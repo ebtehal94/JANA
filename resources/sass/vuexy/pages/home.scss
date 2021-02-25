@@ -1,0 +1,81 @@
+/*=========================================================================================
+    File Name: colors.scss
+    Description: Color page styles
+    ----------------------------------------------------------------------------------------
+    Item Name: Vuexy - Vuejs, HTML & Laravel Admin Dashboard Template
+      Author: Pixinvent
+    Author URL: http://www.themeforest.net/user/pixinvent
+==========================================================================================*/
+
+#shop-home-page, #shop-page {
+
+  .softgray-bg {
+    background-color: #f7f7f7;
+
+    .theme-dark & {
+      background-color: $theme-dark-secondary-bg;
+    }
+  }
+
+  .the-second-container {
+    margin-top: 200px;
+  }
+
+  .dark-and-white-bg {
+    background-color: #343434;
+    .theme-dark & {
+      background-color: #F9F9F9;
+    }
+  }
+
+  .dark-and-white-text {
+    color: #F9F9F9;
+    .theme-dark & {
+      color: $dark-card-color;
+    }
+  }
+
+
+  .roundedcorner {
+    border-radius: 30px;
+
+  }
+  .product-desc {
+    overflow: hidden;
+    height: 95px;
+  }
+
+  .text-dark-always {
+    color:#434343;
+  }
+
+
+  .headerx10 {
+    font-size: 46px;
+  }
+
+  .bg-golden {
+    background: rgb(247,185,35);
+    background: linear-gradient(90deg, rgba(247,185,35,1) 0%, rgba(255,251,125,1) 35%, rgba(247,185,35,1) 100%);
+  }
+
+  .full-middle-section {
+    width: 100vw;
+    // heig ht: 25vw;
+    margin-left: calc(-50vw + 50%);
+  }
+
+  .ql-container{
+    font-family: $headings-font-family;
+    font-weight: $headings-font-weight;
+    line-height: $headings-line-height;
+    .ql-size-huge{
+    font-size: $h1-font-size;
+    }
+    .ql-size-large{
+    font-size: $h2-font-size;
+    }
+  }
+
+
+}
