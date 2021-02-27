@@ -37,7 +37,7 @@
       <path id="path-2" data-name="path" d="M441.628,600h22l-13.976,14.46L435.68,600Z" transform="translate(-432.821 -600)" fill="none" stroke="#696969" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
     </g>
   </svg>
-
+<!---- Confirm --->
   <svg v-else-if="name ==='confirm'" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 32.01 24.647">
     <defs>
       <clipPath id="clip-path">
@@ -48,8 +48,14 @@
       <path id="Path_6504" data-name="Path 6504" d="M31.214.681A2.516,2.516,0,0,0,27.65.8L27.627.83,10.454,18.566,4.241,12.355A2.516,2.516,0,0,0,.708,15.936l7.94,7.941a2.525,2.525,0,0,0,1.806.771h0l.056,0a2.525,2.525,0,0,0,1.756-.766L31.331,4.235A2.516,2.516,0,0,0,31.214.681" transform="translate(0 0)" fill="#7bed8d"/>
     </g>
   </svg>
+<!---- cross --->
+<svg v-else-if="name ==='cross'" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle">
+  <circle cx="12" cy="12" r="10"/>
+  <line x1="15" y1="9" x2="9" y2="15"/>
+  <line x1="9" y1="9" x2="15" y2="15"/>
+</svg>
 
-    <!--- City --->
+<!--- City --->
   <svg v-else-if="name ==='city'" id="Group_5824" data-name="Group 5824" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 44.251 44.251">
     <path id="Path_7134" data-name="Path 7134" d="M8.189,25.6a2.592,2.592,0,1,0,3.763,3.1h6.717a2.593,2.593,0,0,1,0,5.186H8.3a4.321,4.321,0,1,0,0,8.643H16.94a.864.864,0,1,0,0-1.729H8.3a2.593,2.593,0,0,1,0-5.186H18.668a4.321,4.321,0,1,0,0-8.643H11.951A2.606,2.606,0,0,0,10.826,25.6l6.6-10.831a9.507,9.507,0,1,0-15.839,0Zm1.319,3.1a.864.864,0,1,1,.864-.864A.865.865,0,0,1,9.507,28.694Zm0-26.965a7.779,7.779,0,0,1,6.472,12.094l-.019.03L9.507,24.441,3.035,13.823A7.779,7.779,0,0,1,9.507,1.729Z" fill="#696969"/>
     <path id="Path_7135" data-name="Path 7135" d="M64.321,68.643A4.321,4.321,0,1,0,60,64.321,4.326,4.326,0,0,0,64.321,68.643Zm0-6.914a2.593,2.593,0,1,1-2.593,2.593A2.6,2.6,0,0,1,64.321,61.729Z" transform="translate(-54.814 -54.814)" fill="#696969"/>
