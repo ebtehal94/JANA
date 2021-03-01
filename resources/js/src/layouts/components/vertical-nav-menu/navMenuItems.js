@@ -10,72 +10,12 @@
 
 export default [
   {
-    url: '/all',
-    name: 'Products',
-    slug: 'products',
-    icon: 'GridIcon',
-    i18n:'AllProducts',
-    rule: 'public',
-    maxRule: 'captain',
-  },
-  {
-    url: null,
-    cat: 'TeaSets',
-    name: 'TeaSets',
-    // icon: 'coffe',
-    i18n:'TeaSets',
-    maxRule: 'captain',
-    submenu: []
-  },
-  {
-    cat: 'CoffeeSets',
-    name: 'CoffeeSets',
-    // icon: 'coffee',
-    i18n:'CoffeeSets',
-    maxRule: 'captain',
-    submenu: []
-  },
-  {
-    cat: 'ServingSets',
-    name: 'ServingSets',
-    // icon: 'nuts',
-    i18n:'ServingSets',
-    maxRule: 'captain',
-    submenu: []
-  },
-  {
-    cat: 'ServingTrays',
-    name: 'ServingTrays',
-    // icon: 'spices',
-    i18n:'ServingTrays',
-    maxRule: 'captain',
-    submenu: []
-
-  },
-  {
-    cat: 'Accessories',
-    name: 'Accessories',
-    // icon: 'sweets',
-    i18n:'Accessories',
-    maxRule: 'captain',
-    submenu: []
-
-  },
-  {
     url: '/dashboard',
     name: 'Dashboard',
     slug: 'dashboard',
     icon: 'BarChart2Icon',
     i18n:'Reports',
-    rule: 'operator',
-  },
-  {
-    url: '/users',
-    name: "Admins & Users",
-    slug: "users-list",
-    icon: "UserIcon",
-    i18n: "AdminsAndUsers",
-    rule: "admin",
+    rule: 'vendor',
   },
   {
     url: '/products/list',
@@ -85,6 +25,15 @@ export default [
     i18n: "Products",
     rule: "admin"
   },
+  {
+    url: '/users',
+    name: "Admins & Users",
+    slug: "users-list",
+    icon: "UserIcon",
+    i18n: "AdminsAndUsers",
+    rule: "admin",
+  },
+
   {
     url: '/categories',
     name: "Categories",

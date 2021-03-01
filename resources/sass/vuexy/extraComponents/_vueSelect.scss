@@ -100,8 +100,10 @@
       .vs__open-indicator{
           fill: $grey;
       }
-      .vs__dropdown-menu{
+      .vs__dropdown-menu
+      {
           background: $content-dark-bg;
+          z-index: 9999;
           .vs__dropdown-option {
             color: $theme-dark-text-color;
           }

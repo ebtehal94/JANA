@@ -1,6 +1,8 @@
 // en, de, fr, pt
 export default {
 	en: {
+		dashboard:'Dashboard',
+
 		AppDownload: 'Download our app for smoother easier experience',
 		Otantik: 'Otantik',
 
@@ -277,6 +279,8 @@ export default {
 		Shop: 'Shop',
 	},
 	ar: {
+		dashboard:'لوحة التحكم',
+
 		AppDownload: 'لتجربة أسهل قم بتحميل تطبيق أوتانتك',
 		Otantik: 'أوتانتك',
 		language: 'اللغة',

@@ -10,18 +10,18 @@
 
 
 <template>
-  <div class="relative">
+  <!--<div class="relative">-->
 
-    <div class="" :class="classObj">
+    <!--<div class="" :class="classObj">-->
 
-      <vs-navbar class="vx-navbar navbar-custom navbar-skelton" :color="navbarColorLocal" :class="textColor">
+      <!--<vs-navbar class="vx-navbar navbar-custom navbar-skelton" :color="navbarColorLocal" :class="textColor">-->
 
         <!-- SM - OPEN SIDEBAR BUTTON -->
-        <feather-icon class="sm:inline-flex xl:hidden cursor-pointer p-2" icon="MenuIcon" @click.stop="showSidebar" />
+        <!--<feather-icon class="sm:inline-flex xl:hidden cursor-pointer p-2" icon="MenuIcon" @click.stop="showSidebar" />-->
 
         <!-- <bookmarks :navbarColor="navbarColor" v-if="windowWidth >= 992" /> -->
 
-        <vs-spacer />
+        <!--<vs-spacer />-->
 
 
         <!-- <search-bar /> -->
@@ -29,12 +29,12 @@
         <!-- <notification-drop-down /> -->
 
         <!--<dark-mode />-->
-        <country class="mr-2 mt-1"/>
+        <!--<country class="mr-2 mt-1"/>-->
         <!-- <currency /> -->
-        <i18n class="mr-2 mt-1"/>
+        <!--<i18n class="mr-2 mt-1"/>-->
         <!-- <cart-drop-down/> -->
 
-        <profile-drop-down />
+        <!--<profile-drop-down />
 
       </vs-navbar>
     </div>

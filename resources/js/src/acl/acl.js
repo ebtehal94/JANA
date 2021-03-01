@@ -16,9 +16,7 @@ export default new AclCreate({
   acceptLocalRules: true,
   globalRules: {
     admin: new AclRule("admin").generate(),
-    operator: new AclRule("operator").or("admin").generate(),
-    captain: new AclRule("captain").or("operator").or("admin").generate(),
-    customer: new AclRule("customer").or("captain").or("operator").or("admin").generate(),
-    public: new AclRule("public").or("customer").or("captain").or("operator").or("admin").generate(),
+    vendor: new AclRule("vendor").or("admin").generate(),
+    public: new AclRule("public").or("vendor").or("admin").generate(),
   }
 })

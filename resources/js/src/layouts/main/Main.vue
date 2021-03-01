@@ -17,11 +17,11 @@
 
     <v-nav-menu
       :navMenuItems = "navMenuItems"
-      title         = "Otantik"
+      title         = "Jana"
       parent        = ".layout--main" />
 
     <div id="content-area" :class="[contentAreaClass, {'show-overlay': bodyOverlay}]">
-      <div id="content-overlay" />
+     <div id="content-overlay" />
 
     <!-- Navbar -->
     <template v-if="mainLayoutType === 'horizontal' && windowWidth >= 1200">
@@ -55,17 +55,28 @@
     <!-- /Navbar -->
 
       <div class="content-wrapper" :class="[{'header-margin': $acl.not.check('operator')}]">
-          <div class="router-content" style="margin-top: 0;">
-            <div v-if="breadcrumbs!= null && breadcrumbs.length > 0" class="breadcrumbs mx-10 my-6">
-              <p>
-                <span v-for="(bc, i) in breadcrumbs" :key="bc.url">
-                  <a :href="bc.url">{{ $t(bc.title) }}</a>
-                  <span v-if="i != breadcrumbs.length - 1"> > </span>
-                </span>
-              </p>
+          <div class="router-content pt-6" style="margin-top: 0;">
+            <div class="vx-row mx-10">
+              <div class="vx-col">
+                <div  v-if="breadcrumbs!= null && breadcrumbs.length > 0" class="breadcrumbs mx-10 my-6">
+                  <p class="text-white">
+                    <span cl v-for="(bc, i) in breadcrumbs" :key="bc.url">
+                      <a :href="bc.url">{{ $t(bc.title) }}</a>
+                      <span v-if="i != breadcrumbs.length - 1"> > </span>
+                    </span>
+                  </p>
+                </div>
+              </div>
+               <vs-spacer />
+              <div>
+                <i18n class="mr-2 mt-1"/>
+              </div>
+              <div>
+                <profile-drop-down />
+              </div>
             </div>
             <div class="content-area__content">
-              <div style="height: 48px" v-if="!tipHidden"></div>
+              <!--<div style="height: 48px" v-if="!tipHidden"></div>-->
 
               <back-to-top bottom="5%" :right="$vs.rtl ? 'calc(100% - 2.2rem - 38px)' : '30px'" visibleoffset="500" v-if="!hideScrollToTop">
                 <vs-button icon-pack="feather" icon="icon-arrow-up" class="shadow-lg btn-back-to-top" />
@@ -97,6 +108,8 @@ import TheNavbarVertical   from '@/layouts/components/navbar/TheNavbarVertical.v
 import TheFooter           from '@/layouts/components/TheFooter.vue'
 import themeConfig         from '@/../themeConfig.js'
 import VNavMenu            from '@/layouts/components/vertical-nav-menu/VerticalNavMenu.vue'
+import I18n                 from "@/layouts/components/navbar/components/I18n.vue"
+import ProfileDropDown      from '@/layouts/components/navbar/components/ProfileDropDown.vue'
 
 export default {
   components: {
@@ -105,7 +118,9 @@ export default {
     TheFooter,
     TheNavbarHorizontal,
     TheNavbarVertical,
-    VNavMenu
+    VNavMenu,
+    I18n,
+    ProfileDropDown 
   },
   data () {
     return {
@@ -148,13 +163,6 @@ export default {
     breadcrumbs() {
       if(this.$route.meta.breadcrumb && !this.$route.params.item_id) {
         return this.$route.meta.breadcrumb.map(element => {
-          if(element.title == 'Category') {
-            element.title = this.$route.params.category
-          }else if(element.title == 'Filter') {
-            element.title = this.getFilterFromID(this.$route.params.filter)
-          // }else if(element.title == 'ProductDetails') {
-          //   element.title = this.fetch_item_details(this.$route.params.item_id)
-          }
           return element
         })
       }
@@ -252,13 +260,13 @@ export default {
 
     const color = this.navbarColor === '#fff' && this.isThemeDark ? '#212121' : this.navbarColor
     this.updateNavbarColor(color)
-    if (this.$acl.check('captain')){
+    // if (this.$acl.check('captain')){
       this.$store.dispatch('updateMainLayout', 'vertical')
       this.setNavMenuVisibility('vertical')
-    }else{
-      this.$store.dispatch('updateMainLayout', 'horizontal')
-      this.setNavMenuVisibility('horizontal')
-    }
+    // }else{
+    //   this.$store.dispatch('updateMainLayout', 'horizontal')
+    //   this.setNavMenuVisibility('horizontal')
+    // }
   },
 }
 
@@ -282,6 +290,11 @@ export default {
   }
 
   .content-wrapper {
+    .router-content{
+      a{
+        color: #fff;
+      }
+    }
     // margin-top: 17rem;
 
     .router-view {

@@ -108,7 +108,12 @@ const router = new Router({
         //   component: () => import('@/views/pages/ComingSoon.vue'),
           component: () => import('./views/Dashboard.vue'),
           meta: {
-              rule: 'operator',
+            breadcrumb: [
+                { title: 'Home', url: '/' },
+                { title: 'dashboard'},
+                { title: 'Reports', active: true },
+            ],
+              rule: 'vendor',
           }
         },
         {
@@ -137,7 +142,7 @@ const router = new Router({
                     { title: 'List', active: true },
                 ],
                 pageTitle: ' All Categories',
-                rule: 'operator'
+                rule: 'admin'
             },
         },
         {
@@ -219,7 +224,7 @@ const router = new Router({
                 breadcrumb: [
                     { title: 'Home', url: '/' },
                     { title: 'Users' },
-                    { title: 'List', active: true },
+                    // { title: 'View', active: true },
                 ],
                 pageTitle: 'User List',
                 rule: 'admin'

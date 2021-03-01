@@ -235,8 +235,4 @@ export default{
   .account{
     color: #ACACAC;
   }
-  .checkbox{
-    border-radius: 50%;
-  }
-
 </style>

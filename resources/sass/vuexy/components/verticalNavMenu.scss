@@ -147,6 +147,7 @@
     }
 
     &.vs-sidebar-item-active {
+      background-color: #F7F7F7;
 	  	border: none !important;
       font-weight: 400;
       z-index: 1;
@@ -183,14 +184,14 @@
 
 
     .router-link-active{
-      background: linear-gradient(118deg, rgba(var(--vs-primary),1), rgba(var(--vs-primary),.7));
-      box-shadow: 0px 0px 10px 1px rgba(var(--vs-primary),.7);
+      background: #F7F7F7;
+      //box-shadow: 0px 0px 10px 1px rgba(var(--vs-primary),.7);
       // font-weight: 400;
       .feather-icon{
-        color: $white;
+        color: #E93F7D;
       }
       span{
-        color: $white;
+        color: #E93F7D;
       }
     }
   }

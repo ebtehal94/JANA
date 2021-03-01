@@ -9,75 +9,44 @@
 
 <template>
     <div id="dashboard">
-        <div class="vx-row">
-            <!-- Stats -->
-            <div class="vx-col w-full md:w-1/5">
-                <vx-card class="stat sales">
-                    <p class="text-right">{{ currency }}</p>
-                    <h6>{{ $t('Sales') }}</h6>
-                    <h3>{{ getSales() }}</h3>
-                </vx-card>
-
-                <vx-card class="stat">
+        <div class="vx-row flex justify-center">
+            <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4">
+                <vx-card class="stat match-height rounded-3xl">
                     <!-- <p class="text-right">SAR</p> -->
-                    <h6>{{ $t('NewOrders') }}</h6>
-                    <h3>{{ getNewOrders() }}</h3>
-                </vx-card>
-
-                <vx-card class="stat">
-                    <!-- <p class="text-right">SAR</p> -->
-                    <h6>{{ $t('Unfinished') }}</h6>
-                    <h3>{{ Math.ceil(getUnfullfilled()) }} %</h3>
+                    <h6 class="pb-3">إجمالي العروض</h6>
+                    <h3 class="text-gray-400">0017</h3>
                 </vx-card>
             </div>
-
-            <!-- Chart -->
-            <div class="vx-col w-2/5">
-                <vx-card>
-                    <vue-apex-charts type="bar" :options="options" :series="series"></vue-apex-charts>
+            <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4">
+                <vx-card class="stat match-height rounded-3xl">
+                    <h6 class="pb-3">العروض النشطة</h6>
+                    <h3 class="text-primary">007</h3>
                 </vx-card>
             </div>
-
-            <!-- Low Stock Products -->
-            <div class="vx-col w-full md:w-2/5">
-                <ais-instant-search :search-client="searchClient" index-name="products" id="algolia-instant-search-demo">
-
-                  <ais-configure :hits-per-page.camel="8" :filters="'price_'+country.short_code+' > 0'" />
-
-                <vx-card class="low-stock">
-                    <div class="flex align-items text-danger">
-                        <feather-icon icon="AlertCircleIcon" svgClasses="w-5 h-5 mr-2"></feather-icon>
-                        <h6 class="font-bold text-danger">{{ $t('LowStock') }}</h6>
-                    </div>
-                    <ais-hits>
-                    <!-- <ais-hits :transform-items="relatedItems"> -->
-                    <div slot-scope="{ items }">
-                        <template>
-                            <div v-if="items.length != 0">
-                                <div class="mt-2" v-for="item in items" :key="item.objectID">
-                                    <template>
-                                        <div class="product flex">
-                                            <a class="cursor-pointer" @click="$router.push({path: '/products/edit/' + item.id})"><img class="product-size" :src="'https://otantik-home.s3.me-south-1.amazonaws.com/products/' + item.images[0]" alt="Product Image"></a>
-                                            <div>
-                                                <h6>{{ $i18n.locale == 'en' ? item.title.en : item.title.ar }}</h6>
-                                                <h6 class="font-bold mt-10">{{ item['price_' + country.short_code]    }} {{ currency }}</h6>
-                                            </div>
-                                        </div>
-                                    </template>
-                                </div>
-                            </div>
-                            <div v-else>
-                                <p class="text-center p-10">Nothing to Show</p>
-                            </div>
-                        </template>
-                    </div>
-                    </ais-hits>
+            <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4">
+                <vx-card class="stat match-height">
+                    <h6 class="pb-3">عروض معلقة</h6>
+                    <h3 class="text-black">47 
+                        <span class="pl-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="14.959" viewBox="0 0 26.927 14.959"><path id="decrease" d="M89.438,313.632H84.95a1.5,1.5,0,1,1,0-2.992h.678l-6.764-6.281L73.879,308.1a1.5,1.5,0,0,1-1.9-.085L64.5,301.28a1.5,1.5,0,0,1,2-2.223l6.565,5.909,5-3.749a1.5,1.5,0,0,1,1.915.1l7.958,7.389v-1.057a1.5,1.5,0,0,1,2.992,0v4.488A1.5,1.5,0,0,1,89.438,313.632Z" transform="translate(-64.007 -298.673)" fill="#f35162"/></svg>
+                        </span>
+                    </h3>
                 </vx-card>
-                </ais-instant-search>
+            </div>
+            <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4">
+                <vx-card class="stat match-height">
+                    <h6 class="pb-3">عميلات جدد</h6>
+                    <h3 class="text-black">89
+                        <span class="pl-3">
+                            <svg id="increase" xmlns="http://www.w3.org/2000/svg" width="20" height="14.959" viewBox="0 0 26.927 14.959"><path id="increase-2" data-name="increase" d="M89.437,298.673H84.95a1.5,1.5,0,0,0,0,2.992h.678l-6.764,6.281-4.985-3.738a1.5,1.5,0,0,0-1.9.085l-7.48,6.732a1.5,1.5,0,0,0,2,2.224l6.565-5.909,5,3.749a1.5,1.5,0,0,0,1.915-.1l7.958-7.389v1.057a1.5,1.5,0,0,0,2.992,0v-4.488A1.5,1.5,0,0,0,89.437,298.673Z" transform="translate(-64.007 -298.673)" fill="#2ec114"/></svg>
+                        </span>
+                    </h3>
+                </vx-card> 
             </div>
         </div>
 
-        <div class="vx-row">
+        
+      <!--  <div class="vx-row">
             <div class="vx-col w-full md:w-2/3">
                 <vx-card>
                     <div class="flex align-items">
@@ -139,7 +108,7 @@
                     </div>
                 </vx-card>
             </div>
-        </div>
+        </div>-->
     </div>
 </template>
 
@@ -289,8 +258,10 @@ export default{
 
 <style lang="scss" scoped>
 #dashboard {
-    margin: 2rem;
-
+    margin: 0 3rem 3rem 3rem;
+    .vx-row{
+        margin: 0;
+    }
     .stat {
         margin: 1rem;
 

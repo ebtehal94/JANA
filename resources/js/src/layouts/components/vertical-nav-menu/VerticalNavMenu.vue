@@ -27,38 +27,19 @@
       <div @mouseenter="mouseEnter" @mouseleave="mouseLeave">
 
         <!-- Header -->
-        <div class="header-sidebar flex items-end justify-between" slot="header">
+        <div class="header-sidebar items-center justify-center" slot="header">
 
           <!-- Logo -->
           <router-link tag="div" class="vx-logo cursor-pointer flex items-center" to="/">
-            <logo class="w-10 mr-4 fill-current text-primary" />
+            <logo class="w-full text-center fill-current text-primary" />
             <!--<span class="vx-logo-text text-primary" v-show="isMouseEnter || !reduce" v-if="title">{{ title }}</span>-->
           </router-link>
           <!-- /Logo -->
-
-          <!-- Menu Buttons -->
-          <div>
-            <!-- Close Button -->
-            <template v-if="showCloseButton">
-              <feather-icon icon="XIcon" class="m-0 cursor-pointer" @click="$store.commit('TOGGLE_IS_VERTICAL_NAV_MENU_ACTIVE', false)" />
-            </template>
-
-            <!-- Toggle Buttons -->
-            <template v-else-if="!showCloseButton && !verticalNavMenuItemsMin">
-              <feather-icon
-                id="btnVNavMenuMinToggler"
-                class="mr-0 cursor-pointer"
-                :icon="reduce ? 'CircleIcon' : 'DiscIcon'"
-                svg-classes="stroke-current text-primary"
-                @click="toggleReduce(!reduce)" />
-            </template>
-          </div>
-          <!-- /Menu Toggle Buttons -->
         </div>
         <!-- /Header -->
 
         <!-- Header Shadow -->
-        <div class="shadow-bottom" v-show="showShadowBottom" />
+       <!-- <div class="shadow-bottom" v-show="showShadowBottom" /> -->
 
         <!-- Menu Items -->
         <component :is="scrollbarTag" ref="verticalNavMenuPs" class="scroll-area-v-nav-menu pt-2" :settings="settings" @ps-scroll-y="psSectionScroll" :key="$vs.rtl">
@@ -92,7 +73,7 @@
 
               <v-nav-menu-item
               :key="item.id"
-              v-if="item.cat && $acl.not.check('captain')"
+              v-if="item.cat"
               class       = "relative py-4 cursor-pointer"
               :featherIcon = "false"
               :cat         = "item.cat">
