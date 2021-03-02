@@ -9,24 +9,24 @@
 
 <template>
     <div id="dashboard">
-        <div class="vx-row flex justify-center">
+        <div class="vx-row flex justify-center my-4">
             <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4">
-                <vx-card class="stat match-height rounded-3xl">
-                    <!-- <p class="text-right">SAR</p> -->
-                    <h6 class="pb-3">إجمالي العروض</h6>
-                    <h3 class="text-gray-400">0017</h3>
+                <vx-card class="stat">
+                    <h6 class="pt-2.5">عدد الأعضاء 1547</h6>
+                    <vs-divider/>
+                    <h3 class="text-primary">
+                        17 عضو جديد
+                        <span class="pl-3">
+                            <svg id="increase" xmlns="http://www.w3.org/2000/svg" width="20" height="14.959" viewBox="0 0 26.927 14.959"><path id="increase-2" data-name="increase" d="M89.437,298.673H84.95a1.5,1.5,0,0,0,0,2.992h.678l-6.764,6.281-4.985-3.738a1.5,1.5,0,0,0-1.9.085l-7.48,6.732a1.5,1.5,0,0,0,2,2.224l6.565-5.909,5,3.749a1.5,1.5,0,0,0,1.915-.1l7.958-7.389v1.057a1.5,1.5,0,0,0,2.992,0v-4.488A1.5,1.5,0,0,0,89.437,298.673Z" transform="translate(-64.007 -298.673)" fill="#2ec114"/></svg>
+                        </span>
+                    </h3>
                 </vx-card>
             </div>
             <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4">
-                <vx-card class="stat match-height rounded-3xl">
-                    <h6 class="pb-3">العروض النشطة</h6>
-                    <h3 class="text-primary">007</h3>
-                </vx-card>
-            </div>
-            <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4">
-                <vx-card class="stat match-height">
-                    <h6 class="pb-3">عروض معلقة</h6>
-                    <h3 class="text-black">47 
+                <vx-card class="stat">
+                    <h6 class="pt-2.5">عدد المتاجر 1547</h6>
+                    <vs-divider/>
+                    <h3 class="text-gray-400">0 متجر جديد
                         <span class="pl-3">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="14.959" viewBox="0 0 26.927 14.959"><path id="decrease" d="M89.438,313.632H84.95a1.5,1.5,0,1,1,0-2.992h.678l-6.764-6.281L73.879,308.1a1.5,1.5,0,0,1-1.9-.085L64.5,301.28a1.5,1.5,0,0,1,2-2.223l6.565,5.909,5-3.749a1.5,1.5,0,0,1,1.915.1l7.958,7.389v-1.057a1.5,1.5,0,0,1,2.992,0v4.488A1.5,1.5,0,0,1,89.438,313.632Z" transform="translate(-64.007 -298.673)" fill="#f35162"/></svg>
                         </span>
@@ -34,9 +34,16 @@
                 </vx-card>
             </div>
             <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4">
-                <vx-card class="stat match-height">
-                    <h6 class="pb-3">عميلات جدد</h6>
-                    <h3 class="text-black">89
+                <vx-card class="stat">
+                    <h6 class="pt-2.5">عدد العروض  1547</h6>
+                    <vs-divider/>
+                    <h3 class="text-primary">18 عرض مستخدم</h3>
+                </vx-card>
+            </div>
+            <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4">
+                <vx-card class="stat">
+                    <h6 class="pt-2.5">العروض النشطة حاليا</h6>
+                    <h3 class="text-black text-4xl pt-4">46
                         <span class="pl-3">
                             <svg id="increase" xmlns="http://www.w3.org/2000/svg" width="20" height="14.959" viewBox="0 0 26.927 14.959"><path id="increase-2" data-name="increase" d="M89.437,298.673H84.95a1.5,1.5,0,0,0,0,2.992h.678l-6.764,6.281-4.985-3.738a1.5,1.5,0,0,0-1.9.085l-7.48,6.732a1.5,1.5,0,0,0,2,2.224l6.565-5.909,5,3.749a1.5,1.5,0,0,0,1.915-.1l7.958-7.389v1.057a1.5,1.5,0,0,0,2.992,0v-4.488A1.5,1.5,0,0,0,89.437,298.673Z" transform="translate(-64.007 -298.673)" fill="#2ec114"/></svg>
                         </span>
@@ -44,71 +51,57 @@
                 </vx-card> 
             </div>
         </div>
-
         
-      <!--  <div class="vx-row">
-            <div class="vx-col w-full md:w-2/3">
-                <vx-card>
-                    <div class="flex align-items">
-                        <feather-icon icon="ShoppingBagIcon" svgClasses="w-5 h-5 mr-2"></feather-icon>
-                        <h6 class="font-bold">{{ $t('LatestOrders') }}</h6>
-                    </div>
-                    <div class="mt-3">
-                        <vs-table max-items="5" pagination :data="orders">
-                            <template slot-scope="{data}">
-                                <vs-tr :key="indextr" v-for="(tr, indextr) in data" >
-                                <vs-td :data="data[indextr].customer.name">
-                                    <div class="flex items-center">
-                                        <vs-avatar  class="flex-shrink-0 mr-2" size="10rem" />
-                                        <div>
-                                            <p>{{ data[indextr].customer.name }}</p>
-                                            <p style="font-size: 0.75rem">{{ data[indextr].created_at.split(' ')[0] }}</p>
-                                        </div>
-                                    </div>
-                                </vs-td>
-
-                                <vs-td :data="data[indextr].code">
-                                    {{data[indextr].code}}
-                                </vs-td>
-
-                                <vs-td :data="data[indextr].total_price">
-                                    {{data[indextr].total_price}} {{ currency }}
-                                </vs-td>
-
-                                <vs-td :data="data[indextr].status">
-                                    <vs-chip transparent class="ag-grid-cell-chip" :color="statusOptions[data[indextr].status].color">
-                                    {{ statusOptions[data[indextr].status].label }}
-                                    </vs-chip>
-                                </vs-td>
-                                </vs-tr>
-                            </template>
-                        </vs-table>
-                    </div>
-                </vx-card>
-            </div>
-            <div class="vx-col w-full md:w-1/3">
-                <vx-card>
-                    <div class="flex align-items">
-                        <feather-icon icon="BellIcon" svgClasses="w-5 h-5 mr-2"></feather-icon>
-                        <h6 class="font-bold">{{ $t('Questions') }}</h6>
-                    </div>
-                    <div v-if="questions.length != 0">
-                        <div class="mt-3" v-for="question in questions" :key="question.id">
-                            <div class="flex justify-center items-center">
-                                <vs-avatar  class="flex-shrink-0 mr-2" size="50px" />
-                                <div class="question">
-                                    <h6 class="font-bold">{{ question.name }}</h6>
-                                    <p>{{ question.subject }}</p>
+        <div class="vx-row">
+            <div class="vx-col w-full">
+                <vx-card class="mt-8 pt-0">
+                    
+                        <vs-tabs alignment="fixed">
+                            <vs-tab label="أكثر العروض استخداما">
+                                <div>
+                                    
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div v-else>
-                        <p class="mt-5 text-center">Nothing to show</p>
-                    </div>
+                            </vs-tab>
+                            <vs-tab label="عدد العروض المضافة من كل مورد">
+                                <div class="vx-row mt-5"> 
+                                    <div v-for="user in users" class="vx-col w-full sm:w-1/2 lg:w-1/5 mb-base" v-bind:key="user.id">
+                                        <vx-card class="shadow">
+                                            <h4 class="mb-3 text-base">{{user.name}}</h4>
+                                        </vx-card>
+                                    </div>
+                                </div>
+                            </vs-tab>
+                            <vs-tab label="أكثر المناطق تستخدم العروض">
+                                <vs-table :data="users">
+                                    <template slot-scope="{data}">
+                                        <tbody>
+                                            <vs-tr :data="tr" :key="indextr" v-for="(tr, indextr) in data">
+                                                <vs-td>
+                                                    <p class="font-semibold text-base">{{ data[indextr].username }}</p>
+                                                </vs-td>
+
+                                                <vs-td>
+                                                    <span class="pr-40 pl=24">|</span>
+                                                    <span>{{ data[indextr].name }}</span>
+                                                </vs-td>
+
+                                                <vs-td>
+                                                    <p class="text-base">{{ data[indextr].customer}}</p>
+                                                </vs-td>
+
+                                                <!--<vs-td>
+                                                    <p class="text-base">{{ data[indextr].id }}</p>
+                                                </vs-td>-->
+                                            </vs-tr>
+                                        </tbody>
+                                    </template>
+                                </vs-table>
+                            </vs-tab>
+                        </vs-tabs>
+                    
                 </vx-card>
             </div>
-        </div>-->
+        </div>
     </div>
 </template>
 
@@ -127,6 +120,39 @@ export default{
     },
     data() {
         return {
+        users: [
+                {
+                "id": 1,
+                "name": "14 متجر",
+                "username": "منطقة الرياض",
+                "customer": "450 عميلة",
+                },
+                {
+                "id": 2,
+                "name": "14 متجر",
+                "username": "منطقة الرياض",
+                "customer": "450 عميلة",
+                },
+                {
+                "id": 3,
+                "name": "14 متجر",
+                "username": "منطقة الرياض",
+                "customer": "450 عميلة",
+                },
+                {
+                "id": 4,
+                "name": "14 متجر",
+                "username": "منطقة الرياض",
+                "customer": "450 عميلة",
+                },
+                {
+                "id": 5,
+                "name": "14 متجر",
+                "username": "منطقة الرياض",
+                "customer": "450 عميلة",
+                }
+ 
+            ],
             currency: '',
             sales: 0,
             newOrders: 0,
@@ -259,17 +285,19 @@ export default{
 <style lang="scss" scoped>
 #dashboard {
     margin: 0 3rem 3rem 3rem;
+    .vx-card{
+        box-shadow: none;
+    }
     .vx-row{
         margin: 0;
     }
     .stat {
-        margin: 1rem;
-
         p { font-size: .75rem; }
 
         h6 { font-size: .85rem; }
 
         h3 {
+            font-size: 1.3rem;
             color: #747474;
             font-weight: bold;
         }
@@ -293,6 +321,17 @@ export default{
             width: 7.5rem;
             height: 7.5rem;
         }
+    }
+    .vs-tabs--ul{
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+    .vs-tabs--li button.vs-tabs--btn{
+        font-size: .9rem;
+        font-weight: bold;
+    }
+    .vs-tr{
+        border-bottom: 1.5px solid #eee;
     }
 }
 </style>

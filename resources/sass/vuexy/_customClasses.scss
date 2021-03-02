@@ -395,6 +395,7 @@
 .tabs-shadow-none {
   .vs-tabs--ul {
     box-shadow: none;
+    -webkit-box-shadow: none; 
   }
 }
 

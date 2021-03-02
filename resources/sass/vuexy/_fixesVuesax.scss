@@ -602,10 +602,10 @@
   }
 
   .vs-con-tbody {
-    background: #f8f8f8;
-    border: 2px solid #f8f8f8;
+    background: #fff;
     width: 100%;
     overflow: auto;
+    padding: 1rem 2rem;
 
     // Justify checkboxe center
     .con-vs-checkbox {

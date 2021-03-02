@@ -15,9 +15,7 @@
         <div slot="no-body">
           <div class="vx-row no-gutter justify-center items-center py-10">
             <div class="vx-col hidden lg:block lg:w-2/5 pl-1.5">
-              <img src="@assets/images/pages/Logo.png" alt="jana" class="mx-auto" width="130">
-              <img src="@assets/images/pages/Logo-text.png" alt="jana" class="mx-auto mt-2 " width="160" >
-              <!--<h2 class="text-center text-3xl">بطاقات جنا للخصومات</h2>-->
+              <img src="@assets/images/logo/logo-3.png" alt="jana" class="mx-auto" width="130">
             </div>
 
             <div class="vx-col sm:w-full md:w-full lg:w-1/2">

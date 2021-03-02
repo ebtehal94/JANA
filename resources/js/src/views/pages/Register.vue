@@ -8,8 +8,7 @@
         <div slot="no-body">
           <div class="vx-row no-gutter justify-center items-center py-8">
             <div class="vx-col hidden lg:block lg:w-2/5 pl-1.5 bg-logo">
-              <img src="@assets/images/pages/Logo.png" alt="jana" class="mx-auto" width="130">
-              <img src="@assets/images/pages/Logo-text.png" alt="jana" class="mx-auto mt-2 " width="160">
+              <img src="@assets/images/logo/logo-3.png" alt="jana" class="mx-auto" width="130">
             
               <div class="w-full bg-footer">
                 <span class="steps-btn inline-block font-semibold">1</span>
@@ -137,8 +136,7 @@
         <div slot="no-body">
           <div class="vx-row no-gutter justify-center items-center">
             <div class="vx-col hidden lg:block lg:w-2/5 pl-1.5 bg-logo">
-              <img src="@assets/images/pages/Logo.png" alt="jana" class="mx-auto" width="130">
-              <img src="@assets/images/pages/Logo-text.png" alt="jana" class="mx-auto mt-2 " width="160" >
+              <img src="@assets/images/logo/logo-3.png" alt="jana" class="mx-auto" width="130">
             
               <div class="w-full bg-footer">
                 <span class="steps-btn inline-block font-semibold">1</span>
@@ -296,8 +294,7 @@
         <div slot="no-body">
           <div class="vx-row no-gutter justify-center items-center py-8">
             <div class="vx-col hidden lg:block lg:w-2/5 pl-1.5 bg-logo">
-              <img src="@assets/images/pages/Logo.png" alt="jana" class="mx-auto" width="130">
-              <img src="@assets/images/pages/Logo-text.png" alt="jana" class="mx-auto mt-2 " width="160">
+              <img src="@assets/images/logo/logo-3.png" alt="jana" class="mx-auto" width="130">
             
               <div class="w-full bg-footer">
                 <span class="steps-btn inline-block font-semibold">1</span>

@@ -127,7 +127,7 @@ const router = new Router({
                     { title: 'ListView', active: true },
                 ],
                 pageTitle: 'List View',
-                rule: 'operator'
+                rule: 'admin'
             },
         },
         {
@@ -157,7 +157,7 @@ const router = new Router({
                     { title: 'List', active: true },
                 ],
                 pageTitle: ' All Collections',
-                rule: 'operator'
+                rule: 'admin'
             },
         },
         {
