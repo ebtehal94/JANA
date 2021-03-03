@@ -55,18 +55,32 @@
         <div class="vx-row">
             <div class="vx-col w-full">
                 <vx-card class="mt-8 pt-0">
-                    
+                    <div>
                         <vs-tabs alignment="fixed">
                             <vs-tab label="أكثر العروض استخداما">
-                                <div>
-                                    
+                                <div class="vx-row mt-5 match-height">
+                                    <div v-for="item in usedOffers" class="vx-col w-full sm:w-1/2 lg:w-1/4 mb-base" v-bind:key="item.id">
+                                        <vx-card class="usedOffers shadow">
+                                            <template slot="no-body">
+                                                <div class="item-image">
+                                                    <img :src="item.src" class="responsive card-img-top"/>
+                                                    <div class="flex justify-between flex-wrap p-4">
+                                                        <h5>{{item.title}}</h5>
+                                                        <span>{{item.status}}</span>
+                                                    </div>
+                                                </div>
+                                            </template>
+                                        </vx-card>
+                                    </div>
                                 </div>
                             </vs-tab>
                             <vs-tab label="عدد العروض المضافة من كل مورد">
                                 <div class="vx-row mt-5"> 
-                                    <div v-for="user in users" class="vx-col w-full sm:w-1/2 lg:w-1/5 mb-base" v-bind:key="user.id">
-                                        <vx-card class="shadow">
-                                            <h4 class="mb-3 text-base">{{user.name}}</h4>
+                                    <div v-for="item in supplierOffers" class="vx-col w-full sm:w-1/2 lg:w-1/5 mb-base" v-bind:key="item.id">
+                                        <vx-card class="offer shadow">
+                                            <img :src="item.src" class="text-center mx-auto" width="80px"/>
+                                            <h4 class="text-center">{{item.name}}</h4>
+                                            <span class="block text-center">{{item.number}}</span>
                                         </vx-card>
                                     </div>
                                 </div>
@@ -98,7 +112,7 @@
                                 </vs-table>
                             </vs-tab>
                         </vs-tabs>
-                    
+                    </div>
                 </vx-card>
             </div>
         </div>
@@ -120,38 +134,30 @@ export default{
     },
     data() {
         return {
-        users: [
-                {
-                "id": 1,
-                "name": "14 متجر",
-                "username": "منطقة الرياض",
-                "customer": "450 عميلة",
-                },
-                {
-                "id": 2,
-                "name": "14 متجر",
-                "username": "منطقة الرياض",
-                "customer": "450 عميلة",
-                },
-                {
-                "id": 3,
-                "name": "14 متجر",
-                "username": "منطقة الرياض",
-                "customer": "450 عميلة",
-                },
-                {
-                "id": 4,
-                "name": "14 متجر",
-                "username": "منطقة الرياض",
-                "customer": "450 عميلة",
-                },
-                {
-                "id": 5,
-                "name": "14 متجر",
-                "username": "منطقة الرياض",
-                "customer": "450 عميلة",
-                }
- 
+            usedOffers:[
+                {"id":1,src:require('@assets/images/image-1.png'),"title":"أدوات منزلية","status":"نشط"},
+                {"id":2,src:require('@assets/images/image-2.png'),"title":"أدوات منزلية","status":"نشط"},
+                {"id":3,src:require('@assets/images/image-3.png'),"title":"أدوات منزلية","status":"نشط"},
+                {"id":4,src:require('@assets/images/image-4.png'),"title":"أدوات منزلية","status":"نشط"},
+            ],
+            supplierOffers:[
+                {"id":1,"name":"اكسترا ستور","number":"27 عرض",src:require('@assets/images/img-1.png')},
+                {"id":2,"name":"اكسترا ستور","number":"27 عرض",src:require('@assets/images/img-1.png')},
+                {"id":3,"name":"اكسترا ستور","number":"27 عرض",src:require('@assets/images/img-2.png')},
+                {"id":4,"name":"اكسترا ستور","number":"27 عرض",src:require('@assets/images/img-3.png')},
+                {"id":5,"name":"اكسترا ستور","number":"27 عرض",src:require('@assets/images/img-4.png')},
+                {"id":6,"name":"اكسترا ستور","number":"27 عرض",src:require('@assets/images/img-2.png')},
+                {"id":7,"name":"اكسترا ستور","number":"27 عرض",src:require('@assets/images/img-1.png')},
+                {"id":8,"name":"اكسترا ستور","number":"27 عرض",src:require('@assets/images/img-3.png')},
+                {"id":9,"name":"اكسترا ستور","number":"27 عرض",src:require('@assets/images/img-4.png')},
+                {"id":10,"name":"اكسترا ستور","number":"27 عرض",src:require('@assets/images/img-2.png')}
+            ],
+            users: [
+                {"id": 1,"name": "14 متجر","username": "منطقة الرياض","customer": "450 عميلة"},
+                {"id": 2,"name": "14 متجر","username": "منطقة الرياض","customer": "450 عميلة"},
+                {"id": 3,"name": "14 متجر","username": "منطقة الرياض","customer": "450 عميلة"},
+                {"id": 4,"name": "14 متجر","username": "منطقة الرياض","customer": "450 عميلة"},
+                {"id": 5,"name": "14 متجر","username": "منطقة الرياض","customer": "450 عميلة"}
             ],
             currency: '',
             sales: 0,
@@ -300,6 +306,29 @@ export default{
             font-size: 1.3rem;
             color: #747474;
             font-weight: bold;
+        }
+    }
+    .offer{
+        margin-top: 2.5rem;
+        img{
+            margin-top: -3rem;
+        }
+        h4{
+            font-size: .8rem;
+            font-weight: bold;
+            padding-top: .7rem;
+        }
+        span{
+            font-size: .7rem;
+            padding-top: .5rem;
+        }
+    }
+    .usedOffers{
+        h5{
+            font-size: .8rem;
+        }
+        span{
+            font-size: .6rem;
         }
     }
 

@@ -11,7 +11,7 @@
 <template>
   <div id="footer-container">
     <div class="separator">
-      <img src="@assets/images/logo/logo.png" alt="Otantik" width="75">
+      <img src="@assets/images/logo/logo-2.png" alt="Otantik" width="75">
     </div>
     <div class="footer-sections flex mt-6 p-3">
       <div class="w-full md:w-1/3 ml-20">

@@ -58,6 +58,8 @@
 
   .header-sidebar {
     padding: 20px 19px 16px 23px;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
     width: 100%;
     .logo{
       img {
@@ -148,10 +150,11 @@
 
     &.vs-sidebar-item-active {
       background-color: #F7F7F7;
-	  	border: none !important;
       font-weight: 400;
       z-index: 1;
       position: relative;
+      border-right: none; 
+
 	  }
 
     a {

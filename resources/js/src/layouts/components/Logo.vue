@@ -1,5 +1,5 @@
 <template>
   <div >
-    <img src="@assets/images/logo/logo-3.png" alt="Jana" width="75">
+    <img src="@assets/images/logo/sidebar-logo.png" alt="Jana" width="145">
   </div>
 </template>
