@@ -57,10 +57,12 @@
       <div class="content-wrapper" :class="[{'header-margin': $acl.not.check('operator')}]">
           <div class="router-content pt-6" style="margin-top: 0;">
             <div class="vx-row mx-10">
-              <div class="vx-col">
+              <div class="vx-col p-0">
                 <div  v-if="breadcrumbs!= null && breadcrumbs.length > 0" class="breadcrumbs mx-10 my-6">
                   <p class="text-white">
-                    <span cl v-for="(bc, i) in breadcrumbs" :key="bc.url">
+                    <span class="dashboard font-bold">{{$t('dashboard')}} </span>
+                    <span class="sperate">|</span>
+                    <span cl v-for="(bc, i) in breadcrumbs" :key="bc.url" class="text-sm">
                       <a :href="bc.url">{{ $t(bc.title) }}</a>
                       <span v-if="i != breadcrumbs.length - 1"> > </span>
                     </span>
@@ -273,10 +275,6 @@ export default {
 </script>
 
 <style lang="scss">
-  body {
-    background: #fff;
-  }
-
   .app-notify {
     background: #BD9C72;
   }
@@ -294,6 +292,14 @@ export default {
       a{
         color: #fff;
       }
+      .dashboard{
+        font-size: 1.2rem;
+      }
+      .sperate{
+        font-weight: 100;
+        font-size: 1.5rem;
+        padding: 0 .3rem;
+      }
     }
     // margin-top: 17rem;
 
@@ -306,6 +312,7 @@ export default {
       }
     }
   }
+
 
   @media only screen and (min-width: 992px) {
     .header-margin {

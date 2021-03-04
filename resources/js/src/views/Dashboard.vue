@@ -55,18 +55,31 @@
         <div class="vx-row">
             <div class="vx-col w-full">
                 <vx-card class="mt-8 pt-0">
-                    <div>
+                    
                         <vs-tabs alignment="fixed">
                             <vs-tab label="أكثر العروض استخداما">
                                 <div class="vx-row mt-5 match-height">
                                     <div v-for="item in usedOffers" class="vx-col w-full sm:w-1/2 lg:w-1/4 mb-base" v-bind:key="item.id">
                                         <vx-card class="usedOffers shadow">
                                             <template slot="no-body">
+                                                <div class="ml-auto cursor-pointer flex justify-around action" style="width: 6rem">
+                                                    <vs-button @click.stop="" radius type="border" icon-pack="feather" icon="icon-edit" class="edit"/>
+                                                    <vs-button @click.stop="" radius type="border" icon-pack="feather" icon="icon-trash" class="trash"/>
+                                                </div>
                                                 <div class="item-image">
                                                     <img :src="item.src" class="responsive card-img-top"/>
-                                                    <div class="flex justify-between flex-wrap p-4">
+                                                </div>
+                                                <div class="p-3">
+                                                    <div class="flex justify-between flex-wrap pt-2">
                                                         <h5>{{item.title}}</h5>
-                                                        <span>{{item.status}}</span>
+                                                        <span class="date">{{item.date}}</span>
+                                                        <span class="status">{{item.status}}</span>
+                                                    </div>
+                                                    <p>{{item.subtitle}}</p>
+                                                    <div class="flex justify-between flex-wrap">
+                                                        <star-rating :rtl="$vs.rtl" :star-size="10" :increment="0.5"></star-rating>
+                                                        <span class="price">{{item.price}} SAR</span>
+                                                        <spn class="discount">{{item.discount}}</spn>
                                                     </div>
                                                 </div>
                                             </template>
@@ -76,7 +89,7 @@
                             </vs-tab>
                             <vs-tab label="عدد العروض المضافة من كل مورد">
                                 <div class="vx-row mt-5"> 
-                                    <div v-for="item in supplierOffers" class="vx-col w-full sm:w-1/2 lg:w-1/5 mb-base" v-bind:key="item.id">
+                                    <div v-for="item in supplierOffers" class="vx-col w-full sm:w-1/2 lg:w-1/5 mb-base px-2.5" v-bind:key="item.id">
                                         <vx-card class="offer shadow">
                                             <img :src="item.src" class="text-center mx-auto" width="80px"/>
                                             <h4 class="text-center">{{item.name}}</h4>
@@ -91,16 +104,16 @@
                                         <tbody>
                                             <vs-tr :data="tr" :key="indextr" v-for="(tr, indextr) in data">
                                                 <vs-td>
-                                                    <p class="font-semibold text-base">{{ data[indextr].username }}</p>
+                                                    <p class="font-semibold">{{ data[indextr].username }}</p>
                                                 </vs-td>
 
                                                 <vs-td>
-                                                    <span class="pr-40 pl=24">|</span>
+                                                    <!--<span class="pr-40 pl=24">|</span>-->
                                                     <span>{{ data[indextr].name }}</span>
                                                 </vs-td>
 
                                                 <vs-td>
-                                                    <p class="text-base">{{ data[indextr].customer}}</p>
+                                                    <p class="">{{ data[indextr].customer}}</p>
                                                 </vs-td>
 
                                                 <!--<vs-td>
@@ -112,7 +125,7 @@
                                 </vs-table>
                             </vs-tab>
                         </vs-tabs>
-                    </div>
+                    
                 </vx-card>
             </div>
         </div>
@@ -124,6 +137,7 @@ import axios from "@/axios.js"
 import VueApexCharts from 'vue-apexcharts'
 import algoliasearch from 'algoliasearch/lite'
 import { AisConfigure, AisHits, AisInstantSearch } from 'vue-instantsearch'
+import StarRating from 'vue-star-rating'
 
 export default{
     components: {
@@ -131,14 +145,27 @@ export default{
         AisConfigure,
         AisHits,
         AisInstantSearch,
+        StarRating
     },
     data() {
         return {
             usedOffers:[
-                {"id":1,src:require('@assets/images/image-1.png'),"title":"أدوات منزلية","status":"نشط"},
-                {"id":2,src:require('@assets/images/image-2.png'),"title":"أدوات منزلية","status":"نشط"},
-                {"id":3,src:require('@assets/images/image-3.png'),"title":"أدوات منزلية","status":"نشط"},
-                {"id":4,src:require('@assets/images/image-4.png'),"title":"أدوات منزلية","status":"نشط"},
+                {"id":1,src:require('@assets/images/image-1.png'),"title":"أدوات منزلية","status":"نشط",
+                "date":"15/04/2021","subtitle":"وصف مختصر وصف مختصر..","price":"297","discount":"15%"},
+                {"id":2,src:require('@assets/images/image-2.png'),"title":"أدوات منزلية","status":"نشط",
+                "date":"15/04/2021","subtitle":"وصف مختصر وصف مختصر..","price":"297","discount":"15%"},
+                {"id":3,src:require('@assets/images/image-3.png'),"title":"أدوات منزلية",
+                "status":"نشط","date":"15/04/2021","subtitle":"وصف مختصر وصف مختصر..","price":"297","discount":"15%"},
+                {"id":4,src:require('@assets/images/image-4.png'),"title":"أدوات منزلية",
+                "status":"نشط","date":"15/04/2021","subtitle":"وصف مختصر وصف مختصر..","price":"297","discount":"15%"},
+                 {"id":5,src:require('@assets/images/image-4.png'),"title":"أدوات منزلية","status":"نشط",
+                "date":"15/04/2021","subtitle":"وصف مختصر وصف مختصر..","price":"297","discount":"15%"},
+                {"id":6,src:require('@assets/images/image-3.png'),"title":"أدوات منزلية","status":"نشط",
+                "date":"15/04/2021","subtitle":"وصف مختصر وصف مختصر..","price":"297","discount":"15%"},
+                {"id":7,src:require('@assets/images/image-2.png'),"title":"أدوات منزلية",
+                "status":"نشط","date":"15/04/2021","subtitle":"وصف مختصر وصف مختصر..","price":"297","discount":"15%"},
+                {"id":8,src:require('@assets/images/image-1.png'),"title":"أدوات منزلية",
+                "status":"نشط","date":"15/04/2021","subtitle":"وصف مختصر وصف مختصر..","price":"297","discount":"15%"},
             ],
             supplierOffers:[
                 {"id":1,"name":"اكسترا ستور","number":"27 عرض",src:require('@assets/images/img-1.png')},
@@ -297,6 +324,9 @@ export default{
     .vx-row{
         margin: 0;
     }
+    .vx-row > .vx-col {
+        padding: 0 .6rem;
+    }
     .stat {
         p { font-size: .75rem; }
 
@@ -324,43 +354,62 @@ export default{
         }
     }
     .usedOffers{
+        .action{
+            position: absolute;
+            top:10px;
+            right: 0;     
+        }
         h5{
-            font-size: .8rem;
+            font-size: .7rem;
+            color: #5E5E5E;
         }
-        span{
+        .status{
+            background: #47DC51;
+            font-weight: 600;
             font-size: .6rem;
+            color: #fff;
+            padding: 1px 12px;
+            border-radius: 20px;
+        }
+        .date{
+            font-size: 9px;
+            padding-left: 10px;
+            color: #ACACAC;
+
+        }
+        p{
+            font-size:.7rem ;
+            padding:8px 0;
+            color: #ACACAC;
+        }
+        .price{
+            font-size: .6rem;
+            margin-top: 12px;
+        }
+        .discount{
+            color: #F91D1D;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        .vue-star-rating .vue-star-rating-rating-text {
+            margin-right: 5px;
+            font-size: 12px;
         }
     }
 
-    .sales {
-        background: #bd9c72;
-
-        p, h3, h6 { color: #fff; }
-    }
-
-    .low-stock {
-        margin: 1rem;
-        // width: 20rem;
-        height: 21.5rem;
-        overflow: hidden;
-    }
-
-    .product {
-        .product-size {
-            width: 7.5rem;
-            height: 7.5rem;
+    @media (max-width: 992px){
+        .stat{
+            margin-bottom: 1.3rem;
         }
+    }
+    .vs-table--tbody-table tr {
+        border-bottom: 1.5px solid #eee;
+    }
+    .vs-con-table td {
+        font-size: .9rem;
     }
     .vs-tabs--ul{
-        -webkit-box-shadow: none;
         box-shadow: none;
-    }
-    .vs-tabs--li button.vs-tabs--btn{
-        font-size: .9rem;
-        font-weight: bold;
-    }
-    .vs-tr{
-        border-bottom: 1.5px solid #eee;
     }
 }
 </style>

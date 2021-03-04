@@ -110,7 +110,6 @@ const router = new Router({
           meta: {
             breadcrumb: [
                 { title: 'Home', url: '/' },
-                { title: 'dashboard'},
                 { title: 'Reports', active: true },
             ],
               rule: 'vendor',
