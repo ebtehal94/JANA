@@ -2,6 +2,12 @@
 export default {
 	en: {
 		dashboard:'Dashboard',
+		Operations:'Financial Oprations',
+		Offers:'Offers',
+		customerName:"Customer Name",
+		date:'Date',
+		amount:'Amount',
+		notes:'Notes',
 
 		AppDownload: 'Download our app for smoother easier experience',
 		Otantik: 'Otantik',
@@ -280,6 +286,12 @@ export default {
 	},
 	ar: {
 		dashboard:'لوحة التحكم',
+		Operations:'العمليات المالية',
+		Offers:'العروض',
+		customerName:'اسم العميلة',
+		date:"التاريخ",
+		amount:'المبلغ',
+		notes:'ملاحظات',
 
 		AppDownload: 'لتجربة أسهل قم بتحميل تطبيق أوتانتك',
 		Otantik: 'أوتانتك',

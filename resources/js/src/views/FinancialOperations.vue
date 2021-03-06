@@ -6,7 +6,7 @@
                     <vs-tabs>
                         <vs-tab label="هذا الشهر">
                             <vs-table :data="users">
-                                    <template slot="thead">
+                                    <template slot="thead" class="text-center">
                                         <vs-th>{{$t('customerName')}}</vs-th>
                                         <vs-th>{{$t('date')}}</vs-th>
                                         <vs-th>{{$t('amount')}}</vs-th>
@@ -25,11 +25,11 @@
 
                                             <vs-td>
                                                 <!--<span class="pr-40 pl=24">|</span>-->
-                                                <span>{{ data[indextr].amount}}</span>
+                                                <p class="text-right">{{ data[indextr].amount}}</p>
                                             </vs-td>
 
                                             <vs-td>
-                                                <p>{{ data[indextr].notes}}</p>
+                                                <p class="text-right">{{ data[indextr].notes}}</p>
                                             </vs-td>
                                         </vs-tr>
                                     </tbody>
@@ -47,19 +47,14 @@
 </template>
 
 <script>
-import { AgGridVue } from "ag-grid-vue"
-import '@sass/vuexy/extraComponents/agGridStyleOverride.scss'
 
-import CollectionsPopup from './CollectionsPopup.vue'
-import moduleCollections from "@/store/collections-list/moduleCollections.js"
-import CellRendererActions from "./cell-renderer/CellRendererActions.vue"
+
+
 
 
 export default {
     components: {
-        AgGridVue,
-        CollectionsPopup,
-        CellRendererActions,
+     
     },
     data() {
         return {
@@ -91,12 +86,19 @@ export default {
     .vs-con-table .vs-con-tbody{
         padding: 2rem 0;
     }
-    th{
-        text-align: center;
-    
+    th .vs-table-text {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    }
+    .vs-table--thead{
+      th {
+
         .vs-table-text{
             justify-content: center;
+            -webkit-box-pack: center;
         }
+      }
     }
     .vs-table--tbody-table tr {
         border-bottom: 1.5px solid #eee;

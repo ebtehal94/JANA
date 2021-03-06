@@ -673,4 +673,7 @@ export default {
 .steps-btn:hover{
   background: linear-gradient(#E93F7D,#DA6653) ;
 }
+.v-select .vs__dropdown-menu{
+  margin-top: 2rem;
+}
 </style>

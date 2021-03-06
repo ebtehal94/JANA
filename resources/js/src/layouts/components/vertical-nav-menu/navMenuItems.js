@@ -13,9 +13,33 @@ export default [
     url: '/dashboard',
     name: 'Dashboard',
     slug: 'dashboard',
-    icon: 'BarChart2Icon',
+    icon: 'GridIcon',
     i18n:'Reports',
     rule: 'vendor',
+  },
+  {
+    url: '/financialOperations',
+    name: "financial-operations",
+    slug: "operations",
+    icon: "GridIcon",
+    i18n: "Operations",
+    rule: "admin"
+  },
+  {
+    url: '/Offers',
+    name: 'Offres',
+    slug: 'offers',
+    icon: 'GridIcon',
+    i18n:'Offers',
+    rule: 'vendor',
+  },
+  {
+    url: '/collections',
+    name: "Collections",
+    slug: "collections",
+    icon: "GridIcon",
+    i18n: "Collections",
+    rule: "admin"
   },
   {
     url: '/products/list',
@@ -40,14 +64,6 @@ export default [
     slug: "categories",
     icon: "GridIcon",
     i18n: "Categories",
-    rule: "admin"
-  },
-  {
-    url: '/collections',
-    name: "Collections",
-    slug: "collections",
-    icon: "GridIcon",
-    i18n: "Collections",
     rule: "admin"
   },
   {

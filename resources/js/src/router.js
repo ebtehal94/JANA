@@ -116,6 +116,47 @@ const router = new Router({
           }
         },
         {
+            path: '/financialOperations',
+            name: 'financial-operations',
+          //   component: () => import('@/views/pages/ComingSoon.vue'),
+            component: () => import('./views/FinancialOperations.vue'),
+            meta: {
+              breadcrumb: [
+                  { title: 'Home', url: '/' },
+                  { title: 'Operations', active: true },
+              ],
+                rule: 'admin',
+            }
+          },
+          {
+            path: '/Offers',
+            name: 'Offers',
+          //   component: () => import('@/views/pages/ComingSoon.vue'),
+            component: () => import('./views/Offers.vue'),
+            meta: {
+              breadcrumb: [
+                  { title: 'Home', url: '/' },
+                  { title: 'Offers', active: true },
+              ],
+                rule: 'vendor',
+            }
+          },
+        {
+            path: '/collections',
+            name: 'collections',
+            // component: () => import('@/views/pages/ComingSoon.vue'),
+            component: () => import('@/views/collections/CollectionsList.vue'),
+            meta: {
+                breadcrumb: [
+                    { title: 'Home', url: '/' },
+                    { title: 'Collections'},
+                    { title: 'List', active: true },
+                ],
+                pageTitle: ' All Collections',
+                rule: 'admin'
+            },
+        },
+        {
             path: '/products/edit/list-view',
             name: 'products-edit--list-view',
             component: () => import('@/views/products/list-view/DataListListView.vue'),
@@ -141,21 +182,6 @@ const router = new Router({
                     { title: 'List', active: true },
                 ],
                 pageTitle: ' All Categories',
-                rule: 'admin'
-            },
-        },
-        {
-            path: '/collections',
-            name: 'collections',
-            // component: () => import('@/views/pages/ComingSoon.vue'),
-            component: () => import('@/views/collections/CollectionsList.vue'),
-            meta: {
-                breadcrumb: [
-                    { title: 'Home', url: '/' },
-                    { title: 'Collections'},
-                    { title: 'List', active: true },
-                ],
-                pageTitle: ' All Collections',
                 rule: 'admin'
             },
         },

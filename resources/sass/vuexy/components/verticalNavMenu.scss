@@ -24,6 +24,9 @@
 .v-nav-menu{
   white-space: nowrap;
 
+  .feather-icon {
+    color: #626262;
+  }
   .vs-sidebar--background {
     z-index: 50000;
   }
@@ -100,7 +103,7 @@
     }
 
     > .vs-sidebar--item{
-      padding: 0 15px;
+      padding: 0;
     }
   }
 
