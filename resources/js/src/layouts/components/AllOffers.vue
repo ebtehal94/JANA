@@ -27,6 +27,10 @@
                                 <spn class="discount">{{item.discount}}</spn>
                             </div>
                         </div>
+                        <div class="ml-auto cursor-pointer flex justify-center" v-if="display">
+                            <vs-button color="#6FDD68" size="small">موافقة</vs-button>
+                            <vs-button color="danger" size="small">رفض</vs-button>
+                        </div>
                     </template>
                 </vx-card>
             </div>
@@ -60,6 +64,7 @@ export default {
                 {"id":8,src:require('@assets/images/image-1.png'),"title":"أدوات منزلية",
                 "status":"نشط","date":"15/04/2021","subtitle":"وصف مختصر وصف مختصر..","price":"350","disc_price":"297","discount":"15%"},
             ],
+            disblay:false
         }
     }
 }
@@ -116,6 +121,16 @@ export default {
             color: #F91D1D;
             font-weight: bold;
             font-size: 1.5rem;
+        }
+        .vs-button.small:not(.includeIconOnly) {
+            padding: .2rem .9rem;
+            border-radius: 30px;
+            margin-bottom: -7px;
+            margin-left: .5rem;
+        }
+        .vs-button.small{
+            font-size: .6rem;
+            font-weight: bold;
         }
     }
 }

@@ -6,8 +6,8 @@
                     <vs-tabs>
                         <vs-tab label="هذا الشهر">
                             <vs-table :data="users">
-                                    <template slot="thead" class="text-center">
-                                        <vs-th>{{$t('customerName')}}</vs-th>
+                                    <template slot="thead">
+                                        <vs-th >{{$t('customerName')}}</vs-th>
                                         <vs-th>{{$t('date')}}</vs-th>
                                         <vs-th>{{$t('amount')}}</vs-th>
                                         <vs-th>{{$t('notes')}}</vs-th>
@@ -37,7 +37,36 @@
                             </vs-table> 
                         </vs-tab>
                         <vs-tab label="الكل">
+                            <vs-table :data="users">
+                                <template slot="thead" class="text-right">
+                                    <vs-th>{{$t('customerName')}}</vs-th>
+                                    <vs-th>{{$t('date')}}</vs-th>
+                                    <vs-th>{{$t('amount')}}</vs-th>
+                                    <vs-th>{{$t('notes')}}</vs-th>
+                                </template>
+                                <template slot-scope="{data}">
+                                    <tbody>
+                                        <vs-tr :data="tr" :key="indextr" v-for="(tr, indextr) in data">
+                                            <vs-td>
+                                                <p>{{ data[indextr].username }}</p>
+                                            </vs-td>
 
+                                            <vs-td>
+                                                <p>{{ data[indextr].date}}</p>
+                                            </vs-td>
+
+                                            <vs-td>
+                                                <!--<span class="pr-40 pl=24">|</span>-->
+                                                <p class="text-right">{{ data[indextr].amount}}</p>
+                                            </vs-td>
+
+                                            <vs-td>
+                                                <p class="text-right">{{ data[indextr].notes}}</p>
+                                            </vs-td>
+                                        </vs-tr>
+                                    </tbody>
+                                </template>
+                            </vs-table> 
                         </vs-tab>
                     </vs-tabs>
                 </vx-card>
@@ -63,7 +92,12 @@ export default {
                 {"id": 2,"name": "14 متجر","username": "عميلة بطاقة جنى","date":"15/04/2020","amount": "143 ر.س","notes":"مقابل الإشتراك في التطبيق"},
                 {"id": 3,"name": "14 متجر","username": "عميلة بطاقة جنى","date":"15/04/2020","amount": "143 ر.س","notes":"مقابل الإشتراك في التطبيق"},
                 {"id": 4,"name": "14 متجر","username": " عميلة بطاقة جنى","date":"15/04/2020","amount": "143 ر.س","notes":"مقابل الإشتراك في التطبيق"},
-                {"id": 5,"name": "14 متجر","username": "عميلة بطاقة جنى ","date":"15/04/2020","amount": "143 ر.س","notes":"مقابل الإشتراك في التطبيق"}
+                {"id": 5,"name": "14 متجر","username": "عميلة بطاقة جنى ","date":"15/04/2020","amount": "143 ر.س","notes":"مقابل الإشتراك في التطبيق"},
+                {"id": 6,"name": "14 متجر","username": "عميلة بطاقة جنى ","date":"15/04/2020","amount": "143 ر.س","notes":"مقابل الإشتراك في التطبيق"},
+                {"id": 7,"name": "14 متجر","username": "عميلة بطاقة جنى ","date":"15/04/2020","amount": "143 ر.س","notes":"مقابل الإشتراك في التطبيق"},
+                {"id": 8,"name": "14 متجر","username": "عميلة بطاقة جنى ","date":"15/04/2020","amount": "143 ر.س","notes":"مقابل الإشتراك في التطبيق"},
+                {"id": 9,"name": "14 متجر","username": "عميلة بطاقة جنى ","date":"15/04/2020","amount": "143 ر.س","notes":"مقابل الإشتراك في التطبيق"},
+                {"id": 10,"name": "14 متجر","username": "عميلة بطاقة جنى ","date":"15/04/2020","amount": "143 ر.س","notes":"مقابل الإشتراك في التطبيق"},
             ],
         }
     },

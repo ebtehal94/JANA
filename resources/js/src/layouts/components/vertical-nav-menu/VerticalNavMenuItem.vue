@@ -81,4 +81,7 @@ export default {
     box-shadow: none;
     border: none;
   }
+  .v-nav-menu .vs-sidebar--item a span {
+    font-size: 13px;
+}
 </style>

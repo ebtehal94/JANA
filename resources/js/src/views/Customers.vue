@@ -8,7 +8,7 @@
 ========================================================================================== -->
 
 <template>
-    <div id="offers">
+    <div id="customers">
         <div class="vx-row my-2 justify-between">
             <div class="vx-col search-page__search-bar flex">
                 <vs-input icon-no-border placeholder="اكتب كلمة للبحث" v-model="searchQuery" class="w-full input-rounded-full" icon="icon-search" icon-pack="feather" />
@@ -31,15 +31,13 @@
             <div class="vx-col w-full">
                 <vx-card class="mt-8 pt-0">
                     <vs-tabs>
-                        <vs-tab label="كل العروض">
+                        <vs-tab label="كل العملاء">
+                            <AllCustomers/>
+                        </vs-tab>
+                        <vs-tab label="الحسابات المعلقة">
                             <AllOffers />
                         </vs-tab>
-                        <vs-tab label="العروض المعلقة">
-                            <AllOffers />
-                        </vs-tab>
-                        <vs-tab label="العروض النشطة">
-                        </vs-tab>
-                        <vs-tab label="العروض المتوقفة">
+                        <vs-tab label="عملاء جدد استخدموا كود الإحالات">
                         </vs-tab>
                     </vs-tabs>
                 </vx-card>
@@ -51,11 +49,11 @@
 <script>
 import axios from "@/axios.js"
 import StarRating from 'vue-star-rating'
-import AllOffers from '@/layouts/components/AllOffers.vue'
+import AllCustomers from '@/layouts/components/AllCustomers.vue'
 export default{
     components: {
         StarRating,
-        AllOffers,
+        AllCustomers,
     },
     props:[
        //display
@@ -80,7 +78,7 @@ export default{
 </script>
 
 <style lang="scss" scoped>
-#offers {
+#customers {
     margin: 0 3rem 3rem 3rem;
     .vx-card{
         box-shadow: none;
@@ -90,9 +88,6 @@ export default{
     }
     .vx-row > .vx-col {
         padding: 0 .6rem;
-    }
-     .vs-input--placeholder {
-        
     }
     .vs-input--placeholder {
         font-size: small;

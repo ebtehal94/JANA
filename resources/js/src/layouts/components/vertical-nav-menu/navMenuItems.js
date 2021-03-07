@@ -34,6 +34,14 @@ export default [
     rule: 'vendor',
   },
   {
+    url: '/Customers',
+    name: 'Customers',
+    slug: 'Customers',
+    icon: 'GridIcon',
+    i18n:'Customers',
+    rule: 'admin',
+  },
+  {
     url: '/collections',
     name: "Collections",
     slug: "collections",

@@ -141,6 +141,19 @@ const router = new Router({
                 rule: 'vendor',
             }
           },
+          {
+            path: '/Customers',
+            name: 'Customers',
+          //   component: () => import('@/views/pages/ComingSoon.vue'),
+            component: () => import('./views/Customers.vue'),
+            meta: {
+              breadcrumb: [
+                  { title: 'Home', url: '/' },
+                  { title: 'Customers', active: true },
+              ],
+                rule: 'admin',
+            }
+          },
         {
             path: '/collections',
             name: 'collections',
