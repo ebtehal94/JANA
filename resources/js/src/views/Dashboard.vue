@@ -102,25 +102,18 @@
 
 <script>
 import axios from "@/axios.js"
-import VueApexCharts from 'vue-apexcharts'
-import algoliasearch from 'algoliasearch/lite'
-import { AisConfigure, AisHits, AisInstantSearch } from 'vue-instantsearch'
 import StarRating from 'vue-star-rating'
 import AllOffers from '@/layouts/components/AllOffers.vue'
 import SupplierOffers from '@/layouts/components/SupplierOffers.vue'
 export default{
     components: {
-        VueApexCharts,
-        AisConfigure,
-        AisHits,
-        AisInstantSearch,
         StarRating,
         AllOffers,
         SupplierOffers
     },
     data() {
         return {
-            usedOffers:[
+            AllOffers:[
                 {"id":1,src:require('@assets/images/image-1.png'),"title":"أدوات منزلية","status":"نشط",
                 "date":"15/04/2021","subtitle":"وصف مختصر وصف مختصر..","price":"297","discount":"15%"},
                 {"id":2,src:require('@assets/images/image-2.png'),"title":"أدوات منزلية","status":"نشط",
@@ -157,120 +150,15 @@ export default{
                 {"id": 4,"name": "14 متجر","username": "منطقة الرياض","customer": "450 عميلة"},
                 {"id": 5,"name": "14 متجر","username": "منطقة الرياض","customer": "450 عميلة"}
             ],
-            currency: '',
-            sales: 0,
-            newOrders: 0,
-            unfullfilled: 0,
-            short_code: (localStorage.getItem("country_code")) ? localStorage.getItem("country_code") : 'QTR',
-            searchClient: algoliasearch(
-                'SXG4PV0YAT',
-                '42b8e7ea3e742f53ca29e378b2e53e38'
-            ),
-            orders: [],
-            statusOptions: [
-              { label: 'New', color:'#24c1a0', value: 0 },
-              { label: 'In Progress', color:'warning', value: 1 },
-              { label: 'Ready For Pickup', color:'danger', value: 2 },
-              { label: 'On The Way', color:'warning', value: 3 },
-              { label: 'Delivered', color:'success', value: 4 },
-              { label: 'Cancelled', color:'dark', value: 5 },
-            ],
-            questions: [],
-            options: {
-                chart: {
-                id: 'vuechart-example'
-                },
-                xaxis: {
-                categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998]
-                }
-            },
-            series: [{
-                name: 'series-1',
-                data: [30, 40, 45, 50, 49, 60, 70, 91]
-            }]
         }
     },
     computed: {
-      countries () {
-            return this.$store.state.CountriesList
-        },
+ 
     },
     methods: {
-        getSales() {
-            const sales = new Promise((resolve, reject) => {
-                axios.get("/api/orders/sales/count")
-                .then((response) => {
-                    resolve(response)
-                })
-                .catch((error) => { console.log(error.response) })
-            })
 
-            sales.then(res => {
-                this.sales = res.data
-            }).catch(err => console.log(err))
-
-            return this.sales
-        },
-        getNewOrders() {
-            const newOrders = new Promise((resolve, reject) => {
-                axios.get("/api/orders/sales/new")
-                .then((response) => {
-                    resolve(response)
-                })
-                .catch((error) => { console.log(error.response) })
-            })
-
-            newOrders.then(res => {
-                this.newOrders = res.data
-            }).catch(err => console.log(err))
-
-            return this.newOrders
-        },
-        getUnfullfilled() {
-            const unfullfilled = new Promise((resolve, reject) => {
-                axios.get("/api/orders/sales/unfullfilled")
-                .then((response) => {
-                    resolve(response)
-                })
-                .catch((error) => { console.log(error.response) })
-            })
-
-            unfullfilled.then(res => {
-                this.unfullfilled = res.data
-            }).catch(err => console.log(err))
-
-            return this.unfullfilled
-        },
-        // relatedItems(items) {
-        //     return items.filter(item => {
-        //         let product = false
-        //         for (const [key, val] of Object.entries(item.details)) {
-        //             if (key == this.short_code && val.stock <= 5) {
-        //                 product = true
-        //             }
-        //         }
-        //
-        //         return product
-        //     })
-        // },
-        getQuestions() {
-            const questions = new Promise((resolve, reject) => {
-                axios.get("/api/questions/list")
-                .then((response) => {
-                    resolve(response)
-                })
-                .catch((error) => { console.log(error.response) })
-            }).then(res => {
-                this.questions = res.data.filter(q => q.status != 1)
-            }).catch(err => connsole.log(err))
-        }
     },
     created() {
-      const currentCountryID = (localStorage.getItem("country")) ? localStorage.getItem("country") : 1
-        this.country = this.countries.find((country) => country.id == currentCountryID)
-        this.currency = this.country.currency
-        this.getOrdersInDetail()
-        this.getQuestions()
     }
 }
 </script>

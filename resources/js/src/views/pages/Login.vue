@@ -38,7 +38,13 @@
                       placeholder="البريد الإلكتروني"
                       v-model="email"
                       class="w-full text-base"/>
-                  <span class="text-danger text-sm">{{ errors.first('email') }}</span>
+                  <span v-if="!errors.has('email') && email">
+                    <icon name="confirm" class="icon left-icon"/>
+                  </span>
+                  <span v-else-if="errors.has('email')">
+                    <icon name="cross" class="icon left-icon"/>
+                  </span>
+                </div>
 
                 <div class="bg-input">
                   <icon name="password" class="icon"/>
@@ -53,14 +59,19 @@
                       placeholder="كلمة المرور"
                       v-model="password"
                       class="w-full mt-3" />
-                  <span class="text-danger text-sm">{{ errors.first('password') }}</span>
+                  <span v-if="!errors.has('password') && password">
+                    <icon name="confirm" class="icon left-icon"/>
+                  </span>
+                  <span v-else-if="errors.has('password')">
+                    <icon name="cross" class="icon left-icon"/>
+                  </span>
                 </div>
 
-                  <div class="flex flex-wrap justify-between my-5">
-                      <vs-checkbox v-model="checkbox_remember_me" class="mb-3 account font-light text-sm checkbox">تذكرني</vs-checkbox>
-                      <router-link to="/pages/forgot-password" class="account font-light text-sm">نسيت كلمة المرور</router-link>
-                  </div>
-                  <div class=" mb-3">
+                <div class="flex flex-wrap justify-between my-5">
+                  <vs-checkbox v-model="checkbox_remember_me" class="mb-3 account font-light text-sm checkbox">تذكرني</vs-checkbox>
+                  <router-link to="/pages/forgot-password" class="account font-light text-sm">نسيت كلمة المرور</router-link>
+                </div>
+                <div class=" mb-3">
                     <vs-button
                       class="w-full mt-10 font-medium register-btn"
                       color="linear-gradient(to left,#E93F7D,#DA6653)"
@@ -68,8 +79,8 @@
                       @click="loginJWT">
                       تسجيل الدخول
                       </vs-button>
-                  </div>
-                  <div class="w-full text-center">
+                </div>
+                <div class="w-full text-center">
                     <span class="account pl-0.5 font-light text-sm">ليس لديك حساب؟</span>
                     <vs-button 
                     class="login-btn p-0 text-sm"
@@ -78,8 +89,10 @@
                     to="/register">
                       أنشئ حسابك الآن
                      </vs-button>
-                  </div>
                 </div>
+
+                  
+                
               </div>
             </div>
           </div>
@@ -134,7 +147,7 @@ export default{
                             text: 'تم تسجيل الدخول بنجاح'
                           })
                           this.$acl.change(res.data.userData.rule)
-                          if(this.$acl.check('operator')){
+                          if(this.$acl.check('admin')){
                             this.$store.dispatch('updateMainLayout', 'vertical')
                             this.$router.push('/dashboard')
                           }else{
@@ -232,5 +245,11 @@ export default{
   }
   .account{
     color: #ACACAC;
+  }
+
+  .vs-checkbox-primery{
+    .checkbox_x {
+      border-radius: 50%;
+    }
   }
 </style>

@@ -35,14 +35,27 @@ const router = new Router({
         // Theme Routes
         // =============================================================================
         {
-          path: '/',
-          name: 'soon',
-          component: () => import('./views/home/Home.vue'),
+            path: '/',
+            name: 'dashboard',
+          //   component: () => import('@/views/pages/ComingSoon.vue'),
+            component: () => import('./views/Dashboard.vue'),
+            meta: {
+              breadcrumb: [
+                  { title: 'Home', url: '/' },
+                  { title: 'Reports', active: true },
+              ],
+                rule: 'vendor',
+            }
+          },
+        //{
+         // path: '/',
+          //name: 'soon',
+          //component: () => import('./views/home/Home.vue'),
         //   component: () => import('@/views/pages/ComingSoon.vue'),
-          meta: {
-              rule: 'public',
-          }
-        },
+          //meta: {
+              //rule: 'public',
+          //}
+        //},
       ]
     },
     {
@@ -62,14 +75,14 @@ const router = new Router({
         //       rule: 'public',
         //   }
         // },
-        {
-          path: '/',
-          name: 'home',
-          component: () => import('./views/home/Home.vue'),
-          meta: {
-              rule: 'public',
-          }
-        },
+        //{
+         // path: '/',
+          //name: 'home',
+         // component: () => import('./views/home/Home.vue'),
+          //meta: {
+             // rule: 'public',
+          //}
+       // },
         {
           path: '/contact-us',
           name: 'contact',
@@ -77,7 +90,7 @@ const router = new Router({
           meta: {
               rule: 'public',
           }
-        },
+       },
         {
           path: '/about-us',
           name: 'about-us',
@@ -154,18 +167,55 @@ const router = new Router({
                 rule: 'admin',
             }
           },
+          {
+            path: '/Stores',
+            name: 'Stores',
+          //   component: () => import('@/views/pages/ComingSoon.vue'),
+            component: () => import('./views/Stores.vue'),
+            meta: {
+              breadcrumb: [
+                  { title: 'Home', url: '/' },
+                  { title: 'Stores', active: true },
+              ],
+                rule: 'vendor',
+            }
+          },
+          {
+            path: '/Stores',
+            name: 'Stores',
+          //   component: () => import('@/views/pages/ComingSoon.vue'),
+            component: () => import('./views/Stores.vue'),
+            meta: {
+              breadcrumb: [
+                  { title: 'Home', url: '/' },
+                  { title: 'Stores', active: true },
+              ],
+                rule: 'vendor',
+            }
+          },
         {
-            path: '/collections',
-            name: 'collections',
+            path: '/Accounts',
+            name: 'Accounts',
             // component: () => import('@/views/pages/ComingSoon.vue'),
-            component: () => import('@/views/collections/CollectionsList.vue'),
+            component: () => import('@/views/Accounts.vue'),
             meta: {
                 breadcrumb: [
                     { title: 'Home', url: '/' },
-                    { title: 'Collections'},
-                    { title: 'List', active: true },
+                    { title: 'Accounts', active: true },
                 ],
-                pageTitle: ' All Collections',
+                rule: 'admin'
+            },
+        },
+        {
+            path: '/AppControl',
+            name: 'AppControl',
+            // component: () => import('@/views/pages/ComingSoon.vue'),
+            component: () => import('@/views/AppControl.vue'),
+            meta: {
+                breadcrumb: [
+                    { title: 'Home', url: '/' },
+                    { title: 'AppControl', active: true },
+                ],
                 rule: 'admin'
             },
         },

@@ -1,25 +1,20 @@
 <template>
-    <div id="all-customers">
+    <div id="all-admins">
         <div class="vx-row mt-5"> 
-            <div v-for="item in customers" class="vx-col w-full sm:w-1/2 lg:w-1/4 mb-base px-2.5" v-bind:key="item.id">
-                <vx-card class="customers shadow">
-                    <img v-if="!pending" :src="require('@assets/images/customers.png')" class="text-center mx-auto" width="100px"/>
-                    <img v-else :src="require('@assets/images/accounts.png')" class="text-center mx-auto" width="100px"/>
+            <div v-for="item in accounts" class="vx-col w-full sm:w-1/2 lg:w-1/4 mb-base px-2.5" v-bind:key="item.id">
+                <vx-card class="account shadow">
+                    <img :src="item.src" class="text-center mx-auto" width="100px"/>
                         <div class="ml-auto cursor-pointer flex justify-around action" style="width: 4rem">
                             <vs-button @click.stop="" color="rgb(255,255,255)" text-color="rgb(255,159,67)" size="small" radius icon-pack="feather" icon="icon-edit" class=" shadow"/>
                             <vs-button @click.stop="" color="rgb(255,255,255)" text-color="#EA5455" size="small" radius icon-pack="feather" icon="icon-trash-2" class=" shadow"/>
                         </div>
                     <h4 class="text-center">{{item.name}}</h4>
-                    <h6 class="text-center">{{item.subtitle}}</h6>
                     <div class="flex justify-between">
                         <span>{{item.phone}}</span>
                         <span> | </span>
                         <span>{{item.Email}}</span>
                     </div>
-                    <div class="mt-3 cursor-pointer flex items-cente" v-if="display">
-                        <vs-button color="#6FDD68" size="small">موافقة</vs-button>
-                        <vs-button color="danger" size="small">رفض</vs-button>
-                    </div>
+                    <h6 class="text-center">{{item.title}}</h6>
                 </vx-card>
             </div>
         </div>
@@ -30,17 +25,9 @@
 
 export default {
         props:{
-            customers:{
+            accounts:{
                 type: Array
             },
-            display:{
-                type: Boolean,
-                default: false,
-            },
-            pending:{
-                type: Boolean,
-                default: false
-            }
         },
         data() {
         return {
@@ -51,8 +38,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#all-customers{
-    .customers{
+#all-admins{
+    .account{
         margin-top: 2.5rem;
         img{
             margin-top: -4rem;
@@ -65,11 +52,11 @@ export default {
         h4{
             font-size: .8rem;
             font-weight: bold;
-            padding-top: 1rem;
+            padding: 1rem 0 .5rem;
         }
         h6{
             font-size:.6rem ;
-            padding:8px 0 4px 0;
+            padding-top:4px;
             color: #ACACAC;
         }
         span{

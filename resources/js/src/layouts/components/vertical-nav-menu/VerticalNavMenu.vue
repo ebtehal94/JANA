@@ -366,5 +366,8 @@ export default {
 
 
 <style lang="scss">
+.v-nav-menu .vs-sidebar--item a span {
+    font-size: 12px;
+}
 @import "@sass/vuexy/components/verticalNavMenu.scss"
 </style>

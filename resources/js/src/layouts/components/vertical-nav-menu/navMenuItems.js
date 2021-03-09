@@ -42,70 +42,32 @@ export default [
     rule: 'admin',
   },
   {
-    url: '/collections',
-    name: "Collections",
-    slug: "collections",
-    icon: "GridIcon",
-    i18n: "Collections",
-    rule: "admin"
+    url: '/Stores',
+    name: 'Stores',
+    slug: 'Stores',
+    icon: 'ShoppingCartIcon',
+    i18n:'Stores',
+    rule: 'vendor',
   },
   {
-    url: '/products/list',
-    name: "Products",
-    slug: "products-list",
-    icon: "ShoppingCartIcon",
-    i18n: "Products",
-    rule: "admin"
+    url: '/Accounts',
+    name: 'Accounts',
+    slug: 'Accounts',
+    icon: 'UserIcon',
+    i18n:'Accounts',
+    rule: 'admin',
   },
   {
-    url: '/users',
-    name: "Admins & Users",
-    slug: "users-list",
-    icon: "UserIcon",
-    i18n: "AdminsAndUsers",
-    rule: "admin",
+    url: '/AppControl',
+    name: 'AppControl',
+    slug: 'AppControl',
+    icon: 'UserIcon',
+    i18n:'AppControl',
+    rule: 'admin',
   },
 
-  {
-    url: '/categories',
-    name: "Categories",
-    slug: "categories",
-    icon: "GridIcon",
-    i18n: "Categories",
-    rule: "admin"
-  },
-  {
-    url: '/comingsoon2',
-    name: "General Settings",
-    slug: "settings",
-    icon: "SettingsIcon",
-    i18n: "GeneralSettings",
-    rule: "admin"
-  },
-  {
-    url: '/orders',
-    name: "Orders",
-    slug: "orders-list",
-    icon: "PackageIcon",
-    rule: 'operator',
-    i18n: "Orders"
-  },
-  {
-    url: '/questions',
-    name: "Quots & Questions",
-    slug: "questions",
-    icon: "InboxIcon",
-    rule: 'operator',
-    i18n: "QuotsAndQuotations"
-  },
-  {
-    url: '/promocodes',
-    name: "Promotional Codes",
-    slug: "promo-codes",
-    icon: "TagIcon",
-    rule: 'operator',
-    i18n: "PromoCodes"
-  }
+
+
 //   {
 //   header: "Shop",
 //   icon: "ShoppingCartIcon",

@@ -342,7 +342,7 @@
                   placeholder="966+"/>
                       
                   <span v-if="!errors.has('mobile') && data_local.mobile">
-                    <icon name="confirm" class="icon left-icon"/>
+                    <icon name="confirm" class="icon left-phone-icon"/>
                   </span>
                   <span v-else-if="errors.has('mobile')">
                     <icon name="cross" class="icon left-phone-icon"/>
@@ -374,7 +374,7 @@
                     <icon name="confirm" class="icon left-phone-icon"/>
                   </span>
                   <span v-else-if="errors.has('phone')">
-                    <icon name="cross" class="icon left-icon"/>
+                    <icon name="cross" class="icon left-phone-icon"/>
                   </span>
                 </div>
 
@@ -383,6 +383,7 @@
                   <vs-input
                     size="large" 
                     v-validate="'required|email|min:3'"
+                    data-vv-validate-on="blur"
                     icon-no-border
                     icon="icon"
                     placeholder="البريد الإلكتروني"
@@ -496,7 +497,8 @@ export default {
   },
   methods: {
   changeNumber(num){
-    if(!this.errors.any()
+    if((this.page_num === 1)
+    && !this.errors.any()
     && this.data_local.name_ar
     && this.data_local.name_en
     && this.data_local.Commercial_num
@@ -504,7 +506,8 @@ export default {
     {
       return this.page_num = num
     }
-    if(!this.errors.any()
+   else if((this.page_num === 2)
+    && !this.errors.any()
     && this.data_local.store_type
     && this.data_local.brunch_name
     && this.data_local.brunch_city
@@ -519,6 +522,7 @@ export default {
       const obj = {
           name_ar: this.data_local.name_ar,
           name_en: this.data_local.name_en,
+          Commercial_num:this.data_local.Commercial_num,
           brunch_name:this.data_local.brunch_name,
           email: this.data_local.email,
           password: this.data_local.password,
@@ -625,7 +629,7 @@ export default {
       position: absolute;
       top:14px;
       left: 20px;
-      z-index: 9999;
+      z-index:1;
       padding-right: 20px;
     }
     .phone-icon{
@@ -636,14 +640,14 @@ export default {
     .left-icon{
       position: absolute;
       top:18px;
-      left: 90%;
+      left: 92%;
       z-index: 9999;
     }
     .left-phone-icon{
       position: absolute;
       top:24px;
       left: 65%;
-      z-index: 9999;
+      z-index: 999;
     }
   }
   .register-btn{
@@ -673,7 +677,18 @@ export default {
 .steps-btn:hover{
   background: linear-gradient(#E93F7D,#DA6653) ;
 }
-.v-select .vs__dropdown-menu{
-  margin-top: 2rem;
+    .vs__dropdown-menu{
+      margin-top: 2rem;
+      background: #eee;
+      z-index: 9999;
+    }
+
+@media (max-width: 992px) and (min-width: 600px){
+.bg-input{
+  .left-icon{
+      left: 95%;
+    }
+  }
 }
+
 </style>

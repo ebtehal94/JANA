@@ -1,7 +1,7 @@
 <template>
     <div id="all-offers">
         <div class="vx-row mt-5"> 
-            <div v-for="item in usedOffers" class="vx-col w-full sm:w-1/2 lg:w-1/4 mb-base" v-bind:key="item.id">
+            <div v-for="item in AllOffers" class="vx-col w-full sm:w-1/2 lg:w-1/4 mb-base" v-bind:key="item.id">
                 <vx-card class="usedOffers shadow">
                     <template slot="no-body">
                         <div class="ml-auto cursor-pointer flex justify-around action" style="width: 4.5rem">
@@ -24,7 +24,7 @@
                                     <li class="price linetThrough"><span>{{item.price}} SAR</span></li>
                                     <li class="disc-price"><span>{{item.disc_price}} SAR</span></li>
                                 </ul>
-                                <spn class="discount">{{item.discount}}</spn>
+                                <span class="discount">{{item.discount}}</span>
                             </div>
                         </div>
                         <div class="ml-auto cursor-pointer flex justify-center" v-if="display">
@@ -44,9 +44,14 @@ export default {
     components: {
         StarRating
     },
-        data() {
+    props:{
+        display:{
+            type: Boolean
+        }
+    },
+    data() {
         return {
-            usedOffers:[
+            AllOffers:[
                 {"id":1,src:require('@assets/images/image-1.png'),"title":"أدوات منزلية","status":"نشط",
                 "date":"15/04/2021","subtitle":"وصف مختصر وصف مختصر..","price":"350","disc_price":"297","discount":"15%"},
                 {"id":2,src:require('@assets/images/image-2.png'),"title":"أدوات منزلية","status":"نشط",
@@ -64,7 +69,6 @@ export default {
                 {"id":8,src:require('@assets/images/image-1.png'),"title":"أدوات منزلية",
                 "status":"نشط","date":"15/04/2021","subtitle":"وصف مختصر وصف مختصر..","price":"350","disc_price":"297","discount":"15%"},
             ],
-            disblay:false
         }
     }
 }

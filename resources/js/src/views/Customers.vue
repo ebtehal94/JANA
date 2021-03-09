@@ -32,12 +32,13 @@
                 <vx-card class="mt-8 pt-0">
                     <vs-tabs>
                         <vs-tab label="كل العملاء">
-                            <AllCustomers/>
-                        </vs-tab>
+                            <AllCustomers pending="false" :customers="customers"/>
+                        </vs-tab> 
                         <vs-tab label="الحسابات المعلقة">
-                            <AllOffers />
+                            <SuspendedAccounts pending="true" :accounts="accounts"/>
                         </vs-tab>
                         <vs-tab label="عملاء جدد استخدموا كود الإحالات">
+                            <AllCustomers :customers="customers" :code="customers.code"/>
                         </vs-tab>
                     </vs-tabs>
                 </vx-card>
@@ -48,21 +49,38 @@
 
 <script>
 import axios from "@/axios.js"
-import StarRating from 'vue-star-rating'
 import AllCustomers from '@/layouts/components/AllCustomers.vue'
+import SuspendedAccounts from '@/layouts/components/SuspendedAccounts.vue'
 export default{
     components: {
-        StarRating,
         AllCustomers,
+        SuspendedAccounts
     },
-    props:[
-       //display
-    ],
     data() {
         return {
             searchQuery: '',
-            usedOffers:[],
-            
+            customers:[
+                {"id":1,"name":"عميلة بطاقات جنا","subtitle":"مرحبا بك ,كيف نستطيع خدمتك",src:require('@assets/images/customers.png'),"phone":"0512345678","Email":"jana@jana.com","code":"058765485"},
+                {"id":2,"name":"عميلة بطاقات جنا","subtitle":"مرحبا بك ,كيف نستطيع خدمتك",src:require('@assets/images/customers.png'),"phone":"0512345678","Email":"jana@jana.com","code":"058765485"},
+                {"id":3,"name":"عميلة بطاقات جنا","subtitle":"مرحبا بك ,كيف نستطيع خدمتك",src:require('@assets/images/customers.png'),"phone":"0512345678","Email":"jana@jana.com","code":"058765485"},
+                {"id":4,"name":"عميلة بطاقات جنا","subtitle":"مرحبا بك ,كيف نستطيع خدمتك",src:require('@assets/images/customers.png'),"phone":"0512345678","Email":"jana@jana.com","code":"058765485"},
+                {"id":5,"name":"عميلة بطاقات جنا","subtitle":"مرحبا بك ,كيف نستطيع خدمتك",src:require('@assets/images/customers.png'),"phone":"0512345678","Email":"jana@jana.com","code":"058765485"},
+                {"id":6,"name":"عميلة بطاقات جنا","subtitle":"مرحبا بك ,كيف نستطيع خدمتك",src:require('@assets/images/customers.png'),"phone":"0512345678","Email":"jana@jana.com","code":"058765485"},
+                {"id":7,"name":"عميلة بطاقات جنا","subtitle":"مرحبا بك ,كيف نستطيع خدمتك",src:require('@assets/images/customers.png'),"phone":"0512345678","Email":"jana@jana.com","code":"058765485"},
+                {"id":8,"name":"عميلة بطاقات جنا","subtitle":"مرحبا بك ,كيف نستطيع خدمتك",src:require('@assets/images/customers.png'),"phone":"0512345678","Email":"jana@jana.com","code":"058765485"},
+            ],
+             accounts:[
+                {"id":1,"name":"عميلة بطاقات جنا","subtitle":"مرحبا بك ,كيف نستطيع خدمتك",src:require('@assets/images/accounts.png'),"phone":"0512345678","Email":"jana@jana.com"},
+                {"id":2,"name":"عميلة بطاقات جنا","subtitle":"مرحبا بك ,كيف نستطيع خدمتك",src:require('@assets/images/accounts.png'),"phone":"0512345678","Email":"jana@jana.com"},
+                {"id":3,"name":"عميلة بطاقات جنا","subtitle":"مرحبا بك ,كيف نستطيع خدمتك",src:require('@assets/images/accounts.png'),"phone":"0512345678","Email":"jana@jana.com"},
+                {"id":4,"name":"عميلة بطاقات جنا","subtitle":"مرحبا بك ,كيف نستطيع خدمتك",src:require('@assets/images/accounts.png'),"phone":"0512345678","Email":"jana@jana.com"},
+                {"id":5,"name":"عميلة بطاقات جنا","subtitle":"مرحبا بك ,كيف نستطيع خدمتك",src:require('@assets/images/accounts.png'),"phone":"0512345678","Email":"jana@jana.com"},
+                {"id":6,"name":"عميلة بطاقات جنا","subtitle":"مرحبا بك ,كيف نستطيع خدمتك",src:require('@assets/images/accounts.png'),"phone":"0512345678","Email":"jana@jana.com"},
+                {"id":7,"name":"عميلة بطاقات جنا","subtitle":"مرحبا بك ,كيف نستطيع خدمتك",src:require('@assets/images/accounts.png'),"phone":"0512345678","Email":"jana@jana.com"},
+                {"id":8,"name":"عميلة بطاقات جنا","subtitle":"مرحبا بك ,كيف نستطيع خدمتك",src:require('@assets/images/accounts.png'),"phone":"0512345678","Email":"jana@jana.com"},
+            ],
+            display:false,
+            pending:false
         }
     },
     computed: {

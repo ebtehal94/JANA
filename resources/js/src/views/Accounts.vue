@@ -8,7 +8,7 @@
 ========================================================================================== -->
 
 <template>
-    <div id="offers">
+    <div id="admin-account">
         <div class="vx-row my-2 justify-between">
             <div class="vx-col search-page__search-bar flex">
                 <vs-input icon-no-border placeholder="اكتب كلمة للبحث" v-model="searchQuery" class="w-full input-rounded-full" icon="icon-search" icon-pack="feather" />
@@ -31,15 +31,8 @@
             <div class="vx-col w-full">
                 <vx-card class="mt-8 pt-0">
                     <vs-tabs>
-                        <vs-tab label="كل العروض">
-                            <AllOffers />
-                        </vs-tab>
-                        <vs-tab label="العروض المعلقة">
-                            <AllOffers display="true" />
-                        </vs-tab>
-                        <vs-tab label="العروض النشطة">
-                        </vs-tab>
-                        <vs-tab label="العروض المتوقفة">
+                        <vs-tab label="كل الحسابات">
+                            <AllAccounts :accounts="accounts" />
                         </vs-tab>
                     </vs-tabs>
                 </vx-card>
@@ -50,17 +43,19 @@
 
 <script>
 import axios from "@/axios.js"
-import StarRating from 'vue-star-rating'
-import AllOffers from '@/layouts/components/AllOffers.vue'
+import AllAccounts from '@/layouts/components/AllAccounts.vue'
 export default{
     components: {
-        StarRating,
-        AllOffers,
+        AllAccounts
     },
     data() {
         return {
+            accounts:[
+                {"id":1,"name":"محمد ناصر علي",src:require('@assets/images/admin.png'),"phone":"0512345678","Email":"jana@jana.com","title":"مدير العلاقات العامة"},
+                {"id":2,"name":"محمد ناصر علي",src:require('@assets/images/admin.png'),"phone":"0512345678","Email":"jana@jana.com","title":"مدير العلاقات العامة"},
+                {"id":3,"name":"محمد ناصر علي",src:require('@assets/images/admin.png'),"phone":"0512345678","Email":"jana@jana.com","title":"مدير العلاقات العامة"}
+            ],
             searchQuery: '',
-            // shouldDisplay:false
             
         }
     },
@@ -77,7 +72,7 @@ export default{
 </script>
 
 <style lang="scss" scoped>
-#offers {
+#admin-account {
     margin: 0 3rem 3rem 3rem;
     .vx-card{
         box-shadow: none;
