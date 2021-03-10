@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Store;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -28,18 +29,19 @@ class AuthController extends Controller
     {
       $info                     = $request->all();
       $this->validate($request, [
-      'name'      => 'required',
-      'email'     => 'required|email',
-      'password'  => 'required|min:6',
-      'cc'        => 'required',
-      'mobile'    => 'required',
+      // 'store_data.name_ar'      => 'required',
+      'user.email'     => 'required|email',
+      'user.password'  => 'required|min:6',
+      // 'cc'        => 'required',
+      // 'mobile'    => 'required',
       ]);
 
-      $existingMobile           = User::where('mobile', $info['mobile'])
-                                     ->where('cc', $info['cc'])
+      $userInfo                 = $info['user'];
+      $existingMobile           = User::where('mobile', $userInfo['mobile'])
+                                     ->where('cc', $userInfo['cc'])
                                      ->first();
 
-      $existingEmail            = User::where('email', $info['email'])->first();
+      $existingEmail            = User::where('email', $userInfo['email'])->first();
 
       if (isset($existingMobile)){
         $response['statusCode']   = 402;
@@ -49,12 +51,28 @@ class AuthController extends Controller
         $response['statusCode']   = 403;
         return $response;
       }
-      $info['rule']             = 'customer';
-      $info['password']         = bcrypt($info['password']);
-      $user                     = User::create($info);
+
+
+      $storeInfo                = $info['store'];
+      $branchesInfo             = $info['branches'];
+      if (isset($storeInfo) && !empty($storeInfo)){
+        $store                     = Store::create($storeInfo);
+      }
+      if (isset($branchesInfo)){
+        foreach ($branchesInfo as $branch) {
+          $store->branches()->create($branch);
+        }
+      }
+
+
+      $userInfo['name']           = $storeInfo['name_ar'];
+      $userInfo['rule']           = 'vendor';
+      $userInfo['password']       = bcrypt($userInfo['password']);
+      $user                       = $store->users()->create($userInfo);
+
 
       if ($user){
-        $token                    = auth()->login($user);
+        // $token                    = auth()->login($user);
       //   $cc                       = $info['cc'];
       //   $otp                      = mt_rand(1000, 9999);
       //   $mobile                   = $cc . $user->mobile;
@@ -65,7 +83,9 @@ class AuthController extends Controller
         // $response['statusCode']   = 200;
       //   $response['SMSstatus']    = $sendSMSResult;
       //   $response['msg']          = 'Please check your SMS for activation code';
-        return $this->respondWithToken($token);
+        // return $this->respondWithToken($token);
+        $response['statusCode']   = 200;
+        return $response;
       }else{
         $response['statusCode']   = 404;
         $response['msg']          = 'Error creating account';

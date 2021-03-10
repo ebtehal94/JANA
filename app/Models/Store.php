@@ -3,31 +3,38 @@
 namespace App\Models;
 
 use Laravel\Scout\Searchable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class Store extends Model
 {
+  use SoftDeletes;
   use Searchable;
-  protected  $fillable = ['id','title_en','title_ar','sort'];
+  protected  $fillable = ['id', 'city_id','name_en','name_ar','cr_number'];
 
 
   /**
    * Get the products within this category.
    */
-  public function products()
-  {
-      return $this->hasMany('App\Models\Product');
-  }
+  // public function offers()
+  // {
+  //     return $this->hasMany('App\Models\Offer');
+  // }
 
   /**
    * Get the filters within this category.
    */
-   
-  public function filters()
+
+  public function users()
   {
-      return $this->hasMany('App\Models\Filter');
+      return $this->hasMany('App\Models\User');
   }
 
+
+  public function branches()
+  {
+      return $this->hasMany('App\Models\Branch');
+  }
 
 
 

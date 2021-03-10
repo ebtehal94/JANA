@@ -19,7 +19,7 @@ class User extends Authenticatable implements JWTSubject
        * @var array
        */
       protected $fillable = [
-          'name', 'email', 'password', 'rule', 'status', 'mobile', 'notifications', 'cc'
+          'name', 'email', 'password', 'rule', 'status', 'mobile', 'cc', 'store_id'
       ];
 
     /**
@@ -74,18 +74,10 @@ class User extends Authenticatable implements JWTSubject
     }
 
 
-
-    /**
-     * Get the orders of this customer.
-     */
-    public function orders()
+    public function store()
     {
-      return $this->hasMany('App\Models\Order','captain_id');
+        return $this->belongsTo('App\Models\Store');
     }
 
-    public function questions()
-    {
-      return $this->hasMany('App\Models\Question');
-    }
 
 }

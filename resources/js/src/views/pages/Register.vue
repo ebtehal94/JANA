@@ -2,51 +2,51 @@
   <div
     class="h-screen flex w-full bg-img vx-row no-gutter items-center justify-center"
     id="page-login">
-    <!--- Store --->
-    <div class="vx-col w-full lg:w-3/4 xl:w-4/5 sm:m-0 m-4" v-if="page_num === 1">
+    <!-- Store -->
+    <div class="vx-col w-full lg:w-3/4 xl:w-4/5 sm:m-0 m-4">
       <vx-card class="rounded-corner shadow-none">
         <div slot="no-body">
           <div class="vx-row no-gutter justify-center items-center py-8">
             <div class="vx-col hidden lg:block lg:w-2/5 pl-1.5 bg-logo">
               <img src="@assets/images/logo/logo-3.png" alt="jana" class="mx-auto" width="130">
-            
+
               <div class="w-full bg-footer">
-                <span class="steps-btn inline-block font-semibold">1</span>
-                <span class="steps-btn inline-block font-semibold">2</span>
-                <span class="steps-btn inline-block font-semibold">3</span>
+                <span @click="goToPage(1)" class="steps-btn inline-block font-semibold">1</span>
+                <span @click="goToPage(2)" class="steps-btn inline-block font-semibold">2</span>
+                <span @click="goToPage(3)" class="steps-btn inline-block font-semibold">3</span>
                 <span class="account pl-0.5 font-light text-xs">لديك حساب؟</span>
-                  <vs-button 
+                  <vs-button
                   class="login-btn p-0 text-sx"
-                  size="small" 
-                  type="transparent" 
+                  size="small"
+                  type="transparent"
                   to="/login">
                   تسجيل الدخول
                 </vs-button>
               </div>
             </div>
 
-            <div class="vx-col sm:w-full md:w-full lg:w-1/2">
+            <div class="vx-col sm:w-full md:w-full lg:w-1/2" v-if="page_num === 1">
               <div class="p-8 login-tabs-container">
                 <div class="vx-card__title">
                   <div class="separator">
-                    <h4 class="mb-4 text-lg">بيانات المتجر</h4> 
-                  </div>                
+                    <h4 class="mb-4 text-lg">بيانات المتجر</h4>
+                  </div>
                 </div>
 
                 <div>
                   <div class="bg-input">
                     <icon name="name" class="icon"/>
                     <vs-input
-                      size="large" 
+                      size="large"
                       class="w-full text-base"
                       placeholder="اسم المتجر (عربي)"
-                      v-model="data_local.name_ar"
-                      v-validate="'required|alpha_spaces'"
+                      v-model="store_data.name_ar"
+                      v-validate="'required'"
                       icon-no-border
                       icon="icon"
                       name="name_ar"/>
 
-                    <span v-if="!errors.has('name_ar') && data_local.name_ar">
+                    <span v-if="!errors.has('name_ar') && store_data.name_ar">
                       <icon name="confirm" class="icon left-icon"/>
                     </span>
                     <span v-else-if="errors.has('name_ar')">
@@ -57,16 +57,16 @@
                   <div class="bg-input">
                     <icon name="name" class="icon"/>
                     <vs-input
-                      size="large" 
+                      size="large"
                       class="w-full text-base mt-2 "
                       placeholder="اسم المتجر (انجليزي)"
-                      v-model="data_local.name_en"
-                      v-validate="'required|alpha_spaces'"
+                      v-model="store_data.name_en"
+                      v-validate="'required'"
                       icon-no-border
                       icon="icon"
                       name="name_en"/>
 
-                    <span v-if="!errors.has('name_en') && data_local.name_en">
+                    <span v-if="!errors.has('name_en') && store_data.name_en">
                       <icon name="confirm" class="icon left-icon"/>
                     </span>
                     <span v-else-if="errors.has('name_en')">
@@ -77,9 +77,9 @@
                   <div class="bg-input">
                     <icon name="com-number" class="icon phone-icon"/>
                     <vs-input
-                      size="large" 
+                      size="large"
                       placeholder="رقم السجل التجاري"
-                      v-model="data_local.Commercial_num"
+                      v-model="store_data.cr_number"
                       type="number"
                       icon-no-border
                       icon="icon"
@@ -87,10 +87,10 @@
                       class="w-full mt-2"/>
 
                     <span
-                      v-if="!errors.has('Commercial_num') && data_local.Commercial_num">
+                      v-if="!errors.has('cr_number') && store_data.cr_number && store_data.cr_number.length >= 6">
                       <icon name="confirm" class="icon left-icon"/>
                     </span>
-                    <span v-else-if="errors.has('Commercial_num')">
+                    <span v-else-if="errors.has('cr_number')">
                       <icon name="cross" class="icon left-icon"/>
                     </span>
 
@@ -98,17 +98,18 @@
                   <div class="bg-input">
                     <icon name="city" class="icon"/>
                     <v-select class="w-full mt-2"
-                      placeholder="الموقع (المدينة)" 
-                      v-model="data_local.city"
-                      v-validate="'required'" 
-                      label="text" :options="cities_list" 
+                      placeholder="الموقع (المدينة)"
+                      v-model="store_data.city_id"
+                      v-validate="'required'"
+                      label="text" :options="cities_list"
+                      :reduce="text => text.value"
                       :dir="$vs.rtl ? 'rtl' : 'ltr'" />
 
                     <span
-                      v-if="!errors.has('city') && data_local.city">
+                      v-if="!errors.has('city_id') && store_data.city_id">
                       <icon name="confirm" class="icon left-icon"/>
                     </span>
-                    <span v-else-if="errors.has('city')">
+                    <span v-else-if="errors.has('city_id')">
                       <icon name="cross" class="icon left-icon"/>
                     </span>
                  </div>
@@ -125,207 +126,180 @@
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </vx-card>
-    </div>
-   
-   <!----- Brunch ---->
-    <div class="vx-col w-full lg:w-3/4 xl:w-4/5 sm:m-0 m-4"  v-if="page_num ===2">
-      <vx-card class="rounded-corner shadow-none">
-        <div slot="no-body">
-          <div class="vx-row no-gutter justify-center items-center">
-            <div class="vx-col hidden lg:block lg:w-2/5 pl-1.5 bg-logo">
-              <img src="@assets/images/logo/logo-3.png" alt="jana" class="mx-auto" width="130">
-            
-              <div class="w-full bg-footer">
-                <span class="steps-btn inline-block font-semibold">1</span>
-                <span class="steps-btn inline-block font-semibold">2</span>
-                <span class="steps-btn inline-block font-semibold">3</span>
-                <span class="account pl-0.5 font-light text-xs">لديك حساب؟</span>
-                  <vs-button 
-                  class="login-btn p-0 text-xs"
-                  size="small" 
-                  type="transparent" 
-                  to="/login">
-                  تسجيل الدخول
-                </vs-button>
-              </div>
-            </div>
 
-            <div class="vx-col sm:w-full md:w-full lg:w-1/2">
+
+            <div class="vx-col sm:w-full md:w-full lg:w-1/2" v-if="page_num === 2">
               <div class="p-8 login-tabs-container">
                 <div class="vx-card__title">
                   <div class="separator">
-                    <h4 class="mb-4 text-lg">بيانات الفروع</h4> 
-                  </div>                
-                </div>
-
-            <div>
-              <div class="bg-input">
-                <icon name="store-type" class="icon"/>
-                <v-select class="w-full mt-2" 
-                v-model="data_local.store_type" 
-                placeholder="نوع المتجر"  
-                label="text" :options="stores" 
-                :dir="$vs.rtl ? 'rtl' : 'ltr'"/>
-
-                <span v-if="!errors.has('store_type') && data_local.store_type">
-                  <icon name="confirm" class="icon left-icon"/>
-                </span>
-                <span v-else-if="errors.has('store_type')">
-                  <icon name="cross" class="icon left-icon"/>
-                </span>
-              </div>
-
-              <div class="bg-input">
-                <icon name="name" class="icon"/>
-                <vs-input
-                size="large" 
-                class="w-full text-base mt-2 "
-                placeholder="اسم الفرع"
-                v-model="data_local.brunch_name"
-                v-validate="'required|alpha_spaces'"
-                icon-no-border
-                icon="icon"
-                name="brunch_name"/>
-
-                <span v-if="!errors.has('brunch_name') && data_local.brunch_name">
-                  <icon name="confirm" class="icon left-icon"/>
-                </span>
-                <span v-else-if="errors.has('brunch_name')">
-                  <icon name="cross" class="icon left-icon"/>
-                </span>
-              </div>
-
-              <div class="bg-input">
-                <icon name="city" class="icon"/>
-                <v-select class="w-full mt-2"
-                 v-model="data_local.brunch_city" 
-                 placeholder="الموقع (المدينة)" 
-                 label="text" :options="cities_list" 
-                 :dir="$vs.rtl ? 'rtl' : 'ltr'" />
-
-                <span v-if="!errors.has('brunch_city') && data_local.brunch_city">
-                  <icon name="confirm" class="icon left-icon"/>
-                </span>
-                <span v-else-if="errors.has('brunch_city')">
-                  <icon name="cross" class="icon left-icon"/>
-                </span>
-              </div>
-
-              <div class="bg-input">
-                <icon name="location" class="icon"/>
-                  <vs-input
-                    size="large" 
-                    class="w-full text-base mt-2 "
-                    placeholder="الموقع الجغرافي"
-                    v-model="data_local.location"
-                    v-validate="'required|alpha_spaces'"
-                    icon-no-border
-                    icon="icon"
-                    name="location"/>
-
-                  <span v-if="!errors.has('location') && data_local.location">
-                    <icon name="confirm" class="icon left-icon"/>
-                  </span>
-                  <span v-else-if="errors.has('location')">
-                    <icon name="cross" class="icon left-icon"/>
-                  </span>
-              </div>
-
-              <div class="bg-input">
-                <icon name="URL" class="icon"/>
-                  <vs-input
-                    size="large" 
-                    class="w-full text-base mt-2 "
-                    placeholder="الموقع الإلكتروني"
-                    v-model="data_local.url"
-                    v-validate="'required | url:require_protocol'"
-                    icon-no-border
-                    icon="icon"
-                    name="url"/>
-
-                  <span v-if="!errors.has('url') && data_local.url">
-                    <icon name="confirm" class="icon left-icon"/>
-                  </span>
-                  <span v-else-if="errors.has('url')">
-                    <icon name="cross" class="icon left-icon"/>
-                  </span>
-              </div>
-
-              <div class="bg-input">
-                  <vs-input
-                    size="large" 
-                    class="w-full text-base mt-2"
-                    placeholder="إضافة فرع (إختياري)"
-                    v-model="data_local.optional_branch"
-                    v-validate="'required|alpha_spaces'"
-                    icon-no-border
-                    icon="icon"
-                    name="optional_branch"
-                    :disabled="disabled" 
-                    @click="disabled=!disabled"/>
-                  <span v-show="errors.has('optional_branch')">
-                    <icon name="confirm" class="icon left-icon"/>
-                  </span>
-              </div>
-
-                  <div class=" mb-3">
-                    <vs-button
-                      class="w-full mt-10 font-medium register-btn"
-                      color="linear-gradient(to left,#E93F7D,#DA6653)"
-                      gradient
-                      @click="changeNumber(3)">
-                      التالي
-                      </vs-button>
+                    <h4 class="mb-4 text-lg">بيانات الفروع</h4>
                   </div>
                 </div>
+
+                <div v-for="branch,branchIndex in branches_data"  :key="branch.name">
+                  <div class="mt-8" v-if="branchIndex > 0">
+                    <div class="separator">
+                      <h4 class="mb-4 text-lg">فرع إضافي</h4>
+                      <span class="ml-4" @click="openBranchDeleteConfirm(branchIndex)">
+                        <icon name="cross" class="icon left-icon"/>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="bg-input">
+                    <icon name="store-type" class="icon"/>
+                    <v-select class="w-full mt-2"
+                    v-model="branch.type"
+                    placeholder="نوع المتجر"
+                    label="text" :options="stores"
+                    :reduce="text => text.value"
+                    :dir="$vs.rtl ? 'rtl' : 'ltr'"/>
+
+                    <span v-if="!errors.has('type') && branch.type">
+                      <icon name="confirm" class="icon left-icon"/>
+                    </span>
+                    <span v-else-if="errors.has('type')">
+                      <icon name="cross" class="icon left-icon"/>
+                    </span>
+                  </div>
+
+                  <div class="bg-input">
+                    <icon name="city" class="icon"/>
+                    <v-select class="w-full mt-2"
+                     v-model="branch.city_id"
+                     placeholder="الموقع (المدينة)"
+                     label="text" :options="cities_list"
+                     :reduce="text => text.value"
+                     :dir="$vs.rtl ? 'rtl' : 'ltr'" />
+
+                    <span v-if="!errors.has('city_id') && branch.city_id">
+                      <icon name="confirm" class="icon left-icon"/>
+                    </span>
+                    <span v-else-if="errors.has('city_id')">
+                      <icon name="cross" class="icon left-icon"/>
+                    </span>
+                  </div>
+
+                  <div class="bg-input">
+                    <icon name="name" class="icon"/>
+                    <vs-input
+                    size="large"
+                    class="w-full text-base mt-2 "
+                    placeholder="اسم الفرع"
+                    v-model="branch.title"
+                    v-validate="'required'"
+                    icon-no-border
+                    icon="icon"
+                    :name="branchIndex+'title'"/>
+
+                    <span v-if="!errors.has(branchIndex+'title') && branch.title">
+                      <icon name="confirm" class="icon left-icon"/>
+                    </span>
+                    <span v-else-if="errors.has(branchIndex+'title')">
+                      <icon name="cross" class="icon left-icon"/>
+                    </span>
+                  </div>
+
+                  <!-- <div class="bg-input">
+                    <icon name="location" class="icon"/>
+                      <vs-input
+                        size="large"
+                        class="w-full text-base mt-2 "
+                        placeholder="اسم الفرع"
+                        v-model="branch.title"
+                        v-validate="'required'"
+                        icon-no-border
+                        icon="icon"
+                        name="somename"/>
+
+                      <span v-if="!errors.has('title') && branch.title">
+                        <icon name="confirm" class="icon left-icon"/>
+                      </span>
+                      <span v-else-if="errors.has('title')">
+                        <icon name="cross" class="icon left-icon"/>
+                      </span>
+                  </div> -->
+
+                  <div class="bg-input">
+                    <icon name="location" class="icon"/>
+                      <vs-input
+                        size="large"
+                        class="w-full text-base mt-2 "
+                        placeholder="الموقع الجغرافي"
+                        v-model="branch.location"
+                        v-validate="'required'"
+                        icon-no-border
+                        icon="icon"
+                        :name="branchIndex+'location'"/>
+
+                      <span v-if="!errors.has(branchIndex+'location') && branch.location">
+                        <icon name="confirm" class="icon left-icon"/>
+                      </span>
+                      <span v-else-if="errors.has(branchIndex+'location')">
+                        <icon name="cross" class="icon left-icon"/>
+                      </span>
+                  </div>
+
+                  <div class="bg-input">
+                    <icon name="URL" class="icon"/>
+                      <vs-input
+                        size="large"
+                        class="w-full text-base mt-2 "
+                        placeholder="الموقع الإلكتروني"
+                        v-model="branch.url"
+                        v-validate="'url:require_protocol'"
+                        icon-no-border
+                        icon="icon"
+                        :name="branchIndex+'url'"/>
+
+                      <span v-if="!errors.has(branchIndex+'url') && branch.url">
+                        <icon name="confirm" class="icon left-icon"/>
+                      </span>
+                      <span v-else-if="errors.has(branchIndex+'url')">
+                        <icon name="cross" class="icon left-icon"/>
+                      </span>
+                  </div>
+
+                </div>
+                <div class="bg-input">
+                    <vs-button
+                    class="w-full mt-10 font-medium register-btn"
+                    color="#f0f0f0"
+                    gradient
+                    @click="addBranch">
+                    <span class="text-dark">
+                      إضافة فرع (إختياري)
+                    </span>
+                  </vs-button>
+                </div>
+
+                <div class=" mb-3">
+                  <vs-button
+                  class="w-full mt-10 font-medium register-btn"
+                  color="linear-gradient(to left,#E93F7D,#DA6653)"
+                  gradient
+                  @click="changeNumber(3)">
+                  التالي
+                  </vs-button>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-      </vx-card>
-    </div>
 
-    <!--- Contact --->
-    <div class="vx-col w-full lg:w-3/4 xl:w-4/5 sm:m-0 m-4" v-if="page_num === 3">
-      <vx-card class="rounded-corner shadow-none">
-        <div slot="no-body">
-          <div class="vx-row no-gutter justify-center items-center py-8">
-            <div class="vx-col hidden lg:block lg:w-2/5 pl-1.5 bg-logo">
-              <img src="@assets/images/logo/logo-3.png" alt="jana" class="mx-auto" width="130">
-            
-              <div class="w-full bg-footer">
-                <span class="steps-btn inline-block font-semibold">1</span>
-                <span class="steps-btn inline-block font-semibold">2</span>
-                <span class="steps-btn inline-block font-semibold">3</span>
-                <span class="account pl-0.5 font-light text-xs">لديك حساب؟</span>
-                  <vs-button 
-                  class="login-btn p-0 text-xs"
-                  size="small" 
-                  type="transparent" 
-                  to="/login">
-                  تسجيل الدخول
-                </vs-button>
-              </div>
-            </div>
 
-            <div class="vx-col sm:w-full md:w-full lg:w-1/2">
+            <div class="vx-col sm:w-full md:w-full lg:w-1/2" v-if="page_num === 3">
               <div class="p-8 login-tabs-container">
                 <div class="vx-card__title">
                   <div class="separator">
-                    <h4 class="mb-4 text-lg">التواصل والأمان</h4> 
-                  </div>                
+                    <h4 class="mb-4 text-lg">التواصل والأمان</h4>
+                  </div>
                 </div>
 
               <div>
                 <div class="vx-row bg-input">
                   <icon name="mobile" class="icon phone-icon"/>
                   <vs-input
-                    size="large" 
+                    size="large"
                     placeholder="رقم الجوال"
-                    v-model="data_local.mobile"
+                    v-model="user.mobile"
                     type="number"
                     icon-no-border
                     icon="icon"
@@ -333,15 +307,17 @@
                     class="w-3/4 mt-2 px-3"/>
 
                   <vs-input
-                  size="large" 
-                  v-model="data_local.cc"
-                  type="number"
+                  size="large"
+                  v-model="user.cc"
+                  type="text"
+                  disabled
+                  dir="ltr"
                   icon-no-border
                   v-validate="'required'"
                   class="w-1/5 mt-2"
                   placeholder="966+"/>
-                      
-                  <span v-if="!errors.has('mobile') && data_local.mobile">
+
+                  <span v-if="!errors.has('mobile') && user.mobile">
                     <icon name="confirm" class="icon left-phone-icon"/>
                   </span>
                   <span v-else-if="errors.has('mobile')">
@@ -352,9 +328,9 @@
                 <div class="vx-row bg-input">
                   <icon name="phone" class="icon phone-icon"/>
                   <vs-input
-                    size="large" 
+                    size="large"
                     placeholder="رقم الهاتف"
-                    v-model="data_local.phone"
+                    v-model="user.phone"
                     type="number"
                     icon-no-border
                     icon="icon"
@@ -362,15 +338,17 @@
                     class="w-3/4 mt-2 px-3"/>
 
                   <vs-input
-                    size="large" 
-                    v-model="data_local.cc"
-                    type="number"
+                    size="large"
+                    v-model="user.cc"
+                    type="text"
+                    disabled
+                    dir="ltr"
                     icon-no-border
                     v-validate="'required'"
                     class="w-1/5 mt-2"
                     placeholder="966+"/>
-                  
-                  <span v-if="!errors.has('phone') && data_local.phone">
+
+                  <span v-if="!errors.has('phone') && user.phone">
                     <icon name="confirm" class="icon left-phone-icon"/>
                   </span>
                   <span v-else-if="errors.has('phone')">
@@ -381,16 +359,16 @@
                 <div class="bg-input">
                   <icon name="email" class="icon"/>
                   <vs-input
-                    size="large" 
+                    size="large"
                     v-validate="'required|email|min:3'"
                     data-vv-validate-on="blur"
                     icon-no-border
                     icon="icon"
                     placeholder="البريد الإلكتروني"
-                    v-model="data_local.email"
+                    v-model="user.email"
                     class="w-full mt-2"/>
 
-                   <span v-if="!errors.has('email') && data_local.email">
+                   <span v-if="!errors.has('email') && user.email">
                     <icon name="confirm" class="icon left-icon"/>
                   </span>
                   <span v-else-if="errors.has('email')">
@@ -401,17 +379,17 @@
                 <div class="bg-input">
                   <icon name="password" class="icon"/>
                   <vs-input
-                    size="large" 
+                    size="large"
                     data-vv-validate-on="blur"
                     placeholder="كلمة المرور"
                     v-validate="'required|min:6'"
                     type="password"
                     icon-no-border
                     icon="icon"
-                    v-model="data_local.password"
+                    v-model="user.password"
                     class="w-full mt-2"/>
 
-                  <span v-if="!errors.has('password') && data_local.password">
+                  <span v-if="!errors.has('password') && user.password">
                     <icon name="confirm" class="icon left-icon"/>
                   </span>
                   <span v-else-if="errors.has('password')">
@@ -451,104 +429,146 @@ export default {
      vSelect
      },
   data() {
-    return { 
+    return {
         cities_list: [
-          {text:'الرياض',value:0},
-          {text:'الدمام',value:1},
-          {text:'جدة',value:2},
-          {text:'تبوك',value:3}
+          {text:'الرياض',value:1},
+          {text:'الدمام',value:2},
+          {text:'جدة',value:3},
+          {text:'تبوك',value:4}
         ],
         stores: [
-          {text:'النوع الأول',value:0},
-          {text:'النوع التاني',value:1},
-          {text:'النوع الثالث',value:2},
-          {text:'النوع الرابع',value:3}
+          {text:'النوع الأول',value:1},
+          {text:'النوع التاني',value:2},
+          {text:'النوع الثالث',value:3},
+          {text:'النوع الرابع',value:4}
         ],
-      data_local: {
+      store_data: {
         name_ar: null,
         name_en:null,
-        Commercial_num:null,
-        brunch_name:null,
-        url:null,
-        optional_branch:null,
+        cr_number:null,
+        city_id:null
+      },
+      user:{
         email: null,
-        cc: null,
+        cc: '+966',
         mobile: null,
         phone:null,
         password: null,
-        rule: "customer",
-        status: 1,
-        city: "",
-        brunch_city:"",
-        store_type:"",
       },
+      branches_data: [{type: null, title: null, city_id: null, location: null, url: null}],
       page_num:1,
       disabled: true
     }
   },
   computed: {
     validateForm() {
-      return (
-        !this.errors.any() &&
-        ((!this.data_local.id && this.data_local.password) ||
-          this.data_local.id)
-      );
+      return ( !this.errors.any() && this.user.email && this.user.password ) ;
     }
   },
   methods: {
+    openBranchDeleteConfirm(index) {
+      this.ItemToDelete = index;
+       this.$vs.dialog({
+         type: 'confirm',
+         color: 'danger',
+         title: `حذف الفرع`,
+         text: 'هل انت متأكد من رغبتك بحذف هذا الفرع',
+         accept: this.deleteBranch
+       })
+     },
+     deleteBranch() {
+       if (this.branches_data.length > 1){
+         // const branchIndex = this.branches_data.findIndex((u) => u.type == this.ItemToDelete)
+         this.branches_data.splice(this.ItemToDelete, 1)
+           this.$vs.notify({
+             color: 'success',
+             title: 'تم الحذف',
+             text: 'تم حذف الفرع بنجاح',
+           })
+       }else {
+         this.$vs.notify({
+           color: 'danger',
+           title: 'خطاء',
+           text: 'يجب ابقاء فرع واحد على الاقل',
+         })
+       }
+     },
+    addBranch() {
+      this.branches_data.push({type: null, title: null, city_id: null, location: null, url: null})
+    },
   changeNumber(num){
-    if((this.page_num === 1)
-    && !this.errors.any()
-    && this.data_local.name_ar
-    && this.data_local.name_en
-    && this.data_local.Commercial_num
-    && this.data_local.city)
+    if((num == 2))
+    // && !this.errors.any()
+    // && this.store_data.name_ar
+    // && this.store_data.name_en
+    // && this.store_data.cr_number
+    // && this.store_data.city_id)
     {
       return this.page_num = num
     }
-   else if((this.page_num === 2)
+   else if((num == 3)
     && !this.errors.any()
-    && this.data_local.store_type
-    && this.data_local.brunch_name
-    && this.data_local.brunch_city
-    && this.data_local.location
-    && this.data_local.url){
+    && this.branches_data[0].type
+    && this.branches_data[0].title
+    && this.branches_data[0].city_id
+    ){
       return this.page_num = num
+    }else{
+      console.log(this.branches_data)
+      this.$vs.notify({
+      color: 'danger',
+      title: 'خطاء',
+      text: 'الرجاء اكمال جميع الحقول المطلوبة',
+      position: 'bottom-center'
+      })
+    }
+  },
+  goToPage(num){
+    if(num < this.page_num){
+      return this.page_num = num
+    }else{
+      this.changeNumber(num)
     }
   },
   registerUser() {
       if(!this.validateForm) return
       this.$vs.loading()
-      const obj = {
-          name_ar: this.data_local.name_ar,
-          name_en: this.data_local.name_en,
-          Commercial_num:this.data_local.Commercial_num,
-          brunch_name:this.data_local.brunch_name,
-          email: this.data_local.email,
-          password: this.data_local.password,
-          cc: this.data_local.cc,
-          mobile: this.data_local.mobile,
-          status: this.data_local.status
-      }
-      // if (this.data_local.password){
-          // obj.password = this.data_local.password
+      // const obj = {
+      //     name_ar: this.store_data.name_ar,
+      //     name_en: this.store_data.name_en,
+      //     cr_number:this.store_data.cr_number,
+      //     name:this.store_data.name,
+      //     email: this.store_data.email,
+      //     password: this.store_data.password,
+      //     cc: this.store_data.cc,
+      //     mobile: this.store_data.mobile,
+      //     status: this.store_data.status
+      // }
+      // if (this.store_data.password){
+          // obj.password = this.store_data.password
       // }
       return new Promise((resolve, reject) => {
-            this.$store.dispatch('auth/registerUserJWT', obj)
+            this.$store.dispatch('auth/registerUserJWT', {  store: this.store_data,
+                                                            branches: this.branches_data,
+                                                            user: this.user,
+                                                            } )
           .then(res => {
             this.$vs.loading.close()
           if( res.data.statusCode == 200 ){
               this.$vs.notify({
               color: 'success',
               title: 'Successfull',
-              text: 'تم التسجيل بنجاح'
+              text: 'تم التسجيل بنجاح',
+              fixed: 'true',
+              position: 'bottom-center'
               })
-              this.$acl.change('customer')
-              if(this.cartItems.length > 0) {
-                this.$router.push('/checkout')
-              } else {
-                this.$router.push('/')
-              }
+
+              // this.$acl.change('customer')
+              // if(this.cartItems.length > 0) {
+              //   this.$router.push('/checkout')
+              // } else {
+              //   this.$router.push('/')
+              // }
           } else if( res.data.statusCode == 402 ){
             this.$vs.notify({
             color: 'danger',

@@ -22,40 +22,98 @@ const router = new Router({
     return { x: 0, y: 0 }
   },
   routes: [
+    // {
+    // // =============================================================================
+    // // MAIN LAYOUT ROUTES
+    // // =============================================================================
+    //   path: '',
+    // //   component: () => import('@/views/pages/ComingSoon.vue'),
+    //
+    //   component: () => import('./layouts/main/Main.vue'),
+    //   children: [
+    //     // =============================================================================
+    //     // Theme Routes
+    //     // =============================================================================
+    //     {
+    //         path: '/',
+    //         name: 'dashboard',
+    //       //   component: () => import('@/views/pages/ComingSoon.vue'),
+    //         // component: () => import('./views/Dashboard.vue'),
+    //         component: () => import('@/views/pages/Register.vue'),
+    //         meta: {
+    //           // breadcrumb: [
+    //           //     { title: 'Home', url: '/' },
+    //           //     { title: 'Register', active: true },
+    //           // ],
+    //           rule: 'public',
+    //         }
+    //       },
+    //     //{
+    //      // path: '/',
+    //       //name: 'soon',
+    //       //component: () => import('./views/home/Home.vue'),
+    //     //   component: () => import('@/views/pages/ComingSoon.vue'),
+    //       //meta: {
+    //           //rule: 'public',
+    //       //}
+    //     //},
+    //   ]
+    // },
     {
-    // =============================================================================
-    // MAIN LAYOUT ROUTES
-    // =============================================================================
       path: '',
-    //   component: () => import('@/views/pages/ComingSoon.vue'),
-
-      component: () => import('./layouts/main/Main.vue'),
+      component: () => import('@/layouts/full-page/FullPage.vue'),
       children: [
         // =============================================================================
-        // Theme Routes
+        // PAGES
         // =============================================================================
         {
-            path: '/',
-            name: 'dashboard',
-          //   component: () => import('@/views/pages/ComingSoon.vue'),
-            component: () => import('./views/Dashboard.vue'),
+          path: '/',
+          name: 'page-register',
+          component: () => import('@/views/pages/Register.vue'),
+          meta: {
+            rule: 'public',
+          }
+        },
+        {
+          path: '/login',
+          name: 'page-login',
+          component: () => import('@/views/pages/Login.vue'),
+          meta: {
+              rule: 'public',
+          }
+        },
+        {
+            path: '/pages/comingsoon',
+            name: 'page-coming-soon',
+            component: () => import('@/views/pages/ComingSoon.vue'),
             meta: {
-              breadcrumb: [
-                  { title: 'Home', url: '/' },
-                  { title: 'Reports', active: true },
-              ],
-                rule: 'vendor',
+                rule: 'public'
             }
-          },
-        //{
-         // path: '/',
-          //name: 'soon',
-          //component: () => import('./views/home/Home.vue'),
-        //   component: () => import('@/views/pages/ComingSoon.vue'),
-          //meta: {
-              //rule: 'public',
-          //}
-        //},
+        },
+        {
+            path: '/pages/error-404',
+            name: 'page-error-404',
+            component: () => import('@/views/pages/Error404.vue'),
+            meta: {
+                rule: 'public'
+            }
+        },
+        {
+            path: '/pages/error-500',
+            name: 'page-error-500',
+            component: () => import('@/views/pages/Error500.vue'),
+            meta: {
+                rule: 'public'
+            }
+        },
+        {
+            path: '/pages/not-authorized',
+            name: 'page-not-authorized',
+            component: () => import('@/views/pages/NotAuthorized.vue'),
+            meta: {
+                rule: 'public'
+            }
+        }
       ]
     },
     {
@@ -75,14 +133,6 @@ const router = new Router({
         //       rule: 'public',
         //   }
         // },
-        //{
-         // path: '/',
-          //name: 'home',
-         // component: () => import('./views/home/Home.vue'),
-          //meta: {
-             // rule: 'public',
-          //}
-       // },
         {
           path: '/contact-us',
           name: 'contact',
@@ -622,63 +672,6 @@ const router = new Router({
     // =============================================================================
     // FULL PAGE LAYOUTS
     // =============================================================================
-    {
-      path: '',
-      component: () => import('@/layouts/full-page/FullPage.vue'),
-      children: [
-        // =============================================================================
-        // PAGES
-        // =============================================================================
-        {
-          path: '/login',
-          name: 'page-login',
-          component: () => import('@/views/pages/Login.vue'),
-          meta: {
-              rule: 'public',
-          }
-        },
-        {
-          path: '/register',
-          name: 'page-register',
-          component: () => import('@/views/pages/Register.vue'),
-          meta: {
-              rule: 'public',
-          }
-        },
-        {
-            path: '/pages/comingsoon',
-            name: 'page-coming-soon',
-            component: () => import('@/views/pages/ComingSoon.vue'),
-            meta: {
-                rule: 'public'
-            }
-        },
-        {
-            path: '/pages/error-404',
-            name: 'page-error-404',
-            component: () => import('@/views/pages/Error404.vue'),
-            meta: {
-                rule: 'public'
-            }
-        },
-        {
-            path: '/pages/error-500',
-            name: 'page-error-500',
-            component: () => import('@/views/pages/Error500.vue'),
-            meta: {
-                rule: 'public'
-            }
-        },
-        {
-            path: '/pages/not-authorized',
-            name: 'page-not-authorized',
-            component: () => import('@/views/pages/NotAuthorized.vue'),
-            meta: {
-                rule: 'public'
-            }
-        }
-      ]
-    },
     // Redirect to 404 page, if no match found
     {
       path: '*',
