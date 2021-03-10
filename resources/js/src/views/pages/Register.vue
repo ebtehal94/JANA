@@ -557,8 +557,8 @@ export default {
           if( res.data.statusCode == 200 ){
               this.$vs.notify({
               color: 'success',
-              title: 'Successfull',
-              text: 'تم التسجيل بنجاح',
+              title: 'تم التسجيل بنجاح',
+              text: 'سيتم التواصل معكم في أقرب وقت ممكن',
               fixed: 'true',
               position: 'bottom-center'
               })
