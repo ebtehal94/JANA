@@ -437,10 +437,33 @@ export default {
           {text:'تبوك',value:4}
         ],
         stores: [
-          {text:'النوع الأول',value:1},
-          {text:'النوع التاني',value:2},
-          {text:'النوع الثالث',value:3},
-          {text:'النوع الرابع',value:4}
+          {text:' المراكز الصحية والعيادات ' ,value:1},
+          {text:' المطاعم والمقاهي' ,value:2},
+          {text:' الملابس والاحذية والحقائب' ,value:3},
+          {text:' المنتجات الغذائية ' ,value:4},
+          {text:' المكتبات' ,value:5},
+          {text:' الاجهزة التقنية ' ,value:6},
+          {text:' الاواني والمستلزمات المطبخ ' ,value:7},
+          {text:' مراكز التجميل' ,value:8},
+          {text:' الفنادق والشاليهات والمنتجعات' ,value:9},
+          {text:' تذاكر طيران ' ,value:10},
+          {text:' خدمات السيارات' ,value:11},
+          {text:' مراكز ومعاهد التدريب والتعليم ' ,value:12},
+          {text:' النوادي الرياضية' ,value:13},
+          {text:' محلات النظارات والساعات ' ,value:14},
+          {text:' الصيدليات ' ,value:15},
+          {text:'المراكز الرياضية ' ,value:16},
+          {text:' مواقع الاونلاين' ,value:17},
+          {text:' الاثاث ' ,value:18},
+          {text:' الهدايا والورد' ,value:19},
+          {text:'الدعاية والاعلان والمطبوعات ' ,value:20},
+          {text:'مستلزمات تنظيم الحفلات والمناسبات' ,value:21},
+          {text:'استديوهات التصوير' ,value:22},
+          {text:' شركات الشحن ' ,value:23},
+          {text:'اقمشة ومستلزمات الخياطة ' ,value:24},
+          {text:' المشاتل ' ,value:25},
+          {text:' العطور والتجميل' ,value:26},
+          {text:' مستلزمات تجهيز الصالونات ومراكز التجميل' ,value:27},
         ],
       store_data: {
         name_ar: null,
@@ -497,12 +520,12 @@ export default {
       this.branches_data.push({type: null, title: null, city_id: null, location: null, url: null})
     },
   changeNumber(num){
-    if((num == 2))
-    // && !this.errors.any()
-    // && this.store_data.name_ar
-    // && this.store_data.name_en
-    // && this.store_data.cr_number
-    // && this.store_data.city_id)
+    if((num == 2)
+    && !this.errors.any()
+    && this.store_data.name_ar
+    && this.store_data.name_en
+    && this.store_data.cr_number
+    && this.store_data.city_id)
     {
       return this.page_num = num
     }
