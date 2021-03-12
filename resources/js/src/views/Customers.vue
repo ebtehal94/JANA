@@ -15,14 +15,14 @@
             </div>
             <div class="vx-col cursor-pointer flex">
                 <vs-button
-                    class="w-full rounded-full font-simebold"
+                    class="w-full rounded-full text-xs font-bold shadow-none"
                     color="rgb(255, 255, 255)"
                     text-color="#DC6059"
                     icon-after vs-icon-after="true"
                     icon-pack="feather"
-                    icon="plus"
+                    icon="icon-plus pl-4"
                     @click="addNewData">
-                    {{ $t('AddNew') }}
+                    {{ $t('CreateNewCustomer') }}
                 </vs-button>
           </div>
         </div>
@@ -32,13 +32,14 @@
                 <vx-card class="mt-8 pt-0">
                     <vs-tabs>
                         <vs-tab label="كل العملاء">
-                            <AllCustomers pending="false" :customers="customers"/>
+                            <AllCustomers pending="true" :customers="customers"/>
                         </vs-tab> 
                         <vs-tab label="الحسابات المعلقة">
-                            <SuspendedAccounts pending="true" :accounts="accounts"/>
+                            <AllCustomers pending="false" :customers="customers"/>
+                            <!--<SuspendedAccounts pending=true :accounts="accounts"/>-->
                         </vs-tab>
                         <vs-tab label="عملاء جدد استخدموا كود الإحالات">
-                            <AllCustomers :customers="customers" :code="customers.code"/>
+                            <AllCustomers pending=false :customers="customers"/>
                         </vs-tab>
                     </vs-tabs>
                 </vx-card>
@@ -87,7 +88,9 @@ export default{
 
     },
     methods: {
-
+        addNewData() {
+        this.$router.push({path: '/CreateCustomer'})
+        },
     },
     created() {
 

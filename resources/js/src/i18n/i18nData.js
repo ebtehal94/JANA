@@ -8,11 +8,22 @@ export default {
 		Stores:'Stores',
 		Accounts:'Administrative Accounts',
 		AppControl:'App Control',
+
+		CreateCustomer:'Create New Account',
+		CreateAdmin:'Create New Account',
+		CreateStore:'Create New Account',
+
+		CreateNewCustomer:'Create Customer Account',
+		CreateNewOffer:'Create New Offer',
+		CreateNewAdmin:'Create New Account',
+		CreateNewStore:'Create New Account',
+
+		
 		customerName:"Customer Name",
 		date:'Date',
 		amount:'Amount',
 		notes:'Notes',
-
+		
 		AppDownload: 'Download our app for smoother easier experience',
 		Otantik: 'Otantik',
 
@@ -296,10 +307,20 @@ export default {
 		Stores:'المتاجر',
 		Accounts:'الحسابات الإدارية',
 		AppControl:'التحكم بالتطبيق',
+
+		CreateCustomer:'إنشاء حساب جديد',
+		CreateAdmin:'إنشاء حساب جديد',
+		CreateStore:'إنشاء حساب جديد',
+
 		customerName:'اسم العميلة',
 		date:"التاريخ",
 		amount:'المبلغ',
 		notes:'ملاحظات',
+
+		CreateNewCustomer:'إنشاء حساب عميلة',
+		CreateNewOffer:'إنشاء عرض جديد',
+		CreateNewAdmin:'إنشاء حساب جديد',
+		CreateNewStore:'إنشاء حساب جديد',
 
 		AppDownload: 'لتجربة أسهل قم بتحميل تطبيق أوتانتك',
 		Otantik: 'أوتانتك',

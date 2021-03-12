@@ -69,8 +69,9 @@
                 :href="item.slug === 'external' ? item.url : null"
                 :isDisabled="item.isDisabled"
                 :slug="item.slug">
-              <feather-icon class="w-5 h-5" :icon="item.icon" />
-                <span v-show="!verticalNavMenuItemsMin" class="truncate">{{ $t(item.i18n) || item.name }}</span>
+                <icon :name="item.icon" class="pr-4"/>
+             <!-- <feather-icon class="w-5 h-5" :icon="item.icon" />-->
+                <span v-show="!verticalNavMenuItemsMin" class="text-sm">{{ $t(item.i18n) || item.name }}</span>
                   <vs-chip class="ml-auto" :color="item.tagColor" v-if="item.tag && (isMouseEnter || !reduce)">{{ item.tag }}</vs-chip>
               </v-nav-menu-item>
 
@@ -149,7 +150,7 @@
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 import VNavMenuGroup from './VerticalNavMenuGroup.vue'
 import VNavMenuItem from './VerticalNavMenuItem.vue'
-
+import icon from '@/layouts/components/icon.vue';
 import Logo from '../Logo.vue'
 
 export default {
@@ -158,7 +159,8 @@ export default {
     VNavMenuGroup,
     VNavMenuItem,
     VuePerfectScrollbar,
-    Logo
+    Logo,
+    icon
   },
   props: {
     logo:             { type: String },

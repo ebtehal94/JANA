@@ -15,14 +15,14 @@
             </div>
             <div class="vx-col cursor-pointer flex">
                 <vs-button
-                    class="w-full rounded-full font-simebold"
+                    class="w-full rounded-full text-xs font-bold shadow-none"
                     color="rgb(255, 255, 255)"
                     text-color="#DC6059"
                     icon-after vs-icon-after="true"
                     icon-pack="feather"
-                    icon="plus"
+                    icon="icon-plus pl-4"
                     @click="addNewData">
-                    {{ $t('AddNew') }}
+                    {{ $t('CreateNewOffer') }}
                 </vs-button>
           </div>
         </div>

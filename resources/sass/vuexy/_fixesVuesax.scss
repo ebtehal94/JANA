@@ -276,7 +276,7 @@
 
 .vs-input--input.hasIcon:not(.icon-after-input) {
   &+.vs-input--placeholder {
-    padding-left: 5rem !important;
+    padding-left:4rem !important;
   }
   &:focus+.vs-placeholder-label {
     padding-left: .7rem !important;
