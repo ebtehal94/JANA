@@ -10,7 +10,7 @@
             <div class="vx-col hidden lg:block lg:w-2/5 pl-1.5 bg-logo">
               <img src="@assets/images/logo/logo-3.png" alt="jana" class="mx-auto" width="130">
 
-              <div class="w-full bg-footer">
+              <div class="w-full bg-footer" v-if="page_num < 4">
                 <span @click="goToPage(1)" class="steps-btn inline-block font-semibold">1</span>
                 <span @click="goToPage(2)" class="steps-btn inline-block font-semibold">2</span>
                 <span @click="goToPage(3)" class="steps-btn inline-block font-semibold">3</span>
@@ -409,6 +409,11 @@
               </div>
             </div>
           </div>
+
+          <div class="vx-col sm:w-full md:w-full lg:w-1/2" v-if="page_num === 4">
+            <h5>تم التسجيل بنجاح</h5>
+            <h5>سيتم التواصل معكم في أقرب وقت ممكن</h5>
+          </div>
           </div>
         </div>
       </vx-card>
@@ -579,13 +584,14 @@ export default {
             this.$vs.loading.close()
           if( res.data.statusCode == 200 ){
               this.$vs.notify({
-              color: 'success',
-              title: 'تم التسجيل بنجاح',
-              text: 'سيتم التواصل معكم في أقرب وقت ممكن',
-              fixed: 'true',
-              position: 'bottom-center'
+                color: 'success',
+                title: 'تم التسجيل بنجاح',
+                text: 'سيتم التواصل معكم في أقرب وقت ممكن',
+                fixed: 'true',
+                position: 'bottom-center'
               })
-
+              localStorage.setItem('isRegistered', true)
+              this.page_num = 4
               // this.$acl.change('customer')
               // if(this.cartItems.length > 0) {
               //   this.$router.push('/checkout')
@@ -629,6 +635,10 @@ export default {
       if(!moduleUserManagement.isRegistered) {
       this.$store.registerModule('userManagement', moduleUserManagement)
       moduleUserManagement.isRegistered = true
+      }
+
+      if (localStorage.getItem('isRegistered')){
+        this.page_num = 4
       }
   }
 };
