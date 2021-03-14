@@ -75,7 +75,7 @@
                   </div>
 
                   <div class="bg-input">
-                    <icon name="com-number" class="icon phone-icon"/>
+                    <icon name="com-number" class="icon"/>
                     <vs-input
                       size="large"
                       placeholder="رقم السجل التجاري"
@@ -178,7 +178,7 @@
                       <icon name="cross" class="icon left-icon"/>
                     </span>
                   </div>
-
+  
                   <div class="bg-input">
                     <icon name="name" class="icon"/>
                     <vs-input
@@ -687,7 +687,7 @@ export default {
     }
     .phone-icon{
       position: absolute;
-      top:14px;
+      top:20px;
       left: 28px;
     }
     .left-icon{
@@ -740,6 +740,13 @@ export default {
 .bg-input{
   .left-icon{
       left: 95%;
+    }
+  }
+}
+@media (min-width: 375px) and (max-width: 600px){
+  .bg-input{
+  .left-icon{
+      left: 88%;
     }
   }
 }

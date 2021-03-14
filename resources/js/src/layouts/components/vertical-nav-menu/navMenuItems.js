@@ -13,7 +13,7 @@ export default [
     url: '/dashboard',
     name: 'Dashboard',
     slug: 'dashboard',
-    icon: 'GridIcon',
+    icon: 'confirm',
     i18n:'Reports',
     rule: 'vendor',
   },

@@ -218,6 +218,20 @@ const router = new Router({
             }
           },
           {
+            path: '/CreateCustomer',
+            name: 'create-customer',
+          //   component: () => import('@/views/pages/ComingSoon.vue'),
+            component: () => import('./views/CreateCustomer.vue'),
+            meta: {
+              breadcrumb: [
+                  { title: 'Home', url: '/' },
+                  { title: 'Customers'},
+                  { title: 'CreateCustomer', active: true },
+              ],
+                rule: 'admin',
+            }
+          },
+          {
             path: '/Stores',
             name: 'Stores',
           //   component: () => import('@/views/pages/ComingSoon.vue'),
@@ -231,14 +245,15 @@ const router = new Router({
             }
           },
           {
-            path: '/Stores',
-            name: 'Stores',
+            path: '/CreateStore',
+            name: 'create-Store',
           //   component: () => import('@/views/pages/ComingSoon.vue'),
-            component: () => import('./views/Stores.vue'),
+            component: () => import('./views/CreateStore.vue'),
             meta: {
               breadcrumb: [
                   { title: 'Home', url: '/' },
-                  { title: 'Stores', active: true },
+                  { title: 'Stores'},
+                  { title: 'CreateStore', active: true },
               ],
                 rule: 'vendor',
             }
@@ -256,6 +271,20 @@ const router = new Router({
                 rule: 'admin'
             },
         },
+        {
+            path: '/CreateAdmin',
+            name: 'create-Admin',
+          //   component: () => import('@/views/pages/ComingSoon.vue'),
+            component: () => import('./views/CreateAdmin.vue'),
+            meta: {
+              breadcrumb: [
+                  { title: 'Home', url: '/' },
+                  { title: 'Accounts'},
+                  { title: 'CreateAdmin', active: true },
+              ],
+                rule: 'admin',
+            }
+          },
         {
             path: '/AppControl',
             name: 'AppControl',
