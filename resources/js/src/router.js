@@ -205,6 +205,20 @@ const router = new Router({
             }
           },
           {
+            path: '/CreateOffer',
+            name: 'create-offer',
+          //   component: () => import('@/views/pages/ComingSoon.vue'),
+            component: () => import('./views/CreateOffer.vue'),
+            meta: {
+              breadcrumb: [
+                  { title: 'Home', url: '/' },
+                  { title: 'Offers'},
+                  { title: 'CreateOffer', active: true },
+              ],
+                rule: 'vendor',
+            }
+          },
+          {
             path: '/Customers',
             name: 'Customers',
           //   component: () => import('@/views/pages/ComingSoon.vue'),
@@ -294,6 +308,19 @@ const router = new Router({
                 breadcrumb: [
                     { title: 'Home', url: '/' },
                     { title: 'AppControl', active: true },
+                ],
+                rule: 'admin'
+            },
+        },
+        {
+            path: '/Notification',
+            name: 'Notification',
+            // component: () => import('@/views/pages/ComingSoon.vue'),
+            component: () => import('@/views/Notification.vue'),
+            meta: {
+                breadcrumb: [
+                    { title: 'Home', url: '/' },
+                    { title: 'Notification', active: true },
                 ],
                 rule: 'admin'
             },

@@ -23,13 +23,13 @@
                       size="large"
                       class="w-full text-base"
                       placeholder="الإسم كامل"
-                      v-model="data_local.name"
+                      v-model="customer.name"
                       v-validate="'required'"
                       icon-no-border
                       icon="icon"
                       name="name"/>
 
-                    <span v-if="!errors.has('name') && data_local.name">
+                    <span v-if="!errors.has('name') && customer.name">
                       <icon name="confirm" class="icon left-icon"/>
                     </span>
                     <span v-else-if="errors.has('name')">
@@ -46,10 +46,10 @@
                     icon-no-border
                     icon="icon"
                     placeholder="البريد الإلكتروني"
-                    v-model="data_local.email"
+                    v-model="customer.email"
                     class="w-full mt-2"/>
 
-                   <span v-if="!errors.has('email') && data_local.email">
+                   <span v-if="!errors.has('email') && customer.email">
                     <icon name="confirm" class="icon left-icon"/>
                   </span>
                   <span v-else-if="errors.has('email')">
@@ -62,7 +62,7 @@
                   <vs-input
                     size="large"
                     placeholder="رقم الجوال"
-                    v-model="data_local.mobile"
+                    v-model="customer.mobile"
                     type="number"
                     icon-no-border
                     icon="icon"
@@ -71,7 +71,7 @@
 
                   <vs-input
                   size="large"
-                  v-model="data_local.cc"
+                  v-model="customer.cc"
                   type="text"
                   disabled
                   dir="ltr"
@@ -80,7 +80,7 @@
                   class="w-1/5 mt-2"
                   placeholder="966+"/>
 
-                  <span v-if="!errors.has('mobile') && data_local.mobile">
+                  <span v-if="!errors.has('mobile') && customer.mobile">
                     <icon name="confirm" class="icon left-phone-icon"/>
                   </span>
                   <span v-else-if="errors.has('mobile')">
@@ -91,13 +91,13 @@
                 <div class="bg-input">
                     <icon name="city" class="icon"/>
                     <v-select class="w-full mt-2"
-                     v-model="data_local.city_id"
+                     v-model="customer.city_id"
                      placeholder="الموقع (المدينة)"
                      label="text" :options="cities_list"
                      :reduce="text => text.value"
                      :dir="$vs.rtl ? 'rtl' : 'ltr'" />
 
-                    <span v-if="!errors.has('city_id') && data_local.city_id">
+                    <span v-if="!errors.has('city_id') && customer.city_id">
                       <icon name="confirm" class="icon left-icon"/>
                     </span>
                     <span v-else-if="errors.has('city_id')">
@@ -115,10 +115,10 @@
                     type="password"
                     icon-no-border
                     icon="icon"
-                    v-model="data_local.password"
+                    v-model="customer.password"
                     class="w-full mt-2"/>
 
-                  <span v-if="!errors.has('password') && data_local.password">
+                  <span v-if="!errors.has('password') && customer.password">
                     <icon name="confirm" class="icon left-icon"/>
                   </span>
                   <span v-else-if="errors.has('password')">
@@ -128,13 +128,13 @@
 
                 <div class="bg-input">
                     <v-select class="w-full mt-2"
-                     v-model="status"
+                     v-model="customer.status"
                      placeholder="حالة الحساب (غير نشط)"
                      label="text" :options="status_list"
                      :reduce="text => text.value"
                      :dir="$vs.rtl ? 'rtl' : 'ltr'" />
 
-                    <span v-if="!errors.has('status') && status">
+                    <span v-if="!errors.has('status') && customer.status">
                       <icon name="confirm" class="icon left-icon"/>
                     </span>
                     <span v-else-if="errors.has('status')">
@@ -176,7 +176,14 @@ export default {
   },
   data() {
     return {
-      data_local: { name: null, email: null, mobile: null, cc: '+966', city_id:null, password: null,},
+      customer: { 
+        name: null, 
+        email: null, 
+        mobile: null, 
+        cc: '+966', 
+        city_id:null, 
+        password: null,
+        status:null},
       cities_list: [
         {text:'الرياض',value:1},
         {text:'الدمام',value:2},
@@ -187,61 +194,52 @@ export default {
         {text:'غير نشط',value:1},
         {text:'نشط',value:2},
       ],
-      status:null
+      
     }
   },
   computed: {
     validateForm() {
-      return !this.errors.any() && ((!this.data_local.id && this.data_local.password) || this.data_local.id)
+     return ( !this.errors.any() && this.customer.email && this.customer.password ) ;
     },
   },
   methods: {
-    save_changes() {
+    registerUser() {
       if(!this.validateForm) return
-
+        // this.$vs.loading()
       // Here will go your API call for updating data
       // You can get data in "this.data_local"
-        const obj = {
-            id: this.data_local.id,
-            name: this.data_local.name,
-            email: this.data_local.email,
-            mobile: this.data_local.mobile,
-            status: this.activeUserInfo.status,
-            rule: this.activeUserInfo.rule
-        }
-        if (this.data_local.password){
-            obj.password = this.data_local.password
-        }
+        //const obj = {
+           // id: this.data_local.id,
+           // name: this.data_local.name,
+            //email: this.data_local.email,
+            //mobile: this.data_local.mobile,
+       // }
+        //if (this.data_local.password){
+           // obj.password = this.data_local.password
+        //}
 
-        this.$store.dispatch("userManagement/updateUser", obj)
+        this.$store.dispatch('auth/addItem', this.customer)
         .then(res => {
                         if( res.data.statusCode == 200 ){
                         this.$vs.notify({
                         color: 'success',
                         title: 'Successfull',
-                        text: 'User updated successfully'
+                        text: 'تم التسجيل بنجاح'
                         })
-                        window.location.reload()
                     }else{
                         this.$vs.notify({
                         color: 'danger',
                         title: 'Error',
-                        text: 'Error updating user'
+                        text: 'حدث خطأ ما'
                         })
                     }
-                        })
-        .catch(err => { console.error(err) })
+                  })
+                  .catch(function (error) {
+                      console.log(error.response);
+                  });
 
 
     },
-    reset_data() {
-      this.data_local = JSON.parse(JSON.stringify(this.data))
-    },
-    fetch_user_data(userId) {
-      this.$store.dispatch("userManagement/fetchUser", userId)
-        .then(res => { this.data_local = res.data})
-        .catch(err => { console.error(err) })
-    }
   },
   created() {
     // Register Module UserManagement Module
@@ -249,9 +247,6 @@ export default {
       this.$store.registerModule('userManagement', moduleUserManagement)
       moduleUserManagement.isRegistered = true
     }
-
-    this.fetch_user_data(this.activeUserInfo.id)
-    this.$store.dispatch("userManagement/fetchUsers").catch(err => { console.error(err) })
   }
 }
 </script>

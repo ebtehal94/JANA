@@ -1,12 +1,42 @@
 <template>
-  <div id="create-customer">
-    <vx-card class="customer-info">
+  <div id="create-store">
+    <vx-card class="store-info">
       <div slot="no-body" class="tabs-container md:px-6 pt-6 md:pb-4">
         <!-- Content Row -->
         <div class="vx-row">
-          <div class="vx-col hidden lg:block lg:w-2/5 justify-center items-center">
-            <img src="@assets/images/newCustomer.png" alt="jana-customer" class="mt-24 align" width="190">
+          <div class="vx-col lg:block lg:w-2/5 pr-8 mt-5 justify-center items-center">
+            <img src="@assets/images/newCustomer.png" alt="jana-customer" class="align" width="190">
+            <div class="text-center text-xs mt-12">
+              <p>تاريخ الإنضمام<span class="pl-4 date">15/4/2021</span></p>
+              <p>تاريخ آخر عرض<span class="pl-4 date">15/4/2021</span></p>
+            </div>
+            <div class="bg-input text-center">
+              <icon name="qrcode" class="qr-icon"/>
+              <vs-button
+                size="small"
+                class="pl-4 mt-8 text-xs font-bold rounded-full"
+                color="linear-gradient(to left,#E93F7D,#DA6653)"
+                gradient>
+                إنشاء QRCODE
+              </vs-button>
+            </div>
+            <div class="bg-input">
+                <v-select class="w-full mt-8"
+                v-model="status"
+                placeholder="حالة الحساب (غير نشط)"
+                label="text" :options="status_list"
+                :reduce="text => text.value"
+                :dir="$vs.rtl ? 'rtl' : 'ltr'" />
+
+                <span v-if="!errors.has('status') && status">
+                  <icon name="confirm" class="icon left-icon"/>
+                </span>
+                <span v-else-if="errors.has('status')">
+                  <icon name="cross" class="icon left-icon"/>
+                </span>
+              </div>
           </div>
+
           <div class="vx-col sm:w-full md:w-full lg:w-1/2">
             <!-- Col Header -->
             <div class="vx-card__title">
@@ -98,14 +128,14 @@
                  </div>
 
                 <!-- Col Header -->
-                <div class="vx-card__title mt-4">
+                <div class="vx-card__title mt-5">
                     <div class="separator">
-                        <h4 class="mb-4 text-lg">بيانات المتجر</h4>
+                        <h4 class="mb-4 text-lg">طريقة الإتصال</h4>
                     </div>
                 </div>
 
                 <div class="vx-row bg-input">
-                  <icon name="phone" class="icon phone-icon"/>
+                  <icon name="mobile" class="icon phone-icon"/>
                   <vs-input
                     size="large"
                     placeholder="رقم الجوال"
@@ -127,7 +157,7 @@
                     class="w-1/5 mt-2"
                     placeholder="966+"/>
 
-                  <span v-if="!errors.has('phone') && user.phone">
+                  <span v-if="!errors.has('phone') && data_local.phone">
                     <icon name="confirm" class="icon left-phone-icon"/>
                   </span>
                   <span v-else-if="errors.has('phone')">
@@ -157,11 +187,10 @@
 
                 <div class=" mb-3">
                     <vs-button
-                      class="w-full mt-10 font-medium register-btn"
+                      class="w-full mt-10 font-medium register-btn rounded-full"
                       color="linear-gradient(to left,#E93F7D,#DA6653)"
-                      gradient
-                      @click="changeNumber(2)">
-                      التالي
+                      gradient>
+                      حفظ التغيرات
                     </vs-button>
                   </div>
                 </div>
@@ -275,10 +304,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#create-customer {
+#create-store {
     margin: 2rem 2.5rem;
 
-    .customer-info{
+    .store-info{
         padding: 2.5rem;
     }
     .separator{
@@ -328,6 +357,18 @@ export default {
       left: 65%;
       z-index: 999;
     }
+    .qr-icon{
+      position: absolute;
+      top:55%;
+      left: 60%;
+      z-index: 9999;
+    }
+  }
+  .date{
+    color: #ACACAC;
+  }
+  .vs-button.small:not(.includeIconOnly) {
+    padding: 0.5rem 4rem 0.5rem 1.5rem;
   }
 }
 

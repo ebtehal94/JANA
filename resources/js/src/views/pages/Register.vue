@@ -436,10 +436,25 @@ export default {
   data() {
     return {
         cities_list: [
-          {text:'الرياض',value:1},
-          {text:'الدمام',value:2},
-          {text:'جدة',value:3},
-          {text:'تبوك',value:4}
+          {text:'الدمام',value:1},
+          {text:'الخبر',value:2},
+          {text:'الجبيل',value:3},
+          {text:'الاحساء',value:4},
+          {text:'بقيق',value:5},
+          {text:'ينبع',value:6},
+          {text:'املج',value:7},
+          {text:'محافظة بدر',value:8},
+          {text:'الباحة',value:9},
+          {text:'الرياض',value:10},
+          {text:'جدة',value:11},
+          {text:'مكة',value:12},
+          {text:'المدينة',value:13},
+          {text:'خميس مشيط',value:14},
+          {text:'جازان',value:15},
+          {text:'القصيم (عنيزة-بريدة)',value:16},
+          {text:'حائل',value:17},
+          {text:'عرعر',value:18},
+          {text:'الجوف',value:19},
         ],
         stores: [
           {text:' المراكز الصحية والعيادات ' ,value:1},

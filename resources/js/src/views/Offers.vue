@@ -68,7 +68,9 @@ export default{
 
     },
     methods: {
-
+        addNewData() {
+            this.$router.push({path: '/CreateOffer'})
+        },
     },
     created() {
 
