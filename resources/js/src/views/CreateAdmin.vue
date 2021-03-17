@@ -11,7 +11,7 @@
             <!-- Col Header -->
             <div class="vx-card__title">
                 <div class="separator">
-                    <h4 class="mb-4 text-lg">بيانات الحساب</h4>
+                    <h4 class="mb-4 text-base">بيانات الحساب</h4>
                 </div>
             </div>
 
@@ -20,7 +20,6 @@
                 <div class="bg-input">
                     <icon name="user-name" class="icon"/>
                     <vs-input
-                      size="large"
                       class="w-full text-base"
                       placeholder="الإسم كامل"
                       v-model="admin_data.name"
@@ -40,7 +39,6 @@
                 <div class="bg-input">
                   <icon name="email" class="icon"/>
                   <vs-input
-                    size="large"
                     v-validate="'required|email|min:3'"
                     data-vv-validate-on="blur"
                     icon-no-border
@@ -60,7 +58,6 @@
                 <div class="vx-row bg-input">
                   <icon name="mobile" class="icon phone-icon"/>
                   <vs-input
-                    size="large"
                     placeholder="رقم الجوال"
                     v-model="admin_data.mobile"
                     type="number"
@@ -70,7 +67,6 @@
                     class="w-3/4 mt-2 px-3"/>
 
                   <vs-input
-                  size="large"
                   v-model="admin_data.cc"
                   type="text"
                   disabled
@@ -108,7 +104,6 @@
                 <div class="bg-input">
                   <icon name="password" class="icon"/>
                   <vs-input
-                    size="large"
                     data-vv-validate-on="blur"
                     placeholder="كلمة المرور"
                     v-validate="'required|min:6'"
@@ -280,19 +275,19 @@ export default {
     position: relative;
     .icon{
       position: absolute;
-      top:13px;
+      top:10px;
       left: 15px;
       z-index:1;
       padding-right: 20px;
     }
     .phone-icon{
       position: absolute;
-      top:18px;
+      top:13px;
       left: 25px;
     }
     .left-icon{
       position: absolute;
-      top:15px;
+      top:13px;
       left: 92%;
       z-index: 9999;
     }
@@ -302,6 +297,9 @@ export default {
       left: 65%;
       z-index: 999;
     }
+  }
+  .vs-button:not(.vs-radius):not(.includeIconOnly):not(.small):not(.large) {
+      padding: .5rem 2rem;
   }
 }
 

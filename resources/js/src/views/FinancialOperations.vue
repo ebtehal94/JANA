@@ -10,7 +10,7 @@
                                         <vs-th >{{$t('customerName')}}</vs-th>
                                         <vs-th>{{$t('date')}}</vs-th>
                                         <vs-th>{{$t('amount')}}</vs-th>
-                                        <vs-th>{{$t('notes')}}</vs-th>
+                                        <vs-th class="text-right">{{$t('notes')}}</vs-th>
                                     </template>
                                 <template slot-scope="{data}">
                                     <tbody>
@@ -25,11 +25,11 @@
 
                                             <vs-td>
                                                 <!--<span class="pr-40 pl=24">|</span>-->
-                                                <p class="text-right">{{ data[indextr].amount}}</p>
+                                                <p>{{ data[indextr].amount}}</p>
                                             </vs-td>
-
+    
                                             <vs-td>
-                                                <p class="text-right">{{ data[indextr].notes}}</p>
+                                                <p>{{ data[indextr].notes}}</p>
                                             </vs-td>
                                         </vs-tr>
                                     </tbody>
@@ -38,11 +38,11 @@
                         </vs-tab>
                         <vs-tab label="الكل">
                             <vs-table :data="users">
-                                <template slot="thead" class="text-right">
+                                <template slot="thead">
                                     <vs-th>{{$t('customerName')}}</vs-th>
                                     <vs-th>{{$t('date')}}</vs-th>
                                     <vs-th>{{$t('amount')}}</vs-th>
-                                    <vs-th>{{$t('notes')}}</vs-th>
+                                    <vs-th >{{$t('notes')}}</vs-th>
                                 </template>
                                 <template slot-scope="{data}">
                                     <tbody>
@@ -57,11 +57,11 @@
 
                                             <vs-td>
                                                 <!--<span class="pr-40 pl=24">|</span>-->
-                                                <p class="text-right">{{ data[indextr].amount}}</p>
+                                                <p >{{ data[indextr].amount}}</p>
                                             </vs-td>
 
                                             <vs-td>
-                                                <p class="text-right">{{ data[indextr].notes}}</p>
+                                                <p>{{ data[indextr].notes}}</p>
                                             </vs-td>
                                         </vs-tr>
                                     </tbody>

@@ -269,7 +269,6 @@
 
 .vs-input--placeholder {
   top: 0px;
-  font-size: 1rem;
   color: #8F8F8F;
   font-weight: 400;
 }
@@ -351,15 +350,16 @@
 .vs-input--placeholder {
   &.normal {
     padding: .7rem !important;
+    font-size: .9rem !important;
   }
 
   &.large {
     padding: 1rem !important;
+    font-size: 1rem !important;
   }
 
   &.small {
     padding: .2rem .6rem !important;
-    font-size: .8rem !important;
   }
 }
 
@@ -580,6 +580,7 @@
   background: transparent;
 
   .vs-table--header {
+    text-align: center;
     .vs-table--search {
       padding: 1rem 0;
 
@@ -635,6 +636,9 @@
       .vs-table--thead {
         th {
           padding: 10px 15px;
+          .vs-table-text {
+            font-weight: 600;
+          }
         }
 
         .con-td-check {
@@ -711,7 +715,7 @@
 // ======================================================================================
 
 .vs-textarea {
-  font-size: 1rem;
+  font-size: .8rem;
   color: inherit;
   font-family: $font-family-sans-serif;
   line-height: 1.6;

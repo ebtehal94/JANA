@@ -10,70 +10,50 @@
 import axios from "@/axios.js"
 
 export default {
-  addOrder({ commit }, order) {
+  addCustomer({ commit }, customer) {
     return new Promise((resolve, reject) => {
-      axios.post("/api/orders/create", order)
+      axios.post("/api/users/create", customer)
         .then((response) => {
-          // commit('ADD_USER', Object.assign(order, {id: response.data.order.id}))
+          commit('ADD_CUSTOMER', Object.assign(customer, {id: response.data.customer.id}))
           resolve(response)
         })
         .catch((error) => { reject(error) })
     })
   },
-  fetchOrders({ commit }) {
+  fetchCustomers({ commit }) {
     return new Promise((resolve, reject) => {
-      axios.get("/api/orders/list")
+      axios.get("/api/users/list")
         .then((response) => {
-          commit('SET_ORDERS', response.data)
+          commit('SET_CUSTOMERS', response.data)
           resolve(response)
         })
         .catch((error) => { reject(error) })
     })
   },
-  fetchUserOrders({ commit }, userId) {
+  fetchCustomer({}, customerId) {
     return new Promise((resolve, reject) => {
-      axios.get("/api/orders/list")
-        .then((response) => {
-          commit('SET_USERS_ORDERS', { orders: response.data, id: userId})
-          resolve(response)
-        })
-        .catch((error) => { reject(error) })
-    })
-  },
-  fetchUserOrders({ commit }, userId) {
-    return new Promise((resolve, reject) => {
-      axios.get("/api/orders/list")
-        .then((response) => {
-          commit('SET_USERS_ORDERS', { orders: response.data, id: userId})
-          resolve(response)
-        })
-        .catch((error) => { reject(error) })
-    })
-  },
-  fetchOrder({}, orderId) {
-    return new Promise((resolve, reject) => {
-      axios.get(`/api/orders/edit/${orderId}`)
+      axios.get(`/api/users/edit/${customerId}`)
         .then((response) => {
           resolve(response)
         })
         .catch((error) => { reject(error) })
     })
   },
-  updateOrder({ commit }, order) {
+  updateCustomer({ commit }, customer) {
     return new Promise((resolve, reject) => {
-      axios.post(`/api/orders/update`, order)
+      axios.post(`/api/users/update`, customer)
         .then((response) => {
-          commit('UPDATE_ORDER', response.data.order)
+          commit('UPDATE_CUSTOMER', response.data.customer)
           resolve(response)
         })
         .catch((error) => { reject(error) })
     })
   },
-  removeOrder({ commit }, orderId) {
+  removeCustomer({ commit }, customerId) {
     return new Promise((resolve, reject) => {
-      axios.get(`/api/orders/delete/${orderId}`)
+      axios.get(`/api/users/delete/${customerId}`)
         .then((response) => {
-          commit('REMOVE_ORDER', orderId)
+          commit('REMOVE_CUSTOMER', customerId)
           resolve(response)
         })
         .catch((error) => { reject(error) })

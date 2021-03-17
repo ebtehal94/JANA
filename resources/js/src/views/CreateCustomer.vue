@@ -1,17 +1,17 @@
 <template>
   <div id="create-customer">
     <vx-card class="customer-info">
-      <div slot="no-body" class="tabs-container md:px-6 pt-6 md:pb-4">
+      <div slot="no-body" class="tabs-container md:px-6 pt-8 md:pb-4">
         <!-- Content Row -->
         <div class="vx-row">
-          <div class="vx-col hidden lg:block lg:w-2/5 justify-center items-center">
-            <img src="@assets/images/newCustomer.png" alt="jana-customer" class="mt-24 align" width="190">
+          <div class="vx-col hidden lg:block lg:w-2/5 pl-16">
+            <img src="@assets/images/newCustomer.png" alt="jana-customer" class="mt-20 align" width="160">
           </div>
           <div class="vx-col sm:w-full md:w-full lg:w-1/2">
             <!-- Col Header -->
             <div class="vx-card__title">
                 <div class="separator">
-                    <h4 class="mb-4 text-lg">بيانات الحساب</h4>
+                    <h4 class="mb-4 text-base">بيانات الحساب</h4>
                 </div>
             </div>
 
@@ -20,16 +20,15 @@
                 <div class="bg-input">
                     <icon name="user-name" class="icon"/>
                     <vs-input
-                      size="large"
                       class="w-full text-base"
                       placeholder="الإسم كامل"
-                      v-model="customer.name"
+                      v-model="customer_data.name"
                       v-validate="'required'"
                       icon-no-border
                       icon="icon"
                       name="name"/>
 
-                    <span v-if="!errors.has('name') && customer.name">
+                    <span v-if="!errors.has('name') && customer_data.name">
                       <icon name="confirm" class="icon left-icon"/>
                     </span>
                     <span v-else-if="errors.has('name')">
@@ -40,16 +39,15 @@
                 <div class="bg-input">
                   <icon name="email" class="icon"/>
                   <vs-input
-                    size="large"
                     v-validate="'required|email|min:3'"
                     data-vv-validate-on="blur"
                     icon-no-border
                     icon="icon"
                     placeholder="البريد الإلكتروني"
-                    v-model="customer.email"
+                    v-model="customer_data.email"
                     class="w-full mt-2"/>
 
-                   <span v-if="!errors.has('email') && customer.email">
+                   <span v-if="!errors.has('email') && customer_data.email">
                     <icon name="confirm" class="icon left-icon"/>
                   </span>
                   <span v-else-if="errors.has('email')">
@@ -60,9 +58,8 @@
                 <div class="vx-row bg-input">
                   <icon name="mobile" class="icon phone-icon"/>
                   <vs-input
-                    size="large"
                     placeholder="رقم الجوال"
-                    v-model="customer.mobile"
+                    v-model="customer_data.mobile"
                     type="number"
                     icon-no-border
                     icon="icon"
@@ -70,8 +67,7 @@
                     class="w-3/4 mt-2 px-3"/>
 
                   <vs-input
-                  size="large"
-                  v-model="customer.cc"
+                  v-model="customer_data.cc"
                   type="text"
                   disabled
                   dir="ltr"
@@ -80,7 +76,7 @@
                   class="w-1/5 mt-2"
                   placeholder="966+"/>
 
-                  <span v-if="!errors.has('mobile') && customer.mobile">
+                  <span v-if="!errors.has('mobile') && customer_data.mobile">
                     <icon name="confirm" class="icon left-phone-icon"/>
                   </span>
                   <span v-else-if="errors.has('mobile')">
@@ -90,14 +86,15 @@
 
                 <div class="bg-input">
                     <icon name="city" class="icon"/>
-                    <v-select class="w-full mt-2"
-                     v-model="customer.city_id"
+                    <v-select class="w-full mt-2 p-0"
+
+                     v-model="customer_data.city_id"
                      placeholder="الموقع (المدينة)"
                      label="text" :options="cities_list"
                      :reduce="text => text.value"
                      :dir="$vs.rtl ? 'rtl' : 'ltr'" />
 
-                    <span v-if="!errors.has('city_id') && customer.city_id">
+                    <span v-if="!errors.has('city_id') && customer_data.city_id">
                       <icon name="confirm" class="icon left-icon"/>
                     </span>
                     <span v-else-if="errors.has('city_id')">
@@ -108,17 +105,16 @@
                 <div class="bg-input">
                   <icon name="password" class="icon"/>
                   <vs-input
-                    size="large"
                     data-vv-validate-on="blur"
                     placeholder="كلمة المرور"
                     v-validate="'required|min:6'"
                     type="password"
                     icon-no-border
                     icon="icon"
-                    v-model="customer.password"
+                    v-model="customer_data.password"
                     class="w-full mt-2"/>
 
-                  <span v-if="!errors.has('password') && customer.password">
+                  <span v-if="!errors.has('password') && customer_data.password">
                     <icon name="confirm" class="icon left-icon"/>
                   </span>
                   <span v-else-if="errors.has('password')">
@@ -128,13 +124,13 @@
 
                 <div class="bg-input">
                     <v-select class="w-full mt-2"
-                     v-model="customer.status"
+                     v-model="customer_data.status"
                      placeholder="حالة الحساب (غير نشط)"
                      label="text" :options="status_list"
                      :reduce="text => text.value"
                      :dir="$vs.rtl ? 'rtl' : 'ltr'" />
 
-                    <span v-if="!errors.has('status') && customer.status">
+                    <span v-if="!errors.has('status') && customer_data.status">
                       <icon name="confirm" class="icon left-icon"/>
                     </span>
                     <span v-else-if="errors.has('status')">
@@ -144,7 +140,7 @@
 
                 <div class=" mb-3">
                   <vs-button
-                    class="w-full mt-10 font-medium register-btn rounded-full"
+                    class="w-full mt-10 font-medium rounded-full"
                     color="linear-gradient(to left,#E93F7D,#DA6653)"
                     gradient
                     @click="registerUser">
@@ -167,7 +163,7 @@ import vSelect from 'vue-select'
 import icon from '@/layouts/components/icon.vue';
 
 // Store Module
-import moduleUserManagement from '@/store/user-management/moduleUserManagement.js'
+import moduleCustomerManagement from '@/store/customer-management/moduleCustomerManagement.js'
 
 export default {
   components: {
@@ -176,7 +172,7 @@ export default {
   },
   data() {
     return {
-      customer: { 
+      customer_data: { 
         name: null, 
         email: null, 
         mobile: null, 
@@ -218,7 +214,7 @@ export default {
            // obj.password = this.data_local.password
         //}
 
-        this.$store.dispatch('auth/addItem', this.customer)
+        this.$store.dispatch("customerManagement/addCustomer", {customer_data:this.customer})
         .then(res => {
                         if( res.data.statusCode == 200 ){
                         this.$vs.notify({
@@ -243,9 +239,9 @@ export default {
   },
   created() {
     // Register Module UserManagement Module
-    if(!moduleUserManagement.isRegistered) {
-      this.$store.registerModule('userManagement', moduleUserManagement)
-      moduleUserManagement.isRegistered = true
+    if(!moduleCustomerManagement.isRegistered) {
+      this.$store.registerModule('customerManagement', moduleCustomerManagement)
+      moduleCustomerManagement.isRegistered = true
     }
   }
 }
@@ -256,7 +252,7 @@ export default {
     margin: 2rem 2.5rem;
 
     .customer-info{
-        padding: 2.5rem;
+        padding: 2rem 2.5rem;
     }
     .separator{
     display: flex;
@@ -283,19 +279,19 @@ export default {
     position: relative;
     .icon{
       position: absolute;
-      top:13px;
+      top:10px;
       left: 15px;
       z-index:1;
       padding-right: 20px;
     }
     .phone-icon{
       position: absolute;
-      top:18px;
+      top:13px;
       left: 25px;
     }
     .left-icon{
       position: absolute;
-      top:15px;
+      top:13px;
       left: 92%;
       z-index: 9999;
     }
@@ -305,6 +301,12 @@ export default {
       left: 65%;
       z-index: 999;
     }
+  }
+  .vs-button:not(.vs-radius):not(.includeIconOnly):not(.small):not(.large) {
+      padding: .5rem 2rem;
+  }
+  .v-select .vs__dropdown-toggle .vs__search {
+    font-size: .8rem;
   }
 }
 

@@ -85,11 +85,13 @@ export default{
     .vx-row > .vx-col {
         padding: 0 .6rem;
     }
-    .vs-input--placeholder {
-        font-size: small;
-        color: #ACACAC;
-        font-weight: 400;
-        padding-right: 3rem !important;
+    .vs-con-input{
+        .vs-input--placeholder {
+            font-size: .8rem;
+            color: #ACACAC;
+            font-weight: 400;
+            padding-right: 3rem !important;
+        }
     }
     .vs-button{
         box-shadow: none;

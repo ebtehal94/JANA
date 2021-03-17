@@ -12,7 +12,8 @@
                         <!-- Col Content -->
                          <div class="vx-row flex mt-4 mx-0 slider-img">
                             <div class="vx-col w-full md:w-1/4 add-img ">
-
+                                <input type="file" class="hidden" ref="uploadImgInput" multiple @change="updateCurrImg" accept="image/*">
+                                <vs-button v-if="dataUploadedImages.length === 0" size="small" icon-pack="feather" icon="icon-upload" @click="$refs.uploadImgInput.click()">{{ $i18n.locale == 'en' ? 'Upload Image' : 'رفع صورة' }}</vs-button>
                             </div>
                             <div class="vx-col w-full md:w-1/4">
                                 <img src="@assets/images/payment-methods.png" alt="Slider" class="w-full">
@@ -35,10 +36,11 @@
                         </div>
                         <div class="mt-4">
                             <vs-textarea 
-                            placeholder="الوصف"
-                            v-model="desc_ar" 
-                            class="mt-2" 
-                            name="desc_ar"/>
+                            label="الوصف"
+                            v-model="terms_desc" 
+                            class="mt-2 p-2" 
+                            height="120px"
+                            name="terms_desc"/>
                         </div>
                     </div>
                     <div class="vx-col w-full md:w-1/2">
@@ -47,13 +49,35 @@
                         </div>
                         <div class="mt-4">
                             <vs-textarea 
-                            placeholder="الوصف"
-                            v-model="desc_ar" 
-                            class="mt-2 w-full px-8" 
-                            name="desc_ar"/>
+                            label="الوصف"
+                            v-model="about_desc" 
+                            class="mt-2 p-2" 
+                            height="120px"
+                            name="about_desc"/>
                         </div>
                     </div>
                 </div>
+
+                <!-- Save & Reset Button -->
+                <div class="vx-row flex justify-center mt-10">
+                    <vs-button
+                    size="small"
+                    class="mx-4 font-semibold text-sm rounded-full"
+                    color="linear-gradient(to left,#E93F7D,#DA6653)"
+                    gradient
+                    @click="registerUser">
+                         حفظ التغيرات
+                    </vs-button>
+
+                    <vs-button
+                    size="small"
+                    class="mx-4 font-semibold text-sm rounded-full px-28 close"
+                    color="#ACACAC" type="border"
+                    @click="registerUser">
+                        خروج 
+                    </vs-button>
+                </div>
+
             </div>
         </vx-card>
     </div>
@@ -63,15 +87,83 @@
 
 export default {
     components: {
-        
+
     },
 
     data() {
         return {
-            desc_ar:''
+            terms_desc:'',
+            about_desc:'',
+            dataUploadedImages: [],
+            dataUploadedImagesForDisplay: [],
+            ImageToDelete: null,
         }
+        
+    },
+    computed: {
+
+    },
+    methods: {
+
+    updateCurrImg(input) {
+      if (input.target.files && input.target.files[0]) {
+        var reader = new FileReader()
+        reader.onload = e => {
+          this.dataUploadedImages           = input.target.files
+
+          for (var i = 0; i < this.dataUploadedImages.length; i++) {
+            const url = URL.createObjectURL(this.dataUploadedImages[i])
+            this.dataUploadedImages[i].url = url
+          }
+
+          // this.dataImg.push(input.target.files[0])
+          // this.dataImg = input.target.files[0]
+          // this.dataImg = e.target.result
+
+        }
+        reader.readAsDataURL(input.target.files[0])
+      }
+    },
+        submitImage(id) {
+        let formData = new FormData();
+
+        formData.append('product_id', id)
+
+        if (this.dataUploadedImages){
+          for( var i = 0; i < this.dataUploadedImages.length; i++ ){
+            let file = this.dataUploadedImages[i];
+            formData.append('images[' + i + ']', file);
+          }
+        }
+
+        axios.post(`/api/products/addImages`, formData,
+        {
+          headers: {
+              'Content-Type': 'multipart/form-data'
+          }
+        })
+        .then((response) => {
+          this.dataUploadedImages = null
+
+           this.$vs.notify({
+              color: 'success',
+              title: 'Successfull',
+              position:'top-center',
+              text: 'تم حفظ الصور بنجاح'
+            })
+
+            window.location.reload()
+        }).catch((error) => console.log(error.response))
+
+    },
+    },
+    created() {
+
     }
+    
+
 }
+
 </script>
 
 <style lang="scss" scoped>
@@ -86,9 +178,6 @@ export default {
     .vx-row{
         margin: 0;
     }
-    .vx-row > .vx-col {
-        padding: 0 .6rem;
-    }
     .slider-img{
         img{
             width: 100%;
@@ -99,12 +188,20 @@ export default {
       border-radius: 15px;
     }
     .vs-con-textarea{
-        border-radius: 12px;
-        height: 120px;
-        .vs-textarea{
-            height: 100%;
+        border-radius: 13px;
+    }
+    .vs-button.small:not(.includeIconOnly) {
+      padding: 0.4rem 5rem;
+    }
+    @media only screen and (min-width: 360px) and (max-width: 767px) {
+         .slider-img{
+             img{
+                margin-top: 1rem;
+             }
+             .vs-button.small:not(.includeIconOnly) {
+                 margin-top: 1rem;
+             }
         }
     }
-    
 }  
 </style>

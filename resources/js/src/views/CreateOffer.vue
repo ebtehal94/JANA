@@ -1,7 +1,6 @@
 <template>
-  <div id="page-user-edit">
-    <vx-card class="profile-info">
-
+  <div id="create-offer">
+    <vx-card class="offer-info">
       <div slot="no-body" class="tabs-container md:px-6 pt-6 md:pb-4">
         <!-- Content Row -->
         <div class="vx-row">
@@ -24,7 +23,7 @@
               <vs-textarea 
               placeholder="الوصف"
               v-model="offer_data.desc_ar" 
-              class="mt-2 w-full px-8" 
+              class="mt-2 w-full" 
               name="desc_ar"/>
               <span class="text-danger text-sm" v-show="errors.has('desc_ar')">{{ errors.first('desc_ar') }}</span>
 
@@ -50,7 +49,7 @@
               <vs-textarea 
               placeholder="الوصف"
               v-model="offer_data.desc_ar" 
-              class="mt-2 w-full px-8" 
+              class="mt-2 w-full" 
               name="desc_ar"/>
               <span class="text-danger text-sm" v-show="errors.has('desc_ar')">{{ errors.first('desc_ar') }}</span>
 
@@ -136,8 +135,8 @@
 
               <!-- Col Content -->
 
-                <vs-input 
-                class="w-full mt-4"
+                <vs-input
+                class="w-full mt-4 ml-2"
                 placeholder="السعر" 
                 v-model="offer_data.name" 
                 v-validate="'required|alpha_spaces'" 
@@ -280,10 +279,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#page-user-edit {
+#create-offer {
     margin: 2rem 2.5rem;
 
-    .profile-info {
+    .offer-info {
         padding: 2.5rem;
     }
     .add-img{
@@ -292,12 +291,12 @@ export default {
     }
     .vs-button.small:not(.includeIconOnly) {
       padding: 0.4rem 5rem;
-  }
+    }
 
 }
 
 @media only screen and (min-width: 375px) and (max-width: 600px) {
-  #page-user-edit {
+  #create-offer {
     .align {
       display: block;
       margin: 0.5rem auto;
@@ -306,16 +305,21 @@ export default {
 }
 
 @media only screen and (min-width: 360px) and (max-width: 375px) {
-  #page-user-edit {
+  #create-offer {
     .align {
       display: block;
       margin: 0.5rem -1rem;
+    }
+    .vs--searchable{
+      .vs__dropdown-toggle{
+        padding: 0;
+      }
     }
   }
 }
 
 @media only screen and (min-width: 320px)  and (max-width: 360px) {
-  #page-user-edit {
+  #create-offer {
     .align {
       width: 200px !important;
       height: 200px !important;
@@ -325,7 +329,7 @@ export default {
 }
 
 @media only screen  and (max-width: 320px) {
-  #page-user-edit {
+  #create-offer {
     .align {
       width: 200px !important;
       height: 200px !important;

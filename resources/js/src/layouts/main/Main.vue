@@ -58,6 +58,8 @@
           <div class="router-content pt-6" style="margin-top: 0;">
             <div class="vx-row mx-10">
               <div class="vx-col p-0">
+                <!-- SM - OPEN SIDEBAR BUTTON -->
+                <feather-icon class="sm:inline-flex xl:hidden cursor-pointer p-2" icon="MenuIcon" @click.stop="showSidebar" />
                 <div  v-if="breadcrumbs!= null && breadcrumbs.length > 0" class="breadcrumbs mx-10 my-6">
                   <p class="text-white">
                     <span class="dashboard font-bold">{{$t('dashboard')}} </span>
@@ -205,6 +207,9 @@ export default {
     // windowWidth ()          { return this.$store.state.windowWidth }
   },
   methods: {
+      showSidebar () {
+      this.$store.commit('TOGGLE_IS_VERTICAL_NAV_MENU_ACTIVE', true)
+    },
     getFilterFromID(filter_id){
       return (this.filters.find((filter) => filter.id == filter_id)) ? this.filters.find((filter) => filter.id == filter_id) : {title_en:this.$t('NA'), title_ar:this.$t('NA')}
     },

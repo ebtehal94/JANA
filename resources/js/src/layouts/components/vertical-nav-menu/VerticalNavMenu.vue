@@ -36,13 +36,28 @@
           </router-link>
           <!-- /Logo -->
           <!-- Menu Buttons -->
+          <div>
+            <!-- Close Button -->
+            <template v-if="showCloseButton">
+              <feather-icon icon="XIcon" class="m-0 cursor-pointer" @click="$store.commit('TOGGLE_IS_VERTICAL_NAV_MENU_ACTIVE', false)" />
+            </template>
 
+            <!-- Toggle Buttons -->
+            <template v-else-if="!showCloseButton && !verticalNavMenuItemsMin">
+              <feather-icon
+                id="btnVNavMenuMinToggler"
+                class="mr-0 cursor-pointer"
+                :icon="reduce ? 'CircleIcon' : 'DiscIcon'"
+                svg-classes="stroke-current text-primary"
+                @click="toggleReduce(!reduce)" />
+            </template>
+          </div>
           <!-- /Menu Toggle Buttons -->
         </div>
         <!-- /Header -->
 
         <!-- Header Shadow -->
-       <!-- <div class="shadow-bottom" v-show="showShadowBottom" /> -->
+        <div class="shadow-bottom" v-show="showShadowBottom" /> 
 
         <!-- Menu Items -->
         <component :is="scrollbarTag" ref="verticalNavMenuPs" class="scroll-area-v-nav-menu pt-2" :settings="settings" @ps-scroll-y="psSectionScroll" :key="$vs.rtl">
@@ -69,8 +84,8 @@
                 :href="item.slug === 'external' ? item.url : null"
                 :isDisabled="item.isDisabled"
                 :slug="item.slug">
-                <Sidebar-icon :name="item.icon" class="pr-4"/>
-             <!-- <feather-icon class="w-5 h-5" :icon="item.icon" />-->
+                <Sidebar-icon :name="item.icon" class="pr-4 icon"/>
+                <!-- <feather-icon class="w-5 h-5" :icon="item.icon" />-->
                 <span v-show="!verticalNavMenuItemsMin" class="text-sm">{{ $t(item.i18n) || item.name }}</span>
                   <vs-chip class="ml-auto" :color="item.tagColor" v-if="item.tag && (isMouseEnter || !reduce)">{{ item.tag }}</vs-chip>
               </v-nav-menu-item>

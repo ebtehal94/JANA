@@ -4,8 +4,8 @@
       <div slot="no-body" class="tabs-container md:px-6 pt-6 md:pb-4">
         <!-- Content Row -->
         <div class="vx-row">
-          <div class="vx-col lg:block lg:w-2/5 pr-8 mt-5 justify-center items-center">
-            <img src="@assets/images/newCustomer.png" alt="jana-customer" class="align" width="190">
+          <div class="vx-col w-full md:w-2/5 pr-8 mt-5 justify-center items-center">
+            <img src="@assets/images/newCustomer.png" alt="jana-customer" class="text-center" width="190">
             <div class="text-center text-xs mt-12">
               <p>تاريخ الإنضمام<span class="pl-4 date">15/4/2021</span></p>
               <p>تاريخ آخر عرض<span class="pl-4 date">15/4/2021</span></p>
@@ -37,20 +37,19 @@
               </div>
           </div>
 
-          <div class="vx-col sm:w-full md:w-full lg:w-1/2">
+          <div class="vx-col sm:w-full md:w-1/2 lg:w-1/2">
             <!-- Col Header -->
             <div class="vx-card__title">
                 <div class="separator">
-                    <h4 class="mb-4 text-lg">بيانات المتجر</h4>
+                    <h4 class="mb-4 text-base">بيانات المتجر</h4>
                 </div>
             </div>
 
             <!-- Col Content -->
                 <div>
                   <div class="bg-input">
-                    <icon name="name" class="icon"/>
+                    <icon name="store-name" class="icon"/>
                     <vs-input
-                      size="large"
                       class="w-full text-base"
                       placeholder="اسم المتجر (عربي)"
                       v-model="store_data.name_ar"
@@ -68,9 +67,8 @@
                   </div>
 
                   <div class="bg-input">
-                    <icon name="name" class="icon"/>
+                    <icon name="store-name" class="icon"/>
                     <vs-input
-                      size="large"
                       class="w-full text-base mt-2 "
                       placeholder="اسم المتجر (انجليزي)"
                       v-model="store_data.name_en"
@@ -90,7 +88,6 @@
                   <div class="bg-input">
                     <icon name="com-number" class="icon"/>
                     <vs-input
-                      size="large"
                       placeholder="رقم السجل التجاري"
                       v-model="store_data.cr_number"
                       type="number"
@@ -108,9 +105,9 @@
                     </span>
 
                   </div>
-                  <div class="bg-input">
+                  <div class="bg-input text-xs">
                     <icon name="city" class="icon"/>
-                    <v-select class="w-full mt-2"
+                    <v-select class="w-full mt-2 text-xs"
                       placeholder="الموقع (المدينة)"
                       v-model="store_data.city_id"
                       v-validate="'required'"
@@ -130,14 +127,13 @@
                 <!-- Col Header -->
                 <div class="vx-card__title mt-5">
                     <div class="separator">
-                        <h4 class="mb-4 text-lg">طريقة الإتصال</h4>
+                        <h4 class="mb-4 text-base">طريقة الإتصال</h4>
                     </div>
                 </div>
 
                 <div class="vx-row bg-input">
                   <icon name="mobile" class="icon phone-icon"/>
                   <vs-input
-                    size="large"
                     placeholder="رقم الجوال"
                     v-model="data_local.phone"
                     type="number"
@@ -147,7 +143,6 @@
                     class="w-3/4 mt-2 px-3"/>
 
                   <vs-input
-                    size="large"
                     v-model="data_local.cc"
                     type="text"
                     disabled
@@ -168,7 +163,6 @@
                 <div class="bg-input">
                   <icon name="email" class="icon"/>
                   <vs-input
-                    size="large"
                     v-validate="'required|email|min:3'"
                     data-vv-validate-on="blur"
                     icon-no-border
@@ -296,9 +290,6 @@ export default {
       this.$store.registerModule('userManagement', moduleUserManagement)
       moduleUserManagement.isRegistered = true
     }
-
-    this.fetch_user_data(this.activeUserInfo.id)
-    this.$store.dispatch("userManagement/fetchUsers").catch(err => { console.error(err) })
   }
 }
 </script>
@@ -335,19 +326,19 @@ export default {
     position: relative;
     .icon{
       position: absolute;
-      top:13px;
+      top:10px;
       left: 15px;
       z-index:1;
       padding-right: 20px;
     }
     .phone-icon{
       position: absolute;
-      top:18px;
+      top:13px;
       left: 25px;
     }
     .left-icon{
       position: absolute;
-      top:15px;
+      top:13px;
       left: 92%;
       z-index: 9999;
     }
@@ -369,44 +360,35 @@ export default {
   }
   .vs-button.small:not(.includeIconOnly) {
     padding: 0.5rem 4rem 0.5rem 1.5rem;
+    
+  }
+  .vs-button:not(.vs-radius):not(.includeIconOnly):not(.small):not(.large) {
+      padding: .5rem 2rem;
   }
 }
 
+
 @media only screen and (min-width: 375px) and (max-width: 600px) {
-  #create-customer {
-    .align {
-      display: block;
-      margin: 0.5rem auto;
+  #create-store {
+    .vx-card__title{
+      margin-top: 1.5rem;
+    }
+    .qr-icon{
+      left: 57%;
     }
   }
 }
 
 @media only screen and (min-width: 360px) and (max-width: 375px) {
-  #create-customer {
-    .align {
-      display: block;
-      margin: 0.5rem -1rem;
+  #create-store {
+    .vx-card__title{
+      margin-top: 1.5rem;
+    }
+    .qr-icon{
+      left: 55%;
     }
   }
 }
 
-@media only screen and (min-width: 320px)  and (max-width: 360px) {
-  #create-customer {
-    .align {
-      width: 200px !important;
-      height: 200px !important;
-      margin: 0.5rem auto;
-    }
-  }
-}
 
-@media only screen  and (max-width: 320px) {
-  #create-customer {
-    .align {
-      width: 200px !important;
-      height: 200px !important;
-      margin: 0.5rem -1.5rem;
-    }
-  }
-}
 </style>

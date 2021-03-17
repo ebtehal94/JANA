@@ -3,11 +3,11 @@
     class="h-screen flex w-full bg-img vx-row no-gutter items-center justify-center"
     id="page-login">
     <!-- Store -->
-    <div class="vx-col w-full lg:w-3/4 xl:w-4/5 sm:m-0 m-4">
+    <div class="vx-col sm:w-full md:w-full lg:w-3/4 xl:w-4/5 sm:m-0 m-4">
       <vx-card class="rounded-corner shadow-none">
         <div slot="no-body">
           <div class="vx-row no-gutter justify-center items-center py-8">
-            <div class="vx-col hidden lg:block lg:w-2/5 pl-1.5 bg-logo">
+            <div class="vx-col hidden lg:block w-full lg:block lg:w-2/5 pl-1.5 bg-logo">
               <img src="@assets/images/logo/logo-3.png" alt="jana" class="mx-auto" width="130">
 
               <div class="w-full bg-footer" v-if="page_num < 4">
@@ -762,6 +762,11 @@ export default {
   .bg-input{
   .left-icon{
       left: 88%;
+    }
+  }
+  @media (max-width: 375px){
+    .left-phone-icon{
+      left: 63%;
     }
   }
 }

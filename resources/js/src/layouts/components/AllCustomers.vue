@@ -10,7 +10,11 @@
                             <vs-button @click.stop="" color="rgb(255,255,255)" text-color="#EA5455" size="small" radius icon-pack="feather" icon="icon-trash-2" class=" shadow"/>
                         </div>
                     <h4 class="text-center">{{item.name}}</h4>
-                    <h6 class="text-center">{{item.subtitle}}</h6>
+                    <h6 class="text-center" v-if="show">{{item.subtitle}}</h6>
+                    <div class="flex justify-center">
+                        <span class="pr-2">{{item.Refrral}}</span>
+                        <span>{{item.code}}</span>
+                    </div>
                     <div class="flex justify-between">
                         <span>{{item.phone}}</span>
                         <span> | </span>
@@ -35,11 +39,12 @@ export default {
             },
             display:{
                 type: Boolean,
-                default: false,
             },
             pending:{
                 type: Boolean,
-                default: false
+            },
+            show:{
+                type: Boolean,
             }
         },
         data() {
