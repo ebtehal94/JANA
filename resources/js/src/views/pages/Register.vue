@@ -644,7 +644,7 @@ export default {
            })
       })
     }
-  },
+  }, 
   created() {
       // Register Module UserManagement Module
       if(!moduleUserManagement.isRegistered) {
