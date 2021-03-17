@@ -178,7 +178,7 @@
                       <icon name="cross" class="icon left-icon"/>
                     </span>
                   </div>
-  
+
                   <div class="bg-input">
                     <icon name="name" class="icon"/>
                     <vs-input
@@ -410,9 +410,9 @@
             </div>
           </div>
 
-          <div class="vx-col sm:w-full md:w-full lg:w-1/2" v-if="page_num === 4">
-            <h5>تم التسجيل بنجاح</h5>
-            <h5>سيتم التواصل معكم في أقرب وقت ممكن</h5>
+          <div class="vx-col sm:w-full md:w-full lg:w-1/2 text-center" v-if="page_num === 4">
+            <h2 class="text-grey">تم التسجيل بنجاح</h2>
+            <h2 class="text-grey mt-10">سيتم التواصل معكم في أقرب وقت ممكن</h2>
           </div>
           </div>
         </div>
@@ -648,8 +648,8 @@ export default {
   created() {
       // Register Module UserManagement Module
       if(!moduleUserManagement.isRegistered) {
-      this.$store.registerModule('userManagement', moduleUserManagement)
-      moduleUserManagement.isRegistered = true
+        this.$store.registerModule('userManagement', moduleUserManagement)
+        moduleUserManagement.isRegistered = true
       }
 
       if (localStorage.getItem('isRegistered')){
