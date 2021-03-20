@@ -1,7 +1,7 @@
 <template>
   <div class="dropdown-button-container mr-2">
     <vs-dropdown vs-custom-content vs-trigger-click class="cursor-pointer">
-        <span class="cursor-pointer text-black flex items-center i18n-locale cairo p-2 text-white">
+        <span class="cursor-pointer text-black flex items-center i18n-locale cairo p-2 text-white font-bold">
           <img class="h-5 w-5 mr-2" :src="require(`@assets/images/navbar/worldwide.svg`)" alt="qt" />
           {{ ($i18n.locale == 'en') ? 'العربية' : 'English' }}
         </span>

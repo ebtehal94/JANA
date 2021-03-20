@@ -5,7 +5,7 @@
     <!-- Store -->
     <div class="vx-col sm:w-full md:w-full lg:w-3/4 xl:w-4/5 sm:m-0 m-4">
       <div class="vx-row m-4">
-        <i18n class="text-bold"/>
+        <i18n class="font-bold"/>
       </div>
       <vx-card class="rounded-corner shadow-none">
         <div slot="no-body">
@@ -106,8 +106,8 @@
                       :placeholder='$t("mainLocation")'
                       v-model="store_data.city_id"
                       v-validate="'required'"
-                      label="text" :options="cities_list"
-                      :reduce="text => text.value"
+                      label="name_ar" :options="cities_list"
+                      :reduce="name_ar => name_ar.id"
                       :dir="$vs.rtl ? 'rtl' : 'ltr'" />
 
                     <span
@@ -172,8 +172,8 @@
                     <v-select class="w-full mt-2"
                      v-model="branch.city_id"
                      :placeholder="$t('Location')"
-                     label="text" :options="cities_list"
-                     :reduce="text => text.value"
+                     label="name_ar" :options="cities_list"
+                     :reduce="name_ar => name_ar.id"
                      :dir="$vs.rtl ? 'rtl' : 'ltr'" />
 
                     <span v-if="!errors.has('city_id') && branch.city_id">
@@ -389,6 +389,8 @@
                     :placeholder="$t('password') "
                     v-validate="'required|min:6'"
                     type="password"
+                    ref="password"
+                    name="password"
                     icon-no-border
                     icon="icon"
                     v-model="user.password"
@@ -407,9 +409,10 @@
                   <vs-input
                     size="large"
                     :placeholder="$t('confirmPassword')"
-                    v-validate="'required|min:6|confirmed:password'"
+                    v-validate="'min:6|confirmed:password'"
                     type="password"
-                    data-vv-as="password" 
+                    name="confirm_password"
+                    data-vv-as="password"
                     icon-no-border
                     icon="icon"
                     v-model="user.confirm_password"
@@ -452,6 +455,7 @@ import moduleUserManagement from "@/store/user-management/moduleUserManagement.j
 import icon from '../../layouts/components/icon.vue';
 import vSelect from 'vue-select';
 import I18n  from "@/layouts/components/navbar/components/I18n.vue"
+import { CitiesList } from './extra/CitiesList.js'
 
 
 
@@ -463,27 +467,28 @@ export default {
      },
   data() {
     return {
-        cities_list: [
-          {text:'الدمام',value:1},
-          {text:'الخبر',value:2},
-          {text:'الجبيل',value:3},
-          {text:'الاحساء',value:4},
-          {text:'بقيق',value:5},
-          {text:'ينبع',value:6},
-          {text:'املج',value:7},
-          {text:'محافظة بدر',value:8},
-          {text:'الباحة',value:9},
-          {text:'الرياض',value:10},
-          {text:'جدة',value:11},
-          {text:'مكة',value:12},
-          {text:'المدينة',value:13},
-          {text:'خميس مشيط',value:14},
-          {text:'جازان',value:15},
-          {text:'القصيم (عنيزة-بريدة)',value:16},
-          {text:'حائل',value:17},
-          {text:'عرعر',value:18},
-          {text:'الجوف',value:19},
-        ],
+        cities_list: CitiesList,
+        // cities_list: [
+        //   {text:'الدمام',value:1},
+        //   {text:'الخبر',value:2},
+        //   {text:'الجبيل',value:3},
+        //   {text:'الاحساء',value:4},
+        //   {text:'بقيق',value:5},
+        //   {text:'ينبع',value:6},
+        //   {text:'املج',value:7},
+        //   {text:'محافظة بدر',value:8},
+        //   {text:'الباحة',value:9},
+        //   {text:'الرياض',value:10},
+        //   {text:'جدة',value:11},
+        //   {text:'مكة',value:12},
+        //   {text:'المدينة',value:13},
+        //   {text:'خميس مشيط',value:14},
+        //   {text:'جازان',value:15},
+        //   {text:'القصيم (عنيزة-بريدة)',value:16},
+        //   {text:'حائل',value:17},
+        //   {text:'عرعر',value:18},
+        //   {text:'الجوف',value:19},
+        // ],
         stores: [
           {text:' المراكز الصحية والعيادات ' ,value:1},
           {text:' المطاعم والمقاهي' ,value:2},
@@ -586,6 +591,7 @@ export default {
     ){
       return this.page_num = num
     }else{
+      console.log(this.store_data)
       console.log(this.branches_data)
       this.$vs.notify({
       color: 'danger',
@@ -673,7 +679,7 @@ export default {
            })
       })
     }
-  }, 
+  },
   created() {
       // Register Module UserManagement Module
       if(!moduleUserManagement.isRegistered) {
