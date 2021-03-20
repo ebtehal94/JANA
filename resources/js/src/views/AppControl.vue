@@ -13,7 +13,8 @@
                          <div class="vx-row flex mt-4 mx-0 slider-img">
                             <div class="vx-col w-full md:w-1/4 add-img ">
                                 <input type="file" class="hidden" ref="uploadImgInput" multiple @change="updateCurrImg" accept="image/*">
-                                <vs-button v-if="dataUploadedImages.length === 0" size="small" icon-pack="feather" icon="icon-upload" @click="$refs.uploadImgInput.click()">{{ $i18n.locale == 'en' ? 'Upload Image' : 'رفع صورة' }}</vs-button>
+                                <vs-button v-if="dataUploadedImages.length === 0" size="small" icon-pack="feather" color="gray" radius type="border" icon="icon-plus" @click="$refs.uploadImgInput.click()"/>
+                                <h5 class="text-gray text-xs text-center">{{ $i18n.locale == 'en' ? 'Upload Image' : 'اضافة صورة' }}</h5>
                             </div>
                             <div class="vx-col w-full md:w-1/4">
                                 <img src="@assets/images/payment-methods.png" alt="Slider" class="w-full">

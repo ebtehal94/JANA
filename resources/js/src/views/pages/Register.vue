@@ -4,23 +4,28 @@
     id="page-login">
     <!-- Store -->
     <div class="vx-col sm:w-full md:w-full lg:w-3/4 xl:w-4/5 sm:m-0 m-4">
+      <div class="vx-row m-4">
+        <i18n class="text-bold"/>
+      </div>
       <vx-card class="rounded-corner shadow-none">
         <div slot="no-body">
           <div class="vx-row no-gutter justify-center items-center py-8">
             <div class="vx-col hidden lg:block w-full lg:block lg:w-2/5 pl-1.5 bg-logo">
               <img src="@assets/images/logo/logo-3.png" alt="jana" class="mx-auto" width="130">
 
-              <div class="w-full bg-footer" v-if="page_num < 4">
-                <span @click="goToPage(1)" class="steps-btn inline-block font-semibold">1</span>
-                <span @click="goToPage(2)" class="steps-btn inline-block font-semibold">2</span>
-                <span @click="goToPage(3)" class="steps-btn inline-block font-semibold">3</span>
-                <span class="account pl-0.5 font-light text-xs">لديك حساب؟</span>
+              <div class="w-full bg-footer text-center" v-if="page_num < 4">
+                <span @click="goToPage(1)" class="steps-btn inline-block font-semibold" :class="{ active : page_num == 1}">1</span>
+                <span @click="goToPage(2)" class="steps-btn inline-block font-semibold" :class="{ active : page_num == 2}">2</span>
+                <span @click="goToPage(3)" class="steps-btn inline-block font-semibold" :class="{ active : page_num == 3}">3</span>
+                <span class="account pl-0.5 font-light text-sm">
+                  {{$i18n.locale == "en" ? "You have an account" : "لديك حساب"}}
+                </span>
                   <vs-button
-                  class="login-btn p-0 text-sx"
+                  class="login-btn p-0 text-sm"
                   size="small"
                   type="transparent"
                   to="/login">
-                  تسجيل الدخول
+                  {{ $t('loginLabel')}}
                 </vs-button>
               </div>
             </div>
@@ -29,7 +34,7 @@
               <div class="p-8 login-tabs-container">
                 <div class="vx-card__title">
                   <div class="separator">
-                    <h4 class="mb-4 text-lg">بيانات المتجر</h4>
+                    <h4 class="mb-4 text-lg font-extrabold">{{$t('storeData')}}</h4>
                   </div>
                 </div>
 
@@ -39,7 +44,7 @@
                     <vs-input
                       size="large"
                       class="w-full text-base"
-                      placeholder="اسم المتجر (عربي)"
+                      :placeholder="$t('storeNameAr')"
                       v-model="store_data.name_ar"
                       v-validate="'required'"
                       icon-no-border
@@ -59,7 +64,7 @@
                     <vs-input
                       size="large"
                       class="w-full text-base mt-2 "
-                      placeholder="اسم المتجر (انجليزي)"
+                      :placeholder="$t('storeNameEn')"
                       v-model="store_data.name_en"
                       v-validate="'required'"
                       icon-no-border
@@ -78,7 +83,7 @@
                     <icon name="com-number" class="icon"/>
                     <vs-input
                       size="large"
-                      placeholder="رقم السجل التجاري"
+                      :placeholder='$t("CommercialRegisterNo")'
                       v-model="store_data.cr_number"
                       type="number"
                       icon-no-border
@@ -98,7 +103,7 @@
                   <div class="bg-input">
                     <icon name="city" class="icon"/>
                     <v-select class="w-full mt-2"
-                      placeholder="الموقع (المدينة)"
+                      :placeholder='$t("mainLocation")'
                       v-model="store_data.city_id"
                       v-validate="'required'"
                       label="text" :options="cities_list"
@@ -116,11 +121,11 @@
 
                   <div class=" mb-3">
                     <vs-button
-                      class="w-full mt-10 font-medium register-btn"
+                      class="w-full mt-10 font-medium register-btn text-lg"
                       color="linear-gradient(to left,#E93F7D,#DA6653)"
                       gradient
                       @click="changeNumber(2)">
-                      التالي
+                      {{$i18n.locale == "en" ? "Next" : " التالي"}}
                     </vs-button>
                   </div>
                 </div>
@@ -132,14 +137,14 @@
               <div class="p-8 login-tabs-container">
                 <div class="vx-card__title">
                   <div class="separator">
-                    <h4 class="mb-4 text-lg">بيانات الفروع</h4>
+                    <h4 class="mb-4 text-lg font-extrabold">{{$t('branchData')}}</h4>
                   </div>
                 </div>
 
                 <div v-for="branch,branchIndex in branches_data"  :key="branch.name">
                   <div class="mt-8" v-if="branchIndex > 0">
                     <div class="separator">
-                      <h4 class="mb-4 text-lg">فرع إضافي</h4>
+                      <h4 class="mb-4 text-lg font-extrabold">{{$t('additionalBranch')}}</h4>
                       <span class="ml-4" @click="openBranchDeleteConfirm(branchIndex)">
                         <icon name="cross" class="icon left-icon"/>
                       </span>
@@ -149,7 +154,7 @@
                     <icon name="store-type" class="icon"/>
                     <v-select class="w-full mt-2"
                     v-model="branch.type"
-                    placeholder="نوع المتجر"
+                    :placeholder="$t('storeActivity')"
                     label="text" :options="stores"
                     :reduce="text => text.value"
                     :dir="$vs.rtl ? 'rtl' : 'ltr'"/>
@@ -166,7 +171,7 @@
                     <icon name="city" class="icon"/>
                     <v-select class="w-full mt-2"
                      v-model="branch.city_id"
-                     placeholder="الموقع (المدينة)"
+                     :placeholder="$t('Location')"
                      label="text" :options="cities_list"
                      :reduce="text => text.value"
                      :dir="$vs.rtl ? 'rtl' : 'ltr'" />
@@ -184,7 +189,7 @@
                     <vs-input
                     size="large"
                     class="w-full text-base mt-2 "
-                    placeholder="اسم الفرع"
+                    :placeholder="$t('branchName')"
                     v-model="branch.title"
                     v-validate="'required'"
                     icon-no-border
@@ -224,7 +229,7 @@
                       <vs-input
                         size="large"
                         class="w-full text-base mt-2 "
-                        placeholder="الموقع الجغرافي"
+                        :placeholder="$t('geographicalLocation')"
                         v-model="branch.location"
                         v-validate="'required'"
                         icon-no-border
@@ -244,7 +249,7 @@
                       <vs-input
                         size="large"
                         class="w-full text-base mt-2 "
-                        placeholder="الموقع الإلكتروني"
+                        :placeholder="$t('website')"
                         v-model="branch.url"
                         v-validate="'url:require_protocol'"
                         icon-no-border
@@ -266,8 +271,8 @@
                     color="#f0f0f0"
                     gradient
                     @click="addBranch">
-                    <span class="text-dark">
-                      إضافة فرع (إختياري)
+                    <span class="text-dark font-bold">
+                      {{$i18n.locale == "en" ? "Add Branch (Optional)" : " إضافة فرع (إختياري)"}}
                     </span>
                   </vs-button>
                 </div>
@@ -278,7 +283,7 @@
                   color="linear-gradient(to left,#E93F7D,#DA6653)"
                   gradient
                   @click="changeNumber(3)">
-                  التالي
+                   {{$i18n.locale == "en" ? "Next" : " التالي"}}
                   </vs-button>
                 </div>
               </div>
@@ -289,7 +294,7 @@
               <div class="p-8 login-tabs-container">
                 <div class="vx-card__title">
                   <div class="separator">
-                    <h4 class="mb-4 text-lg">التواصل والأمان</h4>
+                    <h4 class="mb-4 text-lg font-extrabold">{{$t('conactAndSafety')}}</h4>
                   </div>
                 </div>
 
@@ -298,7 +303,7 @@
                   <icon name="mobile" class="icon phone-icon"/>
                   <vs-input
                     size="large"
-                    placeholder="رقم الجوال"
+                    :placeholder="$t('mobile')"
                     v-model="user.mobile"
                     type="number"
                     icon-no-border
@@ -329,7 +334,7 @@
                   <icon name="phone" class="icon phone-icon"/>
                   <vs-input
                     size="large"
-                    placeholder="رقم الهاتف"
+                    :placeholder="$t('phone')"
                     v-model="user.phone"
                     type="number"
                     icon-no-border
@@ -364,7 +369,7 @@
                     data-vv-validate-on="blur"
                     icon-no-border
                     icon="icon"
-                    placeholder="البريد الإلكتروني"
+                    :placeholder="$t('email')"
                     v-model="user.email"
                     class="w-full mt-2"/>
 
@@ -381,7 +386,7 @@
                   <vs-input
                     size="large"
                     data-vv-validate-on="blur"
-                    placeholder="كلمة المرور"
+                    :placeholder="$t('password') "
                     v-validate="'required|min:6'"
                     type="password"
                     icon-no-border
@@ -397,13 +402,34 @@
                   </span>
                 </div>
 
+                <div class="bg-input">
+                  <icon name="password" class="icon"/>
+                  <vs-input
+                    size="large"
+                    :placeholder="$t('confirmPassword')"
+                    v-validate="'required|min:6|confirmed:password'"
+                    type="password"
+                    data-vv-as="password" 
+                    icon-no-border
+                    icon="icon"
+                    v-model="user.confirm_password"
+                    class="w-full mt-2"/>
+
+                  <span v-if="!errors.has('confirm_password') && user.confirm_password">
+                    <icon name="confirm" class="icon left-icon"/>
+                  </span>
+                  <span v-else-if="errors.has('confirm_password')">
+                    <icon name="cross" class="icon left-icon"/>
+                  </span>
+                </div>
+
                   <div class=" mb-3">
                     <vs-button
                       class="w-full mt-10 font-medium register-btn"
                       color="linear-gradient(to left,#E93F7D,#DA6653)"
                       gradient
                       @click="registerUser">
-                      إنشاء حساب
+                       {{$i18n.locale == "en" ? "Create Account" : "إنشاء الحساب"}}
                       </vs-button>
                   </div>
               </div>
@@ -411,8 +437,8 @@
           </div>
 
           <div class="vx-col sm:w-full md:w-full lg:w-1/2 text-center" v-if="page_num === 4">
-            <h2 class="text-grey">تم التسجيل بنجاح</h2>
-            <h2 class="text-grey mt-10">سيتم التواصل معكم في أقرب وقت ممكن</h2>
+            <h2 class="text-grey">{{$i18n.locale == "en" ? "Successfull" : "تم التسجيل بنجاح"}}</h2>
+            <h2 class="text-grey mt-10">{{$i18n.locale == "en" ? "We will contact you as soon as possible" : "سيتم التواصل معكم في اقرب وقت ممكن"}}</h2>
           </div>
           </div>
         </div>
@@ -425,13 +451,15 @@
 import moduleUserManagement from "@/store/user-management/moduleUserManagement.js";
 import icon from '../../layouts/components/icon.vue';
 import vSelect from 'vue-select';
+import I18n  from "@/layouts/components/navbar/components/I18n.vue"
 
 
 
 export default {
   components: {
      icon ,
-     vSelect
+     vSelect,
+     I18n
      },
   data() {
     return {
@@ -497,6 +525,7 @@ export default {
         mobile: null,
         phone:null,
         password: null,
+        confirm_password: null,
       },
       branches_data: [{type: null, title: null, city_id: null, location: null, url: null}],
       page_num:1,
@@ -668,7 +697,7 @@ export default {
   }
   .bg-footer{
     position: absolute;
-    bottom:-7rem;
+    bottom:-6rem;
   }
   .separator{
     display: flex;
@@ -744,6 +773,9 @@ export default {
 }
 .steps-btn:hover{
   background: linear-gradient(#E93F7D,#DA6653) ;
+}
+.active{
+   background: linear-gradient(#E93F7D,#DA6653) ;
 }
     .vs__dropdown-menu{
       margin-top: 2rem;
