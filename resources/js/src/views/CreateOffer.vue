@@ -114,6 +114,9 @@
             <!-- Col Content -->
             <div class="vx-row flex mt-4 mx-0">
               <div class="vx-col w-full md:w-1/3 add-img">
+                <input type="file" class="hidden" ref="uploadImgInput" multiple @change="updateCurrImg" accept="image/*">
+                <vs-button v-if="dataUploadedImages.length === 0" class="text-gray mt-4 ml-10" icon-pack="feather" type="transparent" icon="icon-plus" @click="$refs.uploadImgInput.click()"/>
+                <h5 class="text-gray text-xs text-center">{{ $i18n.locale == 'en' ? 'Upload Image' : 'اضافة صورة' }}</h5>
               </div>
               <div class="vx-col w-full md:w-1/3">
                 <img src="@assets/images/payment-methods.png" alt="" class="mx-auto" width="120">
@@ -128,56 +131,55 @@
         <div class="vx-row my-6">
           <div class="vx-col w-full md:w-1/2 flex">
             <div class="vx-col w-full">
-              <!-- Col Header -->
-              <div class="flex items-end">
-                <span class="leading-none font-medium text-xs">السعر قبل الخصم</span>
-              </div>
+                <!-- Col Header -->
+                <div class="flex items-end">
+                  <span class="leading-none font-semibold text-xs">السعر قبل الخصم</span>
+                </div>
 
-              <!-- Col Content -->
+                <!-- Col Content -->
 
-                <vs-input
-                class="w-full mt-4 ml-2"
-                placeholder="السعر" 
-                v-model="offer_data.name" 
-                v-validate="'required|alpha_spaces'" 
-                name="name" />
-                <span class="text-danger text-sm"  v-show="errors.has('name')">{{ errors.first('name') }}</span>
-  
+                  <vs-input
+                  class="w-full mt-4 -m-4"
+                  placeholder="السعر" 
+                  v-model="offer_data.name" 
+                  v-validate="'required|alpha_spaces'" 
+                  name="name" />
+                  <span class="text-danger text-sm"  v-show="errors.has('name')">{{ errors.first('name') }}</span>
             </div>
 
             <div class="vx-col w-full">
-              <!-- Col Header -->
-              <div class="flex items-end">
-                <span class="leading-none font-medium text-xs">السعر بعد الخصم</span>
-              </div>
+                <!-- Col Header -->
+                <div class="flex items-end">
+                  <span class="leading-none font-semibold text-xs">السعر بعد الخصم</span>
+                </div>
 
-              <!-- Col Content -->
+                <!-- Col Content -->
 
-                <vs-input 
-                class="w-full mt-4"
-                placeholder="السعر" 
-                v-model="offer_data.name" 
-                v-validate="'required|alpha_spaces'" 
-                name="name" />
-                <span class="text-danger text-sm"  v-show="errors.has('name')">{{ errors.first('name') }}</span>
+                  <vs-input 
+                  class="w-full mt-4 -m-2"
+                  placeholder="السعر" 
+                  v-model="offer_data.name" 
+                  v-validate="'required|alpha_spaces'" 
+                  name="name" />
+                  <span class="text-danger text-sm"  v-show="errors.has('name')">{{ errors.first('name') }}</span>
 
             </div>
 
             <div class="vx-col w-full">
-              <!-- Col Header -->
-              <div class="flex items-end">
-                <span class="leading-none font-medium text-xs">تاريخ انتهاء العرض</span>
-              </div>
+                <!-- Col Header -->
+                <div class="flex items-end">
+                  <span class="leading-none font-semibold text-xs">تاريخ انتهاء العرض</span>
+                </div>
 
-              <!-- Col Content -->
+                <!-- Col Content -->
 
-                <vs-input 
-                class="w-full mt-4"
-                placeholder="14/14/2021" 
-                v-model="offer_data.name" 
-                v-validate="'required|alpha_spaces'" 
-                name="name" />
-                <span class="text-danger text-sm"  v-show="errors.has('name')">{{ errors.first('name') }}</span>
+                  <vs-input 
+                  class="w-full mt-4"
+                  placeholder="14/14/2021" 
+                  v-model="offer_data.name" 
+                  v-validate="'required|alpha_spaces'" 
+                  name="name" />
+                  <span class="text-danger text-sm"  v-show="errors.has('name')">{{ errors.first('name') }}</span>
             </div>
           </div>
 
@@ -265,9 +267,33 @@ export default {
         {text:'غير نشط',value:1},
         {text:'نشط',value:2},
       ],
+      dataUploadedImages: [],
+      dataUploadedImagesForDisplay: [],
+      ImageToDelete: null,
     }
   },
+  computed: {
 
+  },
+  methods:{
+    updateCurrImg(input) {
+      if (input.target.files && input.target.files[0]) {
+        var reader = new FileReader()
+        reader.onload = e => {
+          this.dataUploadedImages = input.target.files
+
+            const url = URL.createObjectURL(this.dataUploadedImages[i])
+            this.dataUploadedImages[i].url = url
+
+          // this.dataImg.push(input.target.files[0])
+          // this.dataImg = input.target.files[0]
+          // this.dataImg = e.target.result
+
+        }
+        reader.readAsDataURL(input.target.files[0])
+      }
+    },
+  },
   created() {
     // Register Module UserManagement Module
     if(!moduleUserManagement.isRegistered) {
@@ -289,27 +315,24 @@ export default {
       border: 1px solid #eee;
       border-radius: 15px;
     }
+   .vs-input--input{
+    .normal {
+          font-size: .8rem !important;
+      }
+   }
     .vs-button.small:not(.includeIconOnly) {
       padding: 0.4rem 5rem;
     }
 
+
 }
 
 @media only screen and (min-width: 375px) and (max-width: 600px) {
-  #create-offer {
-    .align {
-      display: block;
-      margin: 0.5rem auto;
-    }
-  }
+
 }
 
 @media only screen and (min-width: 360px) and (max-width: 375px) {
   #create-offer {
-    .align {
-      display: block;
-      margin: 0.5rem -1rem;
-    }
     .vs--searchable{
       .vs__dropdown-toggle{
         padding: 0;
@@ -319,22 +342,10 @@ export default {
 }
 
 @media only screen and (min-width: 320px)  and (max-width: 360px) {
-  #create-offer {
-    .align {
-      width: 200px !important;
-      height: 200px !important;
-      margin: 0.5rem auto;
-    }
-  }
+
 }
 
 @media only screen  and (max-width: 320px) {
-  #create-offer {
-    .align {
-      width: 200px !important;
-      height: 200px !important;
-      margin: 0.5rem -1.5rem;
-    }
-  }
+
 }
 </style>

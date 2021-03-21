@@ -303,8 +303,8 @@
 
 .vs-input--input {
   &.normal {
-    padding: .7rem !important;
-    font-size: 1rem !important;
+    padding: .7rem ;
+    font-size: 1rem;
 
     ~ .vs-input--icon {
       &.feather {
@@ -343,6 +343,7 @@
 
     &.icon-after-input {
       padding: 0.7rem 3rem 0.7rem 0.7rem !important;
+     
     }
   }
 }
@@ -530,7 +531,7 @@
 }
 
 .vs-select--options {
-  font-size: 1rem;
+  font-size: .9rem;
   border: 1px solid #eee;
   z-index: 530001;
 
@@ -668,13 +669,18 @@
 .con-slot-tabs {
   width: 100%;
 }
-
+.vs-tabs--ul{
+  border-bottom: 1.5px solid #eee;
+  .line-vs-tabs{
+    width: 200px;
+  }
+}
 .vs-tabs--li {
   white-space: nowrap;
 
   button {
-    font-size: 1rem;
-    font-weight: 500;
+    font-size: .85rem;
+    font-weight: 700;
   }
 
   .vs-tabs-position-left & {
@@ -686,7 +692,7 @@
 .vs-tabs--li {
   button {
     font-family: inherit;
-    color: inherit;
+    color: #acacac;
   }
 
   .vs-icon-primary,

@@ -11,9 +11,9 @@
                         </div>
                     <h4 class="text-center">{{item.name}}</h4>
                     <h6 class="text-center" v-if="show">{{item.subtitle}}</h6>
-                    <div class="flex justify-center">
+                    <div class="flex justify-center my-1" v-if="code">
                         <span class="pr-2">{{item.Refrral}}</span>
-                        <span>{{item.code}}</span>
+                        <span class="code">{{item.code}}</span>
                     </div>
                     <div class="flex justify-between">
                         <span>{{item.phone}}</span>
@@ -44,6 +44,9 @@ export default {
                 type: Boolean,
             },
             show:{
+                type: Boolean,
+            },
+            code:{
                 type: Boolean,
             }
         },
@@ -80,6 +83,10 @@ export default {
         span{
             font-size: .6rem;
             color: #ACACAC;
+        }
+        .code{
+            color:#EA5455;
+            font-weight: bold;
         }
         .vs-button.small:not(.includeIconOnly) {
             padding: 0 .9rem;

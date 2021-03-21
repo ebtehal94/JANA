@@ -20,6 +20,9 @@ export default {
 		email:'Email',
 		password:'Password',
 		confirmPassword:'Confirm Password',
+		
+		accountData:'Account Data',
+		Login: 'Login',
 
 
 		dashboard:'Dashboard',
@@ -45,9 +48,9 @@ export default {
 		date:'Date',
 		amount:'Amount',
 		notes:'Notes',
-		
-		AppDownload: 'Download our app for smoother easier experience',
-		Otantik: 'Otantik',
+
+		fullName:'Full Name',
+		accountStatus:'Account Status (Active)',
 
 		language: 'Language',
 		currency: 'Currency',
@@ -334,7 +337,10 @@ export default {
 		email:'البريد الإلكتروني',
 		password:'كلمة المرور',
 		confirmPassword:'تأكيد كلمة المرور',
-
+		
+		accountData:'بيانات الحساب',
+		Login: 'تسجيل الدخول',
+		
 		dashboard:'لوحة التحكم',
 		Operations:'العمليات المالية',
 		Offers:'العروض',
@@ -358,6 +364,9 @@ export default {
 		date:"التاريخ",
 		amount:'المبلغ',
 		notes:'ملاحظات',
+
+		fullName:'الإسم الكامل',
+		accountStatus:'حالة الحساب (نشط)',
 
 		AppDownload: 'لتجربة أسهل قم بتحميل تطبيق أوتانتك',
 		Otantik: 'أوتانتك',

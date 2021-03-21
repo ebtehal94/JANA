@@ -60,7 +60,7 @@
             <div class="vx-col w-full">
                 <vx-card class="mt-8 pt-0">
                     
-                        <vs-tabs alignment="fixed">
+                        <vs-tabs alignment="fixed" class="tabs-shadow-none">
                             <vs-tab label="أكثر العروض استخداما">
                                 <AllOffers />
                             </vs-tab>

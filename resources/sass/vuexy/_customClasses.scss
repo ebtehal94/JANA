@@ -386,6 +386,11 @@
     border: none !important;
   }
 }
+.v-select{
+  .vs-selected-options-padding{
+    padding: 2rem;
+  }
+}
 
 
 // ======================================================================================

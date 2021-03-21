@@ -13,7 +13,7 @@
                          <div class="vx-row flex mt-4 mx-0 slider-img">
                             <div class="vx-col w-full md:w-1/4 add-img ">
                                 <input type="file" class="hidden" ref="uploadImgInput" multiple @change="updateCurrImg" accept="image/*">
-                                <vs-button v-if="dataUploadedImages.length === 0" size="small" icon-pack="feather" color="gray" radius type="border" icon="icon-plus" @click="$refs.uploadImgInput.click()"/>
+                                <vs-button v-if="dataUploadedImages.length === 0" class="text-gray mt-6 ml-16" icon-pack="feather" type="transparent" icon="icon-plus" @click="$refs.uploadImgInput.click()"/>
                                 <h5 class="text-gray text-xs text-center">{{ $i18n.locale == 'en' ? 'Upload Image' : 'اضافة صورة' }}</h5>
                             </div>
                             <div class="vx-col w-full md:w-1/4">
@@ -110,12 +110,10 @@ export default {
       if (input.target.files && input.target.files[0]) {
         var reader = new FileReader()
         reader.onload = e => {
-          this.dataUploadedImages           = input.target.files
+          this.dataUploadedImages = input.target.files
 
-          for (var i = 0; i < this.dataUploadedImages.length; i++) {
             const url = URL.createObjectURL(this.dataUploadedImages[i])
             this.dataUploadedImages[i].url = url
-          }
 
           // this.dataImg.push(input.target.files[0])
           // this.dataImg = input.target.files[0]

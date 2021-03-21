@@ -5,7 +5,12 @@
         <!-- Content Row -->
         <div class="vx-row">
           <div class="vx-col w-full md:w-2/5 pr-8 mt-5 justify-center items-center">
-            <img src="@assets/images/newCustomer.png" alt="jana-customer" class="text-center" width="190">
+            <div class="upload ml-8">
+              <input type="file" class="hidden" ref="uploadImgInput" multiple @change="updateCurrImg" accept="image/*">
+              <vs-button v-if="dataUploadedImages.length === 0" class="mt-12 ml-8" type="transparent" @click="$refs.uploadImgInput.click()">
+              <img src="@assets/images/Uploader.png" alt="upload" width="90"/>
+              </vs-button>
+            </div>
             <div class="text-center text-xs mt-12">
               <p>تاريخ الإنضمام<span class="pl-4 date">15/4/2021</span></p>
               <p>تاريخ آخر عرض<span class="pl-4 date">15/4/2021</span></p>
@@ -228,7 +233,10 @@ export default {
         {text:'غير نشط',value:1},
         {text:'نشط',value:2},
       ],
-      status:null
+      status:null,
+      dataUploadedImages: [],
+      dataUploadedImagesForDisplay: [],
+      ImageToDelete: null,
     }
   },
   computed: {
@@ -237,6 +245,23 @@ export default {
     },
   },
   methods: {
+    updateCurrImg(input) {
+      if (input.target.files && input.target.files[0]) {
+        var reader = new FileReader()
+        reader.onload = e => {
+          this.dataUploadedImages = input.target.files
+
+            const url = URL.createObjectURL(this.dataUploadedImages[i])
+            this.dataUploadedImages[i].url = url
+
+          // this.dataImg.push(input.target.files[0])
+          // this.dataImg = input.target.files[0]
+          // this.dataImg = e.target.result
+
+        }
+        reader.readAsDataURL(input.target.files[0])
+      }
+    },
     save_changes() {
       if(!this.validateForm) return
 
@@ -322,6 +347,12 @@ export default {
       color: #999999;
     }
   }
+  .upload{
+    background: rgb(243, 243, 243);
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+  }
   .bg-input{
     position: relative;
     .icon{
@@ -367,14 +398,41 @@ export default {
   }
 }
 
-
+@media (min-width: 768px) and (max-width: 991.98px){
+  #create-store {
+    .upload{
+      margin-left: 0rem !important;
+    }
+    .bg-input{
+      .left-icon{
+        left: 88%;
+      }
+      .left-phone-icon{
+        left: 62%;
+        top:20px;
+      }
+    }
+  }
+}
 @media only screen and (min-width: 375px) and (max-width: 600px) {
   #create-store {
     .vx-card__title{
       margin-top: 1.5rem;
     }
+    .upload{
+      margin-left: 0rem !important;
+    }
     .qr-icon{
       left: 57%;
+    }
+    .bg-input{
+      .left-icon{
+        left: 88%;
+      }
+      .left-phone-icon{
+        left: 62%;
+        top:20px;
+      }
     }
   }
 }

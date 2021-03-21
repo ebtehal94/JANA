@@ -20,7 +20,7 @@
         <div class="vx-row">
             <div class="vx-col w-full">
                 <vx-card class="mt-8 pt-0">
-                    <vs-tabs>
+                    <vs-tabs class="tabs-shadow-none">
                         <vs-tab label="كل المتاجر">
                             <AllStores :stores="stores" />
                         </vs-tab>

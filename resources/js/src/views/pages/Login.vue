@@ -11,6 +11,9 @@
 <template>
   <div class="h-screen flex w-full bg-img vx-row no-gutter items-center justify-center" id="page-login">
     <div class="vx-col sm:w-1/2 md:w-1/2 lg:w-3/4 xl:w-4/5 sm:m-0 m-5">
+      <div class="vx-row m-4">
+        <i18n class="text-bold"/>
+      </div>
       <vx-card class="rounded-corner shadow-none">
         <div slot="no-body">
           <div class="vx-row no-gutter justify-center items-center py-10">
@@ -22,7 +25,7 @@
               <div class="p-8 login-tabs-container">
                 <div class="vx-card__title mb-4">
                   <div class="separator">
-                    <h4 class="mb-4 text-lg">بيانات الحساب</h4> 
+                    <h4 class="mb-4 text-lg font-extrabold">{{$t('accountData')}}</h4> 
                   </div> 
                 </div>
 
@@ -35,7 +38,7 @@
                       name="email"
                       icon-no-border
                       icon="icon"
-                      placeholder="البريد الإلكتروني"
+                      :placeholder="$t('email')"
                       v-model="email"
                       class="w-full text-base"/>
                   <span v-if="!errors.has('email') && email">
@@ -56,7 +59,7 @@
                       name="password"
                       icon-no-border
                       icon="icon"
-                      placeholder="كلمة المرور"
+                      :placeholder="$t('password') "
                       v-model="password"
                       class="w-full mt-3" />
                   <span v-if="!errors.has('password') && password">
@@ -73,11 +76,11 @@
                 </div>
                 <div class=" mb-3">
                     <vs-button
-                      class="w-full mt-10 font-medium register-btn"
+                      class="w-full mt-10 font-medium register-btn text-lg"
                       color="linear-gradient(to left,#E93F7D,#DA6653)"
                       gradient
                       @click="loginJWT">
-                      تسجيل الدخول
+                      {{$t('Login')}} 
                       </vs-button>
                 </div>
                 <div class="w-full text-center">
@@ -106,8 +109,12 @@
 
 <script>
 import icon from '../../layouts/components/icon.vue';
+import I18n  from "@/layouts/components/navbar/components/I18n.vue"
 export default{
-  components: { icon },
+  components: { 
+    icon,
+    I18n 
+    },
   data () {
     return {
       email: '',

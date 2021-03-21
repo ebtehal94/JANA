@@ -11,7 +11,14 @@
     <div id="customers">
         <div class="vx-row my-2 justify-between">
             <div class="vx-col search-page__search-bar flex">
-                <vs-input icon-no-border placeholder="اكتب كلمة للبحث" v-model="searchQuery" class="w-full input-rounded-full" icon="icon-search" icon-pack="feather" />
+                <vs-input 
+                icon-no-border 
+                placeholder="اكتب كلمة للبحث" 
+                icon-after vs-icon-after="true" 
+                v-model="searchQuery" 
+                class="w-full input-rounded-full" 
+                icon="icon-search" 
+                icon-pack="feather" />
             </div>
             <div class="vx-col cursor-pointer flex">
                 <vs-button
@@ -30,7 +37,7 @@
         <div class="vx-row">
             <div class="vx-col w-full">
                 <vx-card class="mt-8 pt-0">
-                    <vs-tabs>
+                    <vs-tabs class="tabs-shadow-none">
                         <vs-tab label="كل العملاء">
                             <AllCustomers pending="true" show="true" :customers="customers"/>
                         </vs-tab> 
@@ -39,7 +46,7 @@
                             <!--<SuspendedAccounts pending=true :accounts="accounts"/>-->
                         </vs-tab>
                         <vs-tab label="عملاء جدد استخدموا كود الإحالات">
-                            <AllCustomers pending=false :customers="customers"/>
+                            <AllCustomers pending=false code="true" :customers="customers"/>
                         </vs-tab>
                     </vs-tabs>
                 </vx-card>
