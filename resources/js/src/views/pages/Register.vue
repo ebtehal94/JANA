@@ -17,7 +17,8 @@
                 <span @click="goToPage(1)" class="steps-btn inline-block font-semibold" :class="{ active : page_num == 1}">1</span>
                 <span @click="goToPage(2)" class="steps-btn inline-block font-semibold" :class="{ active : page_num == 2}">2</span>
                 <span @click="goToPage(3)" class="steps-btn inline-block font-semibold" :class="{ active : page_num == 3}">3</span>
-                <span class="account pl-0.5 font-light text-sm">
+
+                <!-- <span class="account pl-0.5 font-light text-sm">
                   {{$i18n.locale == "en" ? "You have an account" : "لديك حساب"}}
                 </span>
                   <vs-button
@@ -26,7 +27,7 @@
                   type="transparent"
                   to="/login">
                   {{ $t('loginLabel')}}
-                </vs-button>
+                </vs-button> -->
               </div>
             </div>
 
