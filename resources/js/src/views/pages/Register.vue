@@ -225,7 +225,7 @@
                       </span>
                   </div> -->
 
-                  <div class="bg-input">
+              <!--<div class="bg-input">
                     <icon name="location" class="icon"/>
                       <vs-input
                         size="large"
@@ -243,7 +243,7 @@
                       <span v-else-if="errors.has(branchIndex+'location')">
                         <icon name="cross" class="icon left-icon"/>
                       </span>
-                  </div>
+                  </div> -->
 
                   <div class="bg-input">
                     <icon name="URL" class="icon"/>
@@ -533,7 +533,7 @@ export default {
         password: null,
         confirm_password: null,
       },
-      branches_data: [{type: null, title: null, city_id: null, location: null, url: null}],
+      branches_data: [{type: null, title: null, city_id: null, url: null}],
       page_num:1,
       disabled: true
     }
@@ -572,7 +572,7 @@ export default {
        }
      },
     addBranch() {
-      this.branches_data.push({type: null, title: null, city_id: null, location: null, url: null})
+      this.branches_data.push({type: null, title: null, city_id: null, url: null})
     },
   changeNumber(num){
     if((num == 2)

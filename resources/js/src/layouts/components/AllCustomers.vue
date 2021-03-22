@@ -3,19 +3,19 @@
         <div class="vx-row mt-5"> 
             <div v-for="item in customers" class="vx-col w-full sm:w-1/2 lg:w-1/4 mb-base px-2.5" v-bind:key="item.id">
                 <vx-card class="customers shadow">
-                    <img v-if="pending" :src="require('@assets/images/customers.png')" class="text-center mx-auto" width="100px"/>
+                    <img v-if="!display" :src="require('@assets/images/customers.png')" class="text-center mx-auto" width="100px"/>
                     <img v-else :src="require('@assets/images/accounts.png')" class="text-center mx-auto" width="100px"/>
                         <div class="ml-auto cursor-pointer flex justify-around action" style="width: 4rem">
                             <vs-button @click.stop="" color="rgb(255,255,255)" text-color="rgb(255,159,67)" size="small" radius icon-pack="feather" icon="icon-edit" class=" shadow"/>
                             <vs-button @click.stop="" color="rgb(255,255,255)" text-color="#EA5455" size="small" radius icon-pack="feather" icon="icon-trash-2" class=" shadow"/>
                         </div>
                     <h4 class="text-center">{{item.name}}</h4>
-                    <h6 class="text-center" v-if="show">{{item.subtitle}}</h6>
-                    <div class="flex justify-center my-1" v-if="code">
+                    <!-- <h6 class="text-center" v-if="display">{{item.subtitle}}</h6> -->
+                    <div class="flex justify-center my-1" v-if="display">
                         <span class="pr-2">{{item.Refrral}}</span>
                         <span class="code">{{item.code}}</span>
                     </div>
-                    <div class="flex justify-between">
+                    <div class="flex justify-between mt-2">
                         <span>{{item.phone}}</span>
                         <span> | </span>
                         <span>{{item.Email}}</span>
@@ -40,15 +40,6 @@ export default {
             display:{
                 type: Boolean,
             },
-            pending:{
-                type: Boolean,
-            },
-            show:{
-                type: Boolean,
-            },
-            code:{
-                type: Boolean,
-            }
         },
         data() {
         return {
@@ -99,5 +90,12 @@ export default {
             font-weight: bold;
         }
     }
-}  
+}
+@media only screen and (min-width: 375px) and (max-width: 600px) {
+    #all-customers{
+        .action{
+            right: 4.5rem;
+        }
+    }
+}
 </style>

@@ -52,6 +52,9 @@ export default {
 		fullName:'Full Name',
 		accountStatus:'Account Status (Active)',
 
+		title:'Title',
+		desc:'Description',
+
 		language: 'Language',
 		currency: 'Currency',
 		country: 'Country',
@@ -367,6 +370,9 @@ export default {
 
 		fullName:'الإسم الكامل',
 		accountStatus:'حالة الحساب (نشط)',
+
+		title:'العنوان',
+		desc:'الوصف',
 
 		AppDownload: 'لتجربة أسهل قم بتحميل تطبيق أوتانتك',
 		Otantik: 'أوتانتك',

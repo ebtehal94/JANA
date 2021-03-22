@@ -71,8 +71,8 @@
                 </div>
 
                 <div class="flex flex-wrap justify-between my-5">
-                  <vs-checkbox v-model="checkbox_remember_me" class="mb-3 account font-light text-sm checkbox">تذكرني</vs-checkbox>
-                  <router-link to="/pages/forgot-password" class="account font-light text-sm">نسيت كلمة المرور</router-link>
+                  <vs-checkbox v-model="checkbox_remember_me" class="mb-3 account  text-sm checkbox" >{{ $i18n.locale == 'en' ? 'Remember Me' : 'تذكرني' }}</vs-checkbox>
+                  <router-link to="/pages/forgot-password" class="account  text-sm">{{ $i18n.locale == 'en' ? 'Forgot Password?' : 'نسيت كلمة المرور؟' }}</router-link>
                 </div>
                 <div class=" mb-3">
                     <vs-button
@@ -90,7 +90,7 @@
                     size="small" 
                     type="transparent" 
                     to="/register">
-                      أنشئ حسابك الآن
+                      {{ $i18n.locale == 'en' ? 'Create Account?' : ' أنشئ حسابك الآن' }}  
                      </vs-button>
                 </div>
 

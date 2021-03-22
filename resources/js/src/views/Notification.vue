@@ -1,6 +1,6 @@
 <template>
-  <div id="create-customer">
-    <vx-card class="customer-info">
+  <div id="notification">
+    <vx-card class="notification-info">
       <div slot="no-body" class="tabs-container">
         <!-- Content Row -->
         <div class="vx-row">
@@ -11,8 +11,8 @@
             <div class="vx-row">
                 <div class="vx-col w-full md:w-1/2">
                   <!-- Col Header -->
-                  <div class="flex items-end pt-4">
-                    <span class="leading-none font-medium text-xs">مستلمي الإشعار</span>
+                  <div class="flex items-end pt-4 pb-2">
+                    <span class="leading-none font-semibold text-sm">{{$i18n.locale == "en" ? "Notice recipients" : "مستلمي الإشعار"}}</span>
                   </div>
                   <!-- Col Content -->
                   <div>
@@ -29,13 +29,13 @@
                 </div>
                 <div class="vx-col w-full md:w-1/2">
                     <!-- Col Header -->
-                    <div class="flex items-end pt-4">
-                        <span class="leading-none font-medium text-xs">وقت الإرسال</span>
+                    <div class="flex items-end pt-4 pb-2">
+                        <span class="leading-none font-semibold text-sm">{{$i18n.locale == "en" ? "Time" : "وقت الإرسال"}}</span>
                     </div>
                      <!-- Col Content -->
                   <div>
                     <vs-input
-                      class="w-full text-base mt-2 "
+                      class="w-full text-sm mt-2 "
                       placeholder="15/4/2021 10:45 AM"
                       v-model="date"
                       v-validate="'required'"
@@ -50,22 +50,22 @@
                 <div class="vx-col w-full">
                     <!-- Col Header -->
                     <div class="flex items-end">
-                        <span class="leading-none font-medium text-xs">تفاصيل الإشعار</span>
+                        <span class="leading-none font-semibold text-sm pb-2">{{$i18n.locale == "en" ? "Notice details" : "تفاصيل الإشعار"}}</span>
                     </div>
                     <div>
                       <vs-input
                         class="w-full text-base mt-2 "
-                        placeholder="العنوان"
-                        v-model="location"
+                        :placeholder="$t('title')"
+                        v-model="title"
                         v-validate="'required'"
-                        name="location"/>
+                        name="title"/>
 
                       <div class="mt-4">
                         <vs-textarea 
-                        label="الوصف"
+                        :placeholder="$t('desc')"
                         v-model="desc" 
                         class="mt-2 p-2" 
-                        height="120px"
+                        height="130px"
                         name="desc"/>
                       </div>
                   </div>
@@ -76,19 +76,19 @@
             <div class="vx-row flex justify-center mt-10">
               <div class="vx-col sm:w-full md:w-1/2 lg:w-1/2 mb-4">
                 <vs-button
-                  class="w-full font-semibold text-sm rounded-full"
+                  class="w-full font-semibold text-base rounded-full"
                   color="linear-gradient(to left,#E93F7D,#DA6653)"
                   gradient
                   @click="registerUser">
-                    إرسال
+                    {{$i18n.locale == "en" ? " Send" : "إرسال"}}
                 </vs-button>
               </div>
               <div class="vx-col sm:w-full md:w-1/2 lg:w-1/2 mb-4">
                 <vs-button
-                  class="w-full font-semibold text-sm rounded-full "
+                  class="w-full font-semibold text-base rounded-full "
                   color="#ACACAC" type="border"
                   @click="registerUser">
-                    خروج 
+                    {{$i18n.locale == "en" ? "Close" : "خروج"}} 
                 </vs-button>
               </div>
             </div>
@@ -121,7 +121,7 @@ export default {
       customers:null,
       date:null,
       desc:null,
-      location:null,
+      title:null,
     }
   },
   computed: {
@@ -181,11 +181,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#create-customer {
+#notification {
   margin: 2rem 2.5rem;
 
-  .customer-info{
-        padding: 2.5rem;
+  .notification-info{
+      padding: 2.5rem;
+    }
+    .vs-textarea{
+      height: 130px;
+      border-radius: 20px;
+    }
+    .vs-button:not(.vs-radius):not(.includeIconOnly):not(.small):not(.large) {
+      padding: .5rem 2rem;
     }
   .v-select .vs__dropdown-toggle .vs__search {
       font-size: .8rem;
@@ -193,7 +200,7 @@ export default {
 }
 
 @media only screen and (min-width: 375px) and (max-width: 600px) {
-  #create-customer {
+  #notification {
     .vs-button:not(.vs-radius):not(.includeIconOnly):not(.small):not(.large) {
         padding: .5rem 4rem;
     }
@@ -201,12 +208,7 @@ export default {
 }
 
 @media only screen and (min-width: 360px) and (max-width: 375px) {
-  #create-customer {
-    .align {
-      display: block;
-      margin: 0.5rem -1rem;
-    }
-  }
+
 }
 
 @media only screen and (min-width: 320px)  and (max-width: 360px) {
@@ -214,12 +216,6 @@ export default {
 }
 
 @media only screen  and (max-width: 320px) {
-  #create-customer {
-    .align {
-      width: 200px !important;
-      height: 200px !important;
-      margin: 0.5rem -1.5rem;
-    }
-  }
+
 }
 </style>
