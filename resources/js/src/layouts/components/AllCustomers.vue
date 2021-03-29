@@ -11,7 +11,7 @@
                         </div>
                     <h4 class="text-center">{{item.name}}</h4>
                     <!-- <h6 class="text-center" v-if="display">{{item.subtitle}}</h6> -->
-                    <div class="flex justify-center my-1" v-if="display">
+                    <div class="flex justify-center my-1" v-if="activeTap == 3">
                         <span class="pr-2">{{item.Refrral}}</span>
                         <span class="code">{{item.code}}</span>
                     </div>
@@ -91,10 +91,13 @@ export default {
         }
     }
 }
-@media only screen and (min-width: 375px) and (max-width: 600px) {
+
+@media only screen and (min-width: 360px) and (max-width: 375px){
     #all-customers{
-        .action{
-            right: 4.5rem;
+        .customers{
+            .action{
+                right: 4.5rem;
+            }
         }
     }
 }

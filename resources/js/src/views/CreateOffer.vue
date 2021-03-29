@@ -11,26 +11,39 @@
             </div>
 
             <!-- Col Content -->
-            <div>
+            <div class="bg-input">
               <vs-input 
               class="w-full mt-4"
               placeholder="العنوان" 
-              v-model="offer_data.name" 
+              v-model="offer_data.title" 
               v-validate="'required|alpha_spaces'" 
-              name="name" />
-              <span class="text-danger text-sm"  v-show="errors.has('name')">{{ errors.first('name') }}</span>
+              name="title" />
 
+              <span v-if="!errors.has('title') && offer_data.title">
+                <icon name="confirm" class="icon left-icon"/>
+              </span>
+              <span v-else-if="errors.has('title')">
+                <icon name="cross" class="icon left-icon"/>
+              </span>
+            </div>
+
+            <div class="bg-input">
               <vs-textarea 
               placeholder="الوصف"
               v-model="offer_data.desc_ar" 
               class="mt-2 w-full" 
               name="desc_ar"/>
-              <span class="text-danger text-sm" v-show="errors.has('desc_ar')">{{ errors.first('desc_ar') }}</span>
-
+              
+              <span v-if="!errors.has('desc_ar') && offer_data.title">
+                <icon name="confirm" class="icon left-icon"/>
+              </span>
+              <span v-else-if="errors.has('desc_ar')">
+                <icon name="cross" class="icon left-icon"/>
+              </span>
             </div>
           </div>
 
-            <div class="vx-col w-full md:w-1/2">
+          <div class="vx-col w-full md:w-1/2">
             <!-- Col Header -->
             <div class="flex items-end">
               <span class="leading-none font-semibold text-xs">بيانات العرض باللغة العربية</span>
@@ -38,13 +51,21 @@
 
             <!-- Col Content -->
             <div>
-              <vs-input 
-              class="w-full mt-4" 
-              placeholder="العنوان"
-              v-model="offer_data.name" 
-              v-validate="'required|alpha_spaces'" 
-              name="name" />
-              <span class="text-danger text-sm"  v-show="errors.has('name')">{{ errors.first('name') }}</span>
+              <div class="bg-input">
+                <vs-input 
+                class="w-full mt-4"
+                placeholder="العنوان" 
+                v-model="offer_data.title" 
+                v-validate="'required|alpha_spaces'" 
+                name="title" />
+
+                <span v-if="!errors.has('title') && offer_data.title">
+                  <icon name="confirm" class="icon left-icon"/>
+                </span>
+                <span v-else-if="errors.has('title')">
+                  <icon name="cross" class="icon left-icon"/>
+                </span>
+              </div>
 
               <vs-textarea 
               placeholder="الوصف"
@@ -115,7 +136,7 @@
             <div class="vx-row flex mt-4 mx-0">
               <div class="vx-col w-full md:w-1/3 add-img">
                 <input type="file" class="hidden" ref="uploadImgInput" multiple @change="updateCurrImg" accept="image/*">
-                <vs-button v-if="dataUploadedImages.length === 0" class="text-gray mt-4 ml-10" icon-pack="feather" type="transparent" icon="icon-plus" @click="$refs.uploadImgInput.click()"/>
+                <vs-button v-if="dataUploadedImages.length === 0" class="text-gray mt-4 ml-8" icon-pack="feather" type="transparent" icon="icon-plus" @click="$refs.uploadImgInput.click()"/>
                 <h5 class="text-gray text-xs text-center">{{ $i18n.locale == 'en' ? 'Upload Image' : 'اضافة صورة' }}</h5>
               </div>
               <div class="vx-col w-full md:w-1/3">
@@ -186,7 +207,7 @@
           <div class="vx-col w-full md:w-1/2">
             <!-- Col Header -->
             <div class="flex items-end">
-              <span class="leading-none font-medium text-xs">بيانات العرض باللغة العربية</span>
+              <span class="leading-none font-semibold text-xs">المتجر</span>
             </div>
 
             <!-- Col Content -->
@@ -194,7 +215,7 @@
              <div>
                 <div class="bg-input">
                     <v-select class="w-full mt-2"
-                      placeholder=" (القسم)الفئة"
+                      placeholder="اختر المتجر"
                       v-model="offer_data.category"
                       v-validate="'required'"
                       label="text" :options="category_list"
@@ -256,7 +277,7 @@ export default {
   },
   data() {
     return {
-      offer_data: { name: null, category: null, desc_ar:null, mobile: null, password: null,status:null},
+      offer_data: { title: null, category: null, desc_ar:null, mobile: null, password: null,status:null,store:null},
       category_list:[
         {text:'القسم الأول',value:1},
         {text:'القسم الثاني',value:2},
@@ -266,6 +287,12 @@ export default {
       status_list: [
         {text:'غير نشط',value:1},
         {text:'نشط',value:2},
+      ],
+      stores_list: [
+        {text:'المتجر الأول',value:1},
+        {text:'المتجر الثاني',value:2},
+        {text:'المتجر الثالث',value:3},
+        {text:'المتجر الرابع',value:4}
       ],
       dataUploadedImages: [],
       dataUploadedImagesForDisplay: [],
@@ -310,6 +337,20 @@ export default {
 
     .offer-info {
         padding: 2.5rem;
+    .bg-input{
+      position: relative;
+      .left-icon{
+        position: absolute;
+        top:13px;
+        left: 92%;
+        z-index: 9999;
+      }
+      .v-select{
+        .vs__dropdown-toggle{
+          padding: 3rem;
+        }
+      }
+    }
     }
     .add-img{
       border: 1px solid #eee;

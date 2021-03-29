@@ -103,7 +103,8 @@
                   </div>
                   <div class="bg-input">
                     <icon name="city" class="icon"/>
-                    <v-select class="w-full mt-2"
+                    <v-select 
+                      class="w-full mt-2"
                       :placeholder='$t("mainLocation")'
                       v-model="store_data.city_id"
                       v-validate="'required'"
@@ -729,6 +730,10 @@ export default {
   }
   .bg-input{
     position: relative;
+
+    .vs__dropdown-toggle {
+      padding: 8rem;
+    }
     .icon{
       position: absolute;
       top:14px;

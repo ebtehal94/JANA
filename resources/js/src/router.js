@@ -299,6 +299,20 @@ const router = new Router({
                 rule: 'admin',
             }
           },
+          {
+            path: '/AdminEdit',
+            name: 'Edit-Admin',
+          //   component: () => import('@/views/pages/ComingSoon.vue'),
+            component: () => import('./views/AdminEdit.vue'),
+            meta: {
+              breadcrumb: [
+                  { title: 'Home', url: '/' },
+                  { title: 'Accounts'},
+                  { title: 'AdminEdit', active: true },
+              ],
+                rule: 'admin',
+            }
+          },
         {
             path: '/AppControl',
             name: 'AppControl',

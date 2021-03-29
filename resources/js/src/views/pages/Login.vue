@@ -25,7 +25,7 @@
               <div class="p-8 login-tabs-container">
                 <div class="vx-card__title mb-4">
                   <div class="separator">
-                    <h4 class="mb-4 text-lg font-extrabold">{{$t('accountData')}}</h4> 
+                    <h4 class="mb-4 text-lg font-bold">{{$t('accountData')}}</h4> 
                   </div> 
                 </div>
 
@@ -71,7 +71,7 @@
                 </div>
 
                 <div class="flex flex-wrap justify-between my-5">
-                  <vs-checkbox v-model="checkbox_remember_me" class="mb-3 account  text-sm checkbox" >{{ $i18n.locale == 'en' ? 'Remember Me' : 'تذكرني' }}</vs-checkbox>
+                  <vs-checkbox v-model="checkbox_remember_me" class="mb-3 account  text-sm checkbox" siza="small">{{ $i18n.locale == 'en' ? 'Remember Me' : 'تذكرني' }}</vs-checkbox>
                   <router-link to="/pages/forgot-password" class="account  text-sm">{{ $i18n.locale == 'en' ? 'Forgot Password?' : 'نسيت كلمة المرور؟' }}</router-link>
                 </div>
                 <div class=" mb-3">
@@ -84,18 +84,15 @@
                       </vs-button>
                 </div>
                 <div class="w-full text-center">
-                    <span class="account pl-0.5 font-light text-sm">ليس لديك حساب؟</span>
+                    <span class="account pl-0.5 text-sm">{{ $i18n.locale == 'en' ? "Don't have an account ?" : 'ليس لديك حساب؟' }}</span>
                     <vs-button 
                     class="login-btn p-0 text-sm"
                     size="small" 
                     type="transparent" 
                     to="/register">
-                      {{ $i18n.locale == 'en' ? 'Create Account?' : ' أنشئ حسابك الآن' }}  
+                      {{ $i18n.locale == 'en' ? 'Create Account' : ' أنشئ حسابك الآن' }}  
                      </vs-button>
                 </div>
-
-                  
-                
               </div>
             </div>
           </div>
@@ -157,13 +154,9 @@ export default{
                           if(this.$acl.check('admin')){
                             this.$store.dispatch('updateMainLayout', 'vertical')
                             this.$router.push('/dashboard')
-                          }else{
-                            if(this.cartItems.length > 0) {
-                              this.$router.push('/checkout')
-                            } else {
+                          }else {
                               this.$router.push('/')
                             }
-                          }
                         }else{
                           this.$vs.notify({
                             color: 'danger',

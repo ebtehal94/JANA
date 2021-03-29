@@ -5,7 +5,7 @@
                 <vx-card class="account shadow">
                     <img :src="item.src" class="text-center mx-auto" width="100px"/>
                         <div class="ml-auto cursor-pointer flex justify-around action" style="width: 4rem">
-                            <vs-button @click.stop="" color="rgb(255,255,255)" text-color="rgb(255,159,67)" size="small" radius icon-pack="feather" icon="icon-edit" class=" shadow"/>
+                            <vs-button @click="EditNewData" color="rgb(255,255,255)" text-color="rgb(255,159,67)" size="small" radius icon-pack="feather" icon="icon-edit" class=" shadow"/>
                             <vs-button @click.stop="" color="rgb(255,255,255)" text-color="#EA5455" size="small" radius icon-pack="feather" icon="icon-trash-2" class=" shadow"/>
                         </div>
                     <h4 class="text-center">{{item.name}}</h4>
@@ -33,7 +33,16 @@ export default {
         return {
 
         }
-    }
+        
+    },
+    computed: {
+
+    },
+    methods: {
+         EditNewData() {
+        this.$router.push({path: '/AdminEdit'})
+        },
+    },
 }
 </script>
 
