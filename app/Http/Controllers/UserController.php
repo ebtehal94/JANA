@@ -41,7 +41,7 @@ class UserController extends Controller
       $response['statusCode']   = 403;
       return $response;
     }
-
+    $user['rule']             = 'admin';
     $response['user']         = User::create($user);
     if ($response['user']){
       $response['statusCode']   = 200;

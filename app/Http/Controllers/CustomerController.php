@@ -14,72 +14,79 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+      $response                 = array();
+      $info                     = $request->all();
+      $customers                = Customer::select('id', 'name', 'mobile', 'email', 'status')
+                                          ->orderby('id','desc');
+      if (isset($info['status']) && count($info['status']) > 0){
+        $customers                   = $customers->whereIn('status', $info['status']);
+      }
+      $response['customers']    = $customers->get();
+      $response['statusCode']   = 200;
+      return $response;
     }
 
+
     /**
-     * Show the form for creating a new resource.
+     * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function indexPage()
     {
-        //
+      $customers          = Customer::with('city')->orderBy('id','desc')->get();
+      foreach ($customers as $customer) {
+        $customer->products_count   = $customer->products()->count();
+      }
+      return $customers;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+
+    public function create(Request $request)
     {
-        //
+      $customer                 = $request->all();
+      $response                 = array();
+      $response['customer']     = Customer::create($customer);
+      if ($response['customer']){
+        $response['statusCode']   = 200;
+      }else{
+        $response['statusCode']   = 400;
+      }
+      return $response;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Customer  $customer
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Customer $customer)
+    public function edit(Request $request, $id)
     {
-        //
+      return Customer::find($id);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Customer  $customer
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Customer $customer)
+
+    public function remove($id)
     {
-        //
+      $customer           = Customer::find($id);
+      if ($customer){
+        $customer->delete();
+        return 'Customer Deleted';
+      }else{
+        return 'Customer not found!';
+      }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Customer  $customer
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Customer $customer)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Customer  $customer
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Customer $customer)
+    public function update(Request $request)
     {
-        //
+      $info               = $request->all();
+      $customer           = Customer::find($request->id);
+      $response           = array();
+      if ($customer){
+        $customer->update($info);
+        $response['customer']     = $customer;
+        $response['statusCode']   = 200;
+      }else{
+        $response['statusCode']   = 400;
+      }
+      return $response;
+
+      return $customer;
     }
 }

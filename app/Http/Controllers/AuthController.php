@@ -68,7 +68,7 @@ class AuthController extends Controller
       $userInfo['name']           = $storeInfo['name_ar'];
       $userInfo['rule']           = 'vendor';
       $userInfo['password']       = bcrypt($userInfo['password']);
-      $user                       = $store->users()->create($userInfo);
+      $user                       = $store->user()->create($userInfo);
 
 
       if ($user){
