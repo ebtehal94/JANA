@@ -1,19 +1,19 @@
 <template>
     <div id="stores">
-        <div class="vx-row my-2 justify-between">
+        <div class="vx-row my-2 justify-center md:justify-between ">
             <div class="vx-col search-page__search-bar flex">
                 <vs-input 
                 icon-no-border 
                 placeholder="اكتب كلمة للبحث" 
                 v-model="searchQuery"
                 icon-after vs-icon-after="true"  
-                class="w-full input-rounded-full" 
+                class="sm:w-1/2 md:w-full input-rounded-full" 
                 icon="icon-search" 
                 icon-pack="feather" />
             </div>
             <div class="vx-col cursor-pointer flex">
                 <vs-button
-                    class="w-full rounded-full text-xs font-bold shadow-none"
+                    class="sm:w-1/2 md:w-full rounded-full text-xs font-bold shadow-none"
                     color="rgb(255, 255, 255)"
                     text-color="#DC6059"
                     icon-after vs-icon-after="true"
@@ -28,10 +28,10 @@
             <div class="vx-col w-full">
                 <vx-card class="mt-8 pt-0">
                     <vs-tabs class="tabs-shadow-none">
-                        <vs-tab label="كل المتاجر">
+                        <vs-tab :label="$t('AllStores')">
                             <AllStores :stores="stores" />
                         </vs-tab>
-                        <vs-tab label="الحسابات المعلقة">
+                        <vs-tab :label="$t('PendingAccounts')">
                             <SuspendedStore :stores="stores"/>
                         </vs-tab>
                     </vs-tabs>
@@ -103,6 +103,12 @@ export default {
         .vs-tabs--ul{
             box-shadow: none;
         }
+    }
+}
+@media only screen and (min-width: 360px) and (max-width: 767px) {
+    .vs-button:not(.vs-radius):not(.includeIconOnly):not(.small):not(.large) {
+        padding: .5rem 2rem !important;
+        margin-top: 1rem;
     }
 }
 </style>

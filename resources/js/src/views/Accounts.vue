@@ -9,20 +9,20 @@
 
 <template>
     <div id="admin-account">
-        <div class="vx-row my-2 justify-between">
+        <div class="vx-row my-2 justify-center md:justify-between ">
             <div class="vx-col search-page__search-bar flex">
                 <vs-input 
                 icon-no-border 
                 placeholder="اكتب كلمة للبحث" 
                 icon-after vs-icon-after="true"
                 v-model="searchQuery" 
-                class="w-full input-rounded-full" 
+                class="sm:w-1/2 md:w-full  input-rounded-full" 
                 icon="icon-search" 
                 icon-pack="feather" />
             </div>
             <div class="vx-col cursor-pointer flex">
                 <vs-button
-                    class="w-full rounded-full text-xs font-bold shadow-none"
+                    class="sm:w-1/2 md:w-full  rounded-full text-xs font-bold shadow-none"
                     color="rgb(255, 255, 255)"
                     text-color="#DC6059"
                     icon-after vs-icon-after="true"
@@ -106,6 +106,13 @@ export default{
     .vs-button:not(.vs-radius):not(.includeIconOnly):not(.small):not(.large) {
         padding: 0 2rem;
         box-shadow: none;
+    }
+    
+}
+@media only screen and (min-width: 360px) and (max-width: 767px) {
+    .vs-button:not(.vs-radius):not(.includeIconOnly):not(.small):not(.large) {
+        padding: .5rem 2rem !important;
+        margin-top: 1rem;
     }
 }
 </style>

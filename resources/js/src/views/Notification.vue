@@ -23,7 +23,8 @@
                             v-validate="'required'"
                             label="text" :options="customers_list"
                             :reduce="text => text.value"
-                            :dir="$vs.rtl ? 'rtl' : 'ltr'" />
+                            :dir="$vs.rtl ? 'rtl' : 'ltr'"
+                            />
                       </div>
                     </div>
                 </div>

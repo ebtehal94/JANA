@@ -9,20 +9,20 @@
 
 <template>
     <div id="customers">
-        <div class="vx-row my-2 justify-between">
-            <div class="vx-col search-page__search-bar flex">
+        <div class="vx-row my-2 justify-center md:justify-between ">
+            <div class="vx-col  search-page__search-bar flex">
                 <vs-input 
                 icon-no-border 
-                placeholder="اكتب كلمة للبحث" 
+                placeholder=" اكتب كلمة للبحث" 
                 icon-after vs-icon-after="true" 
                 v-model="searchQuery" 
-                class="w-full input-rounded-full" 
+                class="sm:w-1/2 md:w-full input-rounded-full" 
                 icon="icon-search" 
                 icon-pack="feather" />
             </div>
             <div class="vx-col cursor-pointer flex">
                 <vs-button
-                    class="w-full rounded-full text-xs font-bold shadow-none"
+                    class="sm:w-1/2 md:w-full rounded-full text-xs font-bold shadow-none"
                     color="rgb(255, 255, 255)"
                     text-color="#DC6059"
                     icon-after vs-icon-after="true"
@@ -42,11 +42,11 @@
                             <AllCustomers :display="false" :customers="customers"/>
                         </vs-tab> 
                         <vs-tab label="الحسابات المعلقة">
-                            <AllCustomers :display="true" :customers="customers"/>
+                            <AllCustomers :display="true" :customers="customers" />
                             <!--<SuspendedAccounts pending=true :accounts="accounts"/>-->
                         </vs-tab>
                         <vs-tab label="عملاء جدد استخدموا كود الإحالات">
-                            <AllCustomers :display="false" :customers="customers"/>
+                            <AllCustomers :display="false" :customers="customers" />
                         </vs-tab>
                     </vs-tabs>
                 </vx-card>
@@ -77,16 +77,7 @@ export default{
                 {"id":7,"name":"عميلة بطاقات جنا","subtitle":"مرحبا بك ,كيف نستطيع خدمتك",src:require('@assets/images/customers.png'),"phone":"0512345678","Email":"jana@jana.com","code":"058765485","Refrral":"كود الإحالة"},
                 {"id":8,"name":"عميلة بطاقات جنا","subtitle":"مرحبا بك ,كيف نستطيع خدمتك",src:require('@assets/images/customers.png'),"phone":"0512345678","Email":"jana@jana.com","code":"058765485","Refrral":"كود الإحالة"},
             ],
-             accounts:[
-                {"id":1,"name":"عميلة بطاقات جنا","subtitle":"مرحبا بك ,كيف نستطيع خدمتك",src:require('@assets/images/accounts.png'),"phone":"0512345678","Email":"jana@jana.com"},
-                {"id":2,"name":"عميلة بطاقات جنا","subtitle":"مرحبا بك ,كيف نستطيع خدمتك",src:require('@assets/images/accounts.png'),"phone":"0512345678","Email":"jana@jana.com"},
-                {"id":3,"name":"عميلة بطاقات جنا","subtitle":"مرحبا بك ,كيف نستطيع خدمتك",src:require('@assets/images/accounts.png'),"phone":"0512345678","Email":"jana@jana.com"},
-                {"id":4,"name":"عميلة بطاقات جنا","subtitle":"مرحبا بك ,كيف نستطيع خدمتك",src:require('@assets/images/accounts.png'),"phone":"0512345678","Email":"jana@jana.com"},
-                {"id":5,"name":"عميلة بطاقات جنا","subtitle":"مرحبا بك ,كيف نستطيع خدمتك",src:require('@assets/images/accounts.png'),"phone":"0512345678","Email":"jana@jana.com"},
-                {"id":6,"name":"عميلة بطاقات جنا","subtitle":"مرحبا بك ,كيف نستطيع خدمتك",src:require('@assets/images/accounts.png'),"phone":"0512345678","Email":"jana@jana.com"},
-                {"id":7,"name":"عميلة بطاقات جنا","subtitle":"مرحبا بك ,كيف نستطيع خدمتك",src:require('@assets/images/accounts.png'),"phone":"0512345678","Email":"jana@jana.com"},
-                {"id":8,"name":"عميلة بطاقات جنا","subtitle":"مرحبا بك ,كيف نستطيع خدمتك",src:require('@assets/images/accounts.png'),"phone":"0512345678","Email":"jana@jana.com"},
-            ],
+            activeTap:1,
  
         }
     },
@@ -116,18 +107,18 @@ export default{
     .vx-row > .vx-col {
         padding: 0 .6rem;
     }
-    .vs-input--placeholder {
-        font-size: small;
-        color: #ACACAC;
-        font-weight: 400;
-        padding-right: 3rem !important;
-    }
     .vs-button{
         box-shadow: none;
     }
     .vs-button:not(.vs-radius):not(.includeIconOnly):not(.small):not(.large) {
         padding: 0 2rem;
         box-shadow: none;
+    }
+}
+@media only screen and (min-width: 360px) and (max-width: 767px) {
+    .vs-button:not(.vs-radius):not(.includeIconOnly):not(.small):not(.large) {
+        padding: .5rem 2rem !important;
+        margin-top: 1rem;
     }
 }
 

@@ -37,6 +37,7 @@ export default {
 		CreateOffer:'Create New Offer',
 		CreateCustomer:'Create New Account',
 		CreateAdmin:'Create New Account',
+		AdminEdit:'Edit Account',
 		CreateStore:'Create New Account',
 
 		CreateNewCustomer:'Create Customer Account',
@@ -54,6 +55,12 @@ export default {
 
 		title:'Title',
 		desc:'Description',
+
+		AllStores:'All Stores',
+		PendingAccounts:'Pending Accounts',
+
+		desc_lable:'Description',
+
 
 		language: 'Language',
 		currency: 'Currency',
@@ -368,22 +375,19 @@ export default {
 		amount:'المبلغ',
 		notes:'ملاحظات',
 
+		
+		AllStores:'كل المتاجر',
+		PendingAccounts:'الحسابات المعلقة',
+
 		fullName:'الإسم الكامل',
 		accountStatus:'حالة الحساب (نشط)',
 
 		title:'العنوان',
 		desc:'الوصف',
 
-		AppDownload: 'لتجربة أسهل قم بتحميل تطبيق أوتانتك',
-		Otantik: 'أوتانتك',
-		language: 'اللغة',
-		currency: 'العملة',
-		country: 'الدولة',
-		Qatar: 'قطر',
-		Bahrain: 'البحرين',
-		Oman: 'عمان',
-		Kuwait: 'الكويت',
-		Jordan: 'الأردن',
+		desc_lable:'الوصف',
+
+	
 
 		Home: 'الرئيسية',
 		ProductsList: 'قائمة المنتجات',
