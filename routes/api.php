@@ -30,38 +30,42 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //
 // Route::post('/orders/create', 'OrderController@create');
 // Route::post('/orders/customer', 'OrderController@customer');
+Route::post('/offers/list', 'OfferController@index');
+Route::post('/offers/create', 'OfferController@create');
+Route::get('/offers/edit/{id}', 'OfferController@edit');
+Route::post('/offers/update', 'OfferController@update');
+Route::delete('/offers/delete/{id}', 'OfferController@remove');
+Route::post('/offers/addImages', 'OfferController@addImages');
+Route::get('/offers/{offer_id}/deleteImage/{image_id}', 'OfferController@deleteImage');
+
+Route::post('/store/list', 'StoreController@index');
+Route::post('/store/create', 'StoreController@create');
+Route::get('/store/edit/{id}', 'StoreController@edit');
+Route::post('/store/update', 'StoreController@update');
+Route::delete('/store/delete/{id}', 'StoreController@remove');
+Route::post('/store/updateImage', 'StoreController@updateImage');
+
+Route::post('/users/list', 'UserController@index');
+Route::post('/users/create', 'UserController@create');
+Route::get('/users/edit/{id}', 'UserController@edit');
+Route::post('/users/update', 'UserController@update');
+Route::get('/users/delete/{id}', 'UserController@remove');
+
+
+Route::post('/customers/login', 'Mobile\CustomerController@login');
+
+Route::post('/customers/list', 'CustomerController@index');
+Route::post('/customers/create', 'CustomerController@create');
+Route::post('/customers/register', 'CustomerController@create');
+Route::get('/customers/edit/{id}', 'CustomerController@edit');
+Route::post('/customers/update', 'CustomerController@update');
+Route::get('/customers/delete/{id}', 'CustomerController@remove');
+
+Route::get('/payments/list', 'PaymentController@index');
 
 
 Route::middleware('auth:api')->group(function () {
 
-    Route::post('/offers/list', 'OfferController@index');
-    Route::post('/offers/create', 'OfferController@create');
-    Route::get('/offers/edit/{id}', 'OfferController@edit');
-    Route::post('/offers/update', 'OfferController@update');
-    Route::delete('/offers/delete/{id}', 'OfferController@remove');
-    Route::post('/offers/addImages', 'OfferController@addImages');
-    Route::get('/offers/{offer_id}/deleteImage/{image_id}', 'OfferController@deleteImage');
-
-    Route::post('/store/list', 'StoreController@index');
-    Route::post('/store/create', 'StoreController@create');
-    Route::get('/store/edit/{id}', 'StoreController@edit');
-    Route::post('/store/update', 'StoreController@update');
-    Route::delete('/store/delete/{id}', 'StoreController@remove');
-    Route::post('/store/updateImage', 'StoreController@updateImage');
-
-    Route::get('/users/list', 'UserController@index');
-    Route::post('/users/create', 'UserController@create');
-    Route::get('/users/edit/{id}', 'UserController@edit');
-    Route::post('/users/update', 'UserController@update');
-    Route::get('/users/delete/{id}', 'UserController@remove');
-
-    Route::get('/customers/list', 'CustomerController@index');
-    Route::get('/customers/create', 'CustomerController@create');
-    Route::get('/customers/edit/{id}', 'CustomerController@edit');
-    Route::post('/customers/update', 'CustomerController@update');
-    Route::get('/customers/delete/{id}', 'CustomerController@remove');
-
-    Route::get('/payments/list', 'PaymentController@index');
 });
 
 

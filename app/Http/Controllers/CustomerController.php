@@ -12,7 +12,7 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
       $response                 = array();
       $info                     = $request->all();
@@ -46,8 +46,21 @@ class CustomerController extends Controller
     {
       $customer                 = $request->all();
       $response                 = array();
-      $response['customer']     = Customer::create($customer);
-      if ($response['customer']){
+      $existingMobile           = Customer::where('mobile', $customer['mobile'])->first();
+      $existingEmail            = Customer::where('email', $customer['email'])->first();
+
+      if (isset($existingMobile)){
+        $response['statusCode']   = 401;
+        return $response;
+      }
+      if (isset($existingEmail)){
+        $response['statusCode']   = 402;
+        return $response;
+      }
+
+      $customer['password']     = $this->AES_Encode($customer['password']);
+      $customer                 = Customer::create($customer);
+      if ($customer){
         $response['statusCode']   = 200;
       }else{
         $response['statusCode']   = 400;
@@ -79,6 +92,9 @@ class CustomerController extends Controller
       $customer           = Customer::find($request->id);
       $response           = array();
       if ($customer){
+        if (isset($info['password']) && !empty($info['password'])){
+          $info['password']       = $this->AES_Encode($info['password']);
+        }
         $customer->update($info);
         $response['customer']     = $customer;
         $response['statusCode']   = 200;
@@ -86,7 +102,19 @@ class CustomerController extends Controller
         $response['statusCode']   = 400;
       }
       return $response;
-
-      return $customer;
     }
+
+
+
+    public function AES_Encode($plain_text, $key = 'CloudsLine2020') {
+
+        return base64_encode(openssl_encrypt($plain_text, "aes-256-cbc", $key, true, str_repeat(chr(0), 16)));
+    }
+
+    public function AES_Decode($base64_text, $key = 'CloudsLine2020') {
+
+        return openssl_decrypt(base64_decode($base64_text), "aes-256-cbc", $key, true, str_repeat(chr(0), 16));
+    }
+
+
 }
