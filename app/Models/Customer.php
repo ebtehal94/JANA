@@ -7,14 +7,31 @@ use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
 {
-  use SoftDeletes;
-  protected $fillable = ['name','email','mobile', 'device_id','device_type','device_token'];
+    use SoftDeletes;
+    protected $fillable = [ 'city_id', 'name', 'email', 'mobile', 'status', 'password', 'otp',
+                            'device_id', 'device_type', 'device_token' ];
 
-    /**
-     * Get the orders of this customer.
-     */
-    public function orders()
+
+    public function redeems()
     {
-        return $this->hasMany('App\Models\Order');
+        return $this->hasMany('App\Models\Redeem');
     }
+
+
+    public function payments()
+    {
+        return $this->hasMany('App\Models\Payment');
+    }
+
+    public function subscription()
+    {
+        return $this->hasOne('App\Models\Subscription');
+    }
+
+
+    public function city()
+    {
+        return $this->belongsTo('App\Models\City');
+    }
+
 }

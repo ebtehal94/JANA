@@ -10,24 +10,23 @@ class Store extends Model
 {
   use SoftDeletes;
   use Searchable;
-  protected  $fillable = ['id', 'city_id','name_en','name_ar','cr_number'];
+  protected  $fillable = ['id', 'city_id','name_en','name_ar','image','cr_number'];
 
 
-  /**
-   * Get the products within this category.
-   */
-  // public function offers()
-  // {
-  //     return $this->hasMany('App\Models\Offer');
-  // }
-
-  /**
-   * Get the filters within this category.
-   */
-
-  public function users()
+  public function offers()
   {
-      return $this->hasMany('App\Models\User');
+      return $this->hasMany('App\Models\Offer');
+  }
+
+
+  public function redeems()
+  {
+      return $this->hasMany('App\Models\Redeem');
+  }
+
+  public function user()
+  {
+      return $this->hasOne('App\Models\User');
   }
 
 
@@ -37,15 +36,10 @@ class Store extends Model
   }
 
 
+  public function city()
+  {
+      return $this->belongsTo('App\Models\City');
+  }
 
-   public function toSearchableArray()
-   {
-       $array = $this->toArray();
-
-       $array = $this->transform($array);
-       // $array['category'] = $this->title_en.'|'.$this->title_ar;
-
-       return $array;
-   }
 
 }

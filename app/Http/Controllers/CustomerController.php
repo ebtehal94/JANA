@@ -12,74 +12,113 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+      $response                 = array();
+      $info                     = $request->all();
+      $customers                = Customer::select('id', 'name', 'mobile', 'email', 'status')
+                                          ->orderby('id','desc');
+      if (isset($info['status']) && count($info['status']) > 0){
+        $customers                   = $customers->whereIn('status', $info['status']);
+      }
+      $response['customers']    = $customers->get();
+      $response['statusCode']   = 200;
+      return $response;
     }
 
+
     /**
-     * Show the form for creating a new resource.
+     * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function indexPage()
     {
-        //
+      $customers          = Customer::with('city')->orderBy('id','desc')->get();
+      foreach ($customers as $customer) {
+        $customer->products_count   = $customer->products()->count();
+      }
+      return $customers;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+
+    public function create(Request $request)
     {
-        //
+      $customer                 = $request->all();
+      $response                 = array();
+      $existingMobile           = Customer::where('mobile', $customer['mobile'])->first();
+      $existingEmail            = Customer::where('email', $customer['email'])->first();
+
+      if (isset($existingMobile)){
+        $response['statusCode']   = 401;
+        return $response;
+      }
+      if (isset($existingEmail)){
+        $response['statusCode']   = 402;
+        return $response;
+      }
+
+      $customer['password']     = $this->AES_Encode($customer['password']);
+      $customer                 = Customer::create($customer);
+      if ($customer){
+        $response['customer']     = $customer;
+        $response['statusCode']   = 200;
+      }else{
+        $response['statusCode']   = 400;
+      }
+      return $response;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Customer  $customer
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Customer $customer)
+    public function edit(Request $request, $id)
     {
-        //
+      $customer                 = Customer::where('id', $id)->select('id', 'name', 'mobile', 'email', 'status', 'city_id')->first();
+      // unset($customer['password']);
+      $response['customer']     = $customer;
+      $response['statusCode']   = 200;
+      return $response;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Customer  $customer
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Customer $customer)
+    public function remove($id)
     {
-        //
+      $customer           = Customer::find($id);
+      if ($customer){
+        $customer->delete();
+        return 'Customer Deleted';
+      }else{
+        return 'Customer not found!';
+      }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Customer  $customer
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Customer $customer)
+
+    public function update(Request $request)
     {
-        //
+      $info               = $request->all();
+      $customer           = Customer::find($request->id);
+      $response           = array();
+      if ($customer){
+        if (isset($info['password']) && !empty($info['password'])){
+          $info['password']       = $this->AES_Encode($info['password']);
+        }
+        $customer->update($info);
+        $response['customer']     = $customer;
+        $response['statusCode']   = 200;
+      }else{
+        $response['statusCode']   = 400;
+      }
+      return $response;
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Customer  $customer
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Customer $customer)
-    {
-        //
+
+
+    public function AES_Encode($plain_text, $key = 'CloudsLine2020') {
+
+        return base64_encode(openssl_encrypt($plain_text, "aes-256-cbc", $key, true, str_repeat(chr(0), 16)));
     }
+
+    public function AES_Decode($base64_text, $key = 'CloudsLine2020') {
+
+        return openssl_decrypt(base64_decode($base64_text), "aes-256-cbc", $key, true, str_repeat(chr(0), 16));
+    }
+
+
 }

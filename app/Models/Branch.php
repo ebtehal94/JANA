@@ -10,13 +10,22 @@ class Branch extends Model
   protected  $fillable = ['id', 'title', 'city_id', 'location', 'url', 'type'];
 
 
-  /**
-   * Get the category that owns the product.
-   */
+
   public function store()
   {
       return $this->belongsTo('App\Models\Store');
   }
 
+
+  public function offers()
+  {
+      return $this->belongsToMany('App\Models\Offer');
+  }
+
+
+  public function city()
+  {
+      return $this->belongsTo('App\Models\City');
+  }
 
 }

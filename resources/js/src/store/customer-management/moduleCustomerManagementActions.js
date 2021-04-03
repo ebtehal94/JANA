@@ -22,17 +22,17 @@ export default {
   },
   fetchCustomers({ commit }) {
     return new Promise((resolve, reject) => {
-      axios.get("/api/customers/list")
+      axios.post("/api/customers/list")
         .then((response) => {
-          commit('SET_CUSTOMERS', response.data)
+          commit('SET_CUSTOMERS', response.data.customers)
           resolve(response)
         })
         .catch((error) => { reject(error) })
     })
   },
-  fetchCustomer({}, customerId) {
+  fetchCustomer({ commit }, customerId) {
     return new Promise((resolve, reject) => {
-      axios.get(`/api/users/edit/${customerId}`)
+      axios.get(`/api/customers/edit/${customerId}`)
         .then((response) => {
           resolve(response)
         })
@@ -41,7 +41,7 @@ export default {
   },
   updateCustomer({ commit }, customer) {
     return new Promise((resolve, reject) => {
-      axios.post(`/api/users/update`, customer)
+      axios.post(`/api/customers/update`, customer)
         .then((response) => {
           commit('UPDATE_CUSTOMER', response.data.customer)
           resolve(response)
@@ -51,7 +51,7 @@ export default {
   },
   removeCustomer({ commit }, customerId) {
     return new Promise((resolve, reject) => {
-      axios.get(`/api/users/delete/${customerId}`)
+      axios.get(`/api/customers/delete/${customerId}`)
         .then((response) => {
           commit('REMOVE_CUSTOMER', customerId)
           resolve(response)
