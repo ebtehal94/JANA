@@ -151,7 +151,7 @@
             </div>
           </div>
         </div>
-        
+
       </div>
 
     </vx-card>
@@ -172,12 +172,12 @@ export default {
   },
   data() {
     return {
-      customer_data: { 
-        name: null, 
-        email: null, 
-        mobile: null, 
-        cc: '+966', 
-        city_id:null, 
+      customer_data: {
+        name: null,
+        email: null,
+        mobile: null,
+        cc: '+966',
+        city_id:null,
         password: null,
         status:null},
       cities_list: [
@@ -190,51 +190,41 @@ export default {
         {text:'غير نشط',value:1},
         {text:'نشط',value:2},
       ],
-      
+
     }
   },
   computed: {
     validateForm() {
-     return ( !this.errors.any() && this.customer.email && this.customer.password ) ;
+     return ( !this.errors.any() && this.customer_data.email && this.customer_data.password ) ;
     },
   },
   methods: {
     registerUser() {
-      if(!this.validateForm) return
-        // this.$vs.loading()
-      // Here will go your API call for updating data
-      // You can get data in "this.data_local"
-        //const obj = {
-           // id: this.data_local.id,
-           // name: this.data_local.name,
-            //email: this.data_local.email,
-            //mobile: this.data_local.mobile,
-       // }
-        //if (this.data_local.password){
-           // obj.password = this.data_local.password
-        //}
-
-        this.$store.dispatch("customerManagement/addCustomer", {customer_data:this.customer})
+      // if(!this.validateForm) return
+        if (this.customer_data.id != null && this.customer_data.id > 0){
+          var link = "customerManagement/updateCustomer"
+        }else{
+          var link = "customerManagement/addCustomer"
+        }
+        this.$store.dispatch(link, this.customer_data)
         .then(res => {
-                        if( res.data.statusCode == 200 ){
-                        this.$vs.notify({
-                        color: 'success',
-                        title: 'Successfull',
-                        text: 'تم التسجيل بنجاح'
-                        })
-                    }else{
-                        this.$vs.notify({
-                        color: 'danger',
-                        title: 'Error',
-                        text: 'حدث خطأ ما'
-                        })
-                    }
-                  })
-                  .catch(function (error) {
-                      console.log(error.response);
-                  });
-
-
+          if( res.data.statusCode == 200 ){
+            this.$vs.notify({
+            color: 'success',
+            title: 'Successfull',
+            text: 'تم بنجاح'
+            })
+          }else{
+            this.$vs.notify({
+            color: 'danger',
+            title: 'Error',
+            text: 'حدث خطأ ما'
+            })
+          }
+        })
+        .catch(function (error) {
+            console.log(error.response);
+        });
     },
   },
   created() {
@@ -242,6 +232,13 @@ export default {
     if(!moduleCustomerManagement.isRegistered) {
       this.$store.registerModule('customerManagement', moduleCustomerManagement)
       moduleCustomerManagement.isRegistered = true
+    }
+    if (this.$route.params.customerID != null){
+      this.$store.dispatch("customerManagement/fetchCustomer", this.$route.params.customerID).catch(err => { console.error(err) })
+      .then((res) => {
+        this.customer_data = res.data.customer
+      })
+      .catch((error) => console.log(error))
     }
   }
 }

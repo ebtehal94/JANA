@@ -30,6 +30,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //
 // Route::post('/orders/create', 'OrderController@create');
 // Route::post('/orders/customer', 'OrderController@customer');
+Route::post('/customers/register', 'CustomerController@create');
+
+
+
+
+
 Route::post('/offers/list', 'OfferController@index');
 Route::post('/offers/create', 'OfferController@create');
 Route::get('/offers/edit/{id}', 'OfferController@edit');
@@ -56,7 +62,6 @@ Route::post('/customers/login', 'Mobile\CustomerController@login');
 
 Route::post('/customers/list', 'CustomerController@index');
 Route::post('/customers/create', 'CustomerController@create');
-Route::post('/customers/register', 'CustomerController@create');
 Route::get('/customers/edit/{id}', 'CustomerController@edit');
 Route::post('/customers/update', 'CustomerController@update');
 Route::get('/customers/delete/{id}', 'CustomerController@remove');

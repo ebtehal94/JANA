@@ -219,10 +219,10 @@ const router = new Router({
             }
           },
           {
-            path: '/Customers',
+            path: '/customers',
             name: 'Customers',
           //   component: () => import('@/views/pages/ComingSoon.vue'),
-            component: () => import('./views/Customers.vue'),
+            component: () => import('./views/customers/Customers.vue'),
             meta: {
               breadcrumb: [
                   { title: 'Home', url: '/' },
@@ -232,10 +232,24 @@ const router = new Router({
             }
           },
           {
-            path: '/CreateCustomer',
+            path: '/customers/edit/:customerID',
+            name: 'edit-customer',
+            //   component: () => import('@/views/pages/ComingSoon.vue'),
+            component: () => import('./views/customers/CreateCustomer.vue'),
+            meta: {
+              breadcrumb: [
+                { title: 'Home', url: '/' },
+                { title: 'Customers'},
+                { title: 'Edit', active: true },
+              ],
+              rule: 'admin',
+            }
+          },
+          {
+            path: '/customers/create',
             name: 'create-customer',
           //   component: () => import('@/views/pages/ComingSoon.vue'),
-            component: () => import('./views/CreateCustomer.vue'),
+            component: () => import('./views/customers/CreateCustomer.vue'),
             meta: {
               breadcrumb: [
                   { title: 'Home', url: '/' },

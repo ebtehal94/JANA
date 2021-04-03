@@ -61,6 +61,7 @@ class CustomerController extends Controller
       $customer['password']     = $this->AES_Encode($customer['password']);
       $customer                 = Customer::create($customer);
       if ($customer){
+        $response['customer']     = $customer;
         $response['statusCode']   = 200;
       }else{
         $response['statusCode']   = 400;
@@ -70,9 +71,12 @@ class CustomerController extends Controller
 
     public function edit(Request $request, $id)
     {
-      return Customer::find($id);
+      $customer                 = Customer::where('id', $id)->select('id', 'name', 'mobile', 'email', 'status', 'city_id')->first();
+      // unset($customer['password']);
+      $response['customer']     = $customer;
+      $response['statusCode']   = 200;
+      return $response;
     }
-
 
     public function remove($id)
     {
