@@ -12,7 +12,7 @@ import axios from "@/axios.js"
 export default {
   addCustomer({ commit }, customer) {
     return new Promise((resolve, reject) => {
-      axios.post("/api/customers/create", customer
+      axios.post("/api/customers/create", customer)
         .then((response) => {
           commit('ADD_CUSTOMER', Object.assign(customer, {id: response.data.customer.id}))
           resolve(response)
