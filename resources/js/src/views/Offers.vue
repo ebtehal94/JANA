@@ -38,15 +38,15 @@
             <div class="vx-col w-full">
                 <vx-card class="mt-8 pt-0">
                     <vs-tabs class="tabs-shadow-none">
-                        <vs-tab label="كل العروض">
+                        <vs-tab :label="$t('AllOffers')">
                             <AllOffers />
                         </vs-tab>
-                        <vs-tab label="العروض المعلقة">
+                        <vs-tab :label="$t('PendingOffers')">
                             <AllOffers display="true" />
                         </vs-tab>
-                        <vs-tab label="العروض النشطة">
+                        <vs-tab :label="$t('ActiveOffers')">
                         </vs-tab>
-                        <vs-tab label="العروض المتوقفة">
+                        <vs-tab :label="$t('StopOffers')">
                         </vs-tab>
                     </vs-tabs>
                 </vx-card>

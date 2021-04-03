@@ -37,7 +37,7 @@
                         </div>
                         <div class="mt-4">
                             <vs-textarea 
-                            :label="$t('desc_lable')"
+                            :placeholder="$t('desc_lable')"
                             v-model="terms_desc" 
                             class="mt-2 p-2" 
                             height="120px"
@@ -50,7 +50,7 @@
                         </div>
                         <div class="mt-4">
                             <vs-textarea 
-                            :label="$t('desc_lable')"
+                            :placeholder="$t('desc_lable')"
                             v-model="about_desc" 
                             class="mt-2 p-2" 
                             height="120px"

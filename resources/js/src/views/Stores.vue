@@ -99,11 +99,6 @@ export default {
         font-size: .8rem;
         color: #acacaa;
     }
-    .con-ul-tabs{
-        .vs-tabs--ul{
-            box-shadow: none;
-        }
-    }
 }
 @media only screen and (min-width: 360px) and (max-width: 767px) {
     .vs-button:not(.vs-radius):not(.includeIconOnly):not(.small):not(.large) {

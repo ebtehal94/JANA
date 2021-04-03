@@ -4,7 +4,7 @@
             <div class="vx-col w-full">
                 <vx-card class="mt-8 pt-0">
                     <vs-tabs class="tabs-shadow-none">
-                        <vs-tab label="هذا الشهر">
+                        <vs-tab :label="$t('ThisMonth')">
                             <vs-table :data="users">
                                     <template slot="thead">
                                         <vs-th >{{$t('customerName')}}</vs-th>
@@ -36,7 +36,7 @@
                                 </template>
                             </vs-table> 
                         </vs-tab>
-                        <vs-tab label="الكل">
+                        <vs-tab :label="$t('All')">
                             <vs-table :data="users">
                                 <template slot="thead">
                                     <vs-th>{{$t('customerName')}}</vs-th>
@@ -141,10 +141,6 @@ export default {
         font-size: .8rem;
         color: #acacaa;
     }
-    .con-ul-tabs{
-        .vs-tabs--ul{
-            box-shadow: none;
-        }
-    }
+
 }
 </style>

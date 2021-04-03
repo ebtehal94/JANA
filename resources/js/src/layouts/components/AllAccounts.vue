@@ -39,8 +39,8 @@ export default {
 
     },
     methods: {
-         EditNewData() {
-        this.$router.push({path: '/AdminEdit'})
+        EditNewData() {
+            this.$router.push({path: '/AdminEdit'})
         },
     },
 }

@@ -27,7 +27,7 @@
                                 <span class="discount">{{item.discount}}</span>
                             </div>
                         </div>
-                        <div class="ml-auto cursor-pointer flex justify-center" v-if="display">
+                        <div class="-ml-6 cursor-pointer flex justify-center" v-if="display">
                             <vs-button color="#6FDD68" size="small">موافقة</vs-button>
                             <vs-button color="danger" size="small">رفض</vs-button>
                         </div>

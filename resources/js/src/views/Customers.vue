@@ -9,8 +9,8 @@
 
 <template>
     <div id="customers">
-        <div class="vx-row my-2 justify-center md:justify-between ">
-            <div class="vx-col  search-page__search-bar flex">
+        <div class="vx-row my-2 justify-center lg:justify-between ">
+            <div class="vx-col search-page__search-bar flex">
                 <vs-input 
                 icon-no-border 
                 placeholder=" اكتب كلمة للبحث" 
@@ -38,15 +38,15 @@
             <div class="vx-col w-full">
                 <vx-card class="mt-8 pt-0">
                     <vs-tabs class="tabs-shadow-none">
-                        <vs-tab label="كل العملاء">
+                        <vs-tab :label="$t('AllCustomers')">
                             <AllCustomers :display="false" :customers="customers"/>
                         </vs-tab> 
-                        <vs-tab label="الحسابات المعلقة">
+                        <vs-tab :label="$t('PendingCustomers')">
                             <AllCustomers :display="true" :customers="customers" />
                             <!--<SuspendedAccounts pending=true :accounts="accounts"/>-->
                         </vs-tab>
-                        <vs-tab label="عملاء جدد استخدموا كود الإحالات">
-                            <AllCustomers :display="false" :customers="customers" />
+                        <vs-tab :label="$t('NewCustomers')">
+                            <AllCustomers :display="false" :show="true" :customers="customers" />
                         </vs-tab>
                     </vs-tabs>
                 </vx-card>
@@ -58,11 +58,10 @@
 <script>
 import axios from "@/axios.js"
 import AllCustomers from '@/layouts/components/AllCustomers.vue'
-import SuspendedAccounts from '@/layouts/components/SuspendedAccounts.vue'
 export default{
     components: {
         AllCustomers,
-        SuspendedAccounts
+        
     },
     data() {
         return {
@@ -77,7 +76,7 @@ export default{
                 {"id":7,"name":"عميلة بطاقات جنا","subtitle":"مرحبا بك ,كيف نستطيع خدمتك",src:require('@assets/images/customers.png'),"phone":"0512345678","Email":"jana@jana.com","code":"058765485","Refrral":"كود الإحالة"},
                 {"id":8,"name":"عميلة بطاقات جنا","subtitle":"مرحبا بك ,كيف نستطيع خدمتك",src:require('@assets/images/customers.png'),"phone":"0512345678","Email":"jana@jana.com","code":"058765485","Refrral":"كود الإحالة"},
             ],
-            activeTap:1,
+            
  
         }
     },

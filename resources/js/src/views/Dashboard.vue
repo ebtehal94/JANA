@@ -61,13 +61,13 @@
                 <vx-card class="mt-8 pt-0">
                     
                         <vs-tabs alignment="fixed" class="tabs-shadow-none">
-                            <vs-tab label="أكثر العروض استخداما">
+                            <vs-tab :label="$t('UsedOffers')">
                                 <AllOffers />
                             </vs-tab>
-                            <vs-tab label="عدد العروض المضافة من كل مورد">
+                            <vs-tab :label="$t('SuppliersOffers')">
                                 <SupplierOffers/>
                             </vs-tab>
-                            <vs-tab label="أكثر المناطق تستخدم العروض">
+                            <vs-tab :label="$t('Areas')">
                                 <vs-table :data="users">
                                     <template slot-scope="{data}">
                                         <tbody>

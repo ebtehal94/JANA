@@ -237,6 +237,8 @@ export default {
       dataUploadedImages: [],
       dataUploadedImagesForDisplay: [],
       ImageToDelete: null,
+      URL:null,
+
     }
   },
   computed: {

@@ -38,7 +38,7 @@
             <div class="vx-col w-full">
                 <vx-card class="mt-8 pt-0">
                     <vs-tabs class="tabs-shadow-none">
-                        <vs-tab label="كل الحسابات">
+                        <vs-tab :label="$t('AllAccounts')">
                             <AllAccounts :accounts="accounts" />
                         </vs-tab>
                     </vs-tabs>

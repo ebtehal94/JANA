@@ -808,11 +808,10 @@ export default {
       left: 88%;
     }
   }
+}
   @media (max-width: 375px){
     .left-phone-icon{
       left: 63%;
     }
   }
-}
-
 </style>

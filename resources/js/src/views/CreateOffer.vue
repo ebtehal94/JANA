@@ -7,34 +7,35 @@
           <div class="vx-col w-full md:w-1/2">
             <!-- Col Header -->
             <div class="flex items-end">
-              <span class="leading-none font-semibold text-xs">بيانات العرض باللغة العربية</span>
+              <span class="leading-none font-semibold text-sm">{{$i18n.locale == "en" ? "Offer data (ar)" : " بيانات العرض باللغة العربية"}}</span>
             </div>
 
             <!-- Col Content -->
             <div class="bg-input">
               <vs-input 
               class="w-full mt-4"
-              placeholder="العنوان" 
-              v-model="offer_data.title" 
+              :placeholder="$t('OfferTitle')" 
+              v-model="offer_data.title_ar" 
               v-validate="'required|alpha_spaces'" 
               name="title" />
 
-              <span v-if="!errors.has('title') && offer_data.title">
+              <span v-if="!errors.has('title_ar') && offer_data.title_ar">
                 <icon name="confirm" class="icon left-icon"/>
               </span>
-              <span v-else-if="errors.has('title')">
+              <span v-else-if="errors.has('title_ar')">
                 <icon name="cross" class="icon left-icon"/>
               </span>
             </div>
 
             <div class="bg-input">
               <vs-textarea 
-              placeholder="الوصف"
+              :placeholder="$t('OfferDesc')"
               v-model="offer_data.desc_ar" 
               class="mt-2 w-full" 
+              height="100px"
               name="desc_ar"/>
               
-              <span v-if="!errors.has('desc_ar') && offer_data.title">
+              <span v-if="!errors.has('desc_ar') && offer_data.desc_ar">
                 <icon name="confirm" class="icon left-icon"/>
               </span>
               <span v-else-if="errors.has('desc_ar')">
@@ -46,7 +47,7 @@
           <div class="vx-col w-full md:w-1/2">
             <!-- Col Header -->
             <div class="flex items-end">
-              <span class="leading-none font-semibold text-xs">بيانات العرض باللغة العربية</span>
+              <span class="leading-none font-semibold text-sm">{{$i18n.locale == "en" ? "Offer data (en)" : " بيانات العرض باللغة الإنجليزية"}}</span>
             </div>
 
             <!-- Col Content -->
@@ -54,25 +55,26 @@
               <div class="bg-input">
                 <vs-input 
                 class="w-full mt-4"
-                placeholder="العنوان" 
-                v-model="offer_data.title" 
+                :placeholder="$t('OfferTitle')" 
+                v-model="offer_data.title_en" 
                 v-validate="'required|alpha_spaces'" 
-                name="title" />
+                name="title_en" />
 
-                <span v-if="!errors.has('title') && offer_data.title">
+                <span v-if="!errors.has('title') && offer_data.title_en">
                   <icon name="confirm" class="icon left-icon"/>
                 </span>
-                <span v-else-if="errors.has('title')">
+                <span v-else-if="errors.has('title_en')">
                   <icon name="cross" class="icon left-icon"/>
                 </span>
               </div>
 
               <vs-textarea 
-              placeholder="الوصف"
-              v-model="offer_data.desc_ar" 
+              :placeholder="$t('OfferDesc')"
+              v-model="offer_data.desc_en" 
               class="mt-2 w-full" 
-              name="desc_ar"/>
-              <span class="text-danger text-sm" v-show="errors.has('desc_ar')">{{ errors.first('desc_ar') }}</span>
+              height="100px"
+              name="desc_en"/>
+              <span class="text-danger text-sm" v-show="errors.has('desc_en')">{{ errors.first('desc_en') }}</span>
 
             </div>
           </div>
@@ -82,14 +84,14 @@
           <div class="vx-col w-full md:w-1/2">
             <!-- Col Header -->
             <div class="flex items-end">
-              <span class="leading-none font-semibold text-xs">خصائص العرض</span>
+              <span class="leading-none font-semibold text-sm">{{$i18n.locale == "en" ? "Offer properties" : "خصائص العرض"}}</span>
             </div>
 
             <!-- Col Content -->
             <div>
                 <div class="bg-input">
                     <v-select class="w-full mt-2"
-                      placeholder="الفئة (القسم)"
+                      :placeholder="$t('Category')"
                       v-model="offer_data.category"
                       v-validate="'required'"
                       label="text" :options="category_list"
@@ -107,7 +109,7 @@
 
                 <div class="bg-input">
                     <v-select class="w-full mt-2"
-                      placeholder="حالة العرض (نشطة)"
+                      :placeholder="$t('accountStatus')"
                       v-model="offer_data.status"
                       v-validate="'required'"
                       label="text" :options="status_list"
@@ -129,7 +131,7 @@
           <div class="vx-col w-full md:w-1/2">
             <!-- Col Header -->
             <div class="flex items-end">
-              <span class="leading-none font-semibold text-xs">صور العرض</span>
+              <span class="leading-none font-semibold text-sm">{{$i18n.locale == "en" ? "Offer images" : "صور العرض"}}</span>
             </div>
 
             <!-- Col Content -->
@@ -154,42 +156,42 @@
             <div class="vx-col w-full">
                 <!-- Col Header -->
                 <div class="flex items-end">
-                  <span class="leading-none font-semibold text-xs">السعر قبل الخصم</span>
+                  <span class="leading-none font-semibold text-xs">{{$i18n.locale == "en" ? "Before discount" : "السعر قبل الخصم"}}</span>
                 </div>
 
                 <!-- Col Content -->
 
                   <vs-input
                   class="w-full mt-4 -m-4"
-                  placeholder="السعر" 
-                  v-model="offer_data.name" 
+                  :placeholder="$t('Price')" 
+                  v-model="offer_data.after_discount" 
                   v-validate="'required|alpha_spaces'" 
-                  name="name" />
-                  <span class="text-danger text-sm"  v-show="errors.has('name')">{{ errors.first('name') }}</span>
+                  name="after_discount" />
+                  <span class="text-danger text-sm"  v-show="errors.has('after_discount')">{{ errors.first('after_discount') }}</span>
             </div>
 
             <div class="vx-col w-full">
                 <!-- Col Header -->
                 <div class="flex items-end">
-                  <span class="leading-none font-semibold text-xs">السعر بعد الخصم</span>
+                  <span class="leading-none font-semibold text-xs">{{$i18n.locale == "en" ? "After discount" : "السعر بعد الخصم"}}</span>
                 </div>
 
                 <!-- Col Content -->
 
                   <vs-input 
                   class="w-full mt-4 -m-2"
-                  placeholder="السعر" 
-                  v-model="offer_data.name" 
+                  :placeholder="$t('Price')" 
+                  v-model="offer_data.before_discount" 
                   v-validate="'required|alpha_spaces'" 
-                  name="name" />
-                  <span class="text-danger text-sm"  v-show="errors.has('name')">{{ errors.first('name') }}</span>
+                  name="before_discount" />
+                  <span class="text-danger text-sm"  v-show="errors.has('before_discount')">{{ errors.first('before_discount') }}</span>
 
             </div>
 
             <div class="vx-col w-full">
                 <!-- Col Header -->
                 <div class="flex items-end">
-                  <span class="leading-none font-semibold text-xs">تاريخ انتهاء العرض</span>
+                  <span class="leading-none font-semibold text-xs">{{$i18n.locale == "en" ? "Offer expiration date" : "تاريخ انتهاء العرض"}}</span>
                 </div>
 
                 <!-- Col Content -->
@@ -197,17 +199,17 @@
                   <vs-input 
                   class="w-full mt-4"
                   placeholder="14/14/2021" 
-                  v-model="offer_data.name" 
+                  v-model="offer_data.date" 
                   v-validate="'required|alpha_spaces'" 
-                  name="name" />
-                  <span class="text-danger text-sm"  v-show="errors.has('name')">{{ errors.first('name') }}</span>
+                  name="date" />
+                  <span class="text-danger text-sm"  v-show="errors.has('date')">{{ errors.first('date') }}</span>
             </div>
           </div>
 
           <div class="vx-col w-full md:w-1/2">
             <!-- Col Header -->
             <div class="flex items-end">
-              <span class="leading-none font-semibold text-xs">المتجر</span>
+              <span class="leading-none font-semibold text-xs">{{$i18n.locale == "en" ? "The Store" : "المتجر"}}</span>
             </div>
 
             <!-- Col Content -->
@@ -277,7 +279,7 @@ export default {
   },
   data() {
     return {
-      offer_data: { title: null, category: null, desc_ar:null, mobile: null, password: null,status:null,store:null},
+      offer_data: {title_ar:null,title_en: null, category: null, desc_ar:null,desc_en:null, mobile: null, password: null,status:null,store:null,before_discount:null,after_discount:null},
       category_list:[
         {text:'القسم الأول',value:1},
         {text:'القسم الثاني',value:2},
@@ -351,6 +353,12 @@ export default {
         }
       }
     }
+      .vs-con-textarea{
+          border-radius: 15px;
+      }
+      .vs-input--placeholder.normal {
+          font-size: .8rem !important;
+      }
     }
     .add-img{
       border: 1px solid #eee;

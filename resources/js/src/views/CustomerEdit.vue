@@ -143,8 +143,8 @@
                     class="w-full mt-10 font-medium rounded-full"
                     color="linear-gradient(to left,#E93F7D,#DA6653)"
                     gradient
-                    @click="registerUser">
-                       {{$i18n.locale == "en" ? "Create Account" : "إنشاء الحساب"}}
+                    @click="save_changes">
+                       {{$i18n.locale == "en" ? "Save Changes" : "حفظ التغيرات"}}
                   </vs-button>
               </div>
 
@@ -172,6 +172,7 @@ export default {
   },
   data() {
     return {
+      user_not_found :false,
       customer_data: { 
         name: null, 
         email: null, 
@@ -195,11 +196,11 @@ export default {
   },
   computed: {
     validateForm() {
-     return ( !this.errors.any() && this.customer_data.email && this.customer_data.password ) ;
+      return !this.errors.any() && ((!this.customer_data.id && this.customer_data.password) || this.customer_data.id);
     },
   },
   methods: {
-    registerUser() {
+    save_changes() {
       if(!this.validateForm) return
         // this.$vs.loading()
       // Here will go your API call for updating data
@@ -213,35 +214,67 @@ export default {
         //if (this.data_local.password){
            // obj.password = this.data_local.password
         //}
-
-        this.$store.dispatch("customerManagement/addCustomer", {Customer:this.customer_data})
-        .then(res => {
+        if(this.customer_data.id !== null && this.customer_data.id >= 0) {
+          this.$store.dispatch("customerManagement/updateCustomer", this.customer_data)
+          .then(res => {
                         if( res.data.statusCode == 200 ){
                         this.$vs.notify({
                         color: 'success',
                         title: 'Successfull',
-                        text: 'تم التسجيل بنجاح'
+                        text: 'User updated successfully'
                         })
                     }else{
                         this.$vs.notify({
                         color: 'danger',
                         title: 'Error',
-                        text: 'حدث خطأ ما'
+                        text: 'Error updating user'
                         })
                     }
                   })
-                  .catch(function (error) {
-                      console.log(error.response);
-                  });
+                  .catch(err => { console.error(err) })
+                            
+                }else{
+                  // delete obj.id
+                  // obj.popularity = 0
+                  this.$store.dispatch("customerManagement/addCustomer", this.customer_data)
+                  .then(res => {
+                                if( res.data.statusCode == 200 ){
+                                this.$vs.notify({
+                                  color: 'success',
+                                  title: 'Successfull',
+                                  text: 'User created successfully'
+                                })
+                              }else{
+                                this.$vs.notify({
+                                  color: 'danger',
+                                  title: 'Error',
+                                  text: 'Error creating user'
+                                })
+                              }
+                              })
+                  .catch(err => { console.error(err) })
 
-
+                }
     },
+    fetch_customer_data(customerId) {
+      this.$store.dispatch("customerManagement/fetchCustomer", customerId)
+        .then(res => { this.customer_data = res.data})
+        .catch(err => {
+          if(err.response.status === 404) {
+            this.user_not_found = true
+            return
+          }
+          console.error(err) })
+        }
   },
   created() {
     // Register Module UserManagement Module
     if(!moduleCustomerManagement.isRegistered) {
       this.$store.registerModule('customerManagement', moduleCustomerManagement)
       moduleCustomerManagement.isRegistered = true
+    }
+    if (this.$route.params.customerId){
+      this.fetch_customer_data(this.$route.params.customerId)
     }
   }
 }
@@ -308,11 +341,6 @@ export default {
   .v-select .vs__dropdown-toggle .vs__search {
     font-size: .8rem;
   }
-.vs__dropdown-toggle {
-    .vs__selected-options {
-        padding: 0 3rem 0 0 !important;
-    }
-  }
 }
 
 @media (max-width: 992px) and (min-width: 600px){
@@ -337,7 +365,6 @@ export default {
     }
   }
 }
-
 
 
 </style>

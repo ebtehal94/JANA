@@ -36,15 +36,17 @@ export default {
 
 		CreateOffer:'Create New Offer',
 		CreateCustomer:'Create New Account',
+		CustomerEdit:'Edit',
 		CreateAdmin:'Create New Account',
-		AdminEdit:'Edit Account',
+		AdminEdit:'Edit',
 		CreateStore:'Create New Account',
 
-		CreateNewCustomer:'Create Customer Account',
-		CreateNewOffer:'Create New Offer',
-		CreateNewAdmin:'Create New Account',
-		CreateNewStore:'Create New Account',
-		
+		UsedOffers:'Most used offers',
+		SuppliersOffers:'The number of added offers from suppliers',
+		Areas:'Areas that use offers',
+
+		ThisMonth:'This Month',
+		All:'All',
 		customerName:"Customer Name",
 		date:'Date',
 		amount:'Amount',
@@ -56,8 +58,29 @@ export default {
 		title:'Title',
 		desc:'Description',
 
-		AllStores:'All Stores',
-		PendingAccounts:'Pending Accounts',
+		CreateNewOffer:'Create New Offer',
+		AllOffers:'All offers',
+		PendingOffers:'Pending offers',
+		ActiveOffers:'Active offers',
+		StopOffers:'Stop offers',
+
+		OfferTitle: 'Title',
+		OfferDesc: 'Description',
+		Category: 'Category',
+		Price:'Price',
+		ChooseStore:'Choose store',
+
+		CreateNewCustomer:'Create Customer Account',
+		AllCustomers:'All Customers',
+		PendingCustomers:'Pending accounts',
+		NewCustomers:'New customers used the referral code',
+		
+		CreateNewStore:'Create New Account',
+		AllStores:'All stores',
+		PendingAccounts:'Pending accounts',
+
+		CreateNewAdmin:'Create New Account',
+		AllAccounts:'All accounts',
 
 		desc_lable:'Description',
 
@@ -92,10 +115,7 @@ export default {
 		MostOrdered: 'Most Ordered',
 		AddNew: 'Add New',
 		NewFilter: 'New Filter',
-		TitleEnglish: 'Title (en)',
-		TitleArabic: 'Title (ar)',
-		DescEN: 'Description (en)',
-		DescAR: 'Description (ar)',
+
 
 		WebsiteSections: 'Website Sections',
 		TeaSets: 'Tea Sets',
@@ -199,7 +219,7 @@ export default {
 		GeneralInfo: 'General Info',
 		NA: 'NA',
 
-		NewCustomers:'New Customers',
+
 		OrdersRecevied:'Orders Recevied',
 		TotalRevenue:'Total Revenue',
 		CompletedOrders:'Completed Orders',
@@ -362,22 +382,45 @@ export default {
 
 		CreateOffer:'إنشاء عرض جديد',
 		CreateCustomer:'إنشاء حساب جديد',
+		CustomerEdit:'تعديل',
 		CreateAdmin:'إنشاء حساب جديد',
+		AdminEdit:'تعديل ',
 		CreateStore:'إنشاء حساب جديد',
 
-		CreateNewCustomer:'إنشاء حساب عميلة',
-		CreateNewOffer:'إنشاء عرض جديد',
-		CreateNewAdmin:'إنشاء حساب جديد',
-		CreateNewStore:'إنشاء حساب جديد',
+		UsedOffers:'أكثر العروض استخداماً',
+		SuppliersOffers:'عدد العروض المضافة من كل مورد',
+		Areas:'أكثر المناطق التي تستخدم العروض',
 
+		ThisMonth:'هذا الشهر',
+		All:'الكل',
 		customerName:'اسم العميلة',
 		date:"التاريخ",
 		amount:'المبلغ',
 		notes:'ملاحظات',
 
-		
+		CreateNewOffer:'إنشاء عرض جديد',
+		AllOffers:'كل العروض',
+		PendingOffers:'العروض المعلقة',
+		ActiveOffers:'العروض النشطة',
+		StopOffers:'العروض المتوقفة',
+
+		OfferTitle: 'العنوان',
+		OfferDesc: 'الوصف',
+		Category: 'الفئة (القسم)',
+		Price:'السعر',
+		ChooseStore:'اختر المتجر',
+
+		CreateNewCustomer:'إنشاء حساب عميلة',
+		AllCustomers:'كل العملاء',
+		PendingCustomers:'الحسابات المعلقة',
+		NewCustomers:'عملاء جدد استخدموا كود الإحالات',
+
+		CreateNewStore:'إنشاء حساب جديد',
 		AllStores:'كل المتاجر',
 		PendingAccounts:'الحسابات المعلقة',
+
+		CreateNewAdmin:'إنشاء حساب جديد',
+		AllAccounts:'كل الحسابات',
 
 		fullName:'الإسم الكامل',
 		accountStatus:'حالة الحساب (نشط)',
@@ -421,11 +464,6 @@ export default {
 		LimitedEdition: 'منتجات محدودة الكمية',
 		AddNew: 'إضافة جديد',
 		NewFilter: 'إضافة فلتر',
-		TitleEnglish: 'الإسم بالإنجليزية',
-		TitleArabic: 'الإسم بالعربية',
-		DescEN: 'الوصف بالإنجليزية',
-		DescAR: 'الوصف بالعربية',
-		Category: 'التصنيف',
 		Filter: 'فلتر',
 		Collection: 'المجموعة',
 		AccountInformation: 'بيانات الحساب',
@@ -593,10 +631,7 @@ export default {
 		JOD: 'د.أ',
 		SAR: 'ر.س',
 
-		NewCustomers:'مستخدم جديد',
-		OrdersRecevied:'الطلبات المستلمة',
-		TotalRevenue:'اجمالي الطلبات',
-		CompletedOrders:'الطلبات المكتملة',
+
 
 
 		PromoCodes:'اكواد الخصم',
