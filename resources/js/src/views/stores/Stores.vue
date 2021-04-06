@@ -7,13 +7,13 @@
                 placeholder="اكتب كلمة للبحث" 
                 v-model="searchQuery"
                 icon-after vs-icon-after="true"  
-                class="sm:w-1/2 md:w-full input-rounded-full" 
+                class="sm:w-full md:w-full input-rounded-full" 
                 icon="icon-search" 
                 icon-pack="feather" />
             </div>
             <div class="vx-col cursor-pointer flex">
                 <vs-button
-                    class="sm:w-1/2 md:w-full rounded-full text-xs font-bold shadow-none"
+                    class="sm:w-full md:w-full rounded-full text-xs font-bold shadow-none"
                     color="rgb(255, 255, 255)"
                     text-color="#DC6059"
                     icon-after vs-icon-after="true"
@@ -32,7 +32,7 @@
                             <AllStores :stores="stores" />
                         </vs-tab>
                         <vs-tab :label="$t('PendingAccounts')">
-                            <SuspendedStore :stores="stores"/>
+                            <AllStores :display="true" :stores="stores" />
                         </vs-tab>
                     </vs-tabs>
                 </vx-card>
@@ -42,8 +42,9 @@
 </template>
 
 <script>
-import AllStores from '@/layouts/components/AllStores.vue'
-import SuspendedStore from '@/layouts/components/SuspendedStore.vue'
+import AllStores from './AllStores.vue'
+import SuspendedStore from './SuspendedStore.vue'
+import moduleStoreManagement from '@/store/store-management/moduleStoreManagement.js'
 export default {
     components: {
         AllStores,
@@ -65,16 +66,23 @@ export default {
         }
     },
     computed: {
-
+        stores() {
+            return this.$store.state.storeManagement.stores
+        },
     },
     methods: {
         addNewData() {
-        this.$router.push({path: '/CreateStore'})
+            this.$router.push({path: '/stores/create'})
         },
     },
 
     created() {
+     if(!moduleStoreManagement.isRegistered) {
+        this.$store.registerModule('storeManagement', moduleStoreManagement)
+        moduleStoreManagement.isRegistered = true
+      }
 
+      this.$store.dispatch("storeManagement/fetchStores").catch(err => { console.error(err) })
     },
 }
 </script>
@@ -100,7 +108,7 @@ export default {
         color: #acacaa;
     }
 }
-@media only screen and (min-width: 360px) and (max-width: 767px) {
+@media only screen and (max-width: 512px){
     .vs-button:not(.vs-radius):not(.includeIconOnly):not(.small):not(.large) {
         padding: .5rem 2rem !important;
         margin-top: 1rem;

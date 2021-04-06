@@ -74,7 +74,7 @@
                     size="small"
                     class="mx-4 mb-4 font-semibold text-sm rounded-full px-28 close"
                     color="#ACACAC" type="border"
-                    @click.stop="goBack">
+                    @click="goBack">
                         {{ $i18n.locale == 'en' ? 'Close' : 'خروج' }} 
                     </vs-button>
                 </div>

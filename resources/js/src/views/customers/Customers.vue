@@ -16,13 +16,13 @@
                 placeholder=" اكتب كلمة للبحث"
                 icon-after vs-icon-after="true"
                 v-model="searchQuery"
-                class="sm:w-1/2 md:w-full input-rounded-full"
+                class="sm:w-full md:w-full input-rounded-full"
                 icon="icon-search"
                 icon-pack="feather" />
             </div>
             <div class="vx-col cursor-pointer flex">
                 <vs-button
-                    class="sm:w-1/2 md:w-full rounded-full text-xs font-bold shadow-none"
+                    class="sm:w-full md:w-full rounded-full text-xs font-bold shadow-none"
                     color="rgb(255, 255, 255)"
                     text-color="#DC6059"
                     icon-after vs-icon-after="true"
@@ -78,7 +78,7 @@ export default{
             //     {"id":7,"name":"عميلة بطاقات جنا","subtitle":"مرحبا بك ,كيف نستطيع خدمتك",src:require('@assets/images/customers.png'),"phone":"0512345678","Email":"jana@jana.com","code":"058765485","Refrral":"كود الإحالة"},
             //     {"id":8,"name":"عميلة بطاقات جنا","subtitle":"مرحبا بك ,كيف نستطيع خدمتك",src:require('@assets/images/customers.png'),"phone":"0512345678","Email":"jana@jana.com","code":"058765485","Refrral":"كود الإحالة"},
             // ],
-            activeTap:1,
+           
 
         }
     },
@@ -123,7 +123,7 @@ export default{
         box-shadow: none;
     }
 }
-@media only screen and (min-width: 360px) and (max-width: 767px) {
+@media only screen and (max-width: 512px){
     .vs-button:not(.vs-radius):not(.includeIconOnly):not(.small):not(.large) {
         padding: .5rem 2rem !important;
         margin-top: 1rem;

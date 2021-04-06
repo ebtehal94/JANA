@@ -192,10 +192,10 @@ const router = new Router({
             }
           },
           {
-            path: '/Offers',
+            path: '/offers',
             name: 'Offers',
           //   component: () => import('@/views/pages/ComingSoon.vue'),
-            component: () => import('./views/Offers.vue'),
+            component: () => import('./views/offers/Offers.vue'),
             meta: {
               breadcrumb: [
                   { title: 'Home', url: '/' },
@@ -205,10 +205,10 @@ const router = new Router({
             }
           },
           {
-            path: '/CreateOffer',
+            path: '/offers/create',
             name: 'create-offer',
           //   component: () => import('@/views/pages/ComingSoon.vue'),
-            component: () => import('./views/CreateOffer.vue'),
+            component: () => import('./views/offers/CreateOffer.vue'),
             meta: {
               breadcrumb: [
                   { title: 'Home', url: '/' },
@@ -216,6 +216,20 @@ const router = new Router({
                   { title: 'CreateOffer', active: true },
               ],
                 rule: 'vendor',
+            }
+          },
+          {
+            path: '/offers/edit/:offersID',
+            name: 'edit-offer',
+            //   component: () => import('@/views/pages/ComingSoon.vue'),
+            component: () => import('./views/offers/CreateOffer.vue'),
+            meta: {
+              breadcrumb: [
+                { title: 'Home', url: '/' },
+                { title: 'Offers'},
+                { title: 'Edit', active: true },
+              ],
+              rule: 'vendor',
             }
           },
           {
@@ -260,10 +274,10 @@ const router = new Router({
             }
           },
           {
-            path: '/Stores',
+            path: '/stores',
             name: 'Stores',
           //   component: () => import('@/views/pages/ComingSoon.vue'),
-            component: () => import('./views/Stores.vue'),
+            component: () => import('./views/stores/Stores.vue'),
             meta: {
               breadcrumb: [
                   { title: 'Home', url: '/' },
@@ -273,10 +287,10 @@ const router = new Router({
             }
           },
           {
-            path: '/CreateStore',
+            path: '/stores/create',
             name: 'create-Store',
           //   component: () => import('@/views/pages/ComingSoon.vue'),
-            component: () => import('./views/CreateStore.vue'),
+            component: () => import('./views/stores/CreateStore.vue'),
             meta: {
               breadcrumb: [
                   { title: 'Home', url: '/' },
@@ -284,6 +298,20 @@ const router = new Router({
                   { title: 'CreateStore', active: true },
               ],
                 rule: 'vendor',
+            }
+          },
+          {
+            path: '/stores/edit/:storeID',
+            name: 'edit-customer',
+            //   component: () => import('@/views/pages/ComingSoon.vue'),
+            component: () => import('./views/stores/CreateStore.vue'),
+            meta: {
+              breadcrumb: [
+                { title: 'Home', url: '/' },
+                { title: 'Stores'},
+                { title: 'Edit', active: true },
+              ],
+              rule: 'admin',
             }
           },
         {

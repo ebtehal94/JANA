@@ -16,13 +16,13 @@
                 placeholder="اكتب كلمة للبحث" 
                 icon-after vs-icon-after="true"
                 v-model="searchQuery" 
-                class="sm:w-1/2 md:w-full input-rounded-full" 
+                class="sm:w-full md:w-full input-rounded-full" 
                 icon="icon-search" 
                 icon-pack="feather" />
             </div>
             <div class="vx-col cursor-pointer flex">
                 <vs-button
-                    class="sm:w-1/2 md:w-full rounded-full text-xs font-bold shadow-none"
+                    class="sm:w-full md:w-full rounded-full text-xs font-bold shadow-none"
                     color="rgb(255, 255, 255)"
                     text-color="#DC6059"
                     icon-after vs-icon-after="true"
@@ -59,6 +59,7 @@
 import axios from "@/axios.js"
 import StarRating from 'vue-star-rating'
 import AllOffers from '@/layouts/components/AllOffers.vue'
+import moduleOfferManagement from '@/store/offer-management/moduleOfferManagement.js'
 export default{
     components: {
         StarRating,
@@ -67,21 +68,44 @@ export default{
     data() {
         return {
             searchQuery: '',
-            // shouldDisplay:false
+            AllOffers:[
+                {"id":1,src:require('@assets/images/image-1.png'),"title":"أدوات منزلية","status":"نشط",
+                "date":"15/04/2021","subtitle":"وصف مختصر وصف مختصر..","price":"350","disc_price":"297","discount":"15%"},
+                {"id":2,src:require('@assets/images/image-2.png'),"title":"أدوات منزلية","status":"نشط",
+                "date":"15/04/2021","subtitle":"وصف مختصر وصف مختصر..","price":"350","disc_price":"297","discount":"15%"},
+                {"id":3,src:require('@assets/images/image-3.png'),"title":"أدوات منزلية",
+                "status":"نشط","date":"15/04/2021","subtitle":"وصف مختصر وصف مختصر..","price":"350","disc_price":"297","discount":"15%"},
+                {"id":4,src:require('@assets/images/image-4.png'),"title":"أدوات منزلية",
+                "status":"نشط","date":"15/04/2021","subtitle":"وصف مختصر وصف مختصر..","price":"350","disc_price":"297","discount":"15%"},
+                 {"id":5,src:require('@assets/images/image-4.png'),"title":"أدوات منزلية","status":"نشط",
+                "date":"15/04/2021","subtitle":"وصف مختصر وصف مختصر..","price":"350","disc_price":"297","discount":"15%"},
+                {"id":6,src:require('@assets/images/image-3.png'),"title":"أدوات منزلية","status":"نشط",
+                "date":"15/04/2021","subtitle":"وصف مختصر وصف مختصر..","price":"350","disc_price":"297","discount":"15%"},
+                {"id":7,src:require('@assets/images/image-2.png'),"title":"أدوات منزلية",
+                "status":"نشط","date":"15/04/2021","subtitle":"وصف مختصر وصف مختصر..","price":"350","disc_price":"297","discount":"15%"},
+                {"id":8,src:require('@assets/images/image-1.png'),"title":"أدوات منزلية",
+                "status":"نشط","date":"15/04/2021","subtitle":"وصف مختصر وصف مختصر..","price":"350","disc_price":"297","discount":"15%"},
+            ],
             
         }
     },
     computed: {
-
+        offers() {
+            return this.$store.state.offereManagement.offers
+        },
     },
     methods: {
         addNewData() {
-            this.$router.push({path: '/CreateOffer'})
+            this.$router.push({path: '/offers/create'})
         },
     },
     created() {
-
-    }
+        if(!moduleOfferManagement.isRegistered) {
+        this.$store.registerModule('offerManagement', moduleOfferManagement)
+        moduleOfferManagement.isRegistered = true
+      }
+      this.$store.dispatch("offerManagement/fetchOffers").catch(err => { console.error(err) })
+    },
 }
 </script>
 
@@ -111,7 +135,7 @@ export default{
         box-shadow: none;
     }
 }
-@media only screen and (min-width: 360px) and (max-width: 767px) {
+@media only screen and (max-width: 512px){
     .vs-button:not(.vs-radius):not(.includeIconOnly):not(.small):not(.large) {
         padding: .5rem 2rem !important;
         margin-top: 1rem;

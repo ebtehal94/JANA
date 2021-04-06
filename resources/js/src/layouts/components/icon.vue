@@ -101,7 +101,7 @@
     </g>
  </svg>
  <!---- store Type ---->
-  <svg v-else-if="name === 'store-type'" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 32 32">
+  <svg v-else-if="name === 'store-type'" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 32 32">
     <g id="dashboard-active" transform="translate(0.306 0.198)">
       <g id="Rectangle_5" data-name="Rectangle 5" transform="translate(-0.306 -0.198)" fill="none" stroke="#696969" stroke-width="1.7">
         <rect width="14" height="14" rx="3" stroke="none"/>

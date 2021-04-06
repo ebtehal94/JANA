@@ -57,7 +57,7 @@ export default {
          type: 'confirm',
          color: 'danger',
          title: this.$t('Delete'),
-         text: 'Are you sure you want to permenantly delete this customer?',
+         text: 'هل أنت متأكدأنك تريد حذف هذا العميل نهائياً؟',
          accept: this.deleteCustoemr
        })
      },

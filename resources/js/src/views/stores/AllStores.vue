@@ -15,7 +15,11 @@
                         <span>{{item.Email}}</span>
                     </div>
                     <p class="text-center">{{item.location}}</p>
-                    <h6 class="text-center">{{item.number}}</h6>
+                    <h6 class="text-center" v-if="!display">{{item.number}}</h6>
+                    <div class="ml-auto mt-4 cursor-pointer flex justify-center" v-if="display">
+                        <vs-button color="#6FDD68" size="small">موافقة</vs-button>
+                        <vs-button color="danger" size="small">رفض</vs-button>
+                    </div>
                 </vx-card>
             </div>
         </div>
@@ -31,6 +35,9 @@ export default {
     props:{
         stores:{
             type:Array
+        },
+        display:{
+            type: Boolean
         }
     },
     data() {
@@ -71,6 +78,16 @@ export default {
             font-size: .6rem;
             color: #F91D1D;
             padding-top: .4rem;
+        }
+        .vs-button.small:not(.includeIconOnly) {
+            padding: 0 .9rem;
+            border-radius: 30px;
+            margin-bottom: -1.9rem;
+            margin-left: .5rem;
+        }
+        .vs-button.small{
+            font-size: .6rem;
+            font-weight: bold;
         }
     }
 }  

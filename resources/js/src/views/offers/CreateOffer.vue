@@ -17,7 +17,7 @@
               :placeholder="$t('OfferTitle')" 
               v-model="offer_data.title_ar" 
               v-validate="'required|alpha_spaces'" 
-              name="title" />
+              name="title_ar" />
 
               <span v-if="!errors.has('title_ar') && offer_data.title_ar">
                 <icon name="confirm" class="icon left-icon"/>
@@ -60,21 +60,27 @@
                 v-validate="'required|alpha_spaces'" 
                 name="title_en" />
 
-                <span v-if="!errors.has('title') && offer_data.title_en">
+                <span v-if="!errors.has('title_en') && offer_data.title_en">
                   <icon name="confirm" class="icon left-icon"/>
                 </span>
                 <span v-else-if="errors.has('title_en')">
                   <icon name="cross" class="icon left-icon"/>
                 </span>
               </div>
-
-              <vs-textarea 
-              :placeholder="$t('OfferDesc')"
-              v-model="offer_data.desc_en" 
-              class="mt-2 w-full" 
-              height="100px"
-              name="desc_en"/>
-              <span class="text-danger text-sm" v-show="errors.has('desc_en')">{{ errors.first('desc_en') }}</span>
+              <div class="bg-input">
+                <vs-textarea 
+                :placeholder="$t('OfferDesc')"
+                v-model="offer_data.desc_en" 
+                class="mt-2 w-full" 
+                height="100px"
+                name="desc_en"/>
+                <span v-if="!errors.has('desc_en') && offer_data.desc_en">
+                  <icon name="confirm" class="icon left-icon"/>
+                </span>
+                <span v-else-if="errors.has('desc_en')">
+                  <icon name="cross" class="icon left-icon"/>
+                </span>
+              </div>
 
             </div>
           </div>
@@ -89,26 +95,25 @@
 
             <!-- Col Content -->
             <div>
-                <div class="bg-input">
-                    <v-select class="w-full mt-2"
+                <div class="bg-input text-sm">
+                    <v-select class="w-full mt-2 text-sm"
                       :placeholder="$t('Category')"
-                      v-model="offer_data.category"
+                      v-model="offer_data.category_id"
                       v-validate="'required'"
                       label="text" :options="category_list"
                       :reduce="text => text.value"
                       :dir="$vs.rtl ? 'rtl' : 'ltr'" />
 
-                    <span
-                      v-if="!errors.has('category') && offer_data.category">
+                    <span v-if="!errors.has('category_id') && offer_data.category_id">
                       <icon name="confirm" class="icon left-icon"/>
                     </span>
-                    <span v-else-if="errors.has('category')">
+                    <span v-else-if="errors.has('category_id')">
                       <icon name="cross" class="icon left-icon"/>
                     </span>
                 </div>
 
-                <div class="bg-input">
-                    <v-select class="w-full mt-2"
+                <div class="bg-input text-sm">
+                    <v-select class="w-full mt-2 text-sm"
                       :placeholder="$t('accountStatus')"
                       v-model="offer_data.status"
                       v-validate="'required'"
@@ -124,7 +129,6 @@
                       <icon name="cross" class="icon left-icon"/>
                     </span>
                 </div>
-                
             </div>
           </div>
 
@@ -142,10 +146,10 @@
                 <h5 class="text-gray text-xs text-center">{{ $i18n.locale == 'en' ? 'Upload Image' : 'اضافة صورة' }}</h5>
               </div>
               <div class="vx-col w-full md:w-1/3">
-                <img src="@assets/images/payment-methods.png" alt="" class="mx-auto" width="120">
+                <img src="@assets/images/payment-methods.png" alt="" class="mx-auto lg:responsive" width="120">
               </div>
               <div class="vx-col w-full md:w-1/3">
-                <img src="@assets/images/card.png" alt="" class="mx-auto" width="120">
+                <img src="@assets/images/card.png" alt="" class="mx-auto lg:responsive" width="120">
               </div>
             </div>
           </div>
@@ -164,10 +168,10 @@
                   <vs-input
                   class="w-full mt-4 -m-4"
                   :placeholder="$t('Price')" 
-                  v-model="offer_data.after_discount" 
-                  v-validate="'required|alpha_spaces'" 
-                  name="after_discount" />
-                  <span class="text-danger text-sm"  v-show="errors.has('after_discount')">{{ errors.first('after_discount') }}</span>
+                  v-model="offer_data.price_before" 
+                  v-validate="'required'" 
+                  name="price_before" />
+                  <span class="text-danger text-sm"  v-show="errors.has('price_before')">{{ errors.first('price_before') }}</span>
             </div>
 
             <div class="vx-col w-full">
@@ -181,10 +185,10 @@
                   <vs-input 
                   class="w-full mt-4 -m-2"
                   :placeholder="$t('Price')" 
-                  v-model="offer_data.before_discount" 
-                  v-validate="'required|alpha_spaces'" 
-                  name="before_discount" />
-                  <span class="text-danger text-sm"  v-show="errors.has('before_discount')">{{ errors.first('before_discount') }}</span>
+                  v-model="offer_data.price" 
+                  v-validate="'required'" 
+                  name="price" />
+                  <span class="text-danger text-sm"  v-show="errors.has('price')">{{ errors.first('price') }}</span>
 
             </div>
 
@@ -199,10 +203,10 @@
                   <vs-input 
                   class="w-full mt-4"
                   placeholder="14/14/2021" 
-                  v-model="offer_data.date" 
-                  v-validate="'required|alpha_spaces'" 
-                  name="date" />
-                  <span class="text-danger text-sm"  v-show="errors.has('date')">{{ errors.first('date') }}</span>
+                  v-model="offer_data.expiry" 
+                  v-validate="'required'" 
+                  name="expiry" />
+                  <span class="text-danger text-sm"  v-show="errors.has('expiry')">{{ errors.first('expiry') }}</span>
             </div>
           </div>
 
@@ -215,20 +219,20 @@
             <!-- Col Content -->
             <div>
              <div>
-                <div class="bg-input">
-                    <v-select class="w-full mt-2"
-                      placeholder="اختر المتجر"
-                      v-model="offer_data.category"
+                <div class="bg-input text-sm">
+                    <v-select class="w-full mt-2 text-sm"
+                      :placeholder="$t('ChooseStore')"
+                      v-model="offer_data.store_id"
                       v-validate="'required'"
                       label="text" :options="category_list"
                       :reduce="text => text.value"
                       :dir="$vs.rtl ? 'rtl' : 'ltr'" />
 
                     <span
-                      v-if="!errors.has('category') && offer_data.category">
+                      v-if="!errors.has('store_id') && offer_data.store_id">
                       <icon name="confirm" class="icon left-icon"/>
                     </span>
-                    <span v-else-if="errors.has('category')">
+                    <span v-else-if="errors.has('store_id')">
                       <icon name="cross" class="icon left-icon"/>
                     </span>
                  </div>
@@ -244,16 +248,16 @@
               class="mx-4 font-semibold text-sm rounded-full"
               color="linear-gradient(to left,#E93F7D,#DA6653)"
               gradient
-              @click="registerUser">
-                إنشاء العرض
+              @click="createOffer">
+                {{$i18n.locale == "en" ? "Create Offer" : "إنشاء العرض"}}
             </vs-button>
 
             <vs-button
               size="small"
               class="mx-4 font-semibold text-sm rounded-full px-24"
               color="#ACACAC" type="border"
-              @click="registerUser">
-                خروج 
+              @click="goBack">
+                {{ $i18n.locale == 'en' ? 'Close' : 'خروج' }} 
             </vs-button>
         </div>
 
@@ -270,7 +274,7 @@ import icon from '@/layouts/components/icon.vue'
 
 
 // Store Module
-import moduleUserManagement from '@/store/user-management/moduleUserManagement.js'
+import moduleOfferManagement from '@/store/offer-management/moduleOfferManagement.js'
 
 export default {
   components: {
@@ -279,7 +283,7 @@ export default {
   },
   data() {
     return {
-      offer_data: {title_ar:null,title_en: null, category: null, desc_ar:null,desc_en:null, mobile: null, password: null,status:null,store:null,before_discount:null,after_discount:null},
+      offer_data: {title_ar:null,title_en: null, category_id: null, desc_ar:null,desc_en:null,status:null,price_before:null,price:null,expiry:null,store_id:null},
       category_list:[
         {text:'القسم الأول',value:1},
         {text:'القسم الثاني',value:2},
@@ -297,8 +301,6 @@ export default {
         {text:'المتجر الرابع',value:4}
       ],
       dataUploadedImages: [],
-      dataUploadedImagesForDisplay: [],
-      ImageToDelete: null,
     }
   },
   computed: {
@@ -306,28 +308,76 @@ export default {
   },
   methods:{
     updateCurrImg(input) {
-      if (input.target.files && input.target.files[0]) {
-        var reader = new FileReader()
-        reader.onload = e => {
-          this.dataUploadedImages = input.target.files
-
-            const url = URL.createObjectURL(this.dataUploadedImages[i])
-            this.dataUploadedImages[i].url = url
-
-          // this.dataImg.push(input.target.files[0])
-          // this.dataImg = input.target.files[0]
-          // this.dataImg = e.target.result
-
+       if (input.target.files && input.target.files[0]) {
+         var reader = new FileReader()
+         reader.onload = e => {
+           this.dataUploadedImages= input.target.files
+           console.log(input.target.files[0])
+         }
+         reader.readAsDataURL(input.target.files[0])
+       }
+    },
+    createOffer(){
+        // if(!this.validateForm) return
+      let formData = new FormData();
+      formData.append('title_ar', this.offer_data.title_ar)
+      formData.append('title_en', this.offer_data.title_en)
+      formData.append('desc_ar', this.offer_data.desc_ar)
+      formData.append('desc_en', this.offer_data.desc_en)
+      formData.append('category_id', this.offer_data.category_id)
+      formData.append('status', this.offer_data.status)
+      formData.append('price_before', this.offer_data.price_before)
+      formData.append('price', this.offer_data.price)
+      formData.append('expiry', this.offer_data.expiry)
+      formData.append('store_id', this.offer_data.store_id)
+      if (this.dataUploadedImages){
+        for( var i = 0; i < this.dataUploadedImages.length; i++ ){
+          let file = this.dataUploadedImages[i];
+          formData.append('images[' + i + ']', file);
         }
-        reader.readAsDataURL(input.target.files[0])
       }
+
+        if (this.offer_data.id != null && this.offer_data.id > 0){
+          var link = "offerManagement/updateOffer"
+        }else{
+          var link = "offerManagement/addOffer"
+        }
+        this.$store.dispatch(link, formData)
+        .then(res => {
+          if( res.data.statusCode == 200 ){
+            this.$vs.notify({
+            color: 'success',
+            title: 'Successfull',
+            text: 'تم بنجاح'
+            })
+          }else{
+            this.$vs.notify({
+            color: 'danger',
+            title: 'Error',
+            text: 'حدث خطأ ما'
+            })
+          }
+        })
+        .catch(function (error) {
+          console.log(error.response);
+        });
+    },
+    goBack(){
+      this.$router.go(-1)
     },
   },
   created() {
-    // Register Module UserManagement Module
-    if(!moduleUserManagement.isRegistered) {
-      this.$store.registerModule('userManagement', moduleUserManagement)
-      moduleUserManagement.isRegistered = true
+    // Register Module OfferManagement Module
+    if(!moduleOfferManagement.isRegistered) {
+      this.$store.registerModule('offerManagement', moduleOfferManagement)
+      moduleOfferManagement.isRegistered = true
+    }
+    if (this.$route.params.offerID != null){
+      this.$store.dispatch("offerManagement/fetchOffer", this.$route.params.offerID).catch(err => { console.error(err) })
+      .then((res) => {
+        this.offer_data = res.data.offer
+      })
+      .catch((error) => console.log(error))
     }
   }
 }

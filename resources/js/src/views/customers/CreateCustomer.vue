@@ -84,14 +84,13 @@
                   </span>
                 </div>
 
-                <div class="bg-input">
+                <div class="bg-input text-sm">
                     <icon name="city" class="icon"/>
-                    <v-select class="w-full mt-2 p-0"
-
+                    <v-select class="w-full mt-2 p-0 text-sm"
                      v-model="customer_data.city_id"
                      :placeholder="$t('Location')"
-                     label="text" :options="cities_list"
-                     :reduce="text => text.value"
+                     label="name_ar" :options="cities_list"
+                     :reduce="name_ar => name_ar.id"
                      :dir="$vs.rtl ? 'rtl' : 'ltr'" />
 
                     <span v-if="!errors.has('city_id') && customer_data.city_id">
@@ -122,8 +121,8 @@
                   </span>
                 </div>
 
-                <div class="bg-input">
-                    <v-select class="w-full mt-2"
+                <div class="bg-input text-sm">
+                    <v-select class="w-full mt-2 text-sm"
                      v-model="customer_data.status"
                      :placeholder="$t('accountStatus')"
                      label="text" :options="status_list"
@@ -164,7 +163,7 @@ import icon from '@/layouts/components/icon.vue';
 
 // Store Module
 import moduleCustomerManagement from '@/store/customer-management/moduleCustomerManagement.js'
-
+import { CitiesList } from '../pages/extra/CitiesList.js'
 export default {
   components: {
     icon,
@@ -180,12 +179,7 @@ export default {
         city_id:null,
         password: null,
         status:null},
-      cities_list: [
-        {text:'الرياض',value:1},
-        {text:'الدمام',value:2},
-        {text:'جدة',value:3},
-        {text:'تبوك',value:4}
-      ],
+      cities_list:CitiesList ,
       status_list: [
         {text:'غير نشط',value:1},
         {text:'نشط',value:2},
@@ -294,7 +288,7 @@ export default {
     }
     .left-phone-icon{
       position: absolute;
-      top:22px;
+      top:18px;
       left: 65%;
       z-index: 999;
     }
