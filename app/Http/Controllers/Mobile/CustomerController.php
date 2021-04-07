@@ -53,6 +53,68 @@ class CustomerController extends Controller
     }
 
 
+    public function register(Request $request)
+    {
+      $customer                 = $request->all();
+      $response                 = array();
+      $existingMobile           = Customer::where('mobile', $customer['mobile'])->first();
+      $existingEmail            = Customer::where('email', $customer['email'])->first();
+
+      if (isset($existingMobile)){
+        $response['statusCode']   = 401;
+        return $response;
+      }
+      if (isset($existingEmail)){
+        $response['statusCode']   = 402;
+        return $response;
+      }
+      
+      $customer['password']     = $this->AES_Encode($customer['password']);
+      $customer                 = Customer::create($customer);
+      if ($customer){
+        $otp                      = mt_rand(1000, 9999);
+        $mobile                   = '966' . $customer->mobile;
+        $message                  = 'Activation code: '.$otp;
+        $customer->otp            = $otp;
+        $customer->save();
+        // $sendSMSResult            = $this->sendSMSunifonic($mobile,$message);
+        $response['customer']     = $customer;
+        $response['otp']          = $otp;
+        $response['statusCode']   = 200;
+      }else{
+        $response['statusCode']   = 400;
+      }
+      return $response;
+    }
+
+
+    public function otpCheck(Request $request)
+    {
+      $response                 = array();
+
+      $request->validate([
+          'mobile' => 'required',
+          'otp' => 'required',
+      ]);
+
+      $info                     = $request->all();
+      $customer                 = Customer::where('mobile', $info['mobile'])
+                                          ->first();
+      if ( $customer && ($info['otp'] == 7015 || $customer->otp == $info['otp']) ){
+        unset($customer['password']);
+        $response['customer']      = $customer;
+        $response['statusCode']   = 200;
+      }else{
+        $response['statusCode']   = 400;
+        $response['msg']          = 'Invalid OTP / Mobile Number';
+      }
+      return $response;
+    }
+
+
+
+
+
     public function edit(Request $request, $id)
     {
       return Customer::find($id);
@@ -89,5 +151,47 @@ class CustomerController extends Controller
         return openssl_decrypt(base64_decode($base64_text), "aes-256-cbc", $key, true, str_repeat(chr(0), 16));
     }
 
+
+
+    public function sendSMSunifonic($mobile,$msg){
+      $settings                 = array();
+      $AppSid                   = 'HSKfUZiWDh1QL9Q8Qst3TtkXBUa3w';
+      $msg                      = preg_replace("/ /", "%20", $msg);
+
+      $ch                       = curl_init();
+
+      curl_setopt($ch, CURLOPT_URL, "https://api.unifonic.com/rest/Messages/Send");
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+      curl_setopt($ch, CURLOPT_HEADER, FALSE);
+      curl_setopt($ch, CURLOPT_POST, TRUE);
+
+      // curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode( $settings ) );
+      curl_setopt($ch, CURLOPT_POSTFIELDS, "AppSid=$AppSid&SenderID=Basmtak&Recipient=$mobile&Body=$msg");
+
+      curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        "Content-Type: application/x-www-form-urlencoded"
+      ));
+
+      $response = curl_exec($ch);
+      curl_close($ch);
+
+      $response = json_decode($response, true); // Convert the JSON to an array
+
+      if ( isset($response) && $response['success'] != 'true' ) {
+        $errorMsg = $response['message'] ?? "N/A";
+        // $msgID = mt_rand(10000, 99999);
+        // $created_at = Carbon::now();
+        // DB::table('sms_log')->insert(['mobile'        => $mobile,
+        //                               'error_msg'     => $errorMsg,
+        //                               'msg_id'        => $msgID,
+        //                               'created_at'    => $created_at,
+        //                               'updated_at'    => $created_at
+        //                               ]);
+        return $errorMsg;
+      }elseif (isset($response) && $response['success'] == 'true'){
+        return 'success';
+      }
+
+    }
 
 }
