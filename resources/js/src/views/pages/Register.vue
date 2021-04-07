@@ -103,7 +103,7 @@
                   </div>
                   <div class="bg-input">
                     <icon name="city" class="icon"/>
-                    <v-select 
+                    <v-select
                       class="w-full mt-2"
                       :placeholder='$t("mainLocation")'
                       v-model="store_data.city_id"
@@ -689,9 +689,9 @@ export default {
         moduleUserManagement.isRegistered = true
       }
 
-      if (localStorage.getItem('isRegistered')){
-        this.page_num = 4
-      }
+      // if (localStorage.getItem('isRegistered')){
+      //   this.page_num = 4
+      // }
   }
 };
 </script>

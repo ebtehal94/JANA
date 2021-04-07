@@ -110,7 +110,7 @@ class StoreController extends Controller
       $Str            = Store::find($info['store_id']);
 
       if (isset($Str)){
-        if (isset($request->images)){
+        if (isset($request->image)){
           $this->addImage($Str, $request->image);
         }
 
@@ -161,8 +161,8 @@ class StoreController extends Controller
 
       if (isset($Str)){
         $Str->update($store);
-        if (isset($request->images)){
-          $this->addImage($Str, $request->images);
+        if (isset($request->image)){
+          $this->addImage($Str, $request->image);
         }
 
 
@@ -179,7 +179,7 @@ class StoreController extends Controller
       $store = Store::find($id);
 
       if($store) {
-        $store->images()->delete();
+        // $store->image()->delete();
         $store->delete();
 
         return 'Deleted Successfully';
