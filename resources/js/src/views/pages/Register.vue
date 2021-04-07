@@ -444,6 +444,15 @@
           <div class="vx-col sm:w-full md:w-full lg:w-1/2 text-center" v-if="page_num === 4">
             <h2 class="text-grey">{{$i18n.locale == "en" ? "Successfull" : "تم التسجيل بنجاح"}}</h2>
             <h2 class="text-grey mt-10">{{$i18n.locale == "en" ? "We will contact you as soon as possible" : "سيتم التواصل معكم في اقرب وقت ممكن"}}</h2>
+            <div class="mt-8 mb-3">
+              <vs-button
+              class="w-full mt-10 font-medium register-btn"
+              color="linear-gradient(to left,#E93F7D,#DA6653)"
+              gradient
+              @click="goToPage(1)">
+               {{$i18n.locale == "en" ? "Back To Registeration" : " العودة للتسجيل"}}
+              </vs-button>
+            </div>
           </div>
           </div>
         </div>
@@ -689,9 +698,9 @@ export default {
         moduleUserManagement.isRegistered = true
       }
 
-      // if (localStorage.getItem('isRegistered')){
-      //   this.page_num = 4
-      // }
+      if (localStorage.getItem('isRegistered')){
+        this.page_num = 4
+      }
   }
 };
 </script>
