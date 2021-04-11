@@ -33,6 +33,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/customers/register', 'Mobile\CustomerController@register');
 Route::post('/customers/otpCheck', 'Mobile\CustomerController@otpCheck');
 
+Route::post('/customers/home', 'Mobile\OfferController@home');
+Route::post('/customers/offers/list', 'Mobile\OfferController@list');
+Route::post('/customers/offers/view', 'Mobile\OfferController@view');
+
+Route::post('/customers/stores/list', 'Mobile\StoreController@list');
+Route::post('/customers/stores/view', 'Mobile\StoreController@view');
+
 
 
 
