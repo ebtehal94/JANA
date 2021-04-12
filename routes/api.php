@@ -41,11 +41,9 @@ Route::post('/customers/stores/list', 'Mobile\StoreController@list');
 Route::post('/customers/stores/view', 'Mobile\StoreController@view');
 
 
-
-
-
 Route::post('/offers/list', 'OfferController@index');
 Route::post('/offers/create', 'OfferController@create');
+Route::post('/offers/getInfo', 'OfferController@getInfo');
 Route::get('/offers/edit/{id}', 'OfferController@edit');
 Route::post('/offers/update', 'OfferController@update');
 Route::delete('/offers/delete/{id}', 'OfferController@remove');
