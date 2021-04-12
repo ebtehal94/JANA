@@ -44,4 +44,11 @@ class Offer extends Model
 
 
 
+    public function store()
+    {
+        return $this->belongsTo('App\Models\Store');
+    }
+
+
+
 }

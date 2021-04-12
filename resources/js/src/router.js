@@ -182,7 +182,7 @@ const router = new Router({
             path: '/financialOperations',
             name: 'financial-operations',
           //   component: () => import('@/views/pages/ComingSoon.vue'),
-            component: () => import('./views/FinancialOperations.vue'),
+            component: () => import('./views/payment/FinancialOperations.vue'),
             meta: {
               breadcrumb: [
                   { title: 'Home', url: '/' },
@@ -193,7 +193,7 @@ const router = new Router({
           },
           {
             path: '/offers',
-            name: 'Offers',
+            name: 'offers',
           //   component: () => import('@/views/pages/ComingSoon.vue'),
             component: () => import('./views/offers/Offers.vue'),
             meta: {
@@ -234,7 +234,7 @@ const router = new Router({
           },
           {
             path: '/customers',
-            name: 'Customers',
+            name: 'customers',
           //   component: () => import('@/views/pages/ComingSoon.vue'),
             component: () => import('./views/customers/Customers.vue'),
             meta: {
@@ -260,22 +260,8 @@ const router = new Router({
             }
           },
           {
-            path: '/customers/create',
-            name: 'create-customer',
-          //   component: () => import('@/views/pages/ComingSoon.vue'),
-            component: () => import('./views/customers/CreateCustomer.vue'),
-            meta: {
-              breadcrumb: [
-                  { title: 'Home', url: '/' },
-                  { title: 'Customers'},
-                  { title: 'CreateCustomer', active: true },
-              ],
-                rule: 'admin',
-            }
-          },
-          {
             path: '/stores',
-            name: 'Stores',
+            name: 'stores',
           //   component: () => import('@/views/pages/ComingSoon.vue'),
             component: () => import('./views/stores/Stores.vue'),
             meta: {
@@ -288,7 +274,7 @@ const router = new Router({
           },
           {
             path: '/stores/create',
-            name: 'create-Store',
+            name: 'create-store',
           //   component: () => import('@/views/pages/ComingSoon.vue'),
             component: () => import('./views/stores/CreateStore.vue'),
             meta: {
@@ -318,7 +304,7 @@ const router = new Router({
             path: '/Accounts',
             name: 'Accounts',
             // component: () => import('@/views/pages/ComingSoon.vue'),
-            component: () => import('@/views/Accounts.vue'),
+            component: () => import('@/views/admins/Accounts.vue'),
             meta: {
                 breadcrumb: [
                     { title: 'Home', url: '/' },
@@ -328,10 +314,10 @@ const router = new Router({
             },
         },
         {
-            path: '/CreateAdmin',
-            name: 'create-Admin',
+            path: '/admins/create',
+            name: 'create-admin',
           //   component: () => import('@/views/pages/ComingSoon.vue'),
-            component: () => import('./views/CreateAdmin.vue'),
+            component: () => import('./views/admins/CreateAdmin.vue'),
             meta: {
               breadcrumb: [
                   { title: 'Home', url: '/' },
@@ -342,15 +328,15 @@ const router = new Router({
             }
           },
           {
-            path: '/AdminEdit',
+            path: '/admins/edit/:userID',
             name: 'Edit-Admin',
           //   component: () => import('@/views/pages/ComingSoon.vue'),
-            component: () => import('./views/AdminEdit.vue'),
+            component: () => import('./views/admins/CreateAdmin.vue'),
             meta: {
               breadcrumb: [
                   { title: 'Home', url: '/' },
                   { title: 'Accounts'},
-                  { title: 'AdminEdit', active: true },
+                  { title: 'Edit', active: true },
               ],
                 rule: 'admin',
             }

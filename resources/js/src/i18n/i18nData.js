@@ -41,16 +41,18 @@ export default {
 		AdminEdit:'Edit',
 		CreateStore:'Create New Account',
 
+		SearchBar: 'What are you looking for?',
+
 		UsedOffers:'Most used offers',
 		SuppliersOffers:'The number of added offers from suppliers',
 		Areas:'Areas that use offers',
 
 		ThisMonth:'This Month',
 		All:'All',
-		customerName:"Customer Name",
-		date:'Date',
+		CustomerNumber:"Customer id",
+		CardNumber:'Card Number',
 		amount:'Amount',
-		notes:'Notes',
+		ref:'Referanc',
 
 		fullName:'Full Name',
 		accountStatus:'Account Status (Active)',
@@ -109,7 +111,6 @@ export default {
 		QuickView: 'Quick View',
 		FullDetails: 'View Full Product Details',
 		ShopNow: 'Shop Now',
-		SearchBar: 'What are you looking for?',
 		NewGroups: 'New Groups',
 		LatestDeals: 'Our Deals',
 		MostOrdered: 'Most Ordered',
@@ -387,16 +388,18 @@ export default {
 		AdminEdit:'تعديل ',
 		CreateStore:'إنشاء حساب جديد',
 
+		SearchBar: 'ما الذي تبحث عنه؟',
+
 		UsedOffers:'أكثر العروض استخداماً',
 		SuppliersOffers:'عدد العروض المضافة من كل مورد',
 		Areas:'أكثر المناطق التي تستخدم العروض',
 
 		ThisMonth:'هذا الشهر',
 		All:'الكل',
-		customerName:'اسم العميلة',
-		date:"التاريخ",
+		CustomerNumber:'رقم العميلة',
+		CardNumber:"رقم البطاقة",
 		amount:'المبلغ',
-		notes:'ملاحظات',
+		ref:'المرجع',
 
 		CreateNewOffer:'إنشاء عرض جديد',
 		AllOffers:'كل العروض',
@@ -457,7 +460,6 @@ export default {
 		QuickView: 'عرض سريع',
 		FullDetails: 'عرض تفاصيل المنتج',
 		ShopNow: 'تسوق الآن',
-		SearchBar: 'ما الذي تبحث عنه؟',
 		NewGroups: 'مجموعات جديدة',
 		LatestDeals: 'عروضنا',
 		MostOrdered: 'الأكثر طلباً',

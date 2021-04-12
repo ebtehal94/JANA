@@ -12,14 +12,14 @@ class PaymentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
       $response                 = array();
       $info                     = $request->all();
-      $customers                = Payment::with('customer:id,name')
+      $payments                 = Payment::with('customer:id,name')
                                           ->orderby('id','desc')
                                           ->get();
-      $response['customers']    = $customers;
+      $response['payments']    = $payments;
       $response['statusCode']   = 200;
       return $response;
     }

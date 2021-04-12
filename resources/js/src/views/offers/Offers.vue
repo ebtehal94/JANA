@@ -13,7 +13,7 @@
             <div class="vx-col search-page__search-bar flex">
                 <vs-input 
                 icon-no-border 
-                placeholder="اكتب كلمة للبحث" 
+                :placeholder="$t('SearchBar')" 
                 icon-after vs-icon-after="true"
                 v-model="searchQuery" 
                 class="sm:w-full md:w-full input-rounded-full" 
@@ -39,14 +39,16 @@
                 <vx-card class="mt-8 pt-0">
                     <vs-tabs class="tabs-shadow-none">
                         <vs-tab :label="$t('AllOffers')">
-                            <AllOffers />
+                            <AllOffers :offers="offers"/>
                         </vs-tab>
                         <vs-tab :label="$t('PendingOffers')">
-                            <AllOffers display="true" />
+                            <AllOffers display="pending" :offers="offers"/>
                         </vs-tab>
                         <vs-tab :label="$t('ActiveOffers')">
+                            <AllOffers display="active" :offers="offers"/>
                         </vs-tab>
                         <vs-tab :label="$t('StopOffers')">
+                            <AllOffers display="expired" :offers="offers"/>
                         </vs-tab>
                     </vs-tabs>
                 </vx-card>
@@ -59,53 +61,34 @@
 import axios from "@/axios.js"
 import StarRating from 'vue-star-rating'
 import AllOffers from '@/layouts/components/AllOffers.vue'
-import moduleOfferManagement from '@/store/offer-management/moduleOfferManagement.js'
 export default{
     components: {
         StarRating,
         AllOffers,
     },
+    props:{
+      offers:{
+          type: Array
+      },
+    },
     data() {
         return {
             searchQuery: '',
-            AllOffers:[
-                {"id":1,src:require('@assets/images/image-1.png'),"title":"أدوات منزلية","status":"نشط",
-                "date":"15/04/2021","subtitle":"وصف مختصر وصف مختصر..","price":"350","disc_price":"297","discount":"15%"},
-                {"id":2,src:require('@assets/images/image-2.png'),"title":"أدوات منزلية","status":"نشط",
-                "date":"15/04/2021","subtitle":"وصف مختصر وصف مختصر..","price":"350","disc_price":"297","discount":"15%"},
-                {"id":3,src:require('@assets/images/image-3.png'),"title":"أدوات منزلية",
-                "status":"نشط","date":"15/04/2021","subtitle":"وصف مختصر وصف مختصر..","price":"350","disc_price":"297","discount":"15%"},
-                {"id":4,src:require('@assets/images/image-4.png'),"title":"أدوات منزلية",
-                "status":"نشط","date":"15/04/2021","subtitle":"وصف مختصر وصف مختصر..","price":"350","disc_price":"297","discount":"15%"},
-                 {"id":5,src:require('@assets/images/image-4.png'),"title":"أدوات منزلية","status":"نشط",
-                "date":"15/04/2021","subtitle":"وصف مختصر وصف مختصر..","price":"350","disc_price":"297","discount":"15%"},
-                {"id":6,src:require('@assets/images/image-3.png'),"title":"أدوات منزلية","status":"نشط",
-                "date":"15/04/2021","subtitle":"وصف مختصر وصف مختصر..","price":"350","disc_price":"297","discount":"15%"},
-                {"id":7,src:require('@assets/images/image-2.png'),"title":"أدوات منزلية",
-                "status":"نشط","date":"15/04/2021","subtitle":"وصف مختصر وصف مختصر..","price":"350","disc_price":"297","discount":"15%"},
-                {"id":8,src:require('@assets/images/image-1.png'),"title":"أدوات منزلية",
-                "status":"نشط","date":"15/04/2021","subtitle":"وصف مختصر وصف مختصر..","price":"350","disc_price":"297","discount":"15%"},
-            ],
             
         }
-    },
-    computed: {
-        offers() {
-            return this.$store.state.offereManagement.offers
-        },
     },
     methods: {
         addNewData() {
             this.$router.push({path: '/offers/create'})
         },
     },
-    created() {
-        if(!moduleOfferManagement.isRegistered) {
-        this.$store.registerModule('offerManagement', moduleOfferManagement)
-        moduleOfferManagement.isRegistered = true
-      }
-      this.$store.dispatch("offerManagement/fetchOffers").catch(err => { console.error(err) })
-    },
+    // created() {
+    //     if(!moduleOfferManagement.isRegistered) {
+    //     this.$store.registerModule('offerManagement', moduleOfferManagement)
+    //     moduleOfferManagement.isRegistered = true
+    //   }
+    //   this.$store.dispatch("offerManagement/fetchOffers").catch(err => { console.error(err) })
+    // },
 }
 </script>
 

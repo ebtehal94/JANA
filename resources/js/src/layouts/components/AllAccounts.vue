@@ -1,20 +1,20 @@
 <template>
     <div id="all-admins">
         <div class="vx-row mt-5"> 
-            <div v-for="item in accounts" class="vx-col w-full sm:w-1/2 lg:w-1/4 mb-base px-2.5" v-bind:key="item.id">
-                <vx-card class="account shadow">
+            <div v-for="item in users" class="vx-col w-full sm:w-1/2 lg:w-1/4 mb-base px-2.5" v-bind:key="item.id">
+                <vx-card class="account shadow text-center">
                     <img :src="item.src" class="text-center mx-auto" width="100px"/>
-                        <div class="ml-auto cursor-pointer flex justify-around action" style="width: 4rem">
-                            <vs-button @click="EditNewData" color="rgb(255,255,255)" text-color="rgb(255,159,67)" size="small" radius icon-pack="feather" icon="icon-edit" class=" shadow"/>
-                            <vs-button @click.stop="" color="rgb(255,255,255)" text-color="#EA5455" size="small" radius icon-pack="feather" icon="icon-trash-2" class=" shadow"/>
+                        <div class="mx-auto cursor-pointer flex justify-around action" style="width: 4rem">
+                            <vs-button @click="gotoEdit(item.id)" color="rgb(255,255,255)" text-color="rgb(255,159,67)" size="small" radius icon-pack="feather" icon="icon-edit" class=" shadow"/>
+                            <vs-button @click.stop="openDeleteConfirm(item.id)" color="rgb(255,255,255)" text-color="#EA5455" size="small" radius icon-pack="feather" icon="icon-trash-2" class=" shadow"/>
                         </div>
-                    <h4 class="text-center">{{item.name}}</h4>
+                    <h4 class="text-center">{{item.name || $t('NA')}}</h4>
                     <div class="flex justify-between">
-                        <span>{{item.phone}}</span>
+                        <span>{{item.mobail}}</span>
                         <span> | </span>
-                        <span>{{item.Email}}</span>
+                        <span>{{item.email}}</span>
                     </div>
-                    <h6 class="text-center">{{item.title}}</h6>
+                    <!--<h6 class="text-center">{{item.title}}</h6>-->
                 </vx-card>
             </div>
         </div>
@@ -25,13 +25,13 @@
 
 export default {
         props:{
-            accounts:{
+            users:{
                 type: Array
             },
         },
         data() {
         return {
-
+            ItemToDelete: null
         }
         
     },
@@ -39,9 +39,22 @@ export default {
 
     },
     methods: {
-        EditNewData() {
-            this.$router.push({path: '/AdminEdit'})
+        gotoEdit(id){
+        this.$router.push({path: 'admins/edit/' + id})
         },
+        openDeleteConfirm(id) {
+        this.ItemToDelete = id;
+        this.$vs.dialog({
+            type: 'confirm',
+            color: 'danger',
+            title: this.$t('Delete'),
+            text: 'هل أنت متأكدأنك تريد حذف هذا المستخدم نهائياً؟',
+            accept: this.deleteUser
+        })
+     },
+    deleteUser(){
+      this.$store.dispatch("userManagement/removeUser", this.ItemToDelete).catch(err => { console.error(err) })
+    }
     },
 }
 </script>
@@ -54,9 +67,7 @@ export default {
             margin-top: -4rem;
         }
         .action{
-            position: absolute;
-            top:3rem;
-            right: 4rem;     
+            margin-top: -1rem;
         }
         h4{
             font-size: .8rem;
@@ -69,7 +80,7 @@ export default {
             color: #ACACAC;
         }
         span{
-            font-size: .6rem;
+            font-size: .7rem;
             color: #ACACAC;
         }
         .vs-button.small:not(.includeIconOnly) {

@@ -39,7 +39,7 @@
           <div>
             <!-- Close Button -->
             <template v-if="showCloseButton">
-              <feather-icon icon="XIcon" class="m-0 cursor-pointer" @click="$store.commit('TOGGLE_IS_VERTICAL_NAV_MENU_ACTIVE', false)" />
+              <feather-icon icon="XIcon" class="m-0 cursor-pointer XIcon" @click="$store.commit('TOGGLE_IS_VERTICAL_NAV_MENU_ACTIVE', false)" />
             </template>
 
             <!-- Toggle Buttons -->
@@ -385,6 +385,9 @@ export default {
 
 
 <style lang="scss">
+.v-nav-menu{
+  color: #626262;
+}
 .v-nav-menu .vs-sidebar--item a span {
     font-size: 12px;
 }

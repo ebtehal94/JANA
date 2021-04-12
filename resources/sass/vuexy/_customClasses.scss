@@ -304,13 +304,11 @@
 // ======================================================================================
 
 .vs-input-no-border {
-  .vs-input--input {
-    border: none !important;
 
     &:focus {
       border: none !important;
     }
-  }
+  
 }
 
 .vs-input-no-shdow-focus {

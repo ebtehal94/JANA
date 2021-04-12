@@ -13,7 +13,7 @@
             <div class="vx-col  search-page__search-bar flex">
                 <vs-input
                 icon-no-border
-                placeholder=" اكتب كلمة للبحث"
+                :placeholder="$t('SearchBar')" 
                 icon-after vs-icon-after="true"
                 v-model="searchQuery"
                 class="sm:w-full md:w-full input-rounded-full"
@@ -42,7 +42,7 @@
                             <AllCustomers :display="false" :customers="customers"/>
                         </vs-tab>
                         <vs-tab label="الحسابات المعلقة">
-                            <AllCustomers :display="true" :customers="customers" />
+                            <AllCustomers display="pending" :show="true" :customers="customers" />
                             <!--<SuspendedAccounts pending=true :accounts="accounts"/>-->
                         </vs-tab>
                         <vs-tab label="عملاء جدد استخدموا كود الإحالات">
@@ -93,12 +93,17 @@ export default{
         },
     },
     created() {
-      if(!moduleCustomerManagement.isRegistered) {
-        this.$store.registerModule('customerManagement', moduleCustomerManagement)
-        moduleCustomerManagement.isRegistered = true
-      }
-
-      this.$store.dispatch("customerManagement/fetchCustomers").catch(err => { console.error(err) })
+        if(!moduleCustomerManagement.isRegistered) {
+            this.$store.registerModule('customerManagement', moduleCustomerManagement)
+            moduleCustomerManagement.isRegistered = true
+        }
+        var link = "customerManagement/fetchCustomers"
+        if (this.display == 'pending'){
+            this.$store.dispatch(link, {status: [0]}).catch(err => { console.error(err) })
+        }else if (this.display == 'new_customer'){
+            this.$store.dispatch(link, {filter: 'new_customer'}).catch(err => { console.error(err) })
+        }else
+        this.$store.dispatch(link).catch(err => { console.error(err) })
     }
 }
 </script>

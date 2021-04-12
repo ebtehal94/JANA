@@ -4,7 +4,7 @@
             <div class="vx-col search-page__search-bar flex">
                 <vs-input 
                 icon-no-border 
-                placeholder="اكتب كلمة للبحث" 
+                :placeholder="$t('SearchBar')"  
                 v-model="searchQuery"
                 icon-after vs-icon-after="true"  
                 class="sm:w-full md:w-full input-rounded-full" 
@@ -32,7 +32,7 @@
                             <AllStores :stores="stores" />
                         </vs-tab>
                         <vs-tab :label="$t('PendingAccounts')">
-                            <AllStores :display="true" :stores="stores" />
+                            <AllStores display="pending" :stores="stores" />
                         </vs-tab>
                     </vs-tabs>
                 </vx-card>
@@ -50,19 +50,25 @@ export default {
         AllStores,
         SuspendedStore
     },
+    props:{
+        display:{
+            required: false
+        },
+       
+    },
     data() {
         return {
             searchQuery:'',
-            stores:[
-                {"id":1,"name":"اكسترا ستور","number":"14 عرض تم استخدامها 18 مرة",src:require('@assets/images/img-1.png'),"phone":"0512345678","Email":"jana@jana.com","location":"الشرقية-شارع الملك عبدالله"},
-                {"id":2,"name":"اكسترا ستور","number":"14 عرض تم استخدامها 18 مرة",src:require('@assets/images/img-2.png'),"phone":"0512345678","Email":"jana@jana.com","location":"الشرقية-شارع الملك عبدالله"},
-                {"id":3,"name":"اكسترا ستور","number":"14 عرض تم استخدامها 18 مرة",src:require('@assets/images/img-3.png'),"phone":"0512345678","Email":"jana@jana.com","location":"الشرقية-شارع الملك عبدالله"},
-                {"id":4,"name":"اكسترا ستور","number":"14 عرض تم استخدامها 18 مرة",src:require('@assets/images/img-4.png'),"phone":"0512345678","Email":"jana@jana.com","location":"الشرقية-شارع الملك عبدالله"},
-                {"id":5,"name":"اكسترا ستور","number":"14 عرض تم استخدامها 18 مرة",src:require('@assets/images/img-2.png'),"phone":"0512345678","Email":"jana@jana.com","location":"الشرقية-شارع الملك عبدالله"},
-                {"id":6,"name":"اكسترا ستور","number":"14 عرض تم استخدامها 18 مرة",src:require('@assets/images/img-1.png'),"phone":"0512345678","Email":"jana@jana.com","location":"الشرقية-شارع الملك عبدالله"},
-                {"id":7,"name":"اكسترا ستور","number":"14 عرض تم استخدامها 18 مرة",src:require('@assets/images/img-3.png'),"phone":"0512345678","Email":"jana@jana.com","location":"الشرقية-شارع الملك عبدالله"},
-                {"id":8,"name":"اكسترا ستور","number":"14 عرض تم استخدامها 18 مرة",src:require('@assets/images/img-4.png'),"phone":"0512345678","Email":"jana@jana.com","location":"الشرقية-شارع الملك عبدالله"}
-            ],
+           // stores:[
+            //    {"id":1,"name":"اكسترا ستور","number":"14 عرض تم استخدامها 18 مرة",src:require('@assets/images/img-1.png'),"phone":"0512345678","Email":"jana@jana.com","location":"الشرقية-شارع الملك عبدالله"},
+            //    {"id":2,"name":"اكسترا ستور","number":"14 عرض تم استخدامها 18 مرة",src:require('@assets/images/img-2.png'),"phone":"0512345678","Email":"jana@jana.com","location":"الشرقية-شارع الملك عبدالله"},
+            //    {"id":3,"name":"اكسترا ستور","number":"14 عرض تم استخدامها 18 مرة",src:require('@assets/images/img-3.png'),"phone":"0512345678","Email":"jana@jana.com","location":"الشرقية-شارع الملك عبدالله"},
+            //    {"id":4,"name":"اكسترا ستور","number":"14 عرض تم استخدامها 18 مرة",src:require('@assets/images/img-4.png'),"phone":"0512345678","Email":"jana@jana.com","location":"الشرقية-شارع الملك عبدالله"},
+            //    {"id":5,"name":"اكسترا ستور","number":"14 عرض تم استخدامها 18 مرة",src:require('@assets/images/img-2.png'),"phone":"0512345678","Email":"jana@jana.com","location":"الشرقية-شارع الملك عبدالله"},
+            //    {"id":6,"name":"اكسترا ستور","number":"14 عرض تم استخدامها 18 مرة",src:require('@assets/images/img-1.png'),"phone":"0512345678","Email":"jana@jana.com","location":"الشرقية-شارع الملك عبدالله"},
+            //    {"id":7,"name":"اكسترا ستور","number":"14 عرض تم استخدامها 18 مرة",src:require('@assets/images/img-3.png'),"phone":"0512345678","Email":"jana@jana.com","location":"الشرقية-شارع الملك عبدالله"},
+            //    {"id":8,"name":"اكسترا ستور","number":"14 عرض تم استخدامها 18 مرة",src:require('@assets/images/img-4.png'),"phone":"0512345678","Email":"jana@jana.com","location":"الشرقية-شارع الملك عبدالله"}
+           // ],
         }
     },
     computed: {
@@ -82,7 +88,11 @@ export default {
         moduleStoreManagement.isRegistered = true
       }
 
-      this.$store.dispatch("storeManagement/fetchStores").catch(err => { console.error(err) })
+      if(this.dispaly == 'pending'){
+          this.$store.dispatch("storeManagement/fetchStores" , {status: [0]}).catch(err => { console.error(err) })
+      }
+      else
+        this.$store.dispatch("storeManagement/fetchStores").catch(err => { console.error(err) })
     },
 }
 </script>

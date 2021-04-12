@@ -4,12 +4,14 @@
       <div slot="no-body" class="tabs-container md:px-6 pt-6 md:pb-4">
         <!-- Content Row -->
         <div class="vx-row">
-          <div class="vx-col hidden lg:block lg:w-2/5 justify-center items-center">
-            <div class="upload ml-8 mt-24">
-              <input type="file" class="hidden" ref="uploadImgInput" multiple @change="updateCurrImg" accept="image/*">
-              <vs-button v-if="dataUploadedImages.length === 0" class="mt-16 ml-10" type="transparent" @click="$refs.uploadImgInput.click()">
-              <img src="@assets/images/Uploader.png" alt="upload" width="90"/>
-              </vs-button>
+          <div class="vx-col w-full lg:block lg:w-2/5 justify-center items-center">
+            <div class="center">
+              <div class="upload mt-16 mb-8">
+                <input type="file" class="hidden" ref="uploadImgInput" @change="updateCurrImg" accept="image/*">
+                <vs-button v-if="dataUploadedImages.length === 0" class="mt-16 ml-4" type="transparent" @click="$refs.uploadImgInput.click()">
+                <img src="@assets/images/Uploader.png" alt="upload" width="100"/>
+                </vs-button>
+              </div>
             </div>
           </div>
           <div class="vx-col sm:w-full md:w-full lg:w-1/2">
@@ -27,13 +29,13 @@
                     <vs-input
                       class="w-full text-base"
                       :placeholder="$t('fullName')"
-                      v-model="admin_data.name"
+                      v-model="user_data.name"
                       v-validate="'required'"
                       icon-no-border
                       icon="icon"
                       name="name"/>
 
-                    <span v-if="!errors.has('name') && admin_data.name">
+                    <span v-if="!errors.has('name') && user_data.name">
                       <icon name="confirm" class="icon left-icon"/>
                     </span>
                     <span v-else-if="errors.has('name')">
@@ -49,10 +51,10 @@
                     icon-no-border
                     icon="icon"
                     :placeholder="$t('email')"
-                    v-model="admin_data.email"
+                    v-model="user_data.email"
                     class="w-full mt-2"/>
 
-                   <span v-if="!errors.has('email') && admin_data.email">
+                   <span v-if="!errors.has('email') && user_data.email">
                     <icon name="confirm" class="icon left-icon"/>
                   </span>
                   <span v-else-if="errors.has('email')">
@@ -64,7 +66,7 @@
                   <icon name="mobile" class="icon phone-icon"/>
                   <vs-input
                     :placeholder="$t('mobile')"
-                    v-model="admin_data.mobile"
+                    v-model="user_data.mobile"
                     type="number"
                     icon-no-border
                     icon="icon"
@@ -72,7 +74,7 @@
                     class="w-3/4 mt-2 px-3"/>
 
                   <vs-input
-                  v-model="admin_data.cc"
+                  v-model="user_data.cc"
                   type="text"
                   disabled
                   dir="ltr"
@@ -81,29 +83,12 @@
                   class="w-1/5 mt-2"
                   placeholder="966+"/>
 
-                  <span v-if="!errors.has('mobile') && admin_data.mobile">
+                  <span v-if="!errors.has('mobile') && user_data.mobile">
                     <icon name="confirm" class="icon left-phone-icon"/>
                   </span>
                   <span v-else-if="errors.has('mobile')">
                     <icon name="cross" class="icon left-phone-icon"/>
                   </span>
-                </div>
-
-                <div class="bg-input">
-                    <icon name="city" class="icon"/>
-                    <v-select class="w-full mt-2"
-                     v-model="admin_data.city_id"
-                     :placeholder="$t('Location')"
-                     label="text" :options="cities_list"
-                     :reduce="text => text.value"
-                     :dir="$vs.rtl ? 'rtl' : 'ltr'" />
-
-                    <span v-if="!errors.has('city_id') && admin_data.city_id">
-                      <icon name="confirm" class="icon left-icon"/>
-                    </span>
-                    <span v-else-if="errors.has('city_id')">
-                      <icon name="cross" class="icon left-icon"/>
-                    </span>
                 </div>
 
                 <div class="bg-input">
@@ -115,10 +100,10 @@
                     type="password"
                     icon-no-border
                     icon="icon"
-                    v-model="admin_data.password"
+                    v-model="user_data.password"
                     class="w-full mt-2"/>
 
-                  <span v-if="!errors.has('password') && admin_data.password">
+                  <span v-if="!errors.has('password') && user_data.password">
                     <icon name="confirm" class="icon left-icon"/>
                   </span>
                   <span v-else-if="errors.has('password')">
@@ -128,13 +113,13 @@
 
                 <div class="bg-input">
                     <v-select class="w-full mt-2"
-                     v-model="status"
+                     v-model="user_data.status"
                      :placeholder="$t('accountStatus')"
                      label="text" :options="status_list"
                      :reduce="text => text.value"
                      :dir="$vs.rtl ? 'rtl' : 'ltr'" />
 
-                    <span v-if="!errors.has('status') && status">
+                    <span v-if="!errors.has('status') && user_data.status">
                       <icon name="confirm" class="icon left-icon"/>
                     </span>
                     <span v-else-if="errors.has('status')">
@@ -176,21 +161,12 @@ export default {
   },
   data() {
     return {
-      admin_data: { name: null, email: null, mobile: null, cc: '+966', city_id:null, password: null,},
-      cities_list: [
-        {text:'الرياض',value:1},
-        {text:'الدمام',value:2},
-        {text:'جدة',value:3},
-        {text:'تبوك',value:4}
-      ],
+      user_data: { name: null, email: null, mobile: null, cc: '+966', password: null,status:null},
       status_list: [
         {text:'غير نشط',value:1},
         {text:'نشط',value:2},
       ],
-      status:null,
       dataUploadedImages: [],
-      dataUploadedImagesForDisplay: [],
-      ImageToDelete: null,
     }
   },
   computed: {
@@ -200,59 +176,50 @@ export default {
   },
   methods: {
     updateCurrImg(input) {
-      if (input.target.files && input.target.files[0]) {
-        var reader = new FileReader()
-        reader.onload = e => {
-          this.dataUploadedImages = input.target.files
-
-            const url = URL.createObjectURL(this.dataUploadedImages[i])
-            this.dataUploadedImages[i].url = url
-
-          // this.dataImg.push(input.target.files[0])
-          // this.dataImg = input.target.files[0]
-          // this.dataImg = e.target.result
-
-        }
-        reader.readAsDataURL(input.target.files[0])
-      }
+       if (input.target.files && input.target.files[0]) {
+         var reader = new FileReader()
+         reader.onload = e => {
+           this.dataUploadedImages= input.target.files[0]
+           console.log(input.target.files[0])
+         }
+         reader.readAsDataURL(input.target.files[0])
+       }
     },
     registerUser()  {
-      if(!this.validateForm) return
+      //if(!this.validateForm) return
 
-      // Here will go your API call for updating data
-      // You can get data in "this.data_local"
-       // const obj = {
-           // id: this.data_local.id,
-           // name: this.data_local.name,
-           // email: this.data_local.email,
-            //mobile: this.data_local.mobile,
-            //status: this.activeUserInfo.status,
-            //rule: this.activeUserInfo.rule
-       // }
-       // if (this.data_local.password){
-           // obj.password = this.data_local.password
-       // }
-
-        this.$store.dispatch("userManagement/updateUser", this.admin_data)
+      let formData = new FormData();
+      formData.append('name', this.user_data.name)
+      formData.append('email', this.user_data.email)
+      formData.append('cc', this.user_data.cc)
+      formData.append('mobile', this.user_data.mobile)
+      formData.append('password', this.user_data.password)
+      formData.append('status', this.user_data.status)
+      if (this.dataUploadedImages){
+          formData.append('image', this.dataUploadedImages);
+      }
+      if (this.user_data.id != null && this.user_data.id > 0){
+        var link = "adminManagement/updateUser"
+      }else{
+        var link = "adminManagement/addUser"
+      }
+      this.$store.dispatch(link,formData)                                 
         .then(res => {
-                        if( res.data.statusCode == 200 ){
-                        this.$vs.notify({
-                        color: 'success',
-                        title: 'Successfull',
-                        text: 'تم التسجيل بنجاح'
-                        })
-                        window.location.reload()
-                    }else{
-                        this.$vs.notify({
-                        color: 'danger',
-                        title: 'Error',
-                        text: 'حدث خطأ ما'
-                        })
-                    }
-                        })
-        .catch(err => { console.error(err) })
-
-
+          if( res.data.statusCode == 200 ){
+            this.$vs.notify({
+             color: 'success',
+             title: 'Successfull',
+             text: 'تم بنجاح'
+             })
+          }else{
+            this.$vs.notify({
+            color: 'danger',
+            title: 'Error',
+            text: 'حدث خطأ ما'
+            })
+          }
+        })
+      .catch(err => { console.error(err) })
     },
 
 
@@ -262,6 +229,13 @@ export default {
     if(!moduleUserManagement.isRegistered) {
       this.$store.registerModule('userManagement', moduleUserManagement)
       moduleUserManagement.isRegistered = true
+    }
+    if (this.$route.params.userID != null){
+      this.$store.dispatch("userManagement/fetchUser", this.$route.params.userID).catch(err => { console.error(err) })
+      .then((res) => {
+        this.formData = res.data.user
+      })
+      .catch((error) => console.log(error))
     }
 
   }
@@ -296,6 +270,9 @@ export default {
       color: #999999;
     }
   }
+  .center{
+      text-align: -webkit-center;
+    }
   .upload{
     background: rgb(243, 243, 243);
     border-radius: 50%;

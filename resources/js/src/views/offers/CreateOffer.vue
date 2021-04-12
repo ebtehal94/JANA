@@ -13,7 +13,7 @@
             <!-- Col Content -->
             <div class="bg-input">
               <vs-input 
-              class="w-full mt-4"
+              class="w-full mt-4 vs-input-no-shdow-focus"
               :placeholder="$t('OfferTitle')" 
               v-model="offer_data.title_ar" 
               v-validate="'required|alpha_spaces'" 
@@ -54,7 +54,7 @@
             <div>
               <div class="bg-input">
                 <vs-input 
-                class="w-full mt-4"
+                class="w-full mt-4 vs-input-no-shdow-focus"
                 :placeholder="$t('OfferTitle')" 
                 v-model="offer_data.title_en" 
                 v-validate="'required|alpha_spaces'" 
@@ -142,7 +142,7 @@
             <div class="vx-row flex mt-4 mx-0">
               <div class="vx-col w-full md:w-1/3 add-img">
                 <input type="file" class="hidden" ref="uploadImgInput" multiple @change="updateCurrImg" accept="image/*">
-                <vs-button v-if="dataUploadedImages.length === 0" class="text-gray mt-4 ml-8" icon-pack="feather" type="transparent" icon="icon-plus" @click="$refs.uploadImgInput.click()"/>
+                <vs-button v-if="dataUploadedImages.length === 0" class="text-gray mt-4" icon-pack="feather"  type="transparent" icon="icon-plus" @click="$refs.uploadImgInput.click()"/>
                 <h5 class="text-gray text-xs text-center">{{ $i18n.locale == 'en' ? 'Upload Image' : 'اضافة صورة' }}</h5>
               </div>
               <div class="vx-col w-full md:w-1/3">
@@ -166,7 +166,7 @@
                 <!-- Col Content -->
 
                   <vs-input
-                  class="w-full mt-4 -m-4"
+                  class="w-full mt-4 -m-4 vs-input-no-shdow-focus"
                   :placeholder="$t('Price')" 
                   v-model="offer_data.price_before" 
                   v-validate="'required'" 
@@ -183,7 +183,7 @@
                 <!-- Col Content -->
 
                   <vs-input 
-                  class="w-full mt-4 -m-2"
+                  class="w-full mt-4 -m-2 vs-input-no-shdow-focus"
                   :placeholder="$t('Price')" 
                   v-model="offer_data.price" 
                   v-validate="'required'" 
@@ -199,13 +199,11 @@
                 </div>
 
                 <!-- Col Content -->
-
-                  <vs-input 
-                  class="w-full mt-4"
-                  placeholder="14/14/2021" 
+                  <flat-pickr
+                  class="w-full mt-4" 
                   v-model="offer_data.expiry" 
-                  v-validate="'required'" 
-                  name="expiry" />
+                  placeholder="14-14-2021" 
+                  v-validate="'required'" />
                   <span class="text-danger text-sm"  v-show="errors.has('expiry')">{{ errors.first('expiry') }}</span>
             </div>
           </div>
@@ -271,7 +269,8 @@
 <script>
 import vSelect from 'vue-select'
 import icon from '@/layouts/components/icon.vue'
-
+import flatPickr from 'vue-flatpickr-component';
+import 'flatpickr/dist/flatpickr.css';
 
 // Store Module
 import moduleOfferManagement from '@/store/offer-management/moduleOfferManagement.js'
@@ -279,7 +278,8 @@ import moduleOfferManagement from '@/store/offer-management/moduleOfferManagemen
 export default {
   components: {
     icon,
-    vSelect
+    vSelect,
+    flatPickr
   },
   data() {
     return {
@@ -413,6 +413,12 @@ export default {
     .add-img{
       border: 1px solid #eee;
       border-radius: 15px;
+      text-align: center;
+      text-align: -webkit-center;
+    }
+    .vs-input--input:focus{
+      -webkit-box-shadow: none !important;
+      box-shadow: none !important;
     }
    .vs-input--input{
     .normal {
@@ -422,11 +428,11 @@ export default {
     .vs-button.small:not(.includeIconOnly) {
       padding: 0.4rem 5rem;
     }
+    .flatpickr-input{
+      border-radius:30px ;
+      font-size: .9rem;
+    }
 
-
-}
-
-@media only screen and (min-width: 375px) and (max-width: 600px) {
 
 }
 
@@ -438,6 +444,17 @@ export default {
       }
     }
   }
+}
+@media (min-width: 375px) and (max-width: 600px){
+   #create-offer{
+     .offer-info {
+      .bg-input{
+        .left-icon{
+            left: 88%;
+        }
+      }
+     }
+   }
 }
 
 @media only screen and (min-width: 320px)  and (max-width: 360px) {

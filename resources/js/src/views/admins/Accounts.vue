@@ -13,16 +13,16 @@
             <div class="vx-col search-page__search-bar flex">
                 <vs-input 
                 icon-no-border 
-                placeholder="اكتب كلمة للبحث" 
+                :placeholder="$t('SearchBar')" 
                 icon-after vs-icon-after="true"
                 v-model="searchQuery" 
-                class="sm:w-1/2 md:w-full  input-rounded-full" 
+                class="sm:w-full md:w-full  input-rounded-full" 
                 icon="icon-search" 
                 icon-pack="feather" />
             </div>
             <div class="vx-col cursor-pointer flex">
                 <vs-button
-                    class="sm:w-1/2 md:w-full  rounded-full text-xs font-bold shadow-none"
+                    class="sm:w-full md:w-full  rounded-full text-xs font-bold shadow-none"
                     color="rgb(255, 255, 255)"
                     text-color="#DC6059"
                     icon-after vs-icon-after="true"
@@ -39,7 +39,7 @@
                 <vx-card class="mt-8 pt-0">
                     <vs-tabs class="tabs-shadow-none">
                         <vs-tab :label="$t('AllAccounts')">
-                            <AllAccounts :accounts="accounts" />
+                            <AllAccounts :users="users" />
                         </vs-tab>
                     </vs-tabs>
                 </vx-card>
@@ -51,33 +51,45 @@
 <script>
 import axios from "@/axios.js"
 import AllAccounts from '@/layouts/components/AllAccounts.vue'
+
+// Store Module
+import moduleUserManagement from '@/store/user-management/moduleUserManagement.js'
 export default{
     components: {
         AllAccounts
     },
     data() {
         return {
-            accounts:[
-                {"id":1,"name":"محمد ناصر علي",src:require('@assets/images/admin.png'),"phone":"0512345678","Email":"jana@jana.com","title":"مدير العلاقات العامة"},
-                {"id":2,"name":"محمد ناصر علي",src:require('@assets/images/admin.png'),"phone":"0512345678","Email":"jana@jana.com","title":"مدير العلاقات العامة"},
-                {"id":3,"name":"محمد ناصر علي",src:require('@assets/images/admin.png'),"phone":"0512345678","Email":"jana@jana.com","title":"مدير العلاقات العامة"}
-            ],
+            // accounts:[
+                // {"id":1,"name":"محمد ناصر علي",src:require('@assets/images/admin.png'),"phone":"0512345678","Email":"jana@jana.com","title":"مدير العلاقات العامة"},
+                // {"id":2,"name":"محمد ناصر علي",src:require('@assets/images/admin.png'),"phone":"0512345678","Email":"jana@jana.com","title":"مدير العلاقات العامة"},
+                // {"id":3,"name":"محمد ناصر علي",src:require('@assets/images/admin.png'),"phone":"0512345678","Email":"jana@jana.com","title":"مدير العلاقات العامة"}
+            // ],
             searchQuery: '',
             
         }
     },
     computed: {
-
+        users() {
+            return this.$store.state.userManagement.users
+        },
     },
     methods: {
-         addNewData() {
-        this.$router.push({path: '/CreateAdmin'})
+        addNewData() {
+            this.$router.push({path: '/admins/create'})
         },
     },
     created() {
+        if(!moduleUserManagement.isRegistered) {
+            this.$store.registerModule('userManagement', moduleUserManagement)
+            moduleUserManagement.isRegistered = true
+        }
+
+        this.$store.dispatch("userManagement/fetchUsers").catch(err => { console.error(err) })
+        },
 
     }
-}
+
 </script>
 
 <style lang="scss" scoped>
@@ -112,7 +124,6 @@ export default{
 @media only screen and (min-width: 360px) and (max-width: 767px) {
     .vs-button:not(.vs-radius):not(.includeIconOnly):not(.small):not(.large) {
         padding: .5rem 2rem !important;
-        margin-top: 1rem;
     }
 }
 </style>

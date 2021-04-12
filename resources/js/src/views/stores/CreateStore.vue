@@ -5,9 +5,10 @@
         <!-- Content Row -->
         <div class="vx-row">
           <div class="vx-col w-full md:w-1/2 pr-8 mt-4 justify-center items-center">
-            <div class="upload md:ml-16 lg:ml-24">
+          <div class="center">
+            <div class="upload">
               <input type="file" class="hidden" ref="uploadImgInput" @change="updateCurrImg" accept="image/*">
-              <vs-button v-if="dataUploadedImages.length === 0" class="mt-12 ml-8" type="transparent" @click="$refs.uploadImgInput.click()">
+              <vs-button v-if="dataUploadedImages.length === 0" class="mt-12 mx-auto" type="transparent" @click="$refs.uploadImgInput.click()">
               <img src="@assets/images/Uploader.png" alt="upload" width="90"/>
               </vs-button>
             </div>
@@ -15,10 +16,11 @@
               <p>تاريخ الإنضمام<span class="pl-4 date">15/4/2021</span></p>
               <p>تاريخ آخر عرض<span class="pl-4 date">15/4/2021</span></p>
             </div>
+          </div>
             <!-- Col Header -->
               <div class="vx-card__title mt-5">
                 <div class="separator">
-                  <h4 class="mb-4 text-base">طريقة الإتصال</h4>
+                  <h4 class="mb-4 text-base">{{$i18n.locale == "en" ? "Method of connection" : "طريقة الاتصال"}}</h4>
                 </div>
               </div>
 
@@ -47,6 +49,34 @@
                   <icon name="confirm" class="icon left-phone-icon"/>
                 </span>
                 <span v-else-if="errors.has('mobile')">
+                  <icon name="cross" class="icon left-phone-icon"/>
+                </span>
+              </div>
+              <div class="vx-row bg-input">
+                <icon name="phone" class="icon phone-icon"/>
+                <vs-input
+                :placeholder="$t('phone')"
+                v-model="user.phone"
+                type="number"
+                icon-no-border
+                icon="icon"
+                v-validate="'required|min:7'"
+                class="w-3/4 mt-2 px-3"/>
+
+                <vs-input
+                v-model="user.cc"
+                type="text"
+                disabled
+                dir="ltr"
+                icon-no-border
+                v-validate="'required'"
+                class="w-1/5 mt-2"
+                placeholder="966+"/>
+
+                <span v-if="!errors.has('phone') && user.phone">
+                  <icon name="confirm" class="icon left-phone-icon"/>
+                </span>
+                <span v-else-if="errors.has('phone')">
                   <icon name="cross" class="icon left-phone-icon"/>
                 </span>
               </div>
@@ -199,81 +229,105 @@
                   <h4 class="mb-4 text-base">{{$t('branchData')}}</h4>
                 </div>
               </div>
-              <div class="bg-input">
-                <icon name="store-type" class="icon"/>
-                <v-select class="w-full mt-2"
-                v-model="branches_data.type"
-                :placeholder="$t('storeActivity')"
-                label="text" :options="stores"
-                :reduce="text => text.value"
-                :dir="$vs.rtl ? 'rtl' : 'ltr'"/>
+                <div v-for="branch, branchIndex in branches_data"  :key="branch.title +'-'+ branchIndex">
+                  <div class="mt-8" v-if="branchIndex > 0">
+                    <div class="separator">
+                      <h4 class="mb-4 text-lg font-extrabold">{{$t('additionalBranch')}}</h4>
+                      <span class="ml-4" @click="openBranchDeleteConfirm(branchIndex)">
+                        <icon name="cross" class="icon left-icon"/>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="bg-input">
+                    <icon name="store-type" class="icon"/>
+                    <v-select class="w-full mt-2"
+                    v-model="branch.type"
+                    :placeholder="$t('storeActivity')"
+                    label="text" :options="stores"
+                    :reduce="text => text.value"
+                    :dir="$vs.rtl ? 'rtl' : 'ltr'"/>
 
-                <span v-if="!errors.has('type') && branches_data.type">
-                  <icon name="confirm" class="icon left-icon"/>
-                </span>
-                <span v-else-if="errors.has('type')">
-                  <icon name="cross" class="icon left-icon"/>
-                </span>
-              </div>
+                    <span v-if="!errors.has('type') && branch.type">
+                      <icon name="confirm" class="icon left-icon"/>
+                    </span>
+                    <span v-else-if="errors.has('type')">
+                      <icon name="cross" class="icon left-icon"/>
+                    </span>
+                  </div>
 
-              <div class="bg-input">
-                <icon name="city" class="icon"/>
-                <v-select class="w-full mt-2"
-                v-model="branches_data.city_id"
-                :placeholder="$t('Location')"
-                label="name_ar" :options="cities_list"
-                :reduce="name_ar => name_ar.id"
-                :dir="$vs.rtl ? 'rtl' : 'ltr'" />
+                  <div class="bg-input">
+                    <icon name="city" class="icon"/>
+                    <v-select class="w-full mt-2"
+                     v-model="branch.city_id"
+                     :placeholder="$t('Location')"
+                     label="name_ar" :options="cities_list"
+                     :reduce="name_ar => name_ar.id"
+                     :dir="$vs.rtl ? 'rtl' : 'ltr'" />
 
-                <span v-if="!errors.has('city_id') && branches_data.city_id">
-                  <icon name="confirm" class="icon left-icon"/>
-                </span>
-                <span v-else-if="errors.has('city_id')">
-                  <icon name="cross" class="icon left-icon"/>
-                </span>
-              </div>
+                    <span v-if="!errors.has('city_id') && branch.city_id">
+                      <icon name="confirm" class="icon left-icon"/>
+                    </span>
+                    <span v-else-if="errors.has('city_id')">
+                      <icon name="cross" class="icon left-icon"/>
+                    </span>
+                  </div>
 
-              <div class="bg-input">
-                <icon name="store-name" class="icon"/>
-                <vs-input
-                class="w-full text-base mt-2 "
-                :placeholder="$t('branchName')"
-                v-model="branches_data.title"
-                v-validate="'required'"
-                icon-no-border
-                icon="icon"
-                :name="'title'"/>
+                  <div class="bg-input">
+                    <icon name="name" class="icon"/>
+                    <vs-input
+                    size="large"
+                    class="w-full text-base mt-2 "
+                    :placeholder="$t('branchName')"
+                    v-model="branch.title"
+                    v-validate="'required'"
+                    icon-no-border
+                    icon="icon"
+                    :name="branchIndex+'title'"/>
 
-                <span v-if="!errors.has('title') && branches_data.title">
-                  <icon name="confirm" class="icon left-icon"/>
-                </span>
-                <span v-else-if="errors.has('title')">
-                  <icon name="cross" class="icon left-icon"/>
-                </span>
-              </div>
+                    <span v-if="!errors.has(branchIndex+'title') && branch.title">
+                      <icon name="confirm" class="icon left-icon"/>
+                    </span>
+                    <span v-else-if="errors.has(branchIndex+'title')">
+                      <icon name="cross" class="icon left-icon"/>
+                    </span>
+                  </div>
 
-              <div class="bg-input">
-                <icon name="URL" class="icon"/>
-                <vs-input
-                class="w-full text-base mt-2 "
-                :placeholder="$t('website')"
-                v-model="branches_data.url"
-                v-validate="'url:require_protocol'"
-                icon-no-border
-                icon="icon"
-                :name="'url'"/>
+                  <div class="bg-input">
+                    <icon name="URL" class="icon"/>
+                      <vs-input
+                        size="large"
+                        class="w-full text-base mt-2 "
+                        :placeholder="$t('website')"
+                        v-model="branch.url"
+                        v-validate="'url:require_protocol'"
+                        icon-no-border
+                        icon="icon"
+                        :name="branchIndex+'url'"/>
 
-                <span v-if="!errors.has('url') && branches_data.url">
-                  <icon name="confirm" class="icon left-icon"/>
-                </span>
-                <span v-else-if="errors.has('url')">
-                  <icon name="cross" class="icon left-icon"/>
-                </span>
-              </div>
+                      <span v-if="!errors.has(branchIndex+'url') && branch.url">
+                        <icon name="confirm" class="icon left-icon"/>
+                      </span>
+                      <span v-else-if="errors.has(branchIndex+'url')">
+                        <icon name="cross" class="icon left-icon"/>
+                      </span>
+                  </div>
 
+                </div>
+
+               <div class="bg-input">
+                    <vs-button
+                    class="w-full mt-6 font-medium register-btn"
+                    color="#f0f0f0"
+                    gradient
+                    @click="addBranch">
+                    <span class="text-dark font-bold">
+                      {{$i18n.locale == "en" ? "Add Branch (Optional)" : " إضافة فرع (إختياري)"}}
+                    </span>
+                  </vs-button>
+                </div>
               <div class=" mb-3">
                 <vs-button
-                class="w-full mt-10 font-medium register-btn rounded-full"
+                class="w-full mt-6 font-medium register-btn rounded-full"
                 color="linear-gradient(to left,#E93F7D,#DA6653)"
                 gradient
                 @click="save_changes">
@@ -291,10 +345,10 @@
 <script>
 import vSelect from 'vue-select'
 import icon from '@/layouts/components/icon.vue';
-
+import { CitiesList } from '../pages/extra/CitiesList.js'
 // Store Module
 import moduleStoreManagement from '@/store/store-management/moduleStoreManagement.js'
-import { CitiesList } from '../pages/extra/CitiesList.js'
+
 export default {
   components: {
     icon,
@@ -347,9 +401,12 @@ export default {
         email: null,
         cc: '+966',
         mobile: null,
+        phone:null,
         password: null,
       },
-      branches_data: {type: null, title: null, city_id: null, url: null},
+      branches_data: [
+        {type: null, title: null, city_id: null, url: null}
+        ],
       dataUploadedImages: [],
 
     }
@@ -360,6 +417,36 @@ export default {
     },
   },
   methods: {
+     openBranchDeleteConfirm(index) {
+      this.ItemToDelete = index;
+       this.$vs.dialog({
+         type: 'confirm',
+         color: 'danger',
+         title: `حذف الفرع`,
+         text: 'هل انت متأكد من رغبتك بحذف هذا الفرع',
+         accept: this.deleteBranch
+       })
+     },
+     deleteBranch() {
+       if (this.branches_data.length > 1){
+         // const branchIndex = this.branches_data.findIndex((u) => u.type == this.ItemToDelete)
+         this.branches_data.splice(this.ItemToDelete, 1)
+           this.$vs.notify({
+             color: 'success',
+             title: 'تم الحذف',
+             text: 'تم حذف الفرع بنجاح',
+           })
+       }else {
+         this.$vs.notify({
+           color: 'danger',
+           title: 'خطاء',
+           text: 'يجب ابقاء فرع واحد على الاقل',
+         })
+       }
+     },
+    addBranch() {
+      this.branches_data.push({type: null, title: null, city_id: null, url: null})
+    },
     updateCurrImg(input) {
        if (input.target.files && input.target.files[0]) {
          var reader = new FileReader()
@@ -380,9 +467,7 @@ export default {
       formData.append('city_id', this.store_data.city_id)
       formData.append('status', this.store_data.status)
       if (this.dataUploadedImages){
-          
           formData.append('image', this.dataUploadedImages);
-        
       }
       if (this.store_data.id != null && this.store_data.id > 0){
         var link = "storeManagement/updateStore"
@@ -436,6 +521,9 @@ export default {
 
     .store-info{
         padding: 2.5rem;
+    }
+    .center{
+      text-align: -webkit-center;
     }
     .separator{
     display: flex;
@@ -506,6 +594,9 @@ export default {
   }
   .vs-button:not(.vs-radius):not(.includeIconOnly):not(.small):not(.large) {
       padding: .5rem 2rem;
+  }
+  .register-btn{
+    border-radius: 30px;
   }
 }
 

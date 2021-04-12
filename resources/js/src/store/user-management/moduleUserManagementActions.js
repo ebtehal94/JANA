@@ -12,7 +12,12 @@ import axios from "@/axios.js"
 export default {
   addUser({ commit }, user) {
     return new Promise((resolve, reject) => {
-      axios.post("/api/users/create", user)
+      axios.post("/api/users/create", user,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+      }
+      })
         .then((response) => {
           commit('ADD_USER', Object.assign(user, {id: response.data.user.id}))
           resolve(response)
@@ -22,7 +27,7 @@ export default {
   },
   fetchUsers({ commit }) {
     return new Promise((resolve, reject) => {
-      axios.get("/api/users/list")
+      axios.post("/api/users/list")
         .then((response) => {
           commit('SET_USERS', response.data)
           resolve(response)
@@ -41,7 +46,12 @@ export default {
   },
   updateUser({ commit }, user) {
     return new Promise((resolve, reject) => {
-      axios.post(`/api/users/update`, user)
+      axios.post(`/api/users/update`, user,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+      }
+      })
         .then((response) => {
           commit('UPDATE_USER', response.data.user)
           resolve(response)

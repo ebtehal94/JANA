@@ -58,7 +58,7 @@
           <div class="router-content pt-6" style="margin-top: 0;">
             <div class="vx-row mx-10">
               <div class="vx-col">
-                <feather-icon class="sm:inline-flex xl:hidden cursor-pointer p-2" icon="MenuIcon" @click.stop="showSidebar" />
+                <feather-icon class="sm:inline-flex xl:hidden cursor-pointer p-2 MenuIcon" icon="MenuIcon" @click.stop="showSidebar" />
               </div>
               <div class="vx-col hidden lg:block lg:block p-0">
                 <!-- SM - OPEN SIDEBAR BUTTON -->
@@ -294,7 +294,9 @@ export default {
     z-index: 10 !important;
     background: #fff;
   }
-
+  .MenuIcon{
+    color: #fff;
+  }
   .content-wrapper {
     .router-content{
       a{
