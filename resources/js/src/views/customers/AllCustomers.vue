@@ -21,8 +21,8 @@
                         <span>{{item.email}}</span>
                     </div>
                     <div class="mt-3 cursor-pointer flex items-cente justify-center" v-if="display == 'pending'">
-                        <vs-button color="#6FDD68" size="small">موافقة</vs-button>
-                        <vs-button color="danger" size="small">رفض</vs-button>
+                        <vs-button color="#6FDD68" size="small" @click="updateStatus(item.id, 1)">موافقة</vs-button>
+                        <vs-button color="danger" size="small" @click="updateStatus(item.id, 0)">رفض</vs-button>
                     </div>
                 </vx-card>
             </div>
@@ -38,7 +38,7 @@ export default {
           type: Array
       },
       display:{
-          type: Boolean,
+        default: false,
       },
   },
   data() {
@@ -63,6 +63,9 @@ export default {
      },
     deleteCustoemr(){
       this.$store.dispatch("customerManagement/removeCustomer", this.ItemToDelete).catch(err => { console.error(err) })
+    },
+    updateStatus(id, status){
+      this.$store.dispatch("customerManagement/updateCustomer", {id:id, status:status}).catch(err => { console.error(err) })
     }
   }
 }

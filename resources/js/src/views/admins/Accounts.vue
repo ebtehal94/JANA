@@ -50,7 +50,7 @@
 
 <script>
 import axios from "@/axios.js"
-import AllAccounts from '@/layouts/components/AllAccounts.vue'
+import AllAccounts from './AllAccounts.vue'
 
 // Store Module
 import moduleUserManagement from '@/store/user-management/moduleUserManagement.js'

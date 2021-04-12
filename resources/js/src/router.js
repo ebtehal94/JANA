@@ -219,7 +219,7 @@ const router = new Router({
             }
           },
           {
-            path: '/offers/edit/:offersID',
+            path: '/offers/edit/:offerID',
             name: 'edit-offer',
             //   component: () => import('@/views/pages/ComingSoon.vue'),
             component: () => import('./views/offers/CreateOffer.vue'),
@@ -243,6 +243,20 @@ const router = new Router({
                   { title: 'Customers', active: true },
               ],
                 rule: 'admin',
+            }
+          },
+          {
+            path: '/customers/create',
+            name: 'create-customer',
+            //   component: () => import('@/views/pages/ComingSoon.vue'),
+            component: () => import('./views/customers/CreateCustomer.vue'),
+            meta: {
+              breadcrumb: [
+                { title: 'Home', url: '/' },
+                { title: 'Customers'},
+                { title: 'CreateCustomer', active: true },
+              ],
+              rule: 'admin',
             }
           },
           {
@@ -301,8 +315,8 @@ const router = new Router({
             }
           },
         {
-            path: '/Accounts',
-            name: 'Accounts',
+            path: '/accounts',
+            name: 'accounts',
             // component: () => import('@/views/pages/ComingSoon.vue'),
             component: () => import('@/views/admins/Accounts.vue'),
             meta: {
@@ -342,8 +356,8 @@ const router = new Router({
             }
           },
         {
-            path: '/AppControl',
-            name: 'AppControl',
+            path: '/appControl',
+            name: 'appControl',
             // component: () => import('@/views/pages/ComingSoon.vue'),
             component: () => import('@/views/AppControl.vue'),
             meta: {
@@ -355,8 +369,8 @@ const router = new Router({
             },
         },
         {
-            path: '/Notification',
-            name: 'Notification',
+            path: '/notification',
+            name: 'notification',
             // component: () => import('@/views/pages/ComingSoon.vue'),
             component: () => import('@/views/Notification.vue'),
             meta: {

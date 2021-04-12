@@ -388,7 +388,7 @@ export default {
     margin: 2rem 2.5rem;
 
     .offer-info {
-        padding: 2.5rem;
+      padding: 2.5rem;
     .bg-input{
       position: relative;
       .left-icon{

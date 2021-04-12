@@ -9,7 +9,7 @@
                             <vs-button @click.stop="openDeleteConfirm(item.id)" color="danger" size="small" radius icon-pack="feather" icon="icon-trash-2"/>
                         </div>
                         <div class="item-image">
-                            <img :src="item.src" class="responsive card-img-top"/>
+                            <img :src="'/images/offers/'+item.link" class="responsive card-img-top"/>
                         </div>
                         <div class="p-3">
                             <div class="flex justify-between flex-wrap pt-2">

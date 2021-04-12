@@ -18,7 +18,7 @@
             <!-- Col Header -->
             <div class="vx-card__title">
                 <div class="separator">
-                    <h4 class="mb-4 text-base font-bold">{{$t('accountData')}}</h4>
+                    <h4 class="mb-4 text-base ">{{$t('accountData')}}</h4>
                 </div>
             </div>
 

@@ -17,8 +17,8 @@
                   <!-- Col Content -->
                   <div>
                       <div>
-                            <v-select class="w-full mt-2"
-                            placeholder="حدد المستعملين (العملاء)"
+                            <v-select class="w-full mt-2 text-sm"
+                            placeholder="حدد المستعملين"
                             v-model="customers"
                             v-validate="'required'"
                             label="text" :options="customers_list"
@@ -35,14 +35,12 @@
                     </div>
                      <!-- Col Content -->
                   <div>
-                    <vs-input
-                      class="w-full text-sm mt-2 "
-                      placeholder="15/4/2021 10:45 AM"
-                      v-model="date"
-                      v-validate="'required'"
-                      icon-no-border
-                      icon="icon"
-                      name="date"/>
+                    <flat-pickr
+                    class="w-full mt-2 " 
+                    v-model="date" 
+                    placeholder="14-14-2021" 
+                    v-validate="'required'" />
+                    <span class="text-danger text-sm"  v-show="errors.has('date')">{{ errors.first('date') }}</span>
                   </div>
                 </div>
             </div>
@@ -88,7 +86,7 @@
                 <vs-button
                   class="w-full font-semibold text-base rounded-full "
                   color="#ACACAC" type="border"
-                  @click="registerUser">
+                  @click="goBack">
                     {{$i18n.locale == "en" ? "Close" : "خروج"}} 
                 </vs-button>
               </div>
@@ -103,6 +101,8 @@
 <script>
 import vSelect from 'vue-select'
 import icon from '@/layouts/components/icon.vue';
+import flatPickr from 'vue-flatpickr-component';
+import 'flatpickr/dist/flatpickr.css';
 
 // Store Module
 import moduleUserManagement from '@/store/user-management/moduleUserManagement.js'
@@ -110,7 +110,8 @@ import moduleUserManagement from '@/store/user-management/moduleUserManagement.j
 export default {
   components: {
     icon,
-    vSelect
+    vSelect,
+    flatPickr 
   },
   data() {
     return {
@@ -131,6 +132,9 @@ export default {
     },
   },
   methods: {
+    goBack(){
+      this.$router.go(-1)
+    },
     save_changes() {
       if(!this.validateForm) return
 
@@ -188,6 +192,9 @@ export default {
   .notification-info{
       padding: 2.5rem;
     }
+    .flatpickr-input{
+      border-radius:30px ;
+    }
     .vs-textarea{
       height: 130px;
       border-radius: 20px;
@@ -198,6 +205,10 @@ export default {
   .v-select .vs__dropdown-toggle .vs__search {
       font-size: .8rem;
   }
+  .v-select .vs__dropdown-toggle .vs__selected-options {
+    padding: 2px 1rem 2px 0;
+  }
+  
 }
 
 @media only screen and (min-width: 375px) and (max-width: 600px) {
