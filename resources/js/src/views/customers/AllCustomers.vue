@@ -38,7 +38,7 @@ export default {
           type: Array
       },
       display:{
-        default: false,
+          type: Boolean,
       },
   },
   data() {
