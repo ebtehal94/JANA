@@ -10,10 +10,7 @@
 
 <template>
   <div class="layout--main" :class="[layoutTypeClass, navbarClasses, footerClasses, {'no-scroll': isAppPage}]">
-     <div v-if="showTip && $acl.not.check('admin')" class="app-notify flex justify-start items-center p-2">
-      <vs-icon icon="cancel" color="#fff" size="small" class="ml-32 cursor-pointer" @click="showTip = false"></vs-icon>
-      <p class="text-white p-3">{{$t('AppDownload')}}</p>
-    </div>
+
 
     <v-nav-menu
       :navMenuItems = "navMenuItems"
@@ -54,7 +51,7 @@
     </template>
     <!-- /Navbar -->
 
-      <div class="content-wrapper" :class="[{'header-margin': $acl.not.check('operator')}]">
+      <div class="content-wrapper">
           <div class="router-content pt-6" style="margin-top: 0;">
             <div class="vx-row mx-10">
               <div class="vx-col">
@@ -62,7 +59,7 @@
               </div>
               <div class="vx-col hidden lg:block lg:block p-0">
                 <!-- SM - OPEN SIDEBAR BUTTON -->
-               
+
                 <div  v-if="breadcrumbs!= null && breadcrumbs.length > 0" class="breadcrumbs mr-10  my-6">
                   <p class="text-white">
                     <span class="dashboard font-bold">{{$t('dashboard')}} </span>
@@ -127,7 +124,7 @@ export default {
     TheNavbarVertical,
     VNavMenu,
     I18n,
-    ProfileDropDown 
+    ProfileDropDown
   },
   data () {
     return {

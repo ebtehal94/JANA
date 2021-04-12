@@ -12,11 +12,11 @@
 
             <!-- Col Content -->
             <div class="bg-input">
-              <vs-input 
+              <vs-input
               class="w-full mt-4 vs-input-no-shdow-focus"
-              :placeholder="$t('OfferTitle')" 
-              v-model="offer_data.title_ar" 
-              v-validate="'required|alpha_spaces'" 
+              :placeholder="$t('OfferTitle')"
+              v-model="offer_data.title_ar"
+              v-validate="'required|alpha_spaces'"
               name="title_ar" />
 
               <span v-if="!errors.has('title_ar') && offer_data.title_ar">
@@ -28,13 +28,13 @@
             </div>
 
             <div class="bg-input">
-              <vs-textarea 
+              <vs-textarea
               :placeholder="$t('OfferDesc')"
-              v-model="offer_data.desc_ar" 
-              class="mt-2 w-full" 
+              v-model="offer_data.desc_ar"
+              class="mt-2 w-full"
               height="100px"
               name="desc_ar"/>
-              
+
               <span v-if="!errors.has('desc_ar') && offer_data.desc_ar">
                 <icon name="confirm" class="icon left-icon"/>
               </span>
@@ -53,11 +53,11 @@
             <!-- Col Content -->
             <div>
               <div class="bg-input">
-                <vs-input 
+                <vs-input
                 class="w-full mt-4 vs-input-no-shdow-focus"
-                :placeholder="$t('OfferTitle')" 
-                v-model="offer_data.title_en" 
-                v-validate="'required|alpha_spaces'" 
+                :placeholder="$t('OfferTitle')"
+                v-model="offer_data.title_en"
+                v-validate="'required|alpha_spaces'"
                 name="title_en" />
 
                 <span v-if="!errors.has('title_en') && offer_data.title_en">
@@ -68,10 +68,10 @@
                 </span>
               </div>
               <div class="bg-input">
-                <vs-textarea 
+                <vs-textarea
                 :placeholder="$t('OfferDesc')"
-                v-model="offer_data.desc_en" 
-                class="mt-2 w-full" 
+                v-model="offer_data.desc_en"
+                class="mt-2 w-full"
                 height="100px"
                 name="desc_en"/>
                 <span v-if="!errors.has('desc_en') && offer_data.desc_en">
@@ -100,8 +100,8 @@
                       :placeholder="$t('Category')"
                       v-model="offer_data.category_id"
                       v-validate="'required'"
-                      label="text" :options="category_list"
-                      :reduce="text => text.value"
+                      label="title_ar" :options="categories"
+                      :reduce="title_ar => title_ar.id"
                       :dir="$vs.rtl ? 'rtl' : 'ltr'" />
 
                     <span v-if="!errors.has('category_id') && offer_data.category_id">
@@ -167,9 +167,9 @@
 
                   <vs-input
                   class="w-full mt-4 -m-4 vs-input-no-shdow-focus"
-                  :placeholder="$t('Price')" 
-                  v-model="offer_data.price_before" 
-                  v-validate="'required'" 
+                  :placeholder="$t('Price')"
+                  v-model="offer_data.price_before"
+                  v-validate="'required'"
                   name="price_before" />
                   <span class="text-danger text-sm"  v-show="errors.has('price_before')">{{ errors.first('price_before') }}</span>
             </div>
@@ -182,11 +182,11 @@
 
                 <!-- Col Content -->
 
-                  <vs-input 
+                  <vs-input
                   class="w-full mt-4 -m-2 vs-input-no-shdow-focus"
-                  :placeholder="$t('Price')" 
-                  v-model="offer_data.price" 
-                  v-validate="'required'" 
+                  :placeholder="$t('Price')"
+                  v-model="offer_data.price"
+                  v-validate="'required'"
                   name="price" />
                   <span class="text-danger text-sm"  v-show="errors.has('price')">{{ errors.first('price') }}</span>
 
@@ -200,45 +200,40 @@
 
                 <!-- Col Content -->
                   <flat-pickr
-                  class="w-full mt-4" 
-                  v-model="offer_data.expiry" 
-                  placeholder="14-14-2021" 
+                  class="w-full mt-4"
+                  v-model="offer_data.expiry"
+                  placeholder="14-14-2021"
                   v-validate="'required'" />
                   <span class="text-danger text-sm"  v-show="errors.has('expiry')">{{ errors.first('expiry') }}</span>
             </div>
           </div>
 
-          <div class="vx-col w-full md:w-1/2">
+          <div v-if="$acl.check('admin')" class="vx-col w-full md:w-1/2">
             <!-- Col Header -->
             <div class="flex items-end">
               <span class="leading-none font-semibold text-xs">{{$i18n.locale == "en" ? "The Store" : "المتجر"}}</span>
             </div>
 
-            <!-- Col Content -->
-            <div>
-             <div>
-                <div class="bg-input text-sm">
-                    <v-select class="w-full mt-2 text-sm"
-                      :placeholder="$t('ChooseStore')"
-                      v-model="offer_data.store_id"
-                      v-validate="'required'"
-                      label="text" :options="category_list"
-                      :reduce="text => text.value"
-                      :dir="$vs.rtl ? 'rtl' : 'ltr'" />
+            <div class="bg-input text-sm">
+                <v-select class="w-full mt-2 text-sm"
+                  :placeholder="$t('ChooseStore')"
+                  v-model="offer_data.store_id"
+                  v-validate="'required'"
+                  label="name_ar" :options="stores"
+                  :reduce="name_ar => name_ar.id"
+                  :dir="$vs.rtl ? 'rtl' : 'ltr'" />
 
-                    <span
-                      v-if="!errors.has('store_id') && offer_data.store_id">
-                      <icon name="confirm" class="icon left-icon"/>
-                    </span>
-                    <span v-else-if="errors.has('store_id')">
-                      <icon name="cross" class="icon left-icon"/>
-                    </span>
-                 </div>
-            </div>
-            </div>
+                <span
+                  v-if="!errors.has('store_id') && offer_data.store_id">
+                  <icon name="confirm" class="icon left-icon"/>
+                </span>
+                <span v-else-if="errors.has('store_id')">
+                  <icon name="cross" class="icon left-icon"/>
+                </span>
+             </div>
           </div>
         </div>
-        
+
         <!-- Save & Reset Button -->
         <div class="vx-row flex justify-center mt-10">
             <vs-button
@@ -255,7 +250,7 @@
               class="mx-4 font-semibold text-sm rounded-full px-24"
               color="#ACACAC" type="border"
               @click="goBack">
-                {{ $i18n.locale == 'en' ? 'Close' : 'خروج' }} 
+                {{ $i18n.locale == 'en' ? 'Close' : 'خروج' }}
             </vs-button>
         </div>
 
@@ -284,12 +279,7 @@ export default {
   data() {
     return {
       offer_data: {title_ar:null,title_en: null, category_id: null, desc_ar:null,desc_en:null,status:null,price_before:null,price:null,expiry:null,store_id:null},
-      category_list:[
-        {text:'القسم الأول',value:1},
-        {text:'القسم الثاني',value:2},
-        {text:'القسم الثالث',value:3},
-        {text:'القسم الرابع',value:4}
-      ],
+      // categories:[],
       status_list: [
         {text:'غير نشط',value:1},
         {text:'نشط',value:2},
@@ -304,7 +294,12 @@ export default {
     }
   },
   computed: {
-
+    categories() {
+        return this.$store.state.offerManagement.categories
+    },
+    stores() {
+        return this.$store.state.offerManagement.stores
+    },
   },
   methods:{
     updateCurrImg(input) {
@@ -379,6 +374,13 @@ export default {
       })
       .catch((error) => console.log(error))
     }
+
+    this.$store.dispatch("offerManagement/fetchInfo").catch(err => { console.error(err) })
+    .then((res) => {
+      // this.categories = res.data.categories
+    })
+    .catch((error) => console.log(error))
+
   }
 }
 </script>

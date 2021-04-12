@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Models\Category;
+use App\Models\Store;
 use App\Models\Offer;
 use App\Models\OfferImage;
 use Illuminate\Http\Request;
@@ -28,6 +30,21 @@ class OfferController extends Controller
       }
 
       $response['offers']       = $offers->get();
+      $response['statusCode']   = 200;
+      return $response;
+    }
+
+
+    public function getInfo(Request $request)
+    {
+      $response                 = array();
+      $user                     = \Auth::Guard('api')->user();
+      $info                     = $request->all();
+      $response['categories']   = Category::select('id', 'title_ar', 'title_en')->get();
+      if ($user->rule == 'admin'){
+        $response['stores']       = Store::select('id', 'name_ar', 'name_en')->get();
+      }
+
       $response['statusCode']   = 200;
       return $response;
     }

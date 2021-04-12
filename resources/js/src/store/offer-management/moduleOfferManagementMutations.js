@@ -15,6 +15,12 @@ export default {
   SET_OFFERS(state, offers) {
     state.offers = offers
   },
+  SET_INFO(state, data) {
+    state.categories = data.categories
+    if (data.stores){
+      state.stores = data.stores
+    }
+  },
  // SET_USERS_ORDERS(state, payload) {
    // const userOrders = payload.orders.filter((order) => order.customer_id == payload.id)
    // state.orders = userOrders
