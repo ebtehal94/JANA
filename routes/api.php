@@ -50,6 +50,7 @@ Route::delete('/offers/delete/{id}', 'OfferController@remove');
 Route::post('/offers/addImages', 'OfferController@addImages');
 Route::get('/offers/{offer_id}/deleteImage/{image_id}', 'OfferController@deleteImage');
 
+
 Route::post('/store/list', 'StoreController@index');
 Route::post('/store/create', 'StoreController@create');
 Route::get('/store/edit/{id}', 'StoreController@edit');

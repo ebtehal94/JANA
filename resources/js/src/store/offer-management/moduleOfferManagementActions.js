@@ -25,6 +25,16 @@ export default {
         .catch((error) => { reject(error) })
     })
   },
+  fetchInfo({ commit }) {
+    return new Promise((resolve, reject) => {
+      axios.post("/api/offers/getInfo")
+        .then((response) => {
+          commit('SET_INFO', response.data)
+          resolve(response)
+        })
+        .catch((error) => { reject(error) })
+    })
+  },
   fetchOffers({ commit }) {
     return new Promise((resolve, reject) => {
       axios.post("/api/offers/list")
