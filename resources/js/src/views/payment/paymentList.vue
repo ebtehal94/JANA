@@ -51,6 +51,7 @@ export default {
     data() {
         return {
             payments: [],
+            dispaly:'',
             // users: [
             //     {"id": 1,"name": "14 متجر","username": "عميلة بطاقة جنى","date":"15/04/2020","amount": "143 ر.س","notes":"مقابل الإشتراك في التطبيق"},
             //     {"id": 2,"name": "14 متجر","username": "عميلة بطاقة جنى","date":"15/04/2020","amount": "143 ر.س","notes":"مقابل الإشتراك في التطبيق"},
@@ -73,18 +74,26 @@ export default {
     },
 
     created() {
-        axios.get('/api/payments/list')
-        .then((res) => {
-         this.payments = res.data.payments
-       })
-       .catch((error) => console.log(error))
+        if (this.dispaly == 'this_month'){
+            axios.get('/api/payments/list',{filter:'this_month'})
+            .then((res) => {
+            this.payments = res.data.payments
+            })
+            .catch((error) => console.log(error)) 
+        }else{
+            axios.get('/api/payments/list')
+            .then((res) => {
+            this.payments = res.data.payments
+            })
+            .catch((error) => console.log(error))
+        }
+       
     },
 }
 </script>
 
 <style lang="scss" scoped>
 #financial-operations{
-
     .vs-con-table .vs-con-tbody{
         padding: 2rem 0;
     }

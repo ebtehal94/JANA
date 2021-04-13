@@ -96,7 +96,7 @@
             <!-- Col Content -->
             <div>
                 <div class="bg-input text-sm">
-                    <v-select class="w-full mt-2 text-sm"
+                    <v-select class="w-full mt-4 text-sm"
                       :placeholder="$t('Category')"
                       v-model="offer_data.category_id"
                       v-validate="'required'"
@@ -139,17 +139,17 @@
             </div>
 
             <!-- Col Content -->
-            <div class="vx-row flex mt-4 mx-0">
-              <div class="vx-col w-full md:w-1/3 add-img">
+            <div class="vx-row flex mt-4 mx-0 offer-images">
+              <div class="vx-col w-full md:w-1/3 mb-4 add-img">
                 <input type="file" class="hidden" ref="uploadImgInput" multiple @change="updateCurrImg" accept="image/*">
-                <vs-button v-if="dataUploadedImages.length === 0" class="text-gray mt-4" icon-pack="feather"  type="transparent" icon="icon-plus" @click="$refs.uploadImgInput.click()"/>
+                <vs-button v-if="dataUploadedImages.length === 0" class="text-gray p-0" icon-pack="feather"  type="transparent" icon="icon-plus" @click="$refs.uploadImgInput.click()"/>
                 <h5 class="text-gray text-xs text-center">{{ $i18n.locale == 'en' ? 'Upload Image' : 'اضافة صورة' }}</h5>
               </div>
-              <div class="vx-col w-full md:w-1/3">
-                <img src="@assets/images/payment-methods.png" alt="" class="mx-auto lg:responsive" width="120">
+              <div class="vx-col w-full md:w-1/3 mb-4">
+                <img src="@assets/images/payment-methods.png" alt="Offer-image" class="mx-auto w-full lg:responsive" width="120">
               </div>
-              <div class="vx-col w-full md:w-1/3">
-                <img src="@assets/images/card.png" alt="" class="mx-auto lg:responsive" width="120">
+              <div class="vx-col w-full md:w-1/3 mb-4">
+                <img src="@assets/images/card.png" alt="Offer-image" class="mx-auto w-full lg:responsive" width="120">
               </div>
             </div>
           </div>
@@ -215,7 +215,7 @@
             </div>
 
             <div class="bg-input text-sm">
-                <v-select class="w-full mt-2 text-sm"
+                <v-select class="w-full mt-4 text-sm"
                   :placeholder="$t('ChooseStore')"
                   v-model="offer_data.store_id"
                   v-validate="'required'"
@@ -238,7 +238,7 @@
         <div class="vx-row flex justify-center mt-10">
             <vs-button
               size="small"
-              class="mx-4 font-semibold text-sm rounded-full"
+              class="mx-4 mb-4 font-semibold text-sm rounded-full"
               color="linear-gradient(to left,#E93F7D,#DA6653)"
               gradient
               @click="createOffer">
@@ -247,7 +247,7 @@
 
             <vs-button
               size="small"
-              class="mx-4 font-semibold text-sm rounded-full px-24"
+              class="mx-4 mb-4 font-semibold text-sm rounded-full px-24"
               color="#ACACAC" type="border"
               @click="goBack">
                 {{ $i18n.locale == 'en' ? 'Close' : 'خروج' }}
@@ -391,25 +391,25 @@ export default {
 
     .offer-info {
       padding: 2.5rem;
-    .bg-input{
-      position: relative;
-      .left-icon{
-        position: absolute;
-        top:13px;
-        left: 92%;
-        z-index: 9999;
-      }
-      .v-select{
-        .vs__dropdown-toggle{
-          padding: 3rem;
+      .bg-input{
+        position: relative;
+        .left-icon{
+          position: absolute;
+          top:13px;
+          left: 92%;
+          z-index: 9999;
         }
       }
-    }
       .vs-con-textarea{
           border-radius: 15px;
       }
       .vs-input--placeholder.normal {
           font-size: .8rem !important;
+      }
+    }
+    .offer-images{
+      img{
+        width: 100%;
       }
     }
     .add-img{

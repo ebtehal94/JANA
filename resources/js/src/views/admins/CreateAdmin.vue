@@ -116,7 +116,7 @@
                      v-model="user_data.status"
                      :placeholder="$t('accountStatus')"
                      label="text" :options="status_list"
-                     :reduce="text => text.value"
+                     :reduce="text => text.id"
                      :dir="$vs.rtl ? 'rtl' : 'ltr'" />
 
                     <span v-if="!errors.has('status') && user_data.status">
@@ -163,8 +163,8 @@ export default {
     return {
       user_data: { name: null, email: null, mobile: null, cc: '+966', password: null,status:null},
       status_list: [
-        {text:'غير نشط',value:1},
-        {text:'نشط',value:2},
+        {text:'غير نشط',id:1},
+        {text:'نشط',id:2},
       ],
       dataUploadedImages: [],
     }
@@ -199,9 +199,9 @@ export default {
           formData.append('image', this.dataUploadedImages);
       }
       if (this.user_data.id != null && this.user_data.id > 0){
-        var link = "adminManagement/updateUser"
+        var link = "userManagement/updateUser"
       }else{
-        var link = "adminManagement/addUser"
+        var link = "userManagement/addUser"
       }
       this.$store.dispatch(link,formData)                                 
         .then(res => {

@@ -39,14 +39,14 @@
                 <vx-card class="mt-8 pt-0">
                     <vs-tabs class="tabs-shadow-none">
                         <vs-tab label="كل العملاء">
-                            <AllCustomers :display="false" :customers="customers"/>
+                            <AllCustomers :customers="customers"/>
                         </vs-tab>
                         <vs-tab label="الحسابات المعلقة">
-                            <AllCustomers display="pending" :show="true" :customers="customers" />
+                            <AllCustomers display="pending" :customers="customers" />
                             <!--<SuspendedAccounts pending=true :accounts="accounts"/>-->
                         </vs-tab>
                         <vs-tab label="عملاء جدد استخدموا كود الإحالات">
-                            <AllCustomers :display="false" :customers="customers" />
+                            <AllCustomers display="new_customer" :customers="customers" />
                         </vs-tab>
                     </vs-tabs>
                 </vx-card>

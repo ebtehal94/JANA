@@ -31,9 +31,6 @@
                         <vs-tab :label="$t('AllStores')">
                             <AllStores :stores="stores" />
                         </vs-tab>
-                        <vs-tab :label="$t('PendingAccounts')">
-                            <AllStores display="pending" :stores="stores" />
-                        </vs-tab>
                     </vs-tabs>
                 </vx-card>
             </div>
@@ -87,11 +84,6 @@ export default {
         this.$store.registerModule('storeManagement', moduleStoreManagement)
         moduleStoreManagement.isRegistered = true
       }
-
-      if(this.dispaly == 'pending'){
-          this.$store.dispatch("storeManagement/fetchStores" , {status: [0]}).catch(err => { console.error(err) })
-      }
-      else
         this.$store.dispatch("storeManagement/fetchStores").catch(err => { console.error(err) })
     },
 }

@@ -10,7 +10,7 @@
                         </div>
                     <h4 class="text-center">{{item.name || $t('NA')}}</h4>
                     <div class="flex justify-between">
-                        <span>{{item.mobail}}</span>
+                        <span>{{item.mobile}}</span>
                         <span> | </span>
                         <span>{{item.email}}</span>
                     </div>

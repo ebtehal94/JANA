@@ -13,23 +13,23 @@
                         </div>
                         <div class="p-3">
                             <div class="flex justify-between flex-wrap pt-2">
-                                <h5>{{item.title}}</h5>
-                                <span class="date">{{item.date}}</span>
+                                <h5>{{item.title_ar}}</h5>
+                                <span class="date">{{item.expiry}}</span>
                                 <span class="status">{{item.status}}</span>
                             </div>
                             <p>{{item.subtitle}}</p>
                             <div class="flex justify-between">
                                 <star-rating :rtl="$vs.rtl" :star-size="12" :rating="3" :read-only="true" :increment="1"></star-rating>
                                 <ul>
-                                    <li class="price linetThrough"><span>{{item.price}} SAR</span></li>
-                                    <li class="disc-price"><span>{{item.disc_price}} SAR</span></li>
+                                    <li class="price linetThrough"><span>{{item.price_before}} SAR</span></li>
+                                    <li class="disc-price"><span>{{item.price}} SAR</span></li>
                                 </ul>
-                                <span class="discount">{{item.discount}}</span>
+                                <span class="discount">{{item.discount_perc}}</span>
                             </div>
                         </div>
                         <div class="-ml-6 cursor-pointer flex justify-center" v-if="display == 'pending'">
-                            <vs-button color="#6FDD68" size="small">موافقة</vs-button>
-                            <vs-button color="danger" size="small">رفض</vs-button>
+                            <vs-button color="#6FDD68" size="small" @click="updateStatus(item.id, 1)">موافقة</vs-button>
+                            <vs-button color="danger" size="small" @click="updateStatus(item.id, 0)">رفض</vs-button>
                         </div>
                     </template>
                 </vx-card>
@@ -46,6 +46,9 @@ export default {
         StarRating
     },
     props:{
+        display:{
+            type: String
+        }
     },
     data() {
         return {
@@ -68,7 +71,6 @@ export default {
             //     "status":"نشط","date":"15/04/2021","subtitle":"وصف مختصر وصف مختصر..","price":"350","disc_price":"297","discount":"15%"},
             // ],
             ItemToDelete: null,
-            display:'',
         }
     },
     computed: {
@@ -92,6 +94,9 @@ export default {
         },
         deleteOffer(){
          this.$store.dispatch("offerManagement/removeOffer", this.ItemToDelete).catch(err => { console.error(err) })
+        },
+        updateStatus(id, status){
+            this.$store.dispatch("offerManagement/updateOffer", {id:id, status:status}).catch(err => { console.error(err) })
         }
     },
     created() {
@@ -104,8 +109,6 @@ export default {
             this.$store.dispatch(link, {status: [0]}).catch(err => { console.error(err) })
         }else if (this.display == 'active'){
             this.$store.dispatch(link, {status: [1]}).catch(err => { console.error(err) })
-        }else if (this.display == 'expired'){
-            this.$store.dispatch(link, {status: [2]}).catch(err => { console.error(err) })
         }else if (this.display == 'most_used'){
             this.$store.dispatch(link, {filter: 'most_used'}).catch(err => { console.error(err) })
         }else

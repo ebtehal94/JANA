@@ -18,6 +18,7 @@
                             </div>
                             <div class="vx-col w-full md:w-1/4">
                                 <img src="@assets/images/payment-methods.png" alt="AppImage" class="w-full">
+                                <vs-button style="position: absolute; bottom: 0; margin: 1rem;" @click="openConfirm(img)" icon-pack="feather" icon="icon-trash" size="small" color="danger" type="filled" />
                             </div>
                             <div class="vx-col w-full md:w-1/4">
                                 <img src="@assets/images/card.png" alt="AppImage" class="w-full">

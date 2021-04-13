@@ -47,9 +47,6 @@
                         <vs-tab :label="$t('ActiveOffers')">
                             <AllOffers display="active" :offers="offers"/>
                         </vs-tab>
-                        <vs-tab :label="$t('StopOffers')">
-                            <AllOffers display="expired" :offers="offers"/>
-                        </vs-tab>
                     </vs-tabs>
                 </vx-card>
             </div>

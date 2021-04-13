@@ -86,6 +86,8 @@ export default {
 
 		desc_lable:'Description',
 
+		recipients:'Recipients',
+
 
 		language: 'Language',
 		currency: 'Currency',
@@ -433,6 +435,7 @@ export default {
 
 		desc_lable:'الوصف',
 
+		recipients:'المستلمين',
 	
 
 		Home: 'الرئيسية',

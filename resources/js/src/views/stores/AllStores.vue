@@ -5,22 +5,22 @@
                 <vx-card class="store shadow text-center">
                     <img :src="'/images/stores/'+item.image" class="text-center mx-auto" width="100px"/>
                         <div class="mx-auto cursor-pointer flex justify-around action" style="width: 4rem">
-                            <vs-button @click.stop="" color="rgb(255,255,255)" text-color="rgb(255,159,67)" size="small" radius icon-pack="feather" icon="icon-edit" class=" shadow"/>
-                            <vs-button @click.stop="" color="rgb(255,255,255)" text-color="#EA5455" size="small" radius icon-pack="feather" icon="icon-trash-2" class=" shadow"/>
+                            <vs-button @click.stop="gotoEdit(item.id)" color="rgb(255,255,255)" text-color="rgb(255,159,67)" size="small" radius icon-pack="feather" icon="icon-edit" class=" shadow"/>
+                            <vs-button @click.stop="openDeleteConfirm(item.id)" color="rgb(255,255,255)" text-color="#EA5455" size="small" radius icon-pack="feather" icon="icon-trash-2" class=" shadow"/>
                         </div>
                     <h4 class="text-center">{{item.name_ar || $t('NA')}}</h4>
                     <h4 class="text-center">{{item.name_en || $t('NA')}}</h4>
-                    <div class="flex justify-between">
+                    <!-- <div class="flex justify-between">
                         <span>{{item.phone}}</span>
                         <span> | </span>
                         <span>{{item.Email}}</span>
-                    </div>
-                    <p class="text-center">{{item.location}}</p>
+                    </div> -->
+                    <!-- <p class="text-center">{{item.location}}</p>
                     <h6 class="text-center" v-if="!display">{{item.number}}</h6>
                     <div class="ml-auto mt-4 cursor-pointer flex justify-center" v-if="display == 'pending'">
                         <vs-button color="#6FDD68" size="small">موافقة</vs-button>
                         <vs-button color="danger" size="small">رفض</vs-button>
-                    </div>
+                    </div> -->
                 </vx-card>
             </div>
         </div>
@@ -44,9 +44,27 @@ export default {
     },
     data() {
         return {
-
+            ItemToDelete:null
         }
-    }
+    },
+    methods: {
+        gotoEdit(id){
+        this.$router.push({path: 'stores/edit/' + id})
+        },
+        openDeleteConfirm(id) {
+        this.ItemToDelete = id;
+        this.$vs.dialog({
+            type: 'confirm',
+            color: 'danger',
+            title: this.$t('Delete'),
+            text: 'هل أنت متأكدأنك تريد حذف هذا المتجر نهائياً؟',
+            accept: this.deleteStore
+        })
+        },
+        deleteStore(){
+        this.$store.dispatch("storeManagement/removeStore", this.ItemToDelete).catch(err => { console.error(err) })
+        },
+  }
 }
 </script>
 
