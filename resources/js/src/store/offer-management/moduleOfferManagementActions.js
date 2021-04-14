@@ -37,7 +37,7 @@ export default {
   },
   fetchOffers({ commit }) {
     return new Promise((resolve, reject) => {
-      axios.post("/api/offers/list")
+      axios.post("/api/offers/list/")
         .then((response) => {
           commit('SET_OFFERS', response.data.offers)
           resolve(response)

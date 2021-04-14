@@ -233,7 +233,7 @@ export default {
     if (this.$route.params.userID != null){
       this.$store.dispatch("userManagement/fetchUser", this.$route.params.userID).catch(err => { console.error(err) })
       .then((res) => {
-        this.formData = res.data.user
+        this.user_data = res.data
       })
       .catch((error) => console.log(error))
     }

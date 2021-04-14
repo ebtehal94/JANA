@@ -192,6 +192,8 @@ export default {
         if(!moduleAppControlManagement .isRegistered) {
         this.$store.registerModule('appControlManagement', moduleAppControlManagement )
         moduleAppControlManagement .isRegistered = true
+
+        this.$store.dispatch("appControlManagement/fetchAppinfo").catch(err => { console.error(err) })
         }
     }
     
@@ -215,6 +217,7 @@ export default {
     .slider-img{
         img{
             width: 100%;
+            position: relative;
         }
     }
     .add-img{

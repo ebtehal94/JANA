@@ -127,7 +127,7 @@
               v-model="store_data.status"
               :placeholder="$t('accountStatus')"
               label="text" :options="status_list"
-              :reduce="text => text.value"
+              :reduce="text => text.id"
               :dir="$vs.rtl ? 'rtl' : 'ltr'" />
 
               <span v-if="!errors.has('status') && store_data.status">
@@ -365,8 +365,8 @@ export default {
       },
       cities_list:CitiesList,
       status_list: [
-        {text:'غير نشط',value:1},
-        {text:'نشط',value:2},
+        {text:'غير نشط',value:0},
+        {text:'نشط',value:1},
       ],
       stores: [
         {text:' المراكز الصحية والعيادات ' ,value:1},
@@ -505,8 +505,8 @@ export default {
       this.$store.dispatch("storeManagement/fetchStore", this.$route.params.storeID).catch(err => { console.error(err) })
       .then((res) => {
         this.store_data = res.data.store
-        this.user = res.data.user
-        this.branches_data = res.data.branch
+        this.user = res.data.store_data.user
+        this.branches_data = res.data.store_data.branches
       })
       .catch((error) => console.log(error))
     }

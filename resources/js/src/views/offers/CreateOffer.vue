@@ -150,6 +150,7 @@
               </div>
               <div class="vx-col w-full md:w-1/3 mb-4">
                 <img src="@assets/images/card.png" alt="Offer-image" class="mx-auto w-full lg:responsive" width="120">
+                <vs-button  @click="openConfirm(img)" icon-pack="feather" icon="icon-trash" size="small" color="danger" type="filled"/>
               </div>
             </div>
           </div>
@@ -281,8 +282,8 @@ export default {
       offer_data: {title_ar:null,title_en: null, category_id: null, desc_ar:null,desc_en:null,status:null,price_before:null,price:null,expiry:null,store_id:null},
       // categories:[],
       status_list: [
+        {text:'نشط',value:0},
         {text:'غير نشط',value:1},
-        {text:'نشط',value:2},
       ],
       stores_list: [
         {text:'المتجر الأول',value:1},
@@ -291,6 +292,7 @@ export default {
         {text:'المتجر الرابع',value:4}
       ],
       dataUploadedImages: [],
+      ImageToDelete: null,
     }
   },
   computed: {
@@ -312,6 +314,36 @@ export default {
          reader.readAsDataURL(input.target.files[0])
        }
     },
+    openConfirm(img) {
+      this.ImageToDelete = img;
+       this.$vs.dialog({
+         type: 'confirm',
+         color: 'danger',
+         title: `Delete Image`,
+         text: 'Are you sure you want to permenantly delete this image?',
+         accept: this.acceptAlert
+       })
+     },
+     acceptAlert() {
+      //  const ItemIndex = this.customImages.findIndex((p) => p.id == this.ImageToDelete.id)
+      //  this.customImages.splice(ItemIndex, 1)
+       this.deleteImage()
+
+       this.$vs.notify({
+         color: 'danger',
+         title: 'Deleted image',
+         text: 'The selected image was successfully deleted'
+       })
+     },
+     deleteImage(image) {
+       return new Promise((resolve, reject) => {
+         axios.get("/api/offers/" + this.offer_data.id + "/deleteImage/" + this.ImageToDelete.id)
+           .then((response) => {
+             resolve(response)
+           })
+           .catch((error) => { reject(error) })
+       })
+     },
     createOffer(){
         // if(!this.validateForm) return
       let formData = new FormData();

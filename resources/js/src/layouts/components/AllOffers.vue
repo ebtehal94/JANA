@@ -39,6 +39,7 @@
 </template>
 
 <script>
+import axios from "@/axios.js"
 import moduleOfferManagement from '@/store/offer-management/moduleOfferManagement.js'
 import StarRating from 'vue-star-rating'
 export default {
@@ -47,7 +48,7 @@ export default {
     },
     props:{
         display:{
-            type: String
+            required: false
         }
     },
     data() {
@@ -105,12 +106,30 @@ export default {
             moduleOfferManagement.isRegistered = true
         }
         var link = "offerManagement/fetchOffers"
+        
         if (this.display == 'pending'){
-            this.$store.dispatch(link, {status: [0]}).catch(err => { console.error(err) })
+            axios.post("/api/offers/list/",{status: [0]} )
+            .then((res) => {
+            (res.data)
+            })
+            .catch((error) => console.log(error))
+           
+        // this.$store.dispatch(link, {status: [0]}).catch(err => { console.error(err) })
+             
         }else if (this.display == 'active'){
-            this.$store.dispatch(link, {status: [1]}).catch(err => { console.error(err) })
-        }else if (this.display == 'most_used'){
-            this.$store.dispatch(link, {filter: 'most_used'}).catch(err => { console.error(err) })
+            axios.post("/api/offers/list/",{status: [1]} )
+            .then((res) => {
+            (res.data)
+            })
+            .catch((error) => console.log(error))
+            // this.$store.dispatch(link, {status: [1]}).catch(err => { console.error(err) })
+         }else if (this.display == 'most_used'){
+            axios.post("/api/offers/list/",{filter: 'most_used'} )
+            .then((res) => {
+            (res.data)
+            })
+            .catch((error) => console.log(error))
+        //     this.$store.dispatch(link, {filter: 'most_used'}).catch(err => { console.error(err) })
         }else
         this.$store.dispatch(link).catch(err => { console.error(err) })
     },

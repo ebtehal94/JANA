@@ -89,7 +89,7 @@
                     class="login-btn p-0 text-sm"
                     size="small" 
                     type="transparent" 
-                    to="/register">
+                    to="/">
                       {{ $i18n.locale == 'en' ? 'Create Account' : ' أنشئ حسابك الآن' }}  
                      </vs-button>
                 </div>

@@ -35,9 +35,9 @@ export default {
         .catch((error) => { reject(error) })
     })
   },
-  fetchUser({}, userId) {
+  fetchUser({}, userID) {
     return new Promise((resolve, reject) => {
-      axios.get(`/api/users/edit/${userId}`)
+      axios.get(`/api/users/edit/${userID}`)
         .then((response) => {
           resolve(response)
         })

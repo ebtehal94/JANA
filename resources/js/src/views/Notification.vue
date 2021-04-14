@@ -84,11 +84,12 @@
 </template>
 
 <script>
+import axios from "@/axios.js"
 import vSelect from 'vue-select'
 import icon from '@/layouts/components/icon.vue';
 
 // Store Module
-//import moduleNoticeManagement from '@/store/notice-management/moduleNoticeManagement.js'
+// import moduleNoticeManagement from '@/store/notice/moduleNoticeManagement.js'
 
 export default {
   components: {
@@ -98,7 +99,7 @@ export default {
   data() {
     return {
       notice_data:{customer_id:null,title_ar:null,desc_ar:null},
-     customers_list: [
+      customers_list: [
         {name_ar:'المتاجر',id:1},
         {name_ar:'العروض', id:2},
       ],
@@ -109,7 +110,7 @@ export default {
   },
   methods: {
     sendNotice(){
-        this.$store.dispatch(noticeManagement/addNotcie, this.notice_data)
+        axios.post("/api/notices/create")
         .then(res => {
           if( res.data.statusCode == 200 ){
             this.$vs.notify({
@@ -134,10 +135,10 @@ export default {
     },
   },
   created() {
-    // if(!moduleNoticeManagement.isRegistered) {
-    //   this.$store.registerModule('noticeManagement', moduleNoticeManagement)
-    //   moduleNoticeManagement.isRegistered = true
-    // }
+    //  if(!moduleNoticeManagement.isRegistered) {
+    //    this.$store.registerModule('noticeManagement', moduleNoticeManagement)
+    //    moduleNoticeManagement.isRegistered = true
+    //  }
   }
 }
 </script>

@@ -2,7 +2,7 @@
     <div id="">
         <div class="vx-row">
             <div class="vx-col w-full">
-                <vs-table :data="payments">
+                <vs-table max-items="10" pagination :data="payments">
                     <template slot="thead">
                         <vs-th >{{$t('CustomerNumber')}}</vs-th>
                         <vs-th>{{$t('CardNumber')}}</vs-th>
