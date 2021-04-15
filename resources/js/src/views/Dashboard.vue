@@ -21,7 +21,7 @@
                             <SupplierOffers/>
                         </vs-tab>
                         <vs-tab :label="$t('Areas')">
-                            <Areas/>
+                            <Locations/>
                         </vs-tab>
                     </vs-tabs>  
                 </vx-card>
@@ -36,14 +36,14 @@ import StarRating from 'vue-star-rating'
 import AllOffers from '@/layouts/components/AllOffers.vue'
 import SupplierOffers from '@/layouts/components/SupplierOffers.vue'
 import statistics from '@/layouts/components/statistics.vue'
-import Areas from '@/layouts/components/Areas.vue'
+import Locations from '@/layouts/components/Locations.vue'
 export default{
     components: {
         StarRating,
         AllOffers,
         SupplierOffers,
         statistics,
-        Areas
+        Locations
     },
     props:{
         offers:{

@@ -110,7 +110,7 @@ export default {
   },
   methods: {
     sendNotice(){
-        axios.post("/api/notices/create")
+        axios.post("/api/notices/create",this.notice_data)
         .then(res => {
           if( res.data.statusCode == 200 ){
             this.$vs.notify({

@@ -107,7 +107,6 @@
                 :placeholder="$t('password')"
                 v-validate="'required|min:6'"
                 type="password"
-                ref="password"
                 name="password"
                 icon-no-border
                 icon="icon"
@@ -229,7 +228,7 @@
                   <h4 class="mb-4 text-base">{{$t('branchData')}}</h4>
                 </div>
               </div>
-                <div v-for="branch, branchIndex in branches_data"  :key="branch.title +'-'+ branchIndex">
+                <div v-for="branch, branchIndex in branches_data"  :key="branch.name">
                   <div class="mt-8" v-if="branchIndex > 0">
                     <div class="separator">
                       <h4 class="mb-4 text-lg font-extrabold">{{$t('additionalBranch')}}</h4>
@@ -240,7 +239,7 @@
                   </div>
                   <div class="bg-input">
                     <icon name="store-type" class="icon"/>
-                    <v-select class="w-full mt-2"
+                    <v-select class="w-full mt-2 text-sm"
                     v-model="branch.type"
                     :placeholder="$t('storeActivity')"
                     label="text" :options="stores"
@@ -257,7 +256,7 @@
 
                   <div class="bg-input">
                     <icon name="city" class="icon"/>
-                    <v-select class="w-full mt-2"
+                    <v-select class="w-full mt-2 text-sm"
                      v-model="branch.city_id"
                      :placeholder="$t('Location')"
                      label="name_ar" :options="cities_list"
@@ -275,7 +274,6 @@
                   <div class="bg-input">
                     <icon name="name" class="icon"/>
                     <vs-input
-                    size="large"
                     class="w-full text-base mt-2 "
                     :placeholder="$t('branchName')"
                     v-model="branch.title"
@@ -295,7 +293,6 @@
                   <div class="bg-input">
                     <icon name="URL" class="icon"/>
                       <vs-input
-                        size="large"
                         class="w-full text-base mt-2 "
                         :placeholder="$t('website')"
                         v-model="branch.url"
@@ -365,8 +362,8 @@ export default {
       },
       cities_list:CitiesList,
       status_list: [
-        {text:'غير نشط',value:0},
-        {text:'نشط',value:1},
+        {text:'غير نشط',id:0},
+        {text:'نشط',id:1},
       ],
       stores: [
         {text:' المراكز الصحية والعيادات ' ,value:1},
@@ -475,8 +472,8 @@ export default {
         var link = "storeManagement/addStore"
       }
       this.$store.dispatch(link, {store: formData,
-      user: this.user,
-      branch: this.branches_data})                                 
+      branches: this.branches_data,
+      user: this.user})                                 
         .then(res => {
           if( res.data.statusCode == 200 ){
             this.$vs.notify({
@@ -505,8 +502,8 @@ export default {
       this.$store.dispatch("storeManagement/fetchStore", this.$route.params.storeID).catch(err => { console.error(err) })
       .then((res) => {
         this.store_data = res.data.store
-        this.user = res.data.store_data.user
-        this.branches_data = res.data.store_data.branches
+        this.user = res.data
+        this.branches_data = res.data
       })
       .catch((error) => console.log(error))
     }

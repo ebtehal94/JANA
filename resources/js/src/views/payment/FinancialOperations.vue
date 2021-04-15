@@ -4,11 +4,11 @@
             <div class="vx-col w-full">
                 <vx-card class="">
                     <vs-tabs class="tabs-shadow-none">
-                        <vs-tab :label="$t('ThisMonth')">
-                            <paymentList />
-                        </vs-tab>
                         <vs-tab :label="$t('All')">
                             <paymentList />
+                        </vs-tab>
+                        <vs-tab :label="$t('ThisMonth')">
+                            <paymentList display='this_month' />
                         </vs-tab>
                     </vs-tabs>
                 </vx-card>

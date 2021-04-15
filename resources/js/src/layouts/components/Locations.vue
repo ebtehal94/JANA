@@ -1,8 +1,8 @@
 <template>
-    <div id="areas">
+    <div id="locations">
         <div class="vx-row">
             <div class="vx-col w-full">
-                <vs-table :data="users">
+                <vs-table :data="locations">
                     <template slot-scope="{data}">
                         <tbody>
                             <vs-tr :data="tr" :key="indextr" v-for="(tr, indextr) in data">
@@ -33,6 +33,7 @@
 <script>
 import axios from "@/axios.js"
 export default{
+
     components: {
 
     },
@@ -43,7 +44,7 @@ export default{
     },
     data() {
         return {
-            users: [
+            locations: [
                 {"id": 1,"name": "14 متجر","username": "منطقة الرياض","customer": "450 عميلة"},
                 {"id": 2,"name": "14 متجر","username": "منطقة الرياض","customer": "450 عميلة"},
                 {"id": 3,"name": "14 متجر","username": "منطقة الرياض","customer": "450 عميلة"},
@@ -59,13 +60,17 @@ export default{
 
     },
     created() {
-        
+            axios.get('/api/locations/list')
+            .then((res) => {
+           // this.locations = res.data.locations
+            })
+            .catch((error) => console.log(error))
     }
 }
 </script>
 
 <style lang="scss" scoped>
-#areas {
+#locations {
     .vx-card{
         box-shadow: none;
     }

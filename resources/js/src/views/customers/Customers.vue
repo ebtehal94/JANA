@@ -57,13 +57,21 @@
 
 <script>
 import axios from "@/axios.js"
-import moduleCustomerManagement from '@/store/customer-management/moduleCustomerManagement.js'
+
 import AllCustomers from './AllCustomers.vue'
 // import SuspendedAccounts from '@/layouts/components/SuspendedAccounts.vue'
 export default{
     components: {
         AllCustomers,
         // SuspendedAccounts
+    },
+   props:{
+        customers:{
+          type: Array
+        },
+        display:{
+            required: false
+        }
     },
     data() {
         return {
@@ -82,29 +90,13 @@ export default{
 
         }
     },
-    computed: {
-      customers() {
-        return this.$store.state.customerManagement.customers
-      },
-    },
+
     methods: {
         addNewData() {
         this.$router.push({path: '/customers/create'})
         },
     },
-    created() {
-        if(!moduleCustomerManagement.isRegistered) {
-            this.$store.registerModule('customerManagement', moduleCustomerManagement)
-            moduleCustomerManagement.isRegistered = true
-        }
-        var link = "customerManagement/fetchCustomers"
-        if (this.display == 'pending'){
-            this.$store.dispatch(link, {status: [0]}).catch(err => { console.error(err) })
-        }else if (this.display == 'new_customer'){
-            this.$store.dispatch(link, {filter: 'new_customer'}).catch(err => { console.error(err) })
-        }else
-        this.$store.dispatch(link).catch(err => { console.error(err) })
-    }
+
 }
 </script>
 

@@ -48,10 +48,15 @@ export default {
     components: {
      
     },
+    props:{
+        display:{
+            required: false
+        }
+    },
     data() {
         return {
             payments: [],
-            dispaly:'',
+            
             // users: [
             //     {"id": 1,"name": "14 متجر","username": "عميلة بطاقة جنى","date":"15/04/2020","amount": "143 ر.س","notes":"مقابل الإشتراك في التطبيق"},
             //     {"id": 2,"name": "14 متجر","username": "عميلة بطاقة جنى","date":"15/04/2020","amount": "143 ر.س","notes":"مقابل الإشتراك في التطبيق"},
@@ -74,12 +79,13 @@ export default {
     },
 
     created() {
-        if (this.dispaly == 'this_month'){
+        if (this.display == 'this_month'){
             axios.get('/api/payments/list',{filter:'this_month'})
             .then((res) => {
             this.payments = res.data.payments
             })
             .catch((error) => console.log(error)) 
+            
         }else{
             axios.get('/api/payments/list')
             .then((res) => {

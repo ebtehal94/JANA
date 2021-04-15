@@ -126,7 +126,7 @@
                      v-model="customer_data.status"
                      :placeholder="$t('accountStatus')"
                      label="text" :options="status_list"
-                     :reduce="text => text.value"
+                     :reduce="text => text.id"
                      :dir="$vs.rtl ? 'rtl' : 'ltr'" />
 
                     <span v-if="!errors.has('status') && customer_data.status">
@@ -181,8 +181,8 @@ export default {
         status:null},
       cities_list:CitiesList ,
       status_list: [
-        {text:'غير نشط',value:1},
-        {text:'نشط',value:2},
+        {text:'غير نشط',id:0},
+        {text:'نشط',id:1},
       ],
 
     }

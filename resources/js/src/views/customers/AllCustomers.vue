@@ -31,14 +31,12 @@
 </template>
 
 <script>
-
+import axios from "@/axios.js"
+import moduleCustomerManagement from '@/store/customer-management/moduleCustomerManagement.js'
 export default {
   props:{
-      customers:{
-          type: Array
-      },
       display:{
-          type: String,
+          required:false
       },
   },
   data() {
@@ -46,6 +44,11 @@ export default {
       ItemToDelete: null,
     }
   },
+    computed: {
+      customers() {
+        return this.$store.state.customerManagement.customers
+      },
+    },
   methods: {
     gotoEdit(id){
       // console.log('customers/edit/' + id)
@@ -67,7 +70,30 @@ export default {
     updateStatus(id, status){
       this.$store.dispatch("customerManagement/updateCustomer", {id:id, status:status}).catch(err => { console.error(err) })
     }
-  }
+  },
+      created() {
+        if(!moduleCustomerManagement.isRegistered) {
+            this.$store.registerModule('customerManagement', moduleCustomerManagement)
+            moduleCustomerManagement.isRegistered = true
+        }
+        var link = "customerManagement/fetchCustomers"
+        if (this.display == 'pending'){
+            axios.post("/api/customers/list/",{status: [0]} )
+            .then((res) => {
+            (res.data)
+            })
+            .catch((error) => console.log(error))
+            //this.$store.dispatch(link, {status: [0]}).catch(err => { console.error(err) })
+        }else if (this.display == 'new_customer'){
+            axios.post("/api/customers/list/",{filter: 'new_customer'} )
+            .then((res) => {
+            (res.data)
+            })
+            .catch((error) => console.log(error))
+            //this.$store.dispatch(link, {filter: 'new_customer'}).catch(err => { console.error(err) })
+        }else
+        this.$store.dispatch(link).catch(err => { console.error(err) })
+    }
 }
 </script>
 

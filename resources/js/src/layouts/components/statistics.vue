@@ -50,7 +50,7 @@
 </template>
 
 <script>
-
+    import axios from "@/axios.js"
     export default {
         components: {
             
@@ -62,8 +62,24 @@
             return {
                 statistics: {new_customers: 22, all_customers: 2310 , new_stores:0, all_stores: 1547, new_offers:18, all_offers:1547, active_offers:46},
             }
+        },
+        computed: {
+ 
+        },
+        methods: {
+
+        },
+        created() {
+            axios.get('/api/statistics/list')
+            .then((res) => {
+            this.locations = res.data.locations
+            })
+            .catch((error) => console.log(error))
         }
+        
+        
     }
+    
 </script>
 
 <style lang="scss" scoped>
