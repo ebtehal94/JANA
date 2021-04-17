@@ -9,7 +9,7 @@
                             <vs-button @click.stop="openDeleteConfirm(item.id)" color="danger" size="small" radius icon-pack="feather" icon="icon-trash-2"/>
                         </div>
                         <div class="item-image">
-                            <img :src="'/images/offers/'+item.link" class="responsive card-img-top"/>
+                            <img :src="'/images/offers/'+item.link "  class="responsive card-img-top"/>
                         </div>
                         <div class="p-3">
                             <div class="flex justify-between flex-wrap pt-2">
@@ -72,6 +72,8 @@ export default {
             //     "status":"نشط","date":"15/04/2021","subtitle":"وصف مختصر وصف مختصر..","price":"350","disc_price":"297","discount":"15%"},
             // ],
             ItemToDelete: null,
+           
+            
         }
     },
     computed: {
@@ -90,11 +92,11 @@ export default {
                 color: 'danger',
                 title: this.$t('Delete'),
                 text: 'هل أنت متأكد أنك تريد حذف هذا العرض نهائياً؟',
-                accept: this.deleteOffer
+                accept: this.deleteOffer(id)
             })
         },
-        deleteOffer(){
-         this.$store.dispatch("offerManagement/removeOffer", this.ItemToDelete).catch(err => { console.error(err) })
+        deleteOffer(id){
+         this.$store.dispatch("offerManagement/removeOffer", id).catch(err => { console.error(err) })
         },
         updateStatus(id, status){
             this.$store.dispatch("offerManagement/updateOffer", {id:id, status:status}).catch(err => { console.error(err) })
@@ -110,7 +112,7 @@ export default {
         if (this.display == 'pending'){
             axios.post("/api/offers/list/",{status: [0]} )
             .then((res) => {
-            (res.data)
+                this.$store.state.offerManagement.offers = res.data.offers
             })
             .catch((error) => console.log(error))
            
@@ -119,19 +121,21 @@ export default {
         }else if (this.display == 'active'){
             axios.post("/api/offers/list/",{status: [1]} )
             .then((res) => {
-            (res.data)
+            this.$store.state.offerManagement.offers = res.data.offers
             })
             .catch((error) => console.log(error))
             // this.$store.dispatch(link, {status: [1]}).catch(err => { console.error(err) })
-         }else if (this.display == 'most_used'){
+        }else if (this.display == 'most_used'){
             axios.post("/api/offers/list/",{filter: 'most_used'} )
             .then((res) => {
-            (res.data)
+            this.$store.state.offerManagement.offers = res.data.offers
             })
             .catch((error) => console.log(error))
         //     this.$store.dispatch(link, {filter: 'most_used'}).catch(err => { console.error(err) })
+        
         }else
-        this.$store.dispatch(link).catch(err => { console.error(err) })
+            this.$store.dispatch(link).catch(err => { console.error(err) })
+
     },
 
 }

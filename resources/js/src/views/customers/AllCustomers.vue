@@ -80,7 +80,7 @@ export default {
         if (this.display == 'pending'){
             axios.post("/api/customers/list/",{status: [0]} )
             .then((res) => {
-            (res.data)
+            console.log( res.data)
             })
             .catch((error) => console.log(error))
             //this.$store.dispatch(link, {status: [0]}).catch(err => { console.error(err) })

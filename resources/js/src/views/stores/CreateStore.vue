@@ -567,20 +567,20 @@ export default {
       position: absolute;
       top:13px;
       left: 92%;
-      z-index: 9999;
+      z-index: 1;
     }
     .left-phone-icon{
       position: absolute;
       top:22px;
       left: 65%;
-      z-index: 999;
+      z-index: 1;
     }
-    .qr-icon{
-      position: absolute;
-      top:55%;
-      left: 60%;
-      z-index: 9999;
-    }
+    // .qr-icon{
+    //   position: absolute;
+    //   top:55%;
+    //   left: 60%;
+    //   z-index: 999;
+    // }
   }
   .date{
     color: #ACACAC;

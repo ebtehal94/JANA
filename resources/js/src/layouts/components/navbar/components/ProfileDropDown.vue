@@ -22,7 +22,7 @@
       <vs-dropdown-menu class="vx-navbar-dropdown">
         <ul style="min-width: 9rem">
 
-          <li
+          <!-- <li
           v-if="$acl.not.check('admin')"
           class="flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white"
           @click="$router.push('/user-profile').catch(() => {})">
@@ -52,7 +52,7 @@
             @click="$router.push('/inqueries').catch(() => {})">
             <feather-icon icon="MailIcon" svgClasses="w-4 h-4" />
             <span class="ml-2">{{$t('Messeges')}}</span>
-          </li>
+          </li> -->
 
           <vs-divider v-if="$acl.not.check('customer')" class="m-1" />
 

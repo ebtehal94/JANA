@@ -71,7 +71,7 @@ export default {
   },
   removeOffer({ commit }, offerId) {
     return new Promise((resolve, reject) => {
-      axios.get(`/api/offers/delete/${offerId}`)
+      axios.delete(`/api/offers/delete/${offerId}`)
         .then((response) => {
           commit('REMOVE_OFFER', offerId)
           resolve(response)

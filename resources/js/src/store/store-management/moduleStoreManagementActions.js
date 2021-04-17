@@ -61,7 +61,7 @@ export default {
   },
   removeStore({ commit }, storeId) {
     return new Promise((resolve, reject) => {
-      axios.get(`/api/store/delete/${storeId}`)
+      axios.delete(`/api/store/delete/${storeId}`)
         .then((response) => {
           commit('REMOVE_STORE', storeId)
           resolve(response)

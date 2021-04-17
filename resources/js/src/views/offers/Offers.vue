@@ -42,7 +42,7 @@
                             <AllOffers :offers="offers"/>
                         </vs-tab>
                         <vs-tab :label="$t('PendingOffers')">
-                            <AllOffers display="pending" :offers="offers"/>
+                            <AllOffers display ='pending' :offers="offers"/>
                         </vs-tab>
                         <vs-tab :label="$t('ActiveOffers')">
                             <AllOffers display="active" :offers="offers"/>
@@ -67,6 +67,9 @@ export default{
       offers:{
           type: Array
       },
+      display:{
+          required: false
+      }
     },
     data() {
         return {
