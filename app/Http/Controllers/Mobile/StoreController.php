@@ -57,7 +57,7 @@ class StoreController extends Controller
       $response       = array();
       $info           = $request->all();
       $Str            = Store::where('id', $info['store_id'])
-                             ->with('branches:id,title')
+                             ->with('branches:id,title,city_id')
                              ->first();
       if (isset($Str)){
         $Str->active_offers  = $Str->offers()->where('status', 1)->count();
