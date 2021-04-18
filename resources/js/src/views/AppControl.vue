@@ -18,13 +18,15 @@
                             </div>
                             <div class="vx-col w-full md:w-1/4">
                                 <img src="@assets/images/payment-methods.png" alt="AppImage" class="w-full">
-                                <vs-button style="position: absolute; bottom: 0; margin: 1rem;" @click="openConfirm(img)" icon-pack="feather" icon="icon-trash" size="small" color="danger" type="filled" />
+                                <!-- <vs-button style="position: absolute; top: 50px; left:50px" @click="openConfirm(img)" icon-pack="feather" icon="icon-trash" size="small" color="danger" type="transparent" /> -->
                             </div>
                             <div class="vx-col w-full md:w-1/4">
                                 <img src="@assets/images/card.png" alt="AppImage" class="w-full">
+                                <!-- <vs-button style="position: absolute; top: 50px; left:13.5rem" @click="openConfirm(img)" icon-pack="feather" icon="icon-trash" size="small" color="danger" type="transparent" /> -->
                             </div>
                             <div class="vx-col w-full md:w-1/4">
                                 <img src="@assets/images/card.png" alt="AppImage" class="w-full">
+                                <!-- <vs-button style="position: absolute; top: 50px; right:19.5rem" @click="openConfirm(img)" icon-pack="feather" icon="icon-trash" size="small" color="danger" type="transparent" /> -->
                             </div>
                         </div>
                     </div>
@@ -218,6 +220,12 @@ export default {
         img{
             width: 100%;
             position: relative;
+        }
+        .delete-img{
+            position: absolute;
+            top:50px;
+            right: 50px;
+            z-index: 999;
         }
     }
     .add-img{

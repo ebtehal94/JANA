@@ -466,7 +466,7 @@ export default {
       if (this.dataUploadedImages){
           formData.append('image', this.dataUploadedImages);
       }
-      if (this.store_data.id != null && this.store_data.id > 0){
+      if (this.store_data.id != null && this.store_data.id > 0 ){
         var link = "storeManagement/updateStore"
       }else{
         var link = "storeManagement/addStore"
@@ -623,7 +623,7 @@ export default {
     }
     .bg-input{
       .left-icon{
-        left: 88%;
+        left: 87%;
       }
       .left-phone-icon{
         left: 62%;
@@ -637,6 +637,11 @@ export default {
   #create-store {
     .vx-card__title{
       margin-top: 1.5rem;
+    }
+    .bg-input{
+      .left-icon{
+        left: 86%;
+      }
     }
   }
 }

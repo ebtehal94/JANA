@@ -15,10 +15,6 @@ export default {
   SET_CUSTOMERS(state, customers) {
     state.customers = customers
   },
- // SET_USERS_ORDERS(state, payload) {
-   // const userOrders = payload.orders.filter((order) => order.customer_id == payload.id)
-   // state.orders = userOrders
- // },
   UPDATE_CUSTOMER(state, customer){
     const customerIndex = state.customers.findIndex((p) => p.id == customer.id)
     state.customers[customerIndex] = customer

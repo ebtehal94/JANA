@@ -86,15 +86,15 @@
           </div>
         </div>
 
-        <div class="vx-row my-6">
+        <div class="vx-row my-4">
           <div class="vx-col w-full md:w-1/2">
             <!-- Col Header -->
-            <div class="flex items-end">
+            <div class="flex items-end pt-4">
               <span class="leading-none font-semibold text-sm">{{$i18n.locale == "en" ? "Offer properties" : "خصائص العرض"}}</span>
             </div>
 
             <!-- Col Content -->
-            <div>
+
                 <div class="bg-input text-sm">
                     <v-select class="w-full mt-4 text-sm"
                       :placeholder="$t('Category')"
@@ -118,7 +118,7 @@
                       v-model="offer_data.status"
                       v-validate="'required'"
                       label="text" :options="status_list"
-                      :reduce="text => text.value"
+                      :reduce="text => text.id"
                       :dir="$vs.rtl ? 'rtl' : 'ltr'" />
 
                     <span
@@ -129,12 +129,11 @@
                       <icon name="cross" class="icon left-icon"/>
                     </span>
                 </div>
-            </div>
           </div>
 
           <div class="vx-col w-full md:w-1/2">
             <!-- Col Header -->
-            <div class="flex items-end">
+            <div class="flex items-end pt-4">
               <span class="leading-none font-semibold text-sm">{{$i18n.locale == "en" ? "Offer images" : "صور العرض"}}</span>
             </div>
 
@@ -149,18 +148,18 @@
                 <img src="@assets/images/payment-methods.png" alt="Offer-image" class="mx-auto w-full lg:responsive" width="120">
               </div>
               <div class="vx-col w-full md:w-1/3 mb-4">
-                <img src="@assets/images/card.png" alt="Offer-image" class="mx-auto w-full lg:responsive" width="120">
-                <vs-button  @click="openConfirm(img)" icon-pack="feather" icon="icon-trash" size="small" color="danger" type="filled"/>
+                <img src="@assets/images/card.png" alt="Offer-image" class="mx-auto w-full lg:responsive relative" width="120">
+                <vs-button class="delete-img" @click="openConfirm(img)" icon-pack="feather" icon="icon-trash" size="small" color="danger" type="filled"/>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="vx-row my-6">
-          <div class="vx-col w-full md:w-1/2 flex">
+        <div class="vx-row my-4">
+          <div class="vx-col w-full md:w-1/2 flex pt-4">
             <div class="vx-col w-full">
                 <!-- Col Header -->
-                <div class="flex items-end">
+                <div class="flex items-end ">
                   <span class="leading-none font-semibold text-xs">{{$i18n.locale == "en" ? "Before discount" : "السعر قبل الخصم"}}</span>
                 </div>
 
@@ -209,7 +208,7 @@
             </div>
           </div>
 
-          <div v-if="$acl.check('admin')" class="vx-col w-full md:w-1/2">
+          <div v-if="$acl.check('admin')" class="vx-col w-full md:w-1/2 pt-4">
             <!-- Col Header -->
             <div class="flex items-end">
               <span class="leading-none font-semibold text-xs">{{$i18n.locale == "en" ? "The Store" : "المتجر"}}</span>
@@ -282,15 +281,15 @@ export default {
       offer_data: {title_ar:null,title_en: null, category_id: null, desc_ar:null,desc_en:null,status:null,price_before:null,price:null,expiry:null,store_id:null},
       // categories:[],
       status_list: [
-        {text:'نشط',value:0},
-        {text:'غير نشط',value:1},
+        {text:'غير نشط',id:0},
+        {text:'نشط',id:1},
       ],
-      stores_list: [
-        {text:'المتجر الأول',value:1},
-        {text:'المتجر الثاني',value:2},
-        {text:'المتجر الثالث',value:3},
-        {text:'المتجر الرابع',value:4}
-      ],
+      // stores_list: [
+      //   {text:'المتجر الأول',value:1},
+      //   {text:'المتجر الثاني',value:2},
+      //   {text:'المتجر الثالث',value:3},
+      //   {text:'المتجر الرابع',value:4}
+      // ],
       dataUploadedImages: [],
       ImageToDelete: null,
     }
@@ -442,6 +441,12 @@ export default {
     .offer-images{
       img{
         width: 100%;
+        position: relative;
+      }
+      .delete-img{
+        position: absolute;
+        top:0;
+        left: 0;
       }
     }
     .add-img{
@@ -454,11 +459,7 @@ export default {
       -webkit-box-shadow: none !important;
       box-shadow: none !important;
     }
-   .vs-input--input{
-    .normal {
-          font-size: .8rem !important;
-      }
-   }
+
     .vs-button.small:not(.includeIconOnly) {
       padding: 0.4rem 5rem;
     }

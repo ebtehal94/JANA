@@ -109,30 +109,12 @@ export default {
         }
         var link = "offerManagement/fetchOffers"
         
-        if (this.display == 'pending'){
-            axios.post("/api/offers/list/",{status: [0]} )
-            .then((res) => {
-                this.$store.state.offerManagement.offers = res.data.offers
-            })
-            .catch((error) => console.log(error))
-           
-        // this.$store.dispatch(link, {status: [0]}).catch(err => { console.error(err) })
-             
+        if (this.display == 'pending'){   
+            this.$store.dispatch(link, {status: [0]}).catch(err => { console.error(err) })             
         }else if (this.display == 'active'){
-            axios.post("/api/offers/list/",{status: [1]} )
-            .then((res) => {
-            this.$store.state.offerManagement.offers = res.data.offers
-            })
-            .catch((error) => console.log(error))
-            // this.$store.dispatch(link, {status: [1]}).catch(err => { console.error(err) })
+            this.$store.dispatch(link, {status: [1]}).catch(err => { console.error(err) })
         }else if (this.display == 'most_used'){
-            axios.post("/api/offers/list/",{filter: 'most_used'} )
-            .then((res) => {
-            this.$store.state.offerManagement.offers = res.data.offers
-            })
-            .catch((error) => console.log(error))
-        //     this.$store.dispatch(link, {filter: 'most_used'}).catch(err => { console.error(err) })
-        
+            this.$store.dispatch(link, {filter: 'most_used'}).catch(err => { console.error(err) }) 
         }else
             this.$store.dispatch(link).catch(err => { console.error(err) })
 

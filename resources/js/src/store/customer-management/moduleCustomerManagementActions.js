@@ -20,9 +20,10 @@ export default {
         .catch((error) => { reject(error) })
     })
   },
-  fetchCustomers({ commit }) {
+
+  fetchCustomers({ commit },status) {
     return new Promise((resolve, reject) => {
-      axios.post("/api/customers/list")
+      axios.post("/api/customers/list" , status )
         .then((response) => {
           commit('SET_CUSTOMERS', response.data.customers)
           resolve(response)

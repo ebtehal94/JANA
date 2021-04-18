@@ -78,12 +78,12 @@ export default {
         }
         var link = "customerManagement/fetchCustomers"
         if (this.display == 'pending'){
-            axios.post("/api/customers/list/",{status: [0]} )
-            .then((res) => {
-            console.log( res.data)
-            })
-            .catch((error) => console.log(error))
-            //this.$store.dispatch(link, {status: [0]}).catch(err => { console.error(err) })
+            // axios.post("/api/customers/list/",{status: [0]} )
+            // .then((res) => {
+            // console.log( res.data)
+            // })
+            // .catch((error) => console.log(error))
+            this.$store.dispatch(link, {status: [0]}).catch(err => { console.error(err) })
         }else if (this.display == 'new_customer'){
             axios.post("/api/customers/list/",{filter: 'new_customer'} )
             .then((res) => {

@@ -35,9 +35,19 @@ export default {
         .catch((error) => { reject(error) })
     })
   },
-  fetchOffers({ commit }) {
+  fetchOffers({ commit }, status) {
     return new Promise((resolve, reject) => {
-      axios.post("/api/offers/list/")
+      axios.post("/api/offers/list/", status)
+        .then((response) => {
+          commit('SET_OFFERS', response.data.offers)
+          resolve(response)
+        })
+        .catch((error) => { reject(error) })
+    })
+  },
+  fetchOffers({ commit }, filter) {
+    return new Promise((resolve, reject) => {
+      axios.post("/api/offers/list/", filter)
         .then((response) => {
           commit('SET_OFFERS', response.data.offers)
           resolve(response)
