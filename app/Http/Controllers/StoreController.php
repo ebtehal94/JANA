@@ -41,6 +41,7 @@ class StoreController extends Controller
     {
       $response                 = array();
       $info                     = $request->all();
+      return dd($info);
       $userInfo                 = $info['user'];
       $existingMobile           = User::where('mobile', $userInfo['mobile'])
                                      ->where('cc', $userInfo['cc'])

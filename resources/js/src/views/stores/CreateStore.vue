@@ -471,9 +471,7 @@ export default {
       }else{
         var link = "storeManagement/addStore"
       }
-      this.$store.dispatch(link, {store: formData,
-      branches: this.branches_data,
-      user: this.user})                                 
+      this.$store.dispatch(link, formData)                                 
         .then(res => {
           if( res.data.statusCode == 200 ){
             this.$vs.notify({
