@@ -500,7 +500,7 @@ export default {
       this.$store.dispatch("storeManagement/fetchStore", this.$route.params.storeID).catch(err => { console.error(err) })
       .then((res) => {
         this.store_data = res.data.store
-        this.user = res.data
+        this.user = res.data.user
         this.branches_data = res.data
       })
       .catch((error) => console.log(error))
