@@ -43,7 +43,7 @@
                             </svg>
                         </span>
                     </h3>
-                </vx-card> 
+                </vx-card>
             </div>
         </div>
     </div>
@@ -53,7 +53,7 @@
     import axios from "@/axios.js"
     export default {
         components: {
-            
+
         },
         props:{
 
@@ -64,22 +64,22 @@
             }
         },
         computed: {
- 
+
         },
         methods: {
 
         },
         created() {
-            axios.get('/api/statistics/list')
+            axios.get('/api/statistics/dashboard')
             .then((res) => {
-            this.locations = res.data.locations
+            this.statistics = res.data.statistics
             })
             .catch((error) => console.log(error))
         }
-        
-        
+
+
     }
-    
+
 </script>
 
 <style lang="scss" scoped>

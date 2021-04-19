@@ -21,13 +21,29 @@ class StoreController extends Controller
     {
       $response                 = array();
       $info                     = $request->all();
-      $stores                   = Store::orderby('id','desc');
+      $stores                   = Store::orderby('id','desc')
+                                       ->select('id','name_ar', 'name_en', 'views', 'image');
       if (isset($info['status']) && count($info['status']) > 0){
         $stores                   = $stores->whereIn('status', $info['status']);
       }
 
       $response['stores']       = $stores->get();
       $response['statusCode']   = 200;
+      return $response;
+    }
+
+
+    public function storeOffers(Request $request)
+    {
+      $response                 = array();
+      $user                     = \Auth::Guard('api')->user();
+      $todaysDate               = Carbon::now()->toDateString();
+      $stores                   = Store::select('id','name_ar', 'name_en', 'views', 'image')->get();
+      foreach ($stores as $store) {
+        $store->offers            = $store->offers()->count();
+      }
+      $stores                   = $stores->sortByDesc('offers')->take(20);
+      $response['stores']       = $stores;
       return $response;
     }
 

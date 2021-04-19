@@ -41,6 +41,10 @@ Route::post('/customers/stores/list', 'Mobile\StoreController@list');
 Route::post('/customers/stores/view', 'Mobile\StoreController@view');
 
 
+Route::get('/statistics/dashboard', 'OfferController@dashboard');
+Route::get('/statistics/storeOffers', 'StoreController@storeOffers');
+
+  
 Route::post('/offers/list', 'OfferController@index');
 Route::post('/offers/create', 'OfferController@create');
 Route::post('/offers/getInfo', 'OfferController@getInfo');
