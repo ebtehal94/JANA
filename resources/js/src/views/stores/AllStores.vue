@@ -1,9 +1,9 @@
 <template>
     <div id="all-store">
-        <div class="vx-row mt-5"> 
+        <div class="vx-row mt-5">
             <div v-for="item in stores" class="vx-col w-full sm:w-1/2 lg:w-1/4 mb-base px-2.5" v-bind:key="item.id">
                 <vx-card class="store shadow text-center">
-                    <img :src="'/images/stores/'+item.image" alt="" class="text-center mx-auto" width="100px"/>
+                    <img v-if="item.image" :src="imgLink + item.image" alt="" class="text-center mx-auto" width="100px"/>
                         <div class="mx-auto cursor-pointer flex justify-around action" style="width: 4rem">
                             <vs-button @click.stop="gotoEdit(item.id)" color="rgb(255,255,255)" text-color="rgb(255,159,67)" size="small" radius icon-pack="feather" icon="icon-edit" class=" shadow"/>
                             <vs-button @click.stop="openDeleteConfirm(item.id)" color="rgb(255,255,255)" text-color="#EA5455" size="small" radius icon-pack="feather" icon="icon-trash-2" class=" shadow"/>
@@ -31,7 +31,7 @@
 
 export default {
     components: {
-        
+
     },
     props:{
         display:{
@@ -40,10 +40,11 @@ export default {
         stores:{
             type: Array
         }
-       
+
     },
     data() {
         return {
+            imgLink: 'https://otantik-home.s3.me-south-1.amazonaws.com/stores/',
             ItemToDelete:null
         }
     },
@@ -108,5 +109,5 @@ export default {
             font-weight: bold;
         }
     }
-}  
+}
 </style>

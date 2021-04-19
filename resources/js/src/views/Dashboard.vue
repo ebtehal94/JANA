@@ -18,7 +18,7 @@
                             <AllOffers display="most_used" :offers="offers"/>
                         </vs-tab>
                         <vs-tab :label="$t('SuppliersOffers')">
-                            <SupplierOffers/>
+                            <storeOffers/>
                         </vs-tab>
                         <vs-tab :label="$t('Areas')">
                             <Locations/>
@@ -34,14 +34,14 @@
 import axios from "@/axios.js"
 import StarRating from 'vue-star-rating'
 import AllOffers from '@/layouts/components/AllOffers.vue'
-import SupplierOffers from '@/layouts/components/SupplierOffers.vue'
+import storeOffers from '@/layouts/components/storeOffers.vue'
 import statistics from '@/layouts/components/statistics.vue'
 import Locations from '@/layouts/components/Locations.vue'
 export default{
     components: {
         StarRating,
         AllOffers,
-        SupplierOffers,
+        storeOffers,
         statistics,
         Locations
     },
@@ -52,36 +52,6 @@ export default{
     },
     data() {
         return {
-            // AllOffers:[
-            //     {"id":1,src:require('@assets/images/image-1.png'),"title":"أدوات منزلية","status":"نشط",
-            //     "date":"15/04/2021","subtitle":"وصف مختصر وصف مختصر..","price":"297","discount":"15%"},
-            //     {"id":2,src:require('@assets/images/image-2.png'),"title":"أدوات منزلية","status":"نشط",
-            //     "date":"15/04/2021","subtitle":"وصف مختصر وصف مختصر..","price":"297","discount":"15%"},
-            //     {"id":3,src:require('@assets/images/image-3.png'),"title":"أدوات منزلية",
-            //     "status":"نشط","date":"15/04/2021","subtitle":"وصف مختصر وصف مختصر..","price":"297","discount":"15%"},
-            //     {"id":4,src:require('@assets/images/image-4.png'),"title":"أدوات منزلية",
-            //     "status":"نشط","date":"15/04/2021","subtitle":"وصف مختصر وصف مختصر..","price":"297","discount":"15%"},
-            //      {"id":5,src:require('@assets/images/image-4.png'),"title":"أدوات منزلية","status":"نشط",
-            //     "date":"15/04/2021","subtitle":"وصف مختصر وصف مختصر..","price":"297","discount":"15%"},
-            //     {"id":6,src:require('@assets/images/image-3.png'),"title":"أدوات منزلية","status":"نشط",
-            //     "date":"15/04/2021","subtitle":"وصف مختصر وصف مختصر..","price":"297","discount":"15%"},
-            //     {"id":7,src:require('@assets/images/image-2.png'),"title":"أدوات منزلية",
-            //     "status":"نشط","date":"15/04/2021","subtitle":"وصف مختصر وصف مختصر..","price":"297","discount":"15%"},
-            //     {"id":8,src:require('@assets/images/image-1.png'),"title":"أدوات منزلية",
-            //     "status":"نشط","date":"15/04/2021","subtitle":"وصف مختصر وصف مختصر..","price":"297","discount":"15%"},
-            // ],
-            supplierOffers:[
-                {"id":1,"name":"اكسترا ستور","number":"27 عرض",src:require('@assets/images/img-1.png')},
-                {"id":2,"name":"اكسترا ستور","number":"27 عرض",src:require('@assets/images/img-1.png')},
-                {"id":3,"name":"اكسترا ستور","number":"27 عرض",src:require('@assets/images/img-2.png')},
-                {"id":4,"name":"اكسترا ستور","number":"27 عرض",src:require('@assets/images/img-3.png')},
-                {"id":5,"name":"اكسترا ستور","number":"27 عرض",src:require('@assets/images/img-4.png')},
-                {"id":6,"name":"اكسترا ستور","number":"27 عرض",src:require('@assets/images/img-2.png')},
-                {"id":7,"name":"اكسترا ستور","number":"27 عرض",src:require('@assets/images/img-1.png')},
-                {"id":8,"name":"اكسترا ستور","number":"27 عرض",src:require('@assets/images/img-3.png')},
-                {"id":9,"name":"اكسترا ستور","number":"27 عرض",src:require('@assets/images/img-4.png')},
-                {"id":10,"name":"اكسترا ستور","number":"27 عرض",src:require('@assets/images/img-2.png')}
-            ],
             users: [
                 {"id": 1,"name": "14 متجر","username": "منطقة الرياض","customer": "450 عميلة"},
                 {"id": 2,"name": "14 متجر","username": "منطقة الرياض","customer": "450 عميلة"},

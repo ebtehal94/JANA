@@ -85,12 +85,12 @@ export default {
             // .catch((error) => console.log(error))
             this.$store.dispatch(link, {status: [0]}).catch(err => { console.error(err) })
         }else if (this.display == 'new_customer'){
-            axios.post("/api/customers/list/",{filter: 'new_customer'} )
-            .then((res) => {
-            (res.data)
-            })
-            .catch((error) => console.log(error))
-            //this.$store.dispatch(link, {filter: 'new_customer'}).catch(err => { console.error(err) })
+            // axios.post("/api/customers/list/",{filter: 'new_customer'} )
+            // .then((res) => {
+            // (res.data)
+            // })
+            // .catch((error) => console.log(error))
+            this.$store.dispatch(link, {filter: 'new_customer'}).catch(err => { console.error(err) })
         }else
         this.$store.dispatch(link).catch(err => { console.error(err) })
     }

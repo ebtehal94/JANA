@@ -149,7 +149,7 @@
               </div>
               <div class="vx-col w-full md:w-1/3 mb-4">
                 <img src="@assets/images/card.png" alt="Offer-image" class="mx-auto w-full lg:responsive relative" width="120">
-                <vs-button class="delete-img" @click="openConfirm(img)" icon-pack="feather" icon="icon-trash" size="small" color="danger" type="filled"/>
+                <!--<vs-button class="delete-img" @click="openConfirm(img)" icon-pack="feather" icon="icon-trash" size="small" color="danger" type="filled"/>-->
               </div>
             </div>
           </div>

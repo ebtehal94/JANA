@@ -21,13 +21,29 @@ class StoreController extends Controller
     {
       $response                 = array();
       $info                     = $request->all();
-      $stores                   = Store::orderby('id','desc');
+      $stores                   = Store::orderby('id','desc')
+                                       ->select('id','name_ar', 'name_en', 'views', 'image');
       if (isset($info['status']) && count($info['status']) > 0){
         $stores                   = $stores->whereIn('status', $info['status']);
       }
 
       $response['stores']       = $stores->get();
       $response['statusCode']   = 200;
+      return $response;
+    }
+
+
+    public function storeOffers(Request $request)
+    {
+      $response                 = array();
+      $user                     = \Auth::Guard('api')->user();
+      $todaysDate               = Carbon::now()->toDateString();
+      $stores                   = Store::select('id','name_ar', 'name_en', 'views', 'image')->get();
+      foreach ($stores as $store) {
+        $store->offers            = $store->offers()->count();
+      }
+      $stores                   = $stores->sortByDesc('offers')->take(20);
+      $response['stores']       = $stores;
       return $response;
     }
 
@@ -41,8 +57,8 @@ class StoreController extends Controller
     {
       $response                 = array();
       $info                     = $request->all();
-      return dd($info);
-      $userInfo                 = $info['user'];
+      // return dd($info);
+      $userInfo                 = json_decode($info['user'], true);
       $existingMobile           = User::where('mobile', $userInfo['mobile'])
                                      ->where('cc', $userInfo['cc'])
                                      ->first();
@@ -59,8 +75,8 @@ class StoreController extends Controller
       }
 
 
-      $storeInfo                = $info['store'];
-      $branchesInfo             = $info['branches'];
+      $storeInfo                = $info;
+      $branchesInfo             = json_decode($info['branches'], true);
       if (isset($storeInfo) && !empty($storeInfo)){
         $store                     = Store::create($storeInfo);
       }

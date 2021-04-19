@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Category;
+use App\Models\Customer;
 use App\Models\Store;
 use App\Models\Offer;
 use App\Models\OfferImage;
@@ -31,6 +32,23 @@ class OfferController extends Controller
 
       $response['offers']       = $offers->get();
       $response['statusCode']   = 200;
+      return $response;
+    }
+
+    public function dashboard(Request $request)
+    {
+      $response                 = array();
+      $user                     = \Auth::Guard('api')->user();
+      $todaysDate               = Carbon::now()->toDateString();
+      $aWeekAgo                 = Carbon::now()->subDays(7)->toDateString();
+      $response['statistics']['all_offers']   = Offer::count();
+      $response['statistics']['active_offers'] = Offer::where('status', 1)->whereDate('expiry', '>', $todaysDate)->count();
+      $response['statistics']['new_offers']   = Offer::whereDate('created_at', '>=', $aWeekAgo)->count();
+      $response['statistics']['all_stores']   = Store::count();
+      $response['statistics']['new_stores']   = Store::whereDate('created_at', '>=', $aWeekAgo)->count();
+      $response['statistics']['all_customers'] = Customer::count();
+      $response['statistics']['new_customers'] = Customer::whereDate('created_at', '>=', $aWeekAgo)->count();
+      $response['statistics']['statusCode']   = 200;
       return $response;
     }
 

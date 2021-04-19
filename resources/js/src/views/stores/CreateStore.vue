@@ -145,7 +145,7 @@
                 <h4 class="mb-4 text-base">{{$t('storeData')}}</h4>
               </div>
             </div>
-            
+
             <div>
               <div class="bg-input">
                 <icon name="store-name" class="icon"/>
@@ -328,7 +328,7 @@
                 color="linear-gradient(to left,#E93F7D,#DA6653)"
                 gradient
                 @click="save_changes">
-                {{$i18n.locale == "en" ? "Save Change" : "حفظ التغيرات"}} 
+                {{$i18n.locale == "en" ? "Save Change" : "حفظ التغيرات"}}
                 </vs-button>
               </div>
             </div>
@@ -456,13 +456,15 @@ export default {
     },
     save_changes() {
       //if(!this.validateForm) return
-    
+
       let formData = new FormData();
       formData.append('name_ar', this.store_data.name_ar)
       formData.append('name_en', this.store_data.name_en)
       formData.append('cr_number', this.store_data.cr_number)
       formData.append('city_id', this.store_data.city_id)
       formData.append('status', this.store_data.status)
+      formData.append('user', JSON.stringify(this.user))
+      formData.append('branches', JSON.stringify(this.branches_data))
       if (this.dataUploadedImages){
           formData.append('image', this.dataUploadedImages);
       }
@@ -471,7 +473,7 @@ export default {
       }else{
         var link = "storeManagement/addStore"
       }
-      this.$store.dispatch(link, formData)                                 
+      this.$store.dispatch(link, formData)
         .then(res => {
           if( res.data.statusCode == 200 ){
             this.$vs.notify({
@@ -500,13 +502,13 @@ export default {
       this.$store.dispatch("storeManagement/fetchStore", this.$route.params.storeID).catch(err => { console.error(err) })
       .then((res) => {
         this.store_data = res.data.store
-        this.user = res.data.user
-        this.branches_data = res.data
+        this.user = res.data.store.user
+        this.branches_data = res.data.store.branches
       })
       .catch((error) => console.log(error))
     }
   }
-  
+
 }
 </script>
 
@@ -585,7 +587,7 @@ export default {
   }
   .vs-button.small:not(.includeIconOnly) {
     padding: 0.5rem 4rem 0.5rem 1.5rem;
-    
+
   }
   .vs-button:not(.vs-radius):not(.includeIconOnly):not(.small):not(.large) {
       padding: .5rem 2rem;
