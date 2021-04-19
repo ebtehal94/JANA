@@ -41,8 +41,8 @@ class StoreController extends Controller
     {
       $response                 = array();
       $info                     = $request->all();
-      return dd($info);
-      $userInfo                 = $info['user'];
+      // return dd($info);
+      $userInfo                 = json_decode($info['user'], true);
       $existingMobile           = User::where('mobile', $userInfo['mobile'])
                                      ->where('cc', $userInfo['cc'])
                                      ->first();
@@ -59,8 +59,8 @@ class StoreController extends Controller
       }
 
 
-      $storeInfo                = $info['store'];
-      $branchesInfo             = $info['branches'];
+      $storeInfo                = $info;
+      $branchesInfo             = json_decode($info['branches'], true);
       if (isset($storeInfo) && !empty($storeInfo)){
         $store                     = Store::create($storeInfo);
       }

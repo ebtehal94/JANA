@@ -1,6 +1,6 @@
 <template>
     <div id="all-offers">
-        <div class="vx-row mt-5"> 
+        <div class="vx-row mt-5">
             <div v-for="item in offers" class="vx-col w-full sm:w-1/2 lg:w-1/4 mb-base" v-bind:key="item.id">
                 <vx-card class="usedOffers shadow">
                     <template slot="no-body">
@@ -9,7 +9,7 @@
                             <vs-button @click.stop="openDeleteConfirm(item.id)" color="danger" size="small" radius icon-pack="feather" icon="icon-trash-2"/>
                         </div>
                         <div class="item-image">
-                            <img :src="'/images/offers/'+item.link "  class="responsive card-img-top"/>
+                            <img v-if="item.images[0]" :src="imgLink + item.images[0].link "  class="responsive card-img-top"/>
                         </div>
                         <div class="p-3">
                             <div class="flex justify-between flex-wrap pt-2">
@@ -72,8 +72,8 @@ export default {
             //     "status":"نشط","date":"15/04/2021","subtitle":"وصف مختصر وصف مختصر..","price":"350","disc_price":"297","discount":"15%"},
             // ],
             ItemToDelete: null,
-           
-            
+            imgLink: 'https://otantik-home.s3.me-south-1.amazonaws.com/offers/',
+
         }
     },
     computed: {
@@ -108,13 +108,13 @@ export default {
             moduleOfferManagement.isRegistered = true
         }
         var link = "offerManagement/fetchOffers"
-        
-        if (this.display == 'pending'){   
-            this.$store.dispatch(link, {status: [0]}).catch(err => { console.error(err) })             
+
+        if (this.display == 'pending'){
+            this.$store.dispatch(link, {status: [0]}).catch(err => { console.error(err) })
         }else if (this.display == 'active'){
             this.$store.dispatch(link, {status: [1]}).catch(err => { console.error(err) })
         }else if (this.display == 'most_used'){
-            this.$store.dispatch(link, {filter: 'most_used'}).catch(err => { console.error(err) }) 
+            this.$store.dispatch(link, {filter: 'most_used'}).catch(err => { console.error(err) })
         }else
             this.$store.dispatch(link).catch(err => { console.error(err) })
 
@@ -129,7 +129,7 @@ export default {
         .action{
             position: absolute;
             top:10px;
-            right: 2px;     
+            right: 2px;
         }
         h5{
             font-size: .7rem;
@@ -157,13 +157,13 @@ export default {
         ul{
             padding-right: 4px;
             padding-top: 6px;
-        
+
             .price{
                 font-size: .4rem;
                 color: #ACACAC;
             }
             .disc-price{
-                font-size: .5rem; 
+                font-size: .5rem;
             }
             .linetThrough{
                 text-decoration: line-through;

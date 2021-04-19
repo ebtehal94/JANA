@@ -119,9 +119,6 @@ class OrderController extends Controller
     }
 
 
-
-
-
     $strings                  = ['ZR','DS','MA','WO','XA','RS'];
     $datetime                 = new DateTime();
     $rand_string              = $strings[rand(0,5)];
