@@ -4,7 +4,7 @@
             <div v-for="item in stores" class="vx-col w-full sm:w-1/2 lg:w-1/4 mb-base px-2.5" v-bind:key="item.id">
                 <vx-card class="store shadow text-center">
                     <img v-if="item.image" :src="imgLink + item.image" alt="" class="text-center mx-auto" width="100px"/>
-                        <div class="mx-auto cursor-pointer flex justify-around action" style="width: 4rem">
+                        <div class="mx-auto -mt-4 cursor-pointer flex justify-around action" style="width: 4rem">
                             <vs-button @click.stop="gotoEdit(item.id)" color="rgb(255,255,255)" text-color="rgb(255,159,67)" size="small" radius icon-pack="feather" icon="icon-edit" class=" shadow"/>
                             <vs-button @click.stop="openDeleteConfirm(item.id)" color="rgb(255,255,255)" text-color="#EA5455" size="small" radius icon-pack="feather" icon="icon-trash-2" class=" shadow"/>
                         </div>
@@ -74,11 +74,11 @@ export default {
     .store{
         margin-top: 2.5rem;
         img{
-            margin-top: -3rem;
+            margin-top: -4rem;
         }
-        .action{
-            margin-top: -lrem;
-        }
+        // .action{
+        //    margin-top: -lrem;
+        // }
         h4{
             font-size: .8rem;
             font-weight: bold;

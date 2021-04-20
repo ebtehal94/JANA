@@ -18,131 +18,126 @@
             <!-- Col Header -->
             <div class="vx-card__title">
                 <div class="separator">
-                    <h4 class="mb-4 text-base ">{{$t('accountData')}}</h4>
+                  <h4 class="mb-4 text-base font-bold">{{$t('accountData')}}</h4>
                 </div>
             </div>
 
             <!-- Col Content -->
-            <div>
-                <div class="bg-input">
-                    <icon name="user-name" class="icon"/>
-                    <vs-input
-                      class="w-full text-base"
-                      :placeholder="$t('fullName')"
-                      v-model="user_data.name"
-                      v-validate="'required'"
-                      icon-no-border
-                      icon="icon"
-                      name="name"/>
+              <div class="bg-input">
+                <icon name="user-name" class="icon"/>
+                <vs-input
+                class="w-full text-base"
+                :placeholder="$t('fullName')"
+                v-model="user_data.name"
+                v-validate="'required'"
+                icon-no-border
+                icon="icon"
+                name="name"/>
 
-                    <span v-if="!errors.has('name') && user_data.name">
-                      <icon name="confirm" class="icon left-icon"/>
-                    </span>
-                    <span v-else-if="errors.has('name')">
-                      <icon name="cross" class="icon left-icon"/>
-                    </span>
-                </div>
-
-                <div class="bg-input">
-                  <icon name="email" class="icon"/>
-                  <vs-input
-                    v-validate="'required|email|min:3'"
-                    data-vv-validate-on="blur"
-                    icon-no-border
-                    icon="icon"
-                    :placeholder="$t('email')"
-                    v-model="user_data.email"
-                    class="w-full mt-2"/>
-
-                   <span v-if="!errors.has('email') && user_data.email">
-                    <icon name="confirm" class="icon left-icon"/>
-                  </span>
-                  <span v-else-if="errors.has('email')">
-                    <icon name="cross" class="icon left-icon"/>
-                  </span>
-                </div>
-
-                <div class="vx-row bg-input">
-                  <icon name="mobile" class="icon phone-icon"/>
-                  <vs-input
-                    :placeholder="$t('mobile')"
-                    v-model="user_data.mobile"
-                    type="number"
-                    icon-no-border
-                    icon="icon"
-                    v-validate="'required|min:7'"
-                    class="w-3/4 mt-2 px-3"/>
-
-                  <vs-input
-                  v-model="user_data.cc"
-                  type="text"
-                  disabled
-                  dir="ltr"
-                  icon-no-border
-                  v-validate="'required'"
-                  class="w-1/5 mt-2"
-                  placeholder="966+"/>
-
-                  <span v-if="!errors.has('mobile') && user_data.mobile">
-                    <icon name="confirm" class="icon left-phone-icon"/>
-                  </span>
-                  <span v-else-if="errors.has('mobile')">
-                    <icon name="cross" class="icon left-phone-icon"/>
-                  </span>
-                </div>
-
-                <div class="bg-input">
-                  <icon name="password" class="icon"/>
-                  <vs-input
-                    data-vv-validate-on="blur"
-                    :placeholder="$t('password')"
-                    v-validate="'required|min:6'"
-                    type="password"
-                    icon-no-border
-                    icon="icon"
-                    v-model="user_data.password"
-                    class="w-full mt-2"/>
-
-                  <span v-if="!errors.has('password') && user_data.password">
-                    <icon name="confirm" class="icon left-icon"/>
-                  </span>
-                  <span v-else-if="errors.has('password')">
-                    <icon name="cross" class="icon left-icon"/>
-                  </span>
-                </div>
-
-                <div class="bg-input">
-                    <v-select class="w-full mt-2"
-                     v-model="user_data.status"
-                     :placeholder="$t('accountStatus')"
-                     label="text" :options="status_list"
-                     :reduce="text => text.id"
-                     :dir="$vs.rtl ? 'rtl' : 'ltr'" />
-
-                    <span v-if="!errors.has('status') && user_data.status">
-                      <icon name="confirm" class="icon left-icon"/>
-                    </span>
-                    <span v-else-if="errors.has('status')">
-                      <icon name="cross" class="icon left-icon"/>
-                    </span>
-                </div>
-
-                <div class=" mb-3">
-                  <vs-button
-                    class="w-full mt-10 font-medium register-btn rounded-full"
-                    color="linear-gradient(to left,#E93F7D,#DA6653)"
-                    gradient
-                    @click="registerUser">
-                      {{$i18n.locale == "en" ? "Create Account" : "إنشاء الحساب"}} 
-                  </vs-button>
+                <span v-if="!errors.has('name') && user_data.name">
+                  <icon name="confirm" class="icon left-icon"/>
+                </span>
+                <span v-else-if="errors.has('name')">
+                  <icon name="cross" class="icon left-icon"/>
+                </span>
               </div>
 
-            </div>
-          </div>
-        </div>
-        
-      </div>
+              <div class="bg-input">
+                <icon name="email" class="icon"/>
+                <vs-input
+                v-validate="'required|email|min:3'"
+                data-vv-validate-on="blur"
+                icon-no-border
+                icon="icon"
+                :placeholder="$t('email')"
+                v-model="user_data.email"
+                class="w-full mt-2"/>
 
+                <span v-if="!errors.has('email') && user_data.email">
+                  <icon name="confirm" class="icon left-icon"/>
+                </span>
+                <span v-else-if="errors.has('email')">
+                  <icon name="cross" class="icon left-icon"/>
+                </span>
+              </div>
+
+              <div class="vx-row bg-input">
+                <icon name="mobile" class="icon phone-icon"/>
+                <vs-input
+                :placeholder="$t('mobile')"
+                v-model="user_data.mobile"
+                type="number"
+                icon-no-border
+                icon="icon"
+                v-validate="'required|min:7'"
+                class="w-3/4 mt-2 px-3"/>
+
+                <vs-input
+                v-model="user_data.cc"
+                type="text"
+                disabled
+                dir="ltr"
+                icon-no-border
+                v-validate="'required'"
+                class="w-1/5 mt-2"
+                placeholder="966+"/>
+
+                <span v-if="!errors.has('mobile') && user_data.mobile">
+                  <icon name="confirm" class="icon left-phone-icon"/>
+                </span>
+                <span v-else-if="errors.has('mobile')">
+                  <icon name="cross" class="icon left-phone-icon"/>
+                </span>
+              </div>
+
+              <div class="bg-input">
+                <icon name="password" class="icon"/>
+                <vs-input
+                data-vv-validate-on="blur"
+                :placeholder="$t('password')"
+                v-validate="'required|min:6'"
+                type="password"
+                icon-no-border
+                icon="icon"
+                v-model="user_data.password"
+                class="w-full mt-2"/>
+
+                <span v-if="!errors.has('password') && user_data.password">
+                  <icon name="confirm" class="icon left-icon"/>
+                </span>
+                <span v-else-if="errors.has('password')">
+                  <icon name="cross" class="icon left-icon"/>
+                </span>
+              </div>
+
+              <div class="bg-input">
+                <v-select class="w-full mt-2 text-sm"
+                v-model="user_data.status"
+                :placeholder="$t('accountStatus')"
+                label="text" :options="status_list"
+                :reduce="text => text.id"
+                :dir="$vs.rtl ? 'rtl' : 'ltr'" />
+
+                <span v-if="!errors.has('status') && user_data.status">
+                  <icon name="confirm" class="icon left-icon"/>
+                </span>
+                <span v-else-if="errors.has('status')">
+                  <icon name="cross" class="icon left-icon"/>
+                </span>
+              </div>
+
+              <div class=" mb-3">
+                <vs-button
+                class="w-full mt-10 font-medium register-btn rounded-full"
+                color="linear-gradient(to left,#E93F7D,#DA6653)"
+                gradient
+                @click="registerUser">
+                {{$i18n.locale == "en" ? "Create Account" : "إنشاء الحساب"}} 
+                </vs-button>
+              </div>
+          </div>
+        </div>       
+      </div>
     </vx-card>
   </div>
 </template>
@@ -163,8 +158,8 @@ export default {
     return {
       user_data: { name: null, email: null, mobile: null, cc: '+966', password: null,status:null},
       status_list: [
-        {text:'غير نشط',id:1},
-        {text:'نشط',id:2},
+        {text:'غير نشط',id:0},
+        {text:'نشط',id:1},
       ],
       dataUploadedImages: [],
     }
@@ -196,7 +191,7 @@ export default {
       formData.append('password', this.user_data.password)
       formData.append('status', this.user_data.status)
       if (this.dataUploadedImages){
-          formData.append('image', this.dataUploadedImages);
+        formData.append('image', this.dataUploadedImages);
       }
       if (this.user_data.id != null && this.user_data.id > 0){
         var link = "userManagement/updateUser"
@@ -244,11 +239,10 @@ export default {
 
 <style lang="scss" scoped>
 #create-admin {
-    margin: 2rem 2.5rem;
-
-    .admin-info{
-        padding: 2.5rem;
-    }
+  margin: 2rem 2.5rem;
+  .admin-info{
+    padding: 2.5rem;
+  }
     .separator{
     display: flex;
     align-items: center;

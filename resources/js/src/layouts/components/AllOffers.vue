@@ -93,11 +93,21 @@ export default {
                 color: 'danger',
                 title: this.$t('Delete'),
                 text: 'هل أنت متأكد أنك تريد حذف هذا العرض نهائياً؟',
-                accept: this.deleteOffer(id)
+                accept: this.deleteOffer(id),
+                acceptText: "Delete"
             })
         },
         deleteOffer(id){
-         this.$store.dispatch("offerManagement/removeOffer", id).catch(err => { console.error(err) })
+         this.$store.dispatch("offerManagement/removeOffer", id)
+         .then(()   => { this.showDeleteSuccess() })
+         .catch(err => { console.error(err) })
+        },
+        showDeleteSuccess() {
+            this.$vs.notify({
+                color: 'success',
+                title: 'Successfull',
+                text: 'تم الحذف بنجاح'
+            })
         },
         updateStatus(id, status){
             this.$store.dispatch("offerManagement/updateOffer", {id, status}).catch(err => { console.error(err) })
