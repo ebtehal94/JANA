@@ -38,14 +38,14 @@
             <div class="vx-col w-full">
                 <vx-card class="mt-8 pt-0">
                     <vs-tabs class="tabs-shadow-none">
-                        <vs-tab label="كل العملاء">
+                        <vs-tab :label="$t('AllCustomers')">
                             <AllCustomers :customers="customers"/>
                         </vs-tab>
-                        <vs-tab label="الحسابات المعلقة">
+                        <vs-tab :label="$t('PendingCustomers')">
                             <AllCustomers display="pending" :customers="customers" />
                             <!--<SuspendedAccounts pending=true :accounts="accounts"/>-->
                         </vs-tab>
-                        <vs-tab label="عملاء جدد استخدموا كود الإحالات">
+                        <vs-tab :label="$t('NewCustomers')">
                             <AllCustomers display="new_customer" :customers="customers" />
                         </vs-tab>
                     </vs-tabs>

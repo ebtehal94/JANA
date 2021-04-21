@@ -8,8 +8,8 @@
                             <vs-button @click.stop="gotoEdit(item.id)" color="rgb(255,255,255)" text-color="rgb(255,159,67)" size="small" radius icon-pack="feather" icon="icon-edit" class=" shadow"/>
                             <vs-button @click.stop="openDeleteConfirm(item.id)" color="rgb(255,255,255)" text-color="#EA5455" size="small" radius icon-pack="feather" icon="icon-trash-2" class=" shadow"/>
                         </div>
-                    <h4 class="text-center">{{item.name_ar || $t('NA')}}</h4>
-                    <h4 class="text-center">{{item.name_en || $t('NA')}}</h4>
+                    <h4 class="text-center">{{ $i18n.locale == 'en' ? (item.name_en || $t('NA')) : (item.name_ar  || $t('NA'))}}</h4>
+                    <!-- <h4 class="text-center">{{item.name_en || $t('NA')}}</h4> -->
                     <!-- <div class="flex justify-between">
                         <span>{{item.phone}}</span>
                         <span> | </span>

@@ -43,6 +43,14 @@ export default {
 
 		SearchBar: 'What are you looking for?',
 
+		customerNumber:'Number of customers',
+		newCustomer:'New customer',
+		storeNumber:'Number of stores',
+		newStore:'New store',
+		offerNumber:'Number of offers',
+		newOffer:'New offer',
+		activeOffers:'Active Offers',
+
 		UsedOffers:'Most used offers',
 		SuppliersOffers:'The number of added offers from suppliers',
 		Areas:'Areas that use offers',
@@ -391,6 +399,14 @@ export default {
 		CreateStore:'إنشاء حساب جديد',
 
 		SearchBar: 'ما الذي تبحث عنه؟',
+
+		customerNumber:'عدد الأعضاء',
+		newCustomer:'عضو جديد',
+		storeNumber:'عدد المتاجر',
+		newStore:'متجر جديد',
+		offerNumber:'عدد العروض',
+		newOffer:'عرض جديد',
+		activeOffers:'العروض النشطة حاليا',
 
 		UsedOffers:'أكثر العروض استخداماً',
 		SuppliersOffers:'عدد العروض المضافة من كل مورد',
