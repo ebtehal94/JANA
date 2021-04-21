@@ -22,11 +22,11 @@ class CustomerController extends Controller
 
       if ($info['method'] == 'email'){
         $customer           = Customer::where('email', $info['email'])
-                                      ->select('id', 'name', 'mobile', 'email', 'status', 'password')
+                                      ->select('id', 'name', 'mobile', 'email', 'status', 'password', 'city_id')
                                       ->first();
       }elseif ($info['method'] == 'mobile'){
         $customer           = Customer::where('mobile', $info['mobile'])
-                                      ->select('id', 'name', 'mobile', 'email', 'status', 'password')
+                                      ->select('id', 'name', 'mobile', 'email', 'status', 'password', 'city_id')
                                       ->first();
       }
 
@@ -68,7 +68,7 @@ class CustomerController extends Controller
         $response['statusCode']   = 402;
         return $response;
       }
-      
+
       $customer['password']     = $this->AES_Encode($customer['password']);
       $customer                 = Customer::create($customer);
       if ($customer){
