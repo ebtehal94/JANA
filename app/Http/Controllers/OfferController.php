@@ -58,7 +58,7 @@ class OfferController extends Controller
       $response                 = array();
       $user                     = \Auth::Guard('api')->user();
       $info                     = $request->all();
-      $response['categories']   = Category::select('id', 'title_ar', 'title_en')->get();
+      $response['categories']   = Category::select('id', 'title_ar', 'title_en')->orderby('sort','asc')->get();
       if ($user->rule == 'admin'){
         $response['stores']       = Store::select('id', 'name_ar', 'name_en')->get();
       }

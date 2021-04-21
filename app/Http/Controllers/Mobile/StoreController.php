@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Mobile;
 use App\Http\Controllers\Controller;
 
 use Carbon\Carbon;
+use App\Models\Offer;
 use App\Models\Store;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -70,6 +71,24 @@ class StoreController extends Controller
                                    ->get();
         $Str->increment('views');
         $response['store']        = $Str;
+        $response['statusCode']   = 200;
+      }else{
+        $response['statusCode']   = 400;
+      }
+      return $response;
+    }
+
+    public function offers(Request $request)
+    {
+      $response       = array();
+      $info           = $request->all();
+      $offers         = Offer::where('store_id', $info['store_id'])
+                             ->select('id','title_en','title_ar', 'desc_en', 'desc_ar', 'discount_perc', 'price_before', 'price', 'status')
+                             ->with('mainImage')
+                             ->orderBy('id', 'desc')
+                             ->get();
+      if (isset($offers)){
+        $response['offers']        = $offers;
         $response['statusCode']   = 200;
       }else{
         $response['statusCode']   = 400;

@@ -40,6 +40,9 @@ Route::post('/customers/offers/view', 'Mobile\OfferController@view');
 
 Route::post('/customers/stores/list', 'Mobile\StoreController@list');
 Route::post('/customers/stores/view', 'Mobile\StoreController@view');
+Route::post('/customers/store/offers', 'Mobile\StoreController@offers');
+
+Route::post('/customers/account/redeems', 'Mobile\OfferController@myRedeems');
 
 
 Route::get('/statistics/dashboard', 'OfferController@dashboard');
