@@ -1,5 +1,6 @@
 <template>
     <div id="all-customers">
+        <div class="p-2">
         <div class="vx-row mt-5">
             <div v-for="item in customers" class="vx-col w-full sm:w-1/2 lg:w-1/4 mb-base px-2.5" v-bind:key="item.id">
                 <vx-card class="customers shadow">
@@ -26,22 +27,32 @@
                     </div>
                 </vx-card>
             </div>
+
+
+            <vs-pagination :total="10" :max="7" v-model="currentPage" />
+        </div>
         </div>
     </div>
 </template>
 
 <script>
+import { AgGridVue } from "ag-grid-vue"
+import '@sass/vuexy/extraComponents/agGridStyleOverride.scss'
 import axios from "@/axios.js"
 import moduleCustomerManagement from '@/store/customer-management/moduleCustomerManagement.js'
 export default {
-  props:{
-      display:{
-          required:false
-      },
-  },
+    components: {
+        AgGridVue,
+    },
+    props:{
+        display:{
+            required:false
+        },
+    },
   data() {
     return {
       ItemToDelete: null,
+      currentPage:1
     }
   },
     computed: {
@@ -69,9 +80,10 @@ export default {
     },
     updateStatus(id, status){
       this.$store.dispatch("customerManagement/updateCustomer", {id:id, status:status}).catch(err => { console.error(err) })
-    }
+    },
   },
-      created() {
+
+    created() {
         if(!moduleCustomerManagement.isRegistered) {
             this.$store.registerModule('customerManagement', moduleCustomerManagement)
             moduleCustomerManagement.isRegistered = true
@@ -85,12 +97,12 @@ export default {
             // .catch((error) => console.log(error))
             this.$store.dispatch(link, {status: [0]}).catch(err => { console.error(err) })
         }else if (this.display == 'new_customer'){
-            axios.post("/api/customers/list/",{filter: 'new_customer'} )
-            .then((res) => {
-            (res.data)
-            })
-            .catch((error) => console.log(error))
-            //this.$store.dispatch(link, {filter: 'new_customer'}).catch(err => { console.error(err) })
+            // axios.post("/api/customers/list/",{filter: 'new_customer'} )
+            // .then((res) => {
+            // (res.data)
+            // })
+            // .catch((error) => console.log(error))
+            this.$store.dispatch(link, {filter: 'new_customer'}).catch(err => { console.error(err) })
         }else
         this.$store.dispatch(link).catch(err => { console.error(err) })
     }

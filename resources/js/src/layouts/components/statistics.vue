@@ -28,7 +28,7 @@
                 <vx-card class="stat">
                     <h6 class="pt-2.5">عدد العروض {{statistics.all_offers}}</h6>
                     <vs-divider/>
-                    <h3 class="text-primary">{{statistics.new_offers}}عرض مستخدم</h3>
+                    <h3 class="text-primary">{{statistics.new_offers}} عرض مستخدم</h3>
                 </vx-card>
             </div>
             <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4">
@@ -60,7 +60,7 @@
         },
         data() {
             return {
-                statistics: {new_customers: 22, all_customers: 2310 , new_stores:0, all_stores: 1547, new_offers:18, all_offers:1547, active_offers:46},
+                statistics: {new_customers: null, all_customers: null, new_stores:null, all_stores: null, new_offers:null, all_offers:null, active_offers:null},
             }
         },
         computed: {

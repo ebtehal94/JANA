@@ -10,6 +10,7 @@
                         </div>
                         <div class="item-image">
                             <img v-if="item.images[0]" :src="imgLink + item.images[0].link "  class="responsive card-img-top"/>
+                            <!-- <img v-else :src="require('@assets/images/customers.png')"/> -->
                         </div>
                         <div class="p-3">
                             <div class="flex justify-between flex-wrap pt-2">
@@ -92,14 +93,24 @@ export default {
                 color: 'danger',
                 title: this.$t('Delete'),
                 text: 'هل أنت متأكد أنك تريد حذف هذا العرض نهائياً؟',
-                accept: this.deleteOffer(id)
+                accept: this.deleteOffer(id),
+                acceptText: "Delete"
             })
         },
         deleteOffer(id){
-         this.$store.dispatch("offerManagement/removeOffer", id).catch(err => { console.error(err) })
+         this.$store.dispatch("offerManagement/removeOffer", id)
+         .then(()   => { this.showDeleteSuccess() })
+         .catch(err => { console.error(err) })
+        },
+        showDeleteSuccess() {
+            this.$vs.notify({
+                color: 'success',
+                title: 'Successfull',
+                text: 'تم الحذف بنجاح'
+            })
         },
         updateStatus(id, status){
-            this.$store.dispatch("offerManagement/updateOffer", {id:id, status:status}).catch(err => { console.error(err) })
+            this.$store.dispatch("offerManagement/updateOffer", {id, status}).catch(err => { console.error(err) })
         }
     },
     created() {
