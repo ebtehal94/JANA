@@ -19,7 +19,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 // Route::post('/import', 'OfferController@import');
 
-// Route::get('/categories/list', 'CategoryController@indexPage');
 // Route::post('/categories/create', 'CategoryController@create');
 // Route::delete('/categories/delete/{itemId}', 'CategoryController@remove');
 //
@@ -34,6 +33,8 @@ Route::post('/customers/register', 'Mobile\CustomerController@register');
 Route::post('/customers/otpCheck', 'Mobile\CustomerController@otpCheck');
 
 Route::post('/customers/home', 'Mobile\OfferController@home');
+Route::get('/customers/categories/list', 'CategoryController@index');
+
 Route::post('/customers/offers/list', 'Mobile\OfferController@list');
 Route::post('/customers/offers/view', 'Mobile\OfferController@view');
 
@@ -44,7 +45,7 @@ Route::post('/customers/stores/view', 'Mobile\StoreController@view');
 Route::get('/statistics/dashboard', 'OfferController@dashboard');
 Route::get('/statistics/storeOffers', 'StoreController@storeOffers');
 
-  
+
 Route::post('/offers/list', 'OfferController@index');
 Route::post('/offers/create', 'OfferController@create');
 Route::post('/offers/getInfo', 'OfferController@getInfo');

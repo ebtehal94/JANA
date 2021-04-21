@@ -15,10 +15,15 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories       = Category::select('title_en as title', 'id')->orderby('sort','asc')->get();
-        return $categories;
+      $response                 = array();
+      $categories               = Category::select('title_en', 'title_ar', 'id')->orderby('sort','asc')->get();
+
+      $response['categories']   = $categories;
+      $response['statusCode']   = 200;
+
+      return $response;
     }
-    
+
     public function listFilters()
     {
       $filters = Filter::all();
@@ -74,7 +79,7 @@ class CategoryController extends Controller
       if(isset($filter['category_id'])) {
         $category = Category::find($request['category_id']);
         $category->filters()->create($filter);
-      
+
         $response['statusCode']   = 200;
       }else{
         $response['statusCode']   = 400;
@@ -123,7 +128,7 @@ class CategoryController extends Controller
 
     public function deleteFilter($cat, $id)
     {
-     
+
       $category           = Category::find($cat);
       $response           = array();
 
