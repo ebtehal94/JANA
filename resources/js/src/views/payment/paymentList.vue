@@ -79,20 +79,21 @@ export default {
     },
 
     created() {
+        
         if (this.display == 'this_month'){
             axios.get('/api/payments/list',{filter:'this_month'})
             .then((res) => {
             this.payments = res.data.payments
             })
-            .catch((error) => console.log(error)) 
+            .catch((error) => console.log(error)) }
             
-        }else{
-            axios.get('/api/payments/list')
-            .then((res) => {
-            this.payments = res.data.payments
-            })
-            .catch((error) => console.log(error))
-        }
+        // }else{
+        //     axios.get('/api/payments/list')
+        //     .then((res) => {
+        //     this.payments = res.data.payments
+        //     })
+        //     .catch((error) => console.log(error))
+        // }
        
     },
 }
