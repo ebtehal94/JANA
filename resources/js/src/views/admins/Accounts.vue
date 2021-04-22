@@ -121,9 +121,10 @@ export default{
     }
     
 }
-@media only screen and (min-width: 360px) and (max-width: 767px) {
+@media only screen and (max-width: 512px){
     .vs-button:not(.vs-radius):not(.includeIconOnly):not(.small):not(.large) {
         padding: .5rem 2rem !important;
+        margin-top: 1rem;
     }
 }
 </style>

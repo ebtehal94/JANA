@@ -15,7 +15,7 @@
                 icon-no-border 
                 :placeholder="$t('SearchBar')" 
                 icon-after vs-icon-after="true"
-                v-model="searchQuery" 
+                v-model="query" 
                 class="sm:w-full md:w-full input-rounded-full" 
                 icon="icon-search" 
                 icon-pack="feather" />
@@ -73,8 +73,7 @@ export default{
     },
     data() {
         return {
-            searchQuery: '',
-            
+            query: '',    
         }
     },
     methods: {

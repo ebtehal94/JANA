@@ -195,7 +195,7 @@
             <div class="vx-col w-full">
                 <!-- Col Header -->
                 <div class="flex items-end">
-                  <span class="leading-none font-semibold text-xs">{{$i18n.locale == "en" ? "Offer expiration date" : "تاريخ انتهاء العرض"}}</span>
+                  <span class="leading-none font-semibold text-xs">{{$i18n.locale == "en" ? "Offer expiration date" : " تاريخ انتهاءالعرض"}}</span>
                 </div>
 
                 <!-- Col Content -->
