@@ -38,11 +38,18 @@ class StoreController extends Controller
       $response                 = array();
       $user                     = \Auth::Guard('api')->user();
       $todaysDate               = Carbon::now()->toDateString();
-      $stores                   = Store::select('id','name_ar', 'name_en', 'views', 'image')->get();
+      $stores                   = Store::select('id','name_ar', 'name_en', 'views', 'image')
+                                       ->get()
+                                       ->sortByDesc(function($store)
+                                         {
+                                             return $store->offers->count();
+                                         })
+                                       ->take(20);
+
       foreach ($stores as $store) {
+        unset($store['offers']);
         $store->offers            = $store->offers()->count();
       }
-      $stores                   = $stores->sortByDesc('offers')->take(20);
       $response['stores']       = $stores;
       return $response;
     }

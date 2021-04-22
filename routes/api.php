@@ -47,6 +47,8 @@ Route::post('/customers/account/redeems', 'Mobile\OfferController@myRedeems');
 
 Route::get('/statistics/dashboard', 'OfferController@dashboard');
 Route::get('/statistics/storeOffers', 'StoreController@storeOffers');
+Route::get('/statistics/mostRedeemed', 'OfferController@mostRedeemed');
+Route::get('/statistics/offersByCity', 'OfferController@offersByCity');
 
 
 Route::post('/offers/list', 'OfferController@index');

@@ -14,6 +14,11 @@ class City extends Model
       return $this->hasMany('App\Models\Offer');
     }
 
+    public function customers()
+    {
+      return $this->hasMany('App\Models\Customer');
+    }
+
 
     public function redeems()
     {
