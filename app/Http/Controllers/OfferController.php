@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Models\City;
 use App\Models\Category;
 use App\Models\Customer;
 use App\Models\Store;
@@ -30,6 +31,14 @@ class OfferController extends Controller
         $offers                   = $offers->whereIn('status', $info['status']);
       }
 
+      if (isset($info['search'])){
+        if (isset($info['lang']) && $info['lang'] == 'en'){
+          $offers                   = $offers->where('title_en', 'like', '%'.$info['search'].'%');
+        }else{
+          $offers                   = $offers->where('title_ar', 'like', '%'.$info['search'].'%');
+        }
+      }
+
       $response['offers']       = $offers->get();
       $response['statusCode']   = 200;
       return $response;
@@ -39,6 +48,9 @@ class OfferController extends Controller
     {
       $response                 = array();
       $user                     = \Auth::Guard('api')->user();
+      if (!isset($user) || $user->rule != 'admin'){
+        return 'Unauthorized!';
+      }
       $todaysDate               = Carbon::now()->toDateString();
       $aWeekAgo                 = Carbon::now()->subDays(7)->toDateString();
       $response['statistics']['all_offers']   = Offer::count();
@@ -49,6 +61,56 @@ class OfferController extends Controller
       $response['statistics']['all_customers'] = Customer::count();
       $response['statistics']['new_customers'] = Customer::whereDate('created_at', '>=', $aWeekAgo)->count();
       $response['statistics']['statusCode']   = 200;
+      return $response;
+    }
+
+
+    public function mostRedeemed(Request $request)
+    {
+      $response                 = array();
+      $user                     = \Auth::Guard('api')->user();
+      // if (!isset($user) || $user->rule != 'admin'){
+      //   return 'Unauthorized!';
+      // }
+      $offers                   = Offer::select('id','title_en', 'title_ar', 'created_at', 'status', 'price', 'price_before', 'discount_perc')
+                                       ->with('mainImage')
+                                       ->get()
+                                       ->sortByDesc(function($offer)
+                                         {
+                                             return $offer->redeems->count();
+                                         })
+                                       ->take(20);
+      foreach ($offers as $offer) {
+        unset($offer['redeems']);
+        $offer->redeems            = $offer->redeems()->count();
+      }
+      $response['offers']       = $offers;
+      return $response;
+    }
+
+
+    public function offersByCity(Request $request)
+    {
+      $response                 = array();
+      $user                     = \Auth::Guard('api')->user();
+      if (!isset($user) || $user->rule != 'admin'){
+        return 'Unauthorized!';
+      }
+
+      $cities                   = City::select('id','name_ar')
+                                      ->get()
+                                      ->sortByDesc(function($city)
+                                        {
+                                            return $city->redeems->count();
+                                        })
+                                      ->take(20);
+      foreach ($cities as $city) {
+        unset($city['redeems']);
+        $city->stores             = $city->stores()->count();
+        $city->customers          = $city->customers()->count();
+        $city->redeems            = $city->redeems()->count();
+      }
+      $response['cities']       = $cities;
       return $response;
     }
 
