@@ -109,7 +109,7 @@ import HNavMenu            from '@/layouts/components/horizontal-nav-menu/Horizo
 import navMenuItems        from '@/layouts/components/vertical-nav-menu/navMenuItems.js'
 import TheNavbarHorizontal from '@/layouts/components/navbar/TheNavbarHorizontal.vue'
 import TheNavbarVertical   from '@/layouts/components/navbar/TheNavbarVertical.vue'
-import TheFooter           from '@/layouts/components/TheFooter.vue'
+// import TheFooter           from '@/layouts/components/TheFooter.vue'
 import themeConfig         from '@/../themeConfig.js'
 import VNavMenu            from '@/layouts/components/vertical-nav-menu/VerticalNavMenu.vue'
 import I18n                 from "@/layouts/components/navbar/components/I18n.vue"
@@ -119,7 +119,7 @@ export default {
   components: {
     BackToTop,
     HNavMenu,
-    TheFooter,
+    // TheFooter,
     TheNavbarHorizontal,
     TheNavbarVertical,
     VNavMenu,
