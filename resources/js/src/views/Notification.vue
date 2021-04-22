@@ -17,7 +17,7 @@
                   <!-- Col Content -->
                   <div>
                       <div>
-                            <v-select class="w-full mt-2 text-sm"
+                            <v-select class="w-full mt-2  text-sm"
                             :placeholder="$t('recipients')"
                             v-model="notice_data.customer_id"
                             v-validate="'required'"
@@ -48,7 +48,7 @@
                         <vs-textarea 
                         :placeholder="$t('desc')"
                         v-model="notice_data.desc_ar" 
-                        class="mt-2 p-2" 
+                        class="mt-2" 
                         height="130px"
                         name="desc_ar"/>
                       </div>
@@ -156,16 +156,21 @@ export default {
     .vs-textarea{
       height: 130px;
       border-radius: 20px;
+      padding: 1rem;
     }
     .vs-button:not(.vs-radius):not(.includeIconOnly):not(.small):not(.large) {
       padding: .5rem 2rem;
     }
-  .v-select .vs__dropdown-toggle .vs__search {
-      font-size: .8rem;
-  }
-  .v-select .vs__dropdown-toggle .vs__selected-options {
-    padding: 2px 1rem 2px 0;
-  }
+  // .v-select .vs__dropdown-toggle .vs__search {
+  //     font-size: .8rem;
+  // }
+  // .v-select {
+  //   .vs__dropdown-toggle {
+  //     .vs__selected-options {
+  //     padding: 2px 1rem 2px 0;
+  //   }
+  //   }
+  // }
   
 }
 

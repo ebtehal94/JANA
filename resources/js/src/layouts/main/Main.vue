@@ -55,12 +55,12 @@
           <div class="router-content pt-6" style="margin-top: 0;">
             <div class="vx-row mx-10">
               <div class="vx-col">
-                <feather-icon class="sm:inline-flex xl:hidden cursor-pointer p-2 MenuIcon" icon="MenuIcon" @click.stop="showSidebar" />
+                <feather-icon class="sm:inline-flex xl:hidden cursor-pointer p-2 mt-2 MenuIcon" icon="MenuIcon" @click.stop="showSidebar" />
               </div>
               <div class="vx-col hidden lg:block lg:block p-0">
                 <!-- SM - OPEN SIDEBAR BUTTON -->
 
-                <div  v-if="breadcrumbs!= null && breadcrumbs.length > 0" class="breadcrumbs mr-10  my-6">
+                <div  v-if="breadcrumbs!= null && breadcrumbs.length > 0" class="breadcrumbs mr-10 mt-2 mb-6">
                   <p class="text-white">
                     <span class="dashboard font-bold">{{$t('dashboard')}} </span>
                     <span class="sperate">|</span>

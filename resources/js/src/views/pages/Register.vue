@@ -637,10 +637,10 @@ export default {
           // obj.password = this.store_data.password
       // }
       return new Promise((resolve, reject) => {
-            this.$store.dispatch('auth/registerUserJWT', {  store: this.store_data,
+          this.$store.dispatch('auth/registerUserJWT', {store: this.store_data,
                                                             branches: this.branches_data,
                                                             user: this.user,
-                                                            } )
+                                                            })
           .then(res => {
             this.$vs.loading.close()
           if( res.data.statusCode == 200 ){
@@ -739,10 +739,6 @@ export default {
   }
   .bg-input{
     position: relative;
-
-    .vs__dropdown-toggle {
-      padding: 8rem;
-    }
     .icon{
       position: absolute;
       top:14px;
@@ -778,9 +774,6 @@ export default {
   .account{
     color: #ACACAC;
   }
- .vs__selected-options {
-    padding: 0 10px;
-}
 .steps-btn{
     width: 18px;
     height: 18px;

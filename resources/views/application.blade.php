@@ -20,7 +20,7 @@
   </head>
   <body>
     <noscript>
-      <strong>We're sorry but Otantik Website doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+      <strong>We're sorry but Jana Website doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.4/bluebird.min.js"></script>

@@ -1,11 +1,11 @@
 <template>
     <div id="supplier-offers">
         <div class="vx-row mt-5"> 
-            <div v-for="item in stores" class="vx-col w-full sm:w-1/2 lg:w-1/5 mb-base px-2.5" v-bind:key="item.id">
-                <vx-card class="offer shadow">
+            <div v-for="item in stores" class="flex flex-col flex-wrap vx-col w-full sm:w-1/2 lg:w-1/5 mb-base px-2.5" v-bind:key="item.id">
+                <vx-card class="offer shadow flex-1">
                     <img v-if="item.image" :src="imgLink + item.image"  class="text-center mx-auto" width="80px"/>
-                    <h4 class="text-center">{{item.name_ar || $t('NA')}}</h4>
-                    <span class="block text-center">{{item.name_en || $t('NA')}}</span>
+                    <h4 class="text-center">{{ $i18n.locale == 'en' ? (item.name_en || $t('NA')) : (item.name_ar  || $t('NA'))}}</h4>
+                    
                 </vx-card>
             </div>
         </div>

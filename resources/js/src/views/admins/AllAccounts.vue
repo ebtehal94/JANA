@@ -1,15 +1,15 @@
 <template>
     <div id="all-admins">
         <div class="vx-row mt-5"> 
-            <div v-for="item in users" class="vx-col w-full sm:w-1/2 lg:w-1/4 mb-base px-2.5" v-bind:key="item.id">
-                <vx-card class="account shadow text-center">
+            <div v-for="item in users" class="flex flex-col flex-wrap vx-col w-full sm:w-1/2 lg:w-1/4 mb-base px-2.5" v-bind:key="item.id">
+                <vx-card class="account shadow text-center flex-1">
                     <img :src="require('@assets/images/admin.png')" class="text-center mx-auto" width="100px"/>
                         <div class="mx-auto cursor-pointer flex justify-around action" style="width: 4rem">
                             <vs-button @click="gotoEdit(item.id)" color="rgb(255,255,255)" text-color="rgb(255,159,67)" size="small" radius icon-pack="feather" icon="icon-edit" class=" shadow"/>
                             <vs-button @click.stop="openDeleteConfirm(item.id)" color="rgb(255,255,255)" text-color="#EA5455" size="small" radius icon-pack="feather" icon="icon-trash-2" class=" shadow"/>
                         </div>
                     <h4 class="text-center">{{item.name || $t('NA')}}</h4>
-                    <div class="flex justify-between">
+                    <div class="flex justify-between clear-both">
                         <span>{{item.mobile}}</span>
                         <span> | </span>
                         <span>{{item.email}}</span>
