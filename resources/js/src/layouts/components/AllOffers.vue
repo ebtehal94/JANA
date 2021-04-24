@@ -50,6 +50,9 @@ export default {
     props:{
         display:{
             required: false
+        },
+        query:{
+            type: String
         }
     },
     data() {
@@ -121,13 +124,13 @@ export default {
         var link = "offerManagement/fetchOffers"
 
         if (this.display == 'pending'){
-            this.$store.dispatch(link, {status: [0]}).catch(err => { console.error(err) })
+            this.$store.dispatch(link, {status: [0],search:this.query}).catch(err => { console.error(err) })
         }else if (this.display == 'active'){
             this.$store.dispatch(link, {status: [1]}).catch(err => { console.error(err) })
         }else if (this.display == 'most_used'){
             this.$store.dispatch(link, {filter: 'most_used'}).catch(err => { console.error(err) })
         }else
-            this.$store.dispatch(link).catch(err => { console.error(err) })
+            this.$store.dispatch(link,{search:this.query}).catch(err => { console.error(err) })
     },
 
 }

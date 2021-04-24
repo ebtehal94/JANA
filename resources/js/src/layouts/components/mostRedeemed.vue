@@ -1,7 +1,7 @@
 <template>
     <div id="all-offers">
         <div class="vx-row mt-5">
-            <div v-for="item in offers" class="flex flex-col flex-wrap vx-col w-full sm:w-1/2 lg:w-1/4 mb-base" v-bind:key="item.id">
+            <div v-for="item in redeems" class="flex flex-col flex-wrap vx-col w-full sm:w-1/2 lg:w-1/4 mb-base" v-bind:key="item.id">
                 <vx-card class="offers shadow flex-1">
                     <template slot="no-body">
                         <div class="item-image">
@@ -45,6 +45,7 @@ export default {
     },
     data() {
         return {
+            redeems:[],
             imgLink: 'https://otantik-home.s3.me-south-1.amazonaws.com/offers/',
 
         }
@@ -58,7 +59,7 @@ export default {
     created() {
             axios.get('/api/statistics/mostRedeemed')
             .then((res) => {
-            this.offers = res.data.offers
+            this.redeems = res.data.redeems
             })
             .catch((error) => console.log(error))
     },

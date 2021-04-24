@@ -85,15 +85,15 @@ export default {
             .then((res) => {
             this.payments = res.data.payments
             })
-            .catch((error) => console.log(error)) }
+            .catch((error) => console.log(error)) 
             
-        // }else{
-        //     axios.get('/api/payments/list')
-        //     .then((res) => {
-        //     this.payments = res.data.payments
-        //     })
-        //     .catch((error) => console.log(error))
-        // }
+        }else{
+            axios.get('/api/payments/list')
+            .then((res) => {
+            this.payments = res.data.payments
+            })
+            .catch((error) => console.log(error))
+        }
        
     },
 }

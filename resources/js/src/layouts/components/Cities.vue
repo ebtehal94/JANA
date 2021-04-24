@@ -10,7 +10,7 @@
                                     <p class="name font-bold">{{ data[indextr].name_ar }}</p>
                                 </vs-td>
 
-                                <!-- <vs-td>
+                                <vs-td>
                                     <span class="">|</span>
                                 </vs-td>
 
@@ -20,7 +20,7 @@
 
                                 <vs-td>
                                     <p class="text-right">{{ data[indextr].customer}}</p>
-                                </vs-td> -->
+                                </vs-td>
                             </vs-tr>
                         </tbody>
                     </template>
