@@ -15,7 +15,7 @@
                 <vx-card class="mt-8 pt-0">
                     <vs-tabs alignment="fixed" class="tabs-shadow-none">
                         <vs-tab :label="$t('UsedOffers')">
-                            <mostRedeemed />
+                            <mostRedeemed :offers='offers' />
                         </vs-tab>
                         <vs-tab :label="$t('SuppliersOffers')">
                             <storeOffers :stores="stores"/>

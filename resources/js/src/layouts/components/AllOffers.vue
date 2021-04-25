@@ -29,8 +29,8 @@
                             </div>
                         </div>
                         <div class="-ml-6 cursor-pointer flex justify-center" v-if="display == 'pending'">
-                            <vs-button color="#6FDD68" size="small" @click="updateStatus(item.id, 1)">موافقة</vs-button>
-                            <vs-button color="danger" size="small" @click="updateStatus(item.id, 0)">رفض</vs-button>
+                            <vs-button color="#6FDD68" size="small" @click="updateStatus(item.id, 1)">{{$i18n.locale == "en" ? "Accept" : "موافقة"}}</vs-button>
+                            <vs-button color="danger" size="small" @click="updateStatus(item.id, 0)">{{$i18n.locale == "en" ? "Reject" : "رفض"}}</vs-button>
                         </div>
                     </template>
                 </vx-card>

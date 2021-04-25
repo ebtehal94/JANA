@@ -1,11 +1,11 @@
 <template>
     <div id="all-offers">
         <div class="vx-row mt-5">
-            <div v-for="item in redeems" class="flex flex-col flex-wrap vx-col w-full sm:w-1/2 lg:w-1/4 mb-base" v-bind:key="item.id">
-                <vx-card class="offers shadow flex-1">
+            <div v-for="item in offers" class="flex flex-col flex-wrap vx-col w-full sm:w-1/2 lg:w-1/4 mb-base" v-bind:key="item.id">
+                <vx-card class="offers shadow flex-">
                     <template slot="no-body">
                         <div class="item-image">
-                            <img v-if="item.images[0]" :src="imgLink + item.images[0].link "  class="responsive card-img-top"/>
+                            <img v-if="item.images" :src="imgLink + item.images[0].link "  class="responsive card-img-top"/>
                             <!-- <img v-else :src="require('@assets/images/customers.png')"/> -->
                         </div>
                         <div class="p-3">
@@ -39,13 +39,12 @@ export default {
         StarRating
     },
     props:{
-        offers:{
-            type:Array
-        }
+
     },
     data() {
         return {
-            redeems:[],
+            offers:[],
+            //redeems:[],
             imgLink: 'https://otantik-home.s3.me-south-1.amazonaws.com/offers/',
 
         }
@@ -59,7 +58,7 @@ export default {
     created() {
             axios.get('/api/statistics/mostRedeemed')
             .then((res) => {
-            this.redeems = res.data.redeems
+            this.offers = res.data.offers
             })
             .catch((error) => console.log(error))
     },

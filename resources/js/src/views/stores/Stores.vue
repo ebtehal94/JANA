@@ -5,7 +5,7 @@
                 <vs-input 
                 icon-no-border 
                 :placeholder="$t('SearchBar')"  
-                v-model="searchQuery"
+                v-model="query"
                 icon-after vs-icon-after="true"  
                 class="sm:w-full md:w-full input-rounded-full" 
                 icon="icon-search" 
@@ -55,7 +55,7 @@ export default {
     },
     data() {
         return {
-            searchQuery:'',
+            query:'',
            // stores:[
             //    {"id":1,"name":"اكسترا ستور","number":"14 عرض تم استخدامها 18 مرة",src:require('@assets/images/img-1.png'),"phone":"0512345678","Email":"jana@jana.com","location":"الشرقية-شارع الملك عبدالله"},
             //    {"id":2,"name":"اكسترا ستور","number":"14 عرض تم استخدامها 18 مرة",src:require('@assets/images/img-2.png'),"phone":"0512345678","Email":"jana@jana.com","location":"الشرقية-شارع الملك عبدالله"},
@@ -84,7 +84,7 @@ export default {
         this.$store.registerModule('storeManagement', moduleStoreManagement)
         moduleStoreManagement.isRegistered = true
       }
-        this.$store.dispatch("storeManagement/fetchStores").catch(err => { console.error(err) })
+        this.$store.dispatch("storeManagement/fetchStores",{search:this.query}).catch(err => { console.error(err) })
     },
 }
 </script>

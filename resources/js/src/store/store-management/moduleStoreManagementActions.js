@@ -25,9 +25,9 @@ export default {
         .catch((error) => { reject(error) })
     })
   },
-  fetchStores({ commit }) {
+  fetchStores({ commit },obj) {
     return new Promise((resolve, reject) => {
-      axios.post("/api/store/list")
+      axios.post("/api/store/list",obj)
         .then((response) => {
           commit('SET_STORES', response.data.stores)
           resolve(response)

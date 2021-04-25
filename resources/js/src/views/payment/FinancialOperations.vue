@@ -5,10 +5,10 @@
                 <vx-card class="">
                     <vs-tabs class="tabs-shadow-none">
                         <vs-tab :label="$t('All')">
-                            <paymentList />
+                            <paymentList :payments='payments'/>
                         </vs-tab>
                         <vs-tab :label="$t('ThisMonth')">
-                            <paymentList display='this_month' />
+                            <paymentList display='this_month' :payments='payments' />
                         </vs-tab>
                     </vs-tabs>
                 </vx-card>
@@ -25,6 +25,11 @@ export default {
     
     components: {
      paymentList
+    },
+     props:{
+        payments:{
+            type: Array
+        }
     },
     data() {
         return {
