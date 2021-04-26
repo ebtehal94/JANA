@@ -64,6 +64,7 @@ class OfferController extends Controller
       $response                 = array();
       $info                     = $request->all();
       $offers                   = Offer::with('mainImage', 'category:id,title_en,title_ar', 'store:id,name_en,name_ar')
+                                       ->with('category:id,title_en,title_ar', 'store:id,name_en,name_ar')
                                        ->select('id','title_en', 'title_ar', 'price_before', 'price', 'discount_perc')
                                        ->orderby('id','desc');
       if (isset($info['status'])){

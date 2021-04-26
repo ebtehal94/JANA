@@ -90,6 +90,7 @@ Route::get('/payments/list', 'PaymentController@index');
 
 Route::middleware('auth:api')->group(function () {
 
+
 });
 
 
