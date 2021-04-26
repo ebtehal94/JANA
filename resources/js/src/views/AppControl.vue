@@ -13,8 +13,8 @@
                          <div class="vx-row flex mt-4 mx-0 slider-img">
                             <div class="vx-col w-full md:w-1/4 add-img ">
                                 <input type="file" class="hidden" ref="uploadImgInput" multiple @change="updateCurrImg" accept="image/*">
-                                <vs-button v-if="dataUploadedImages.length === 0" class="text-gray mt-2 lg:mt-6 ml-10 lg:ml-16" icon-pack="feather" type="transparent" icon="icon-plus" @click="$refs.uploadImgInput.click()"/>
-                                <h5 class="text-gray text-xs text-center">{{ $i18n.locale == 'en' ? 'Upload Image' : 'اضافة صورة' }}</h5>
+                                <vs-button v-if="dataUploadedImages.length === 0" class="text-gray mt-2 lg:mt-6 p-0" icon-pack="feather" type="transparent" icon="icon-plus" @click="$refs.uploadImgInput.click()"/>
+                                <h5 class="text-gray text-xs text-center mb-4">{{ $i18n.locale == 'en' ? 'Upload Image' : 'اضافة صورة' }}</h5>
                             </div>
                             <div class="vx-col w-full md:w-1/4">
                                 <img src="@assets/images/payment-methods.png" alt="AppImage" class="w-full">
@@ -42,7 +42,7 @@
                             <vs-textarea 
                             :placeholder="$t('desc_lable')"
                             v-model="appControl_data.terms_desc_ar" 
-                            class="mt-2 p-2" 
+                            class="mt-2" 
                             height="120px"
                             name="terms_desc_ar"/>
                         </div>
@@ -55,7 +55,7 @@
                             <vs-textarea 
                             :placeholder="$t('desc_lable')"
                             v-model="appControl_data.terms_desc_en" 
-                            class="mt-2 p-2" 
+                            class="mt-2" 
                             height="120px"
                             name="terms_desc_en"/>
                         </div>
@@ -72,7 +72,7 @@
                             <vs-textarea 
                             :placeholder="$t('desc_lable')"
                             v-model="appControl_data.about_desc_ar" 
-                            class="mt-2 p-2" 
+                            class="mt-2" 
                             height="120px"
                             name="about_desc_ar"/>
                         </div>
@@ -85,7 +85,7 @@
                             <vs-textarea 
                             :placeholder="$t('desc_lable')"
                             v-model="appControl_data.about_desc_en" 
-                            class="mt-2 p-2" 
+                            class="mt-2 " 
                             height="120px"
                             name="about_desc_en"/>
                         </div>
@@ -231,6 +231,8 @@ export default {
     .add-img{
       border: 1px solid #b1b1b1;
       border-radius: 15px;
+      text-align: center;
+      text-align: -webkit-center;
     }
     .vs-con-textarea{
         border-radius: 13px;

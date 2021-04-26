@@ -5,10 +5,10 @@
                 <vx-card class="">
                     <vs-tabs class="tabs-shadow-none">
                         <vs-tab :label="$t('All')">
-                            <paymentList />
+                            <paymentList :payments='payments'/>
                         </vs-tab>
                         <vs-tab :label="$t('ThisMonth')">
-                            <paymentList display='this_month' />
+                            <paymentList display='this_month' :payments='payments' />
                         </vs-tab>
                     </vs-tabs>
                 </vx-card>
@@ -19,9 +19,6 @@
 
 <script>
 
-
-
-
 import axios from "@/axios.js"
 import paymentList from './paymentList.vue'
 export default {
@@ -29,20 +26,14 @@ export default {
     components: {
      paymentList
     },
+     props:{
+        payments:{
+            type: Array
+        }
+    },
     data() {
         return {
-            // users: [
-            //     {"id": 1,"name": "14 متجر","username": "عميلة بطاقة جنى","date":"15/04/2020","amount": "143 ر.س","notes":"مقابل الإشتراك في التطبيق"},
-            //     {"id": 2,"name": "14 متجر","username": "عميلة بطاقة جنى","date":"15/04/2020","amount": "143 ر.س","notes":"مقابل الإشتراك في التطبيق"},
-            //     {"id": 3,"name": "14 متجر","username": "عميلة بطاقة جنى","date":"15/04/2020","amount": "143 ر.س","notes":"مقابل الإشتراك في التطبيق"},
-            //     {"id": 4,"name": "14 متجر","username": " عميلة بطاقة جنى","date":"15/04/2020","amount": "143 ر.س","notes":"مقابل الإشتراك في التطبيق"},
-            //     {"id": 5,"name": "14 متجر","username": "عميلة بطاقة جنى ","date":"15/04/2020","amount": "143 ر.س","notes":"مقابل الإشتراك في التطبيق"},
-            //     {"id": 6,"name": "14 متجر","username": "عميلة بطاقة جنى ","date":"15/04/2020","amount": "143 ر.س","notes":"مقابل الإشتراك في التطبيق"},
-            //     {"id": 7,"name": "14 متجر","username": "عميلة بطاقة جنى ","date":"15/04/2020","amount": "143 ر.س","notes":"مقابل الإشتراك في التطبيق"},
-            //     {"id": 8,"name": "14 متجر","username": "عميلة بطاقة جنى ","date":"15/04/2020","amount": "143 ر.س","notes":"مقابل الإشتراك في التطبيق"},
-            //     {"id": 9,"name": "14 متجر","username": "عميلة بطاقة جنى ","date":"15/04/2020","amount": "143 ر.س","notes":"مقابل الإشتراك في التطبيق"},
-            //     {"id": 10,"name": "14 متجر","username": "عميلة بطاقة جنى ","date":"15/04/2020","amount": "143 ر.س","notes":"مقابل الإشتراك في التطبيق"},
-            // ],
+
         }
     },
     computed: {

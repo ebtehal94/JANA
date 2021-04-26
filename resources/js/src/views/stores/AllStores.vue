@@ -9,18 +9,13 @@
                             <vs-button @click.stop="openDeleteConfirm(item.id)" color="rgb(255,255,255)" text-color="#EA5455" size="small" radius icon-pack="feather" icon="icon-trash-2" class=" shadow"/>
                         </div>
                     <h4 class="text-center">{{ $i18n.locale == 'en' ? (item.name_en || $t('NA')) : (item.name_ar  || $t('NA'))}}</h4>
-                    <!-- <h4 class="text-center">{{item.name_en || $t('NA')}}</h4> -->
                     <!-- <div class="flex justify-between">
                         <span>{{item.phone}}</span>
                         <span> | </span>
                         <span>{{item.Email}}</span>
                     </div> -->
                     <!-- <p class="text-center">{{item.location}}</p>
-                    <h6 class="text-center" v-if="!display">{{item.number}}</h6>
-                    <div class="ml-auto mt-4 cursor-pointer flex justify-center" v-if="display == 'pending'">
-                        <vs-button color="#6FDD68" size="small">موافقة</vs-button>
-                        <vs-button color="danger" size="small">رفض</vs-button>
-                    </div> -->
+                    <h6 class="text-center">{{item.number}}</h6>-->
                 </vx-card>
             </div>
         </div>

@@ -1,8 +1,8 @@
 <template>
     <div id="all-offers">
         <div class="vx-row mt-5">
-            <div v-for="item in offers" class="vx-col w-full sm:w-1/2 lg:w-1/4 mb-base" v-bind:key="item.id">
-                <vx-card class="usedOffers shadow">
+            <div v-for="item in offers" class="flex flex-col flex-wrap vx-col w-full sm:w-1/2 lg:w-1/4 mb-base" v-bind:key="item.id">
+                <vx-card class="offers shadow flex-1">
                     <template slot="no-body">
                         <div class="ml-auto cursor-pointer flex justify-around action" style="width: 4.5rem">
                             <vs-button @click.stop="gotoEdit(item.id)" color="warning" size="small" radius icon-pack="feather" icon="icon-edit"/>
@@ -29,8 +29,8 @@
                             </div>
                         </div>
                         <div class="-ml-6 cursor-pointer flex justify-center" v-if="display == 'pending'">
-                            <vs-button color="#6FDD68" size="small" @click="updateStatus(item.id, 1)">موافقة</vs-button>
-                            <vs-button color="danger" size="small" @click="updateStatus(item.id, 0)">رفض</vs-button>
+                            <vs-button color="#6FDD68" size="small" @click="updateStatus(item.id, 1)">{{$i18n.locale == "en" ? "Accept" : "موافقة"}}</vs-button>
+                            <vs-button color="danger" size="small" @click="updateStatus(item.id, 0)">{{$i18n.locale == "en" ? "Reject" : "رفض"}}</vs-button>
                         </div>
                     </template>
                 </vx-card>
@@ -50,6 +50,9 @@ export default {
     props:{
         display:{
             required: false
+        },
+        query:{
+            type: String
         }
     },
     data() {
@@ -121,13 +124,13 @@ export default {
         var link = "offerManagement/fetchOffers"
 
         if (this.display == 'pending'){
-            this.$store.dispatch(link, {status: [0] , search:'query' , lang:this.$i18n.locale == 'en'}).catch(err => { console.error(err) })
+            this.$store.dispatch(link, {status: [0],search:this.query}).catch(err => { console.error(err) })
         }else if (this.display == 'active'){
-            this.$store.dispatch(link, {status: [1] , search:'query' , lang:this.$i18n.locale == 'en'}).catch(err => { console.error(err) })
+            this.$store.dispatch(link, {status: [1]}).catch(err => { console.error(err) })
         }else if (this.display == 'most_used'){
-            this.$store.dispatch(link, {filter: 'most_used', search:'query' , lang:this.$i18n.locale == 'en'}).catch(err => { console.error(err) })
+            this.$store.dispatch(link, {filter: 'most_used'}).catch(err => { console.error(err) })
         }else
-            this.$store.dispatch(link, {search:'query' , lang:this.$i18n.locale == 'en'}).catch(err => { console.error(err) })
+            this.$store.dispatch(link,{search:this.query}).catch(err => { console.error(err) })
     },
 
 }
@@ -135,7 +138,7 @@ export default {
 
 <style lang="scss" scoped>
 #all-offers{
-    .usedOffers{
+    .offers{
         .action{
             position: absolute;
             top:10px;

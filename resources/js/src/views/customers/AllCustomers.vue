@@ -2,8 +2,8 @@
     <div id="all-customers">
         <div class="p-2">
         <div class="vx-row mt-5">
-            <div v-for="item in customers" class="vx-col w-full sm:w-1/2 lg:w-1/4 mb-base px-2.5" v-bind:key="item.id">
-                <vx-card class="customers shadow">
+            <div v-for="item in customers" class="flex flex-col flex-wrap vx-col w-full sm:w-1/2 lg:w-1/4 mb-base px-2.5" v-bind:key="item.id">
+                <vx-card class="customers shadow flex-1">
                     <img v-if="display == 'pending'" :src="require('@assets/images/accounts.png')" class="text-center mx-auto" width="100px"/>
                     <img v-else :src="require('@assets/images/customers.png')" class="text-center mx-auto" width="100px"/>
                         <div class="mx-auto cursor-pointer flex justify-around action" style="width: 4rem">
@@ -22,8 +22,8 @@
                         <span>{{item.email}}</span>
                     </div>
                     <div class="mt-3 cursor-pointer flex items-cente justify-center" v-if="display == 'pending'">
-                        <vs-button color="#6FDD68" size="small" @click="updateStatus(item.id, 1)">موافقة</vs-button>
-                        <vs-button color="danger" size="small" @click="updateStatus(item.id, 0)">رفض</vs-button>
+                        <vs-button color="#6FDD68" size="small" @click="updateStatus(item.id, 1)">{{$i18n.locale == "en" ? "Accept" : "موافقة"}}</vs-button>
+                        <vs-button color="danger" size="small" @click="updateStatus(item.id, 0)">{{$i18n.locale == "en" ? "Reject" : "رفض"}}</vs-button>
                     </div>
                 </vx-card>
             </div>

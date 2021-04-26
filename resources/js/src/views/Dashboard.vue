@@ -15,13 +15,13 @@
                 <vx-card class="mt-8 pt-0">
                     <vs-tabs alignment="fixed" class="tabs-shadow-none">
                         <vs-tab :label="$t('UsedOffers')">
-                            <AllOffers display="most_used" :offers="offers"/>
+                            <mostRedeemed :offers='offers' />
                         </vs-tab>
                         <vs-tab :label="$t('SuppliersOffers')">
-                            <storeOffers/>
+                            <storeOffers :stores="stores"/>
                         </vs-tab>
                         <vs-tab :label="$t('Areas')">
-                            <Locations/>
+                            <Cities :cities='cities'/>
                         </vs-tab>
                     </vs-tabs>  
                 </vx-card>
@@ -34,31 +34,41 @@
 import axios from "@/axios.js"
 import StarRating from 'vue-star-rating'
 import AllOffers from '@/layouts/components/AllOffers.vue'
+import mostRedeemed from '@/layouts/components/mostRedeemed.vue'
 import storeOffers from '@/layouts/components/storeOffers.vue'
 import statistics from '@/layouts/components/statistics.vue'
-import Locations from '@/layouts/components/Locations.vue'
+//import Locations from '@/layouts/components/Locations.vue'
+import Cities from '@/layouts/components/Cities.vue'
 export default{
     components: {
         StarRating,
         AllOffers,
         storeOffers,
         statistics,
-        Locations
+        //Locations,
+        mostRedeemed,
+        Cities
     },
     props:{
         offers:{
+            type: Array
+        },
+        stores:{
+            type: Array
+        },
+        cities:{
             type: Array
         }
     },
     data() {
         return {
-            users: [
-                {"id": 1,"name": "14 متجر","username": "منطقة الرياض","customer": "450 عميلة"},
-                {"id": 2,"name": "14 متجر","username": "منطقة الرياض","customer": "450 عميلة"},
-                {"id": 3,"name": "14 متجر","username": "منطقة الرياض","customer": "450 عميلة"},
-                {"id": 4,"name": "14 متجر","username": "منطقة الرياض","customer": "450 عميلة"},
-                {"id": 5,"name": "14 متجر","username": "منطقة الرياض","customer": "450 عميلة"}
-            ],
+            // users: [
+            //     {"id": 1,"name": "14 متجر","username": "منطقة الرياض","customer": "450 عميلة"},
+            //     {"id": 2,"name": "14 متجر","username": "منطقة الرياض","customer": "450 عميلة"},
+            //     {"id": 3,"name": "14 متجر","username": "منطقة الرياض","customer": "450 عميلة"},
+            //     {"id": 4,"name": "14 متجر","username": "منطقة الرياض","customer": "450 عميلة"},
+            //     {"id": 5,"name": "14 متجر","username": "منطقة الرياض","customer": "450 عميلة"}
+            // ],
         }
     },
     computed: {
