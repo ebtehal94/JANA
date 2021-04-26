@@ -33,19 +33,15 @@
 <script>
 import axios from "@/axios.js"
 import StarRating from 'vue-star-rating'
-import AllOffers from '@/layouts/components/AllOffers.vue'
-import mostRedeemed from '@/layouts/components/mostRedeemed.vue'
-import storeOffers from '@/layouts/components/storeOffers.vue'
-import statistics from '@/layouts/components/statistics.vue'
-//import Locations from '@/layouts/components/Locations.vue'
-import Cities from '@/layouts/components/Cities.vue'
+import mostRedeemed from './mostRedeemed.vue'
+import storeOffers from './storeOffers.vue'
+import statistics from './statistics.vue'
+import Cities from './Cities.vue'
 export default{
     components: {
         StarRating,
-        AllOffers,
         storeOffers,
         statistics,
-        //Locations,
         mostRedeemed,
         Cities
     },

@@ -169,7 +169,7 @@ const router = new Router({
           path: '/dashboard',
           name: 'dashboard',
         //   component: () => import('@/views/pages/ComingSoon.vue'),
-          component: () => import('./views/Dashboard.vue'),
+          component: () => import('./views/dashboard/Dashboard.vue'),
           meta: {
             breadcrumb: [
                 { title: 'Home', url: '/' },

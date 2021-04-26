@@ -57,7 +57,7 @@
 <script>
 import axios from "@/axios.js"
 import StarRating from 'vue-star-rating'
-import AllOffers from '@/layouts/components/AllOffers.vue'
+import AllOffers from './AllOffers.vue'
 export default{
     components: {
         StarRating,
