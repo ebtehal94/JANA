@@ -20,7 +20,7 @@
             <!-- Col Header -->
               <div class="vx-card__title mt-5">
                 <div class="separator">
-                  <h4 class="mb-4 text-base">{{$i18n.locale == "en" ? "Method of connection" : "طريقة الاتصال"}}</h4>
+                  <h4 class="mb-4 text-base font-bold">{{$i18n.locale == "en" ? "Method of connection" : "طريقة الاتصال"}}</h4>
                 </div>
               </div>
 
@@ -142,7 +142,7 @@
             <!-- Col Header -->
             <div class="vx-card__title">
               <div class="separator">
-                <h4 class="mb-4 text-base">{{$t('storeData')}}</h4>
+                <h4 class="mb-4 text-base font-bold">{{$t('storeData')}}</h4>
               </div>
             </div>
 
@@ -225,13 +225,13 @@
 
               <div class="vx-card__title mt-4">
                 <div class="separator">
-                  <h4 class="mb-4 text-base">{{$t('branchData')}}</h4>
+                  <h4 class="mb-4 text-base font-bold">{{$t('branchData')}}</h4>
                 </div>
               </div>
                 <div v-for="branch, branchIndex in branches_data"  :key="branch.name">
                   <div class="mt-8" v-if="branchIndex > 0">
                     <div class="separator">
-                      <h4 class="mb-4 text-lg font-extrabold">{{$t('additionalBranch')}}</h4>
+                      <h4 class="mb-4 text-lg font-bold">{{$t('additionalBranch')}}</h4>
                       <span class="ml-4" @click="openBranchDeleteConfirm(branchIndex)">
                         <icon name="cross" class="icon left-icon"/>
                       </span>

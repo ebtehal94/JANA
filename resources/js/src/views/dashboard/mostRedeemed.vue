@@ -5,8 +5,8 @@
                 <vx-card class="offers shadow flex-">
                     <template slot="no-body">
                         <div class="item-image">
-                            <img v-if="item.images" :src="imgLink + item.images[0].link "  class="responsive card-img-top"/>
-                            <!-- <img v-else :src="require('@assets/images/customers.png')"/> -->
+                            <img v-if="item.main_image" :src="imgLink + item.main_image.link "  class="responsive card-img-top"/>
+                            <img v-else :src="require('@assets/images/offer.png')" class="text-center mx-auto"/>
                         </div>
                         <div class="p-3">
                             <div class="flex justify-between flex-wrap pt-2">

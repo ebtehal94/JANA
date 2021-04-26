@@ -10,17 +10,17 @@
                                     <p class="name font-bold">{{ data[indextr].name_ar }}</p>
                                 </vs-td>
 
-                                <!-- <vs-td>
+                                <vs-td>
                                     <span class="">|</span>
                                 </vs-td>
 
                                 <vs-td>
-                                    <p class="text-right">{{ data[indextr].name }}</p>
+                                    <p class="text-right">{{ data[indextr].stores}} {{$i18n.locale == "en" ? "Store" : "متجر"}}</p>
                                 </vs-td>
 
                                 <vs-td>
-                                    <p class="text-right">{{ data[indextr].customer}}</p>
-                                </vs-td> -->
+                                    <p class="text-right">{{ data[indextr].customers}} {{$i18n.locale == "en" ? "Customer" : "عميلة"}}</p>
+                                </vs-td>
                             </vs-tr>
                         </tbody>
                     </template>

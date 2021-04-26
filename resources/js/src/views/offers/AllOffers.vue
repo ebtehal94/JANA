@@ -10,7 +10,7 @@
                         </div>
                         <div class="item-image">
                             <img v-if="item.images[0]" :src="imgLink + item.images[0].link "  class="responsive card-img-top"/>
-                            <!-- <img v-else :src="require('@assets/images/customers.png')"/> -->
+                            <img v-else :src="require('@assets/images/offer.png')" class="text-center mx-auto"/>
                         </div>
                         <div class="p-3">
                             <div class="flex justify-between flex-wrap pt-2">
@@ -124,13 +124,15 @@ export default {
         var link = "offerManagement/fetchOffers"
 
         if (this.display == 'pending'){
-            this.$store.dispatch(link, {status: [0],search:this.query}).catch(err => { console.error(err) })
+            this.$store.dispatch(link, {status: [0],search:''}).catch(err => { console.error(err) })
         }else if (this.display == 'active'){
-            this.$store.dispatch(link, {status: [1]}).catch(err => { console.error(err) })
-        }else if (this.display == 'most_used'){
-            this.$store.dispatch(link, {filter: 'most_used'}).catch(err => { console.error(err) })
-        }else
-            this.$store.dispatch(link,{search:this.query}).catch(err => { console.error(err) })
+            this.$store.dispatch(link, {status: [1],search:''}).catch(err => { console.error(err) })
+        }
+        // }else if (this.display == 'most_used'){
+        //     this.$store.dispatch(link, {filter: 'most_used'}).catch(err => { console.error(err) })
+        // }
+        else
+            this.$store.dispatch(link,{search:''}).catch(err => { console.error(err) })
     },
 
 }
