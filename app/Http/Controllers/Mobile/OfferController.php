@@ -112,7 +112,7 @@ class OfferController extends Controller
       $info           = $request->all();
       $Ofr            = Offer::where('id', $info['offer_id'])
                              // ->where('status', 1)
-                             ->with('category:id,title_en,title_ar', 'store:id,name_en,name_ar,image','images:id,link')
+                             ->with('category:id,title_en,title_ar', 'store:id,name_en,name_ar,image','images')
                              ->first();
       if (isset($Ofr)){
         $response['offer']        = $Ofr;
