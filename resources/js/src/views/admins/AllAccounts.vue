@@ -9,9 +9,9 @@
                             <vs-button @click.stop="openDeleteConfirm(item.id)" color="rgb(255,255,255)" text-color="#EA5455" size="small" radius icon-pack="feather" icon="icon-trash-2" class=" shadow"/>
                         </div>
                     <h4 class="text-center">{{item.name || $t('NA')}}</h4>
-                    <div class="flex justify-between clear-both">
+                    <div class="flex justify-center">
                         <span>{{item.mobile}}</span>
-                        <span> | </span>
+                        <span class="px-1"> | </span>
                         <span>{{item.email}}</span>
                     </div>
                     <!--<h6 class="text-center">{{item.title}}</h6>-->

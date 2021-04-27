@@ -16,9 +16,9 @@
                         <span class="pr-2">{{item.Refrral}}</span>
                         <span class="code">{{item.code}}</span>
                     </div> -->
-                    <div class="flex justify-between mt-2">
+                    <div class="flex justify-center mt-2">
                         <span>{{item.mobile}}</span>
-                        <span> | </span>
+                        <span class="px-1"> | </span>
                         <span>{{item.email}}</span>
                     </div>
                     <div class="mt-3 cursor-pointer flex items-cente justify-center" v-if="display == 'pending'">
@@ -29,7 +29,7 @@
             </div>
 
 
-            <vs-pagination :total="10" :max="7" v-model="currentPage" />
+            <vs-pagination :total="10" :max="7" v-model="currentPage" @change="handlePageChange"/>
         </div>
         </div>
     </div>
@@ -95,7 +95,7 @@ export default {
             // console.log( res.data)
             // })
             // .catch((error) => console.log(error))
-            this.$store.dispatch(link, {status: [0]}).catch(err => { console.error(err) })
+            this.$store.dispatch(link, {status: [0] ,search:''}).catch(err => { console.error(err) })
         }else if (this.display == 'new_customer'){
             // axios.post("/api/customers/list/",{filter: 'new_customer'} )
             // .then((res) => {
@@ -104,7 +104,7 @@ export default {
             // .catch((error) => console.log(error))
             this.$store.dispatch(link, {filter: 'new_customer'}).catch(err => { console.error(err) })
         }else
-        this.$store.dispatch(link).catch(err => { console.error(err) })
+        this.$store.dispatch(link,{search:''}).catch(err => { console.error(err) })
     }
 }
 </script>

@@ -18,7 +18,8 @@
                 v-model="query" 
                 class="sm:w-full md:w-full input-rounded-full" 
                 icon="icon-search" 
-                icon-pack="feather" />
+                icon-pack="feather"
+                @input="getResults" />
             </div>
             <div class="vx-col cursor-pointer flex">
                 <vs-button
