@@ -29,7 +29,7 @@
             </div>
 
 
-            <vs-pagination :total="10" :max="7" v-model="currentPage" @change="handlePageChange"/>
+            <!-- <vs-pagination :data="customers" :total="10" :max="7" v-model="currentPage" @change="handlePageChange"/> -->
         </div>
         </div>
     </div>
@@ -97,7 +97,7 @@ export default {
             // .catch((error) => console.log(error))
             this.$store.dispatch(link, {status: [0] ,search:''}).catch(err => { console.error(err) })
         }else if (this.display == 'new_customer'){
-            // axios.post("/api/customers/list/",{filter: 'new_customer'} )
+            // axios.post("/api/customers/list/",{params:{filter: 'new_customer'}} )
             // .then((res) => {
             // (res.data)
             // })

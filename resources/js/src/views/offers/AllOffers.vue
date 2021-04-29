@@ -10,7 +10,7 @@
                         </div>
                         <div class="item-image">
                             <img v-if="item.images[0]" :src="imgLink + item.images[0].link "  class="responsive card-img-top"/>
-                            <img v-else :src="require('@assets/images/offer.png')" class="text-center mx-auto" width="150px"/>
+                            <img v-else :src="require('@assets/images/offer.png')" class="text-center mx-auto card-img-top" width="150px"/>
                         </div>
                         <div class="p-3">
                             <div class="flex justify-between flex-wrap pt-2">

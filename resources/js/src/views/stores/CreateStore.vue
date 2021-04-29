@@ -12,10 +12,10 @@
               <img src="@assets/images/Uploader.png" alt="upload" width="90"/>
               </vs-button>
             </div>
-            <div class="text-center text-xs mt-8">
+            <!-- <div class="text-center text-xs mt-8">
               <p>تاريخ الإنضمام<span class="pl-4 date">15/4/2021</span></p>
               <p>تاريخ آخر عرض<span class="pl-4 date">15/4/2021</span></p>
-            </div>
+            </div> -->
           </div>
             <!-- Col Header -->
               <div class="vx-card__title mt-5">

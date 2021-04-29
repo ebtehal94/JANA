@@ -81,7 +81,8 @@ export default {
     created() {
         
         if (this.display == 'this_month'){
-            axios.get('/api/payments/list',{filter:'this_month'})
+             axios.get('/api/payments/list', {params:{filter:'this_month'}})
+            // axios.get('/api/payments/list', {filter:'this_month'})
             .then((res) => {
             this.payments = res.data.payments
             })
