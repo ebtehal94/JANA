@@ -58,7 +58,7 @@ export default {
     created() {
             axios.get('/api/statistics/mostRedeemed')
             .then((res) => {
-            this.offers = res.data.offers
+                this.offers = res.data.offers
             })
             .catch((error) => console.log(error))
     },

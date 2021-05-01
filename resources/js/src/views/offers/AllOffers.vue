@@ -101,16 +101,7 @@ export default {
             })
         },
         deleteOffer(id){
-         this.$store.dispatch("offerManagement/removeOffer", id)
-         .then(()   => { this.showDeleteSuccess() })
-         .catch(err => { console.error(err) })
-        },
-        showDeleteSuccess() {
-            this.$vs.notify({
-                color: 'success',
-                title: 'Successfull',
-                text: 'تم الحذف بنجاح'
-            })
+         this.$store.dispatch("offerManagement/removeOffer", id).catch(err => { console.error(err) })
         },
         updateStatus(id, status){
             this.$store.dispatch("offerManagement/updateOffer", {id, status}).catch(err => { console.error(err) })

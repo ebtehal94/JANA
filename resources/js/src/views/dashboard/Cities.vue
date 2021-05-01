@@ -38,13 +38,13 @@ export default{
     },
     data() {
         return {
-           cities: [{}]
+            cities: [{}]
         }
     },
-
-    created() {
+   created() {
             axios.get('/api/statistics/offersByCity')
             .then((res) => {
+                // console.log(res.data)
             this.cities = res.data.cities
             })
             .catch((error) => console.log(error))

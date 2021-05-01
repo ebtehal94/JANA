@@ -29,7 +29,7 @@
             </div>
 
 
-            <!-- <vs-pagination :data="customers" :total="10" :max="7" v-model="currentPage" @change="handlePageChange"/> -->
+            <!-- <vs-pagination :data="customers" :total="10" :max="7" v-model="currentPage" @change="nextPage"/> -->
         </div>
         </div>
     </div>
@@ -61,6 +61,9 @@ export default {
       },
     },
   methods: {
+    nextPage(){
+        this.currentPage++
+    },
     gotoEdit(id){
       // console.log('customers/edit/' + id)
       this.$router.push({path: 'customers/edit/' + id})

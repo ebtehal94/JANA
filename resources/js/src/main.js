@@ -62,6 +62,7 @@ Vue.use(VeeValidate);
 import { VueHammer } from 'vue2-hammer'
 Vue.use(VueHammer)
 
+Vue.component('pagination', require('laravel-vue-pagination'));
 
 // PrismJS
 import 'prismjs'
