@@ -53,14 +53,16 @@ class OfferController extends Controller
       }
       $todaysDate               = Carbon::now()->toDateString();
       $aWeekAgo                 = Carbon::now()->subDays(7)->toDateString();
-      $response['statistics']['all_offers']   = Offer::count();
-      $response['statistics']['active_offers'] = Offer::where('status', 1)->whereDate('expiry', '>', $todaysDate)->count();
-      $response['statistics']['new_offers']   = Offer::whereDate('created_at', '>=', $aWeekAgo)->count();
-      $response['statistics']['all_stores']   = Store::count();
-      $response['statistics']['new_stores']   = Store::whereDate('created_at', '>=', $aWeekAgo)->count();
-      $response['statistics']['all_customers'] = Customer::count();
-      $response['statistics']['new_customers'] = Customer::whereDate('created_at', '>=', $aWeekAgo)->count();
-      $response['statistics']['statusCode']   = 200;
+      $statistics               = array();
+      $statistics['all_offers']     = Offer::count();
+      $statistics['active_offers']  = Offer::where('status', 1)->whereDate('expiry', '>', $todaysDate)->count();
+      $statistics['new_offers']     = Offer::whereDate('created_at', '>=', $aWeekAgo)->count();
+      $statistics['all_stores']     = Store::count();
+      $statistics['new_stores']     = Store::whereDate('created_at', '>=', $aWeekAgo)->count();
+      $statistics['all_customers']  = Customer::count();
+      $statistics['new_customers']  = Customer::whereDate('created_at', '>=', $aWeekAgo)->count();
+      $response['statistics']       = $statistics;
+      $statistics['statusCode']     = 200;
       return $response;
     }
 
