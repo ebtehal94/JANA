@@ -122,7 +122,7 @@ export default{
       editorOption: {
         theme: 'bubble',
       },
-      s3Link: 'https://otantik-home.s3.me-south-1.amazonaws.com/pages/',
+      s3Link: 'https://janacard.s3.eu-central-1.amazonaws.com/pages/',
       customImages:[],
       mainSectionText: ``,
 

@@ -24,7 +24,7 @@
           <div class="carousel-example">
               <swiper :options="swiperOption" :dir="$vs.rtl ? 'rtl' : 'ltr'" :key="$vs.rtl">
                   <swiper-slide v-for="img in dataImg" :key="img.id" class="items-center">
-                    <img :src="'https://otantik-home.s3.me-south-1.amazonaws.com/products/'+img.link" height="250px" width="100%" class="ml-auto">
+                    <img :src="'https://janacard.s3.eu-central-1.amazonaws.com/products/'+img.link" height="250px" width="100%" class="ml-auto">
                     <vs-button @click="openConfirm(img)" icon-pack="feather" icon="icon-trash" size="small" color="danger" type="flat">Delete</vs-button>
                   </swiper-slide>
                   <swiper-slide v-for="img in dataUploadedImages" :key="img.data" class="items-center">

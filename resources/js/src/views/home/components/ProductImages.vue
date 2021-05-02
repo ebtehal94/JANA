@@ -4,11 +4,11 @@
             <div class="vx-col w-full p-0 relative">
                 <button class="prev-main mx-3" @click="increment"><vs-icon size="medium" color="#fff" icon="chevron_left"></vs-icon></button>
                 <button class="next-main mx-3" @click="decrement"><vs-icon size="medium" color="#fff" icon="chevron_right"></vs-icon></button>
-                <img :src="'https://otantik-home.s3.me-south-1.amazonaws.com/products/' + product_images[currentImage]" alt="Main Image" class="main-img">
+                <img :src="'https://janacard.s3.eu-central-1.amazonaws.com/products/' + product_images[currentImage]" alt="Main Image" class="main-img">
                 <!-- <div class="zoom"><vs-icon icon="zoom_in" size="medium"></vs-icon></div> -->
                 <!-- <div class="slider w-full">
                     <button class="prev m-1" @click="decrement"><vs-icon icon="chevron_left" size="medium" color="#fff"></vs-icon></button>
-                    <img v-for="(img, index) in product_images" :key="index" @click="selectImage(index)" :class="{ 'active': currentImage == index }" class="mini-img m-1" :src="'https://otantik-home.s3.me-south-1.amazonaws.com/products/' + img" alt="Product Image">
+                    <img v-for="(img, index) in product_images" :key="index" @click="selectImage(index)" :class="{ 'active': currentImage == index }" class="mini-img m-1" :src="'https://janacard.s3.eu-central-1.amazonaws.com/products/' + img" alt="Product Image">
                     <button class="next m-1" @click="increment"><vs-icon icon="chevron_right" size="medium" color="#fff"></vs-icon></button>
                   </div> -->
             </div>

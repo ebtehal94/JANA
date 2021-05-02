@@ -61,7 +61,7 @@ export default {
   data() {
 	return {
 	  quantity: 1,
-	  productsLink: 'https://otantik-home.s3.me-south-1.amazonaws.com/products/',
+	  productsLink: 'https://janacard.s3.eu-central-1.amazonaws.com/products/',
 	  currency: (localStorage.getItem("currency")) ? localStorage.getItem("currency") : 'QAR',
 	  short_code: (localStorage.getItem("country_code")) ? localStorage.getItem("country_code") : 'QTR',
 	}

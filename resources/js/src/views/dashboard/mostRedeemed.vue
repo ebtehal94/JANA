@@ -45,7 +45,7 @@ export default {
         return {
             offers:[],
             //redeems:[],
-            imgLink: 'https://otantik-home.s3.me-south-1.amazonaws.com/offers/',
+            imgLink: 'https://janacard.s3.eu-central-1.amazonaws.com/offers/',
 
         }
     },

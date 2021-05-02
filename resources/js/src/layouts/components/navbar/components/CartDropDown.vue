@@ -71,7 +71,7 @@ export default {
   },
   data() {
     return {
-      productsLink: 'https://otantik-home.s3.me-south-1.amazonaws.com/products/',
+      productsLink: 'https://janacard.s3.eu-central-1.amazonaws.com/products/',
       settings: { // perfectscrollbar settings
         maxScrollbarLength: 60,
         wheelSpeed: .60,

@@ -125,7 +125,7 @@ export default {
         '1QQCCC7V7K',
         '5eb1665900dd1ae25c1ca6d8965fd5ce'
       ).initIndex("products"),
-      productsLink: 'https://otantik-home.s3.me-south-1.amazonaws.com/products/',
+      productsLink: 'https://janacard.s3.eu-central-1.amazonaws.com/products/',
       loading: false,
       paymentOptions: [
         { label: this.$t('COD'), color:'warning' },
