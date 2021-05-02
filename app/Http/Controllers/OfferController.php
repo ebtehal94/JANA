@@ -219,7 +219,7 @@ class OfferController extends Controller
     {
       $response       = array();
       $Ofr            = Offer::where('id', $offer_id)
-                               ->with('images:id,link')
+                               ->with('images:id,offer_id,link')
                                ->first();
       if (isset($Ofr)){
         $response['offer']        = $Ofr;
