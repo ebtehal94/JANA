@@ -65,21 +65,29 @@ export default{
         AllOffers,
     },
     props:{
-      offers:{
-          type: Array
-      },
+    //   offers:{
+    //       type: Array
+    //   },
       display:{
           required: false
       }
     },
     data() {
         return {
-            search: '',    
+            search: '', 
+            offers:[]   
         }
     },
     methods: {
         getResults(){
-            console.log('searching')
+            // console.log('searching')
+            axios.post("/api/offers/list/", {search:this.search})
+            .then((response) => {
+            this.offers = response.data.offers
+
+            })
+            .catch((error) => console.log(error))
+
         },
         addNewData() {
             this.$router.push({path: '/offers/create'})

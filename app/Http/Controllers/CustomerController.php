@@ -21,9 +21,11 @@ class CustomerController extends Controller
       if (isset($info['status']) && count($info['status']) > 0){
         $customers                   = $customers->whereIn('status', $info['status']);
       }
+    
       $response['customers']    = $customers->get();
       $response['statusCode']   = 200;
       return $response;
+      
     }
 
 

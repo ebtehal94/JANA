@@ -2,7 +2,7 @@
     <div id="all-offers">
         <div class="vx-row mt-5">
             <div v-for="item in offers" class="flex flex-col flex-wrap vx-col w-full sm:w-1/2 lg:w-1/4 mb-base" v-bind:key="item.id">
-                <vx-card class="offers shadow flex-">
+                <vx-card class="offers shadow flex-1">
                     <template slot="no-body">
                         <div class="item-image">
                             <img v-if="item.main_image" :src="imgLink + item.main_image.link "  class="responsive card-img-top"/>
@@ -69,11 +69,6 @@ export default {
 <style lang="scss" scoped>
 #all-offers{
     .offers{
-        .action{
-            position: absolute;
-            top:10px;
-            right: 2px;
-        }
         h5{
             font-size: .7rem;
             color: #5E5E5E;
@@ -117,16 +112,6 @@ export default {
             color: #F91D1D;
             font-weight: bold;
             font-size: 1.5rem;
-        }
-        .vs-button.small:not(.includeIconOnly) {
-            padding: .2rem .9rem;
-            border-radius: 30px;
-            margin-bottom: -7px;
-            margin-left: .5rem;
-        }
-        .vs-button.small{
-            font-size: .6rem;
-            font-weight: bold;
         }
     }
 }

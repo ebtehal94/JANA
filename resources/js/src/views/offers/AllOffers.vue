@@ -105,7 +105,8 @@ export default {
         },
         updateStatus(id, status){
             this.$store.dispatch("offerManagement/updateOffer", {id, status}).catch(err => { console.error(err) })
-        }
+        },
+        
     },
     created() {
         if(!moduleOfferManagement.isRegistered) {

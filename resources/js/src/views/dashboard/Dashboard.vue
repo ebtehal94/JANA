@@ -91,35 +91,11 @@ export default{
     .vx-row > .vx-col {
         padding: 0 .6rem;
     }
-    .stat {
-        p { font-size: .75rem; }
-
-        h6 { font-size: .85rem; }
-
-        h3 {
-            font-size: 1.3rem;
-            color: #747474;
-            font-weight: bold;
-        }
-    }
-
-    @media (max-width: 992px){
-        .stat{
-            margin-bottom: 1.3rem;
-        }
-    }
-    .vs-table--tbody-table tr {
-        border-bottom: 1.5px solid #eee;
-    }
-    .vs-con-table td {
-        font-size: .8rem;
-        color:#ACACAC
-    }
     .name {
         color: #434343;
     }
     .vs-tabs--li button.vs-tabs--btn{
-         font-size: .9rem;
+        font-size: .9rem;
         font-weight: 700;
     }
 }
