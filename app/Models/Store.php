@@ -2,14 +2,12 @@
 
 namespace App\Models;
 
-use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
 class Store extends Model
 {
   use SoftDeletes;
-  use Searchable;
   protected  $fillable = ['id', 'city_id','name_en','name_ar','image','cr_number'];
 
 

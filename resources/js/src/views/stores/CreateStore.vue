@@ -469,6 +469,7 @@ export default {
           formData.append('image', this.dataUploadedImages);
       }
       if (this.store_data.id != null && this.store_data.id > 0 ){
+        formData.append('id', this.store_data.id)
         var link = "storeManagement/updateStore"
       }else{
         var link = "storeManagement/addStore"
