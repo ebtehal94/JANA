@@ -155,7 +155,7 @@ export default{
           'SXG4PV0YAT',
           '8eef2c401974b661a6c0fa482ee65849'
         ),
-        productsLink: 'https://otantik-home.s3.me-south-1.amazonaws.com/products/',
+        productsLink: 'https://janacard.s3.eu-central-1.amazonaws.com/products/',
       }
     },
     computed: {

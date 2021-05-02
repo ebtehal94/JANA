@@ -3,14 +3,14 @@
         <div class="vx-row w-full m-0">
             <div class="vx-col md:w-1/5 hide-on-phone">
                 <button class="prev w-full m-1" @click="decrement"><vs-icon icon="expand_less"></vs-icon></button>
-                <img v-for="(img, index) in product_images.slice(0,5)" :key="index" @click="selectImage(index)" :class="{ 'active': currentImage == index }" class="mini-img m-1" :src="'https://otantik-home.s3.me-south-1.amazonaws.com/products/' + img" alt="Product Image">
+                <img v-for="(img, index) in product_images.slice(0,5)" :key="index" @click="selectImage(index)" :class="{ 'active': currentImage == index }" class="mini-img m-1" :src="'https://janacard.s3.eu-central-1.amazonaws.com/products/' + img" alt="Product Image">
                 <button class="next w-full m-1" @click="increment"><vs-icon icon="expand_more"></vs-icon></button>
             </div>
             <div class="vx-col w-full md:w-4/5  p-0 relative mx-auto block">
                 <button class="prev-main mx-10" @click="increment"><vs-icon icon="chevron_left"></vs-icon></button>
                 <button class="next-main mx-10" @click="decrement"><vs-icon icon="chevron_right"></vs-icon></button>
                 <div class="main-img-container">
-                <img :src="'https://otantik-home.s3.me-south-1.amazonaws.com/products/' + product_images[currentImage]" alt="Main Image" class="main-img">
+                <img :src="'https://janacard.s3.eu-central-1.amazonaws.com/products/' + product_images[currentImage]" alt="Main Image" class="main-img">
                 </div>
                 <div class="slides flex justify-center items-center">
                     <div class="slide" v-for="(img, index) in product_images" :key="index" @click="selectImage(index)" :class="{ 'active': currentImage == index }"></div>

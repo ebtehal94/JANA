@@ -133,7 +133,7 @@ export default {
   data() {
     return {
       order_data: { },
-      productsLink: 'https://otantik-home.s3.me-south-1.amazonaws.com/products/',
+      productsLink: 'https://janacard.s3.eu-central-1.amazonaws.com/products/',
       loading: false,
       paymentOptions: [
         { label: this.$t('COD'), id: 0 },

@@ -92,7 +92,7 @@ export default {
   },
   data() {
     return {
-      s3Link: 'https://otantik-home.s3.me-south-1.amazonaws.com/icons/',
+      s3Link: 'https://janacard.s3.eu-central-1.amazonaws.com/icons/',
       scroll: false,
       menuWithFilters: [],
     }

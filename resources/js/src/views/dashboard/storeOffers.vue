@@ -25,7 +25,7 @@ export default {
         data() {
         return {
             stores:[],
-            imgLink: 'https://otantik-home.s3.me-south-1.amazonaws.com/stores/'
+            imgLink: 'https://janacard.s3.eu-central-1.amazonaws.com/stores/'
             // supplierOffers:[
             //     {"id":1,"name":"اكسترا ستور","number":"27 عرض",src:require('@assets/images/img-1.png')},
             //     {"id":2,"name":"اكسترا ستور","number":"27 عرض",src:require('@assets/images/img-1.png')},

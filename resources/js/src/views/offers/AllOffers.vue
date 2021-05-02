@@ -76,7 +76,7 @@ export default {
             //     "status":"نشط","date":"15/04/2021","subtitle":"وصف مختصر وصف مختصر..","price":"350","disc_price":"297","discount":"15%"},
             // ],
             ItemToDelete: null,
-            imgLink: 'https://otantik-home.s3.me-south-1.amazonaws.com/offers/',
+            imgLink: 'https://janacard.s3.eu-central-1.amazonaws.com/offers/',
 
         }
     },

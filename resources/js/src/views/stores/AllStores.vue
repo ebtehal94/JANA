@@ -40,7 +40,7 @@ export default {
     },
     data() {
         return {
-            imgLink: 'https://otantik-home.s3.me-south-1.amazonaws.com/stores/',
+            imgLink: 'https://janacard.s3.eu-central-1.amazonaws.com/stores/',
             ItemToDelete:null
         }
     },

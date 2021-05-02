@@ -76,7 +76,7 @@ export default{
   },
   data() {
     return {
-      s3Link: 'https://otantik-home.s3.me-south-1.amazonaws.com/pages/',
+      s3Link: 'https://janacard.s3.eu-central-1.amazonaws.com/pages/',
       updateKey: false,
       specialOffer: {},
       editorOption: {
