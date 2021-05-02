@@ -25,12 +25,12 @@ class StoreController extends Controller
       $info                     = $request->all();
       $stores                   = Store::orderby('id','desc')
                                        ->select('id','name_ar', 'name_en', 'views', 'image');
-      if (isset($info['city_id'])){
-        $city_id                  = $info['city_id'];
-        $stores                   = $stores->whereHas('branches', function ($query) use ($city_id) {
-                                              return $query->where('city_id', $city_id);
-                                            });
-      }
+      // if (isset($info['city_id'])){
+      //   $city_id                  = $info['city_id'];
+      //   $stores                   = $stores->whereHas('branches', function ($query) use ($city_id) {
+      //                                         return $query->where('city_id', $city_id);
+      //                                       });
+      // }
       if (isset($info['skip'])){
         $stores                   = $stores->skip($info['skip']);
       }
