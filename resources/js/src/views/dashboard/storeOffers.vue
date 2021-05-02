@@ -49,7 +49,7 @@ export default {
         created() {
             axios.get('/api/statistics/storeOffers')
             .then((res) => {
-            this.stores = res.data.stores
+                this.stores = res.data.stores
             })
             .catch((error) => console.log(error))
         }

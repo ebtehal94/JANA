@@ -668,12 +668,17 @@
 
 .con-slot-tabs {
   width: 100%;
+
+}
+.con-ul-tabs{
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 .vs-tabs--ul{
   border-bottom: 1.5px solid #eee;
-  .line-vs-tabs{
-    width: 200px;
-  }
+}
+.line-vs-tabs{
+  display: none;
 }
 .vs-tabs--li {
   white-space: nowrap;

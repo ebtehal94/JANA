@@ -59,11 +59,10 @@
 import axios from "@/axios.js"
 
 import AllCustomers from './AllCustomers.vue'
-// import SuspendedAccounts from '@/layouts/components/SuspendedAccounts.vue'
+
 export default{
     components: {
         AllCustomers,
-        // SuspendedAccounts
     },
    props:{
         customers:{

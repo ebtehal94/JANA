@@ -5,7 +5,7 @@
                 <vs-table max-items="10" pagination :data="cities">
                     <template slot-scope="{data}">
                         <tbody>
-                            <vs-tr :data="tr" :key="indextr" v-for="(tr, indextr) in data">
+                            <vs-tr :key="indextr" v-for="(tr, indextr) in data">
                                 <vs-td>
                                     <p class="name font-bold">{{ data[indextr].name_ar }}</p>
                                 </vs-td>
@@ -33,27 +33,18 @@
 <script>
 import axios from "@/axios.js"
 export default{
-
-    components: {
-
-    },
     props:{
-
+      
     },
     data() {
         return {
-           cities:[]
+            cities: [{}]
         }
     },
-    computed: {
-        
-    },
-    methods: {
-
-    },
-    created() {
+   created() {
             axios.get('/api/statistics/offersByCity')
             .then((res) => {
+                // console.log(res.data)
             this.cities = res.data.cities
             })
             .catch((error) => console.log(error))

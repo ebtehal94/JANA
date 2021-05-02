@@ -15,10 +15,11 @@
                 icon-no-border 
                 :placeholder="$t('SearchBar')" 
                 icon-after vs-icon-after="true"
-                v-model="query" 
+                v-model="search" 
                 class="sm:w-full md:w-full input-rounded-full" 
                 icon="icon-search" 
-                icon-pack="feather" />
+                icon-pack="feather"
+                @keyup.enter="getResults" />
             </div>
             <div class="vx-col cursor-pointer flex">
                 <vs-button
@@ -73,10 +74,13 @@ export default{
     },
     data() {
         return {
-            query: '',    
+            search: '',    
         }
     },
     methods: {
+        getResults(){
+            console.log('searching')
+        },
         addNewData() {
             this.$router.push({path: '/offers/create'})
         },

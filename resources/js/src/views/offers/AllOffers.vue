@@ -10,7 +10,7 @@
                         </div>
                         <div class="item-image">
                             <img v-if="item.images[0]" :src="imgLink + item.images[0].link "  class="responsive card-img-top"/>
-                            <img v-else :src="require('@assets/images/offer.png')" class="text-center mx-auto"/>
+                            <img v-else :src="require('@assets/images/offer.png')" class="text-center mx-auto card-img-top" width="150px"/>
                         </div>
                         <div class="p-3">
                             <div class="flex justify-between flex-wrap pt-2">
@@ -101,16 +101,7 @@ export default {
             })
         },
         deleteOffer(id){
-         this.$store.dispatch("offerManagement/removeOffer", id)
-         .then(()   => { this.showDeleteSuccess() })
-         .catch(err => { console.error(err) })
-        },
-        showDeleteSuccess() {
-            this.$vs.notify({
-                color: 'success',
-                title: 'Successfull',
-                text: 'تم الحذف بنجاح'
-            })
+         this.$store.dispatch("offerManagement/removeOffer", id).catch(err => { console.error(err) })
         },
         updateStatus(id, status){
             this.$store.dispatch("offerManagement/updateOffer", {id, status}).catch(err => { console.error(err) })
