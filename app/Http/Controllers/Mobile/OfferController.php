@@ -29,12 +29,7 @@ class OfferController extends Controller
       $stores                   = Store::orderby('views','desc')
                                        ->select('id','name_ar', 'name_en', 'views', 'image')
                                        ->take(6);
-      if (isset($info['city_id'])){
-       $city_id                  = $info['city_id'];
-       $stores                   = $stores->whereHas('branches', function ($query) use ($city_id) {
-                                             return $query->where('city_id', $city_id);
-                                           });
-      }
+
       $response['stores']       = $stores->get();
 
       $offers                   = Offer::with('mainImage', 'category:id,title_en,title_ar', 'store:id,name_en,name_ar')
@@ -42,12 +37,12 @@ class OfferController extends Controller
                                        ->whereIn('status', [1,2])
                                        ->take(9);
 
-      if (isset($info['city_id'])){
-        $city_id                  = $info['city_id'];
-        $offers                   = $offers->whereHas('branches', function ($query) use ($city_id) {
-                                              return $query->where('city_id', $city_id);
-                                            });
-      }
+      // if (isset($info['city_id'])){
+      //   $city_id                  = $info['city_id'];
+      //   $offers                   = $offers->whereHas('branches', function ($query) use ($city_id) {
+      //                                         return $query->where('city_id', $city_id);
+      //                                       });
+      // }
 
       $response['offers']       = $offers->get();
       $response['statusCode']   = 200;
@@ -70,14 +65,17 @@ class OfferController extends Controller
       if (isset($info['status'])){
         $offers                   = $offers->whereIn('status', $info['status']);
       }
-      if (isset($info['city_id'])){
-        $city_id                  = $info['city_id'];
-        $offers                   = $offers->whereHas('branches', function ($query) use ($city_id) {
-                                              return $query->where('city_id', $city_id);
-                                            });
-      }
+      // if (isset($info['city_id'])){
+      //   $city_id                  = $info['city_id'];
+      //   $offers                   = $offers->whereHas('branches', function ($query) use ($city_id) {
+      //                                         return $query->where('city_id', $city_id);
+      //                                       });
+      // }
       if (isset($info['category_id'])){
         $offers                   = $offers->where('category_id', $info['category_id']);
+      }
+      if (isset($info['store_id'])){
+        $offers                   = $offers->where('store_id', $info['store_id']);
       }
       if (isset($info['search'])){
         if (isset($info['lang']) && $info['lang'] == 'en'){

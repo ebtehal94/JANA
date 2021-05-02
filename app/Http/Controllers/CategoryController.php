@@ -16,7 +16,7 @@ class CategoryController extends Controller
     public function index()
     {
       $response                 = array();
-      $categories               = Category::select('title_en', 'title_ar', 'id')->orderby('sort','asc')->get();
+      $categories               = Category::select('id', 'title_en', 'title_ar', 'image')->orderby('sort','asc')->get();
       $response['categories']   = $categories;
       $response['statusCode']   = 200;
       return $response;
