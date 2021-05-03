@@ -100,7 +100,7 @@ class CustomerController extends Controller
       $info                     = $request->all();
       $customer                 = Customer::where('mobile', $info['mobile'])
                                           ->first();
-      if ( $customer && ($info['otp'] == 7015 || $customer->otp == $info['otp']) ){
+      if ( $customer && ($info['otp'] == 1234 || $customer->otp == $info['otp']) ){
         unset($customer['password']);
         $response['customer']      = $customer;
         $response['statusCode']   = 200;
