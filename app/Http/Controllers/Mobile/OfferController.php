@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 use Carbon\Carbon;
 use App\Models\Customer;
+use App\Models\AppPhoto;
 use App\Models\Offer;
 use App\Models\Store;
 use App\Models\OfferImage;
@@ -24,7 +25,7 @@ class OfferController extends Controller
     public function home(Request $request)
     {
       $response                 = array();
-      $response['slider']       = array();
+      $response['slider']       = AppPhoto::select('id', 'link')->get();
       $info                     = $request->all();
       $stores                   = Store::orderby('views','desc')
                                        ->select('id','name_ar', 'name_en', 'views', 'image')
