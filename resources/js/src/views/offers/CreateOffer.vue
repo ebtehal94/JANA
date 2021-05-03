@@ -117,6 +117,10 @@
                       :placeholder="$t('accountStatus')"
                       v-model="offer_data.status"
                       v-validate="'required'"
+                      as="text:id:id"
+                      :from="status_list"
+                      tagging
+                      name="status"
                       label="text" :options="status_list"
                       :reduce="text => text.id"
                       :dir="$vs.rtl ? 'rtl' : 'ltr'" />
@@ -281,8 +285,8 @@ export default {
       offer_data: {title_ar:null,title_en: null, category_id: null, desc_ar:null,desc_en:null,status:null,price_before:null,price:null,expiry:null,store_id:null},
       // categories:[],
       status_list: [
-        {text:'غير نشط',id:0},
-        {text:'نشط',id:1},
+        {text:this.$i18n.locale == 'en' ? 'Deactivated' : 'غير فعال',id:0},
+        {text:this.$i18n.locale == 'en' ? 'Active' : 'فعال',id:1},
       ],
       // stores_list: [
       //   {text:'المتجر الأول',value:1},
@@ -376,6 +380,7 @@ export default {
             title: 'Successfull',
             text: 'تم بنجاح'
             })
+            this.$router.go(-1)
           }else{
             this.$vs.notify({
             color: 'danger',

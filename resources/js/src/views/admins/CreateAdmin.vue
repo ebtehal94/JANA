@@ -206,6 +206,7 @@ export default {
              title: 'Successfull',
              text: 'تم بنجاح'
              })
+             this.$router.go(-1)
           }else{
             this.$vs.notify({
             color: 'danger',

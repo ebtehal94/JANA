@@ -104,8 +104,20 @@ export default {
          this.$store.dispatch("offerManagement/removeOffer", id).catch(err => { console.error(err) })
         },
         updateStatus(id, status){
-            this.$store.dispatch("offerManagement/updateOffer", {id, status}).catch(err => { console.error(err) })
+            this.$store.dispatch("offerManagement/updateOffer", {id, status})
+            .then(()   => { this.showUpdateSuccess() })
+            .then(()  => {   
+            this.$store.dispatch("offerManagement/fetchOffers", {status: [0]})
+        })
+            .catch(err => { console.error(err.response)})
         },
+        showUpdateSuccess() {
+                this.$vs.notify({
+                color: 'success',
+                title: 'Successfull',
+                text: 'تم بنجاح'
+            })
+        }
         
     },
     created() {

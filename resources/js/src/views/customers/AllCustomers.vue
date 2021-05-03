@@ -87,8 +87,21 @@ export default {
       this.$store.dispatch("customerManagement/removeCustomer", this.ItemToDelete).catch(err => { console.error(err) })
     },
     updateStatus(id, status){
-      this.$store.dispatch("customerManagement/updateCustomer", {id:id, status:status}).catch(err => { console.error(err) })
+      this.$store.dispatch("customerManagement/updateCustomer", {id:id, status:status})
+        .then(()   => { this.showUpdateSuccess() })
+        .then(()  => {   
+            this.$store.dispatch("customerManagement/fetchCustomers", {status: [0]})
+        })
+        .catch(err => { console.error(err.response)})
     },
+    showUpdateSuccess() {
+            this.$vs.notify({
+            color: 'success',
+            title: 'Successfull',
+            text: 'تم بنجاح'
+        })
+    }
+    
   },
 
     created() {
