@@ -29,7 +29,7 @@
             </div>
 
 
-            <vs-pagination :data="customers" :total="10" :max="7" v-model="currentPage" @change="nextPage"/>
+            <!-- <vs-pagination :data="customers" :total="10" :max="7" v-model="currentPage" @change="nextPage"/> -->
             <!-- <pagination :data="customers" @pagination-change-page="getResults"></pagination> -->
         </div>
         </div>
@@ -89,8 +89,7 @@ export default {
     updateStatus(id, status){
       this.$store.dispatch("customerManagement/updateCustomer", {id:id, status:status})
         .then(()   => { this.showUpdateSuccess() })
-        .then(()  => {   
-            this.$store.dispatch("customerManagement/fetchCustomers", {status: [0]})
+        .then(()  => { this.$store.dispatch("customerManagement/fetchCustomers", {status: [0]})
         })
         .catch(err => { console.error(err.response)})
     },

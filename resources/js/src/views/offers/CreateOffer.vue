@@ -117,7 +117,7 @@
                       :placeholder="$t('accountStatus')"
                       v-model="offer_data.status"
                       v-validate="'required'"
-                      as="text:id:id"
+                      as="text"
                       :from="status_list"
                       tagging
                       name="status"
@@ -150,10 +150,11 @@
               </div>
               <div class="vx-col w-full md:w-1/3 mb-4">
                 <img src="@assets/images/payment-methods.png" alt="Offer-image" class="mx-auto w-full lg:responsive" width="120">
+                <vs-button class="delete-img" @click="openConfirm(img)" icon-pack="feather" icon="icon-trash" size="small" color="danger" type="transparent" />
               </div>
               <div class="vx-col w-full md:w-1/3 mb-4">
                 <img src="@assets/images/card.png" alt="Offer-image" class="mx-auto w-full lg:responsive relative" width="120">
-                <!--<vs-button class="delete-img" @click="openConfirm(img)" icon-pack="feather" icon="icon-trash" size="small" color="danger" type="filled"/>-->
+               <vs-button class="delete-img" @click="openConfirm(img)" icon-pack="feather" icon="icon-trash" size="small" color="danger" type="transparent" />
               </div>
             </div>
           </div>
@@ -266,6 +267,7 @@
 </template>
 
 <script>
+import axios from "@/axios.js"
 import vSelect from 'vue-select'
 import icon from '@/layouts/components/icon.vue'
 import flatPickr from 'vue-flatpickr-component';
@@ -296,6 +298,8 @@ export default {
       // ],
       dataUploadedImages: [],
       ImageToDelete: null,
+      imgLink: 'https://janacard.s3.eu-central-1.amazonaws.com/offers/',
+      offers:[],
     }
   },
   computed: {
@@ -328,8 +332,6 @@ export default {
        })
      },
      acceptAlert() {
-      //  const ItemIndex = this.customImages.findIndex((p) => p.id == this.ImageToDelete.id)
-      //  this.customImages.splice(ItemIndex, 1)
        this.deleteImage()
 
        this.$vs.notify({
@@ -338,9 +340,9 @@ export default {
          text: 'The selected image was successfully deleted'
        })
      },
-     deleteImage(image) {
+     deleteImage(img) {
        return new Promise((resolve, reject) => {
-         axios.get("/api/offers/" + this.offer_data.id + "/deleteImage/" + this.ImageToDelete.id)
+         axios.get("/api//offers/`{offer_id}`/deleteImage/`{image_id}`")
            .then((response) => {
              resolve(response)
            })
@@ -449,9 +451,12 @@ export default {
         position: relative;
       }
       .delete-img{
-        position: absolute;
-        top:0;
-        left: 0;
+        float: right;
+        margin-top: -4rem;
+        z-index: 999;
+        // position: absolute;
+        // top:0;
+        // left: 0;
       }
     }
     .add-img{
@@ -483,6 +488,11 @@ export default {
         padding: 0;
       }
     }
+    .offer-images{
+      .delete-img{
+        margin-top: -9rem;
+      }
+    }
   }
 }
 @media (min-width: 375px) and (max-width: 600px){
@@ -494,7 +504,21 @@ export default {
         }
       }
      }
-   }
+    .offer-images{
+      .delete-img{
+        margin-top: -8rem;
+      }
+    }
+  }
+}
+@media (max-width: 992px) and (min-width: 600px){
+  #create-offer{
+    .offer-images{
+      .delete-img{
+        margin-top: -2.6rem;
+      }
+    }
+  }
 }
 
 @media only screen and (min-width: 320px)  and (max-width: 360px) {

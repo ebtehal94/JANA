@@ -3,7 +3,7 @@
         <div class="vx-row flex justify-center my-4">
             <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4">
                 <vx-card class="stat">
-                    <h6 class="pt-2.5">{{ $t('customerNumber') }} {{statistics.all_customers}}</h6>
+                    <h6 class="pt-2.5" @click="goToCustomer">{{ $t('customerNumber') }} {{statistics.all_customers}}</h6>
                     <vs-divider/>
                     <h3 class="text-primary">
                         {{statistics.new_customers}}  {{ $t('newCustomer') }}
@@ -15,7 +15,7 @@
             </div>
             <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4">
                 <vx-card class="stat">
-                    <h6 class="pt-2.5">{{ $t('storeNumber') }} {{statistics.all_stores}}</h6>
+                    <h6 class="pt-2.5" @click="goToStore">{{ $t('storeNumber') }} {{statistics.all_stores}}</h6>
                     <vs-divider/>
                     <h3 class="text-gray-400">{{statistics.new_stores}} {{ $t('newStore') }}
                         <span class="pl-3">
@@ -26,7 +26,7 @@
             </div>
             <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4">
                 <vx-card class="stat">
-                    <h6 class="pt-2.5">{{ $t('offerNumber') }} {{statistics.all_offers}}</h6>
+                    <h6 class="pt-2.5" @click="goToOffer">{{ $t('offerNumber') }} {{statistics.all_offers}}</h6>
                     <vs-divider/>
                     <h3 class="text-primary">{{statistics.new_offers}} {{ $t('newOffer') }}</h3>
                 </vx-card>
@@ -67,7 +67,15 @@
 
         },
         methods: {
-
+            goToCustomer(){
+                this.$router.push({path: 'customers'})
+            },
+            goToStore(){
+                this.$router.push({path: 'stores'})
+            },
+            goToOffer(){
+                this.$router.push({path: 'offers'})
+            }
         },
         created() {
             axios.get('/api/statistics/dashboard')
@@ -96,7 +104,8 @@
     .stat {
         p { font-size: .75rem; }
 
-        h6 { font-size: .85rem; }
+        h6 { font-size: .85rem; 
+             cursor: pointer;}
 
         h3 {
             font-size: 1.1rem;

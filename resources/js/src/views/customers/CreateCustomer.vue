@@ -234,6 +234,7 @@ export default {
         this.customer_data = res.data.customer
       })
       .catch((error) => console.log(error))
+      
     }
   }
 }

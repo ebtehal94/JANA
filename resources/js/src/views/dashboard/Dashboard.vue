@@ -17,10 +17,10 @@
                         <vs-tab :label="$t('UsedOffers')">
                             <mostRedeemed :offers='offers' />
                         </vs-tab>
-                        <vs-tab :label="$t('SuppliersOffers')">
+                        <vs-tab v-if="$acl.check('admin')" :label="$t('SuppliersOffers')">
                             <storeOffers :stores="stores"/>
                         </vs-tab>
-                        <vs-tab :label="$t('Areas')">
+                        <vs-tab v-if="$acl.check('admin')" :label="$t('Areas')">
                             <Cities :cities='cities'/>
                         </vs-tab>
                     </vs-tabs>  

@@ -53,9 +53,18 @@ export default {
         })
      },
     deleteUser(){
-      this.$store.dispatch("userManagement/removeUser", this.ItemToDelete).catch(err => { console.error(err) })
-    }
+        this.$store.dispatch("userManagement/removeUser", this.ItemToDelete)
+        .then(()   => { this.showDeleteSuccess() })
+        .catch(err => { console.error(err) })
+        }
     },
+    showDeleteSuccess() {
+            this.$vs.notify({
+            color: 'success',
+            title: 'Successfull',
+            text: 'تم بنجاح'
+        })
+    }
 }
 </script>
 

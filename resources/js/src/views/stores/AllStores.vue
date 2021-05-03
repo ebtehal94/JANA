@@ -59,8 +59,17 @@ export default {
         })
         },
         deleteStore(){
-        this.$store.dispatch("storeManagement/removeStore", this.ItemToDelete).catch(err => { console.error(err) })
+        this.$store.dispatch("storeManagement/removeStore", this.ItemToDelete)
+        .then(()   => { this.showDeleteSuccess() })
+        .catch(err => { console.error(err) })
         },
+        showDeleteSuccess() {
+                this.$vs.notify({
+                color: 'success',
+                title: 'Successfull',
+                text: 'تم بنجاح'
+            })
+        }
   }
 }
 </script>
