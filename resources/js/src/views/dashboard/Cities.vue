@@ -34,7 +34,7 @@
 import axios from "@/axios.js"
 export default{
     props:{
-      
+
     },
     data() {
         return {
@@ -44,7 +44,7 @@ export default{
    created() {
             axios.get('/api/statistics/offersByCity')
             .then((res) => {
-                // console.log(res.data)
+                console.log(res.data)
             this.cities = res.data.cities
             })
             .catch((error) => console.log(error))

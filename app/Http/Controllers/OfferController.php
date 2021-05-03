@@ -106,13 +106,16 @@ class OfferController extends Controller
                                             return $city->redeems->count();
                                         })
                                       ->take(20);
+                                      // ->toArray();
+                                      // ->get();
       foreach ($cities as $city) {
         unset($city['redeems']);
         $city->stores             = $city->stores()->count();
         $city->customers          = $city->customers()->count();
         $city->redeems            = $city->redeems()->count();
+        $response['cities'][]     = $city;
       }
-      $response['cities']       = $cities;
+      // $response['cities']       = $cities->all();
       return $response;
     }
 
@@ -216,7 +219,7 @@ class OfferController extends Controller
     {
       $response       = array();
       $Ofr            = Offer::where('id', $offer_id)
-                               ->with('images:id,link')
+                               ->with('images:id,offer_id,link')
                                ->first();
       if (isset($Ofr)){
         $response['offer']        = $Ofr;
