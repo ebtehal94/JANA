@@ -117,7 +117,7 @@
                       :placeholder="$t('accountStatus')"
                       v-model="offer_data.status"
                       v-validate="'required'"
-                      as="text"
+                      as="text:id:id"
                       :from="status_list"
                       tagging
                       name="status"
@@ -150,11 +150,11 @@
               </div>
               <div class="vx-col w-full md:w-1/3 mb-4">
                 <img src="@assets/images/payment-methods.png" alt="Offer-image" class="mx-auto w-full lg:responsive" width="120">
-                <vs-button class="delete-img" @click="openConfirm(img)" icon-pack="feather" icon="icon-trash" size="small" color="danger" type="transparent" />
+                <!-- <vs-button class="delete-img" @click="openConfirm(img)" icon-pack="feather" icon="icon-trash" size="small" color="danger" type="transparent" /> -->
               </div>
               <div class="vx-col w-full md:w-1/3 mb-4">
                 <img src="@assets/images/card.png" alt="Offer-image" class="mx-auto w-full lg:responsive relative" width="120">
-               <vs-button class="delete-img" @click="openConfirm(img)" icon-pack="feather" icon="icon-trash" size="small" color="danger" type="transparent" />
+               <!-- <vs-button class="delete-img" @click="openConfirm(img)" icon-pack="feather" icon="icon-trash" size="small" color="danger" type="transparent" /> -->
               </div>
             </div>
           </div>
@@ -287,8 +287,8 @@ export default {
       offer_data: {title_ar:null,title_en: null, category_id: null, desc_ar:null,desc_en:null,status:null,price_before:null,price:null,expiry:null,store_id:null},
       // categories:[],
       status_list: [
-        {text:this.$i18n.locale == 'en' ? 'Deactivated' : 'غير فعال',id:0},
-        {text:this.$i18n.locale == 'en' ? 'Active' : 'فعال',id:1},
+        {text:this.$i18n.locale == 'en' ? 'Deactivated' : 'غير نشط',id:0},
+        {text:this.$i18n.locale == 'en' ? 'Active' : 'نشط',id:1},
       ],
       // stores_list: [
       //   {text:'المتجر الأول',value:1},
@@ -299,7 +299,7 @@ export default {
       dataUploadedImages: [],
       ImageToDelete: null,
       imgLink: 'https://janacard.s3.eu-central-1.amazonaws.com/offers/',
-      offers:[],
+      offer_images:[],
     }
   },
   computed: {
@@ -342,7 +342,7 @@ export default {
      },
      deleteImage(img) {
        return new Promise((resolve, reject) => {
-         axios.get("/api//offers/`{offer_id}`/deleteImage/`{image_id}`")
+         axios.get("/api//offers/{offer_id}/deleteImage/{image_id}")
            .then((response) => {
              resolve(response)
            })
@@ -405,13 +405,13 @@ export default {
       this.$store.registerModule('offerManagement', moduleOfferManagement)
       moduleOfferManagement.isRegistered = true
     }
-    if (this.$route.params.offerID != null){
-      this.$store.dispatch("offerManagement/fetchOffer", this.$route.params.offerID).catch(err => { console.error(err) })
-      .then((res) => {
-        this.offer_data = res.data.offer
-      })
-      .catch((error) => console.log(error))
-    }
+    // if (this.$route.params.offerID != null){
+    //   this.$store.dispatch("offerManagement/fetchOffer", this.$route.params.offerID).catch(err => { console.error(err) })
+    //   .then((res) => {
+    //     this.offer_data = res.data.offer
+    //   })
+    //   .catch((error) => console.log(error))
+    // }
 
     this.$store.dispatch("offerManagement/fetchInfo").catch(err => { console.error(err) })
     .then((res) => {

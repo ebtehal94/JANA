@@ -46,22 +46,22 @@ export default {
     },
     methods: {
         gotoEdit(id){
-        this.$router.push({path: 'stores/edit/' + id})
+            this.$router.push({path: 'stores/edit/' + id})
         },
         openDeleteConfirm(id) {
-        this.ItemToDelete = id;
-        this.$vs.dialog({
-            type: 'confirm',
-            color: 'danger',
-            title: this.$t('Delete'),
-            text: 'هل أنت متأكدأنك تريد حذف هذا المتجر نهائياً؟',
-            accept: this.deleteStore
-        })
+            this.ItemToDelete = id;
+            this.$vs.dialog({
+                type: 'confirm',
+                color: 'danger',
+                title: this.$t('Delete'),
+                text: 'هل أنت متأكدأنك تريد حذف هذا المتجر نهائياً؟',
+                accept: this.deleteStore
+            })
         },
         deleteStore(){
-        this.$store.dispatch("storeManagement/removeStore", this.ItemToDelete)
-        .then(()   => { this.showDeleteSuccess() })
-        .catch(err => { console.error(err) })
+            this.$store.dispatch("storeManagement/removeStore", this.ItemToDelete)
+            .then(()   => { this.showDeleteSuccess() })
+            .catch(err => { console.error(err) })
         },
         showDeleteSuccess() {
                 this.$vs.notify({

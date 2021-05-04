@@ -182,7 +182,7 @@ const router = new Router({
             path: '/offers/edit/:offerID',
             name: 'edit-offer',
             //   component: () => import('@/views/pages/ComingSoon.vue'),
-            component: () => import('./views/offers/CreateOffer.vue'),
+            component: () => import('./views/offers/EditOffer.vue'),
             meta: {
               breadcrumb: [
                 { title: 'Home', url: '/' },
