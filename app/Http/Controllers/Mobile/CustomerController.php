@@ -77,6 +77,8 @@ class CustomerController extends Controller
         $message                  = 'Activation code: '.$otp;
         $customer->otp            = $otp;
         $customer->save();
+        // $this->sendSMSHiSMS($mobile,$message);
+
         // $sendSMSResult            = $this->sendSMSunifonic($mobile,$message);
         $response['customer']     = $customer;
         $response['otp']          = $otp;
@@ -153,44 +155,21 @@ class CustomerController extends Controller
 
 
 
-    public function sendSMSunifonic($mobile,$msg){
+    public function sendSMSHiSMS($mobile,$msg){
       $settings                 = array();
-      $AppSid                   = 'HSKfUZiWDh1QL9Q8Qst3TtkXBUa3w';
+      $username                 = '966540212744';
+      $pwd                      = 'farabi@321';
       $msg                      = preg_replace("/ /", "%20", $msg);
+      $url                      = "https://www.hisms.ws/api.php?send_sms&username=$username&password=$pwd&sender=FARABI&numbers=$mobile&message=$msg";
 
-      $ch                       = curl_init();
-
-      curl_setopt($ch, CURLOPT_URL, "https://api.unifonic.com/rest/Messages/Send");
+      $ch = curl_init($url);
+      // curl_setopt($ch, CURLOPT_URL, );
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-      curl_setopt($ch, CURLOPT_HEADER, FALSE);
-      curl_setopt($ch, CURLOPT_POST, TRUE);
-
-      // curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode( $settings ) );
-      curl_setopt($ch, CURLOPT_POSTFIELDS, "AppSid=$AppSid&SenderID=Basmtak&Recipient=$mobile&Body=$msg");
-
-      curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-        "Content-Type: application/x-www-form-urlencoded"
-      ));
-
       $response = curl_exec($ch);
       curl_close($ch);
 
-      $response = json_decode($response, true); // Convert the JSON to an array
 
-      if ( isset($response) && $response['success'] != 'true' ) {
-        $errorMsg = $response['message'] ?? "N/A";
-        // $msgID = mt_rand(10000, 99999);
-        // $created_at = Carbon::now();
-        // DB::table('sms_log')->insert(['mobile'        => $mobile,
-        //                               'error_msg'     => $errorMsg,
-        //                               'msg_id'        => $msgID,
-        //                               'created_at'    => $created_at,
-        //                               'updated_at'    => $created_at
-        //                               ]);
-        return $errorMsg;
-      }elseif (isset($response) && $response['success'] == 'true'){
-        return 'success';
-      }
+      return $response;
 
     }
 

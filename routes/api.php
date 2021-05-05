@@ -44,6 +44,10 @@ Route::post('/customers/store/offers', 'Mobile\StoreController@offers');
 
 Route::post('/customers/account/redeems', 'Mobile\OfferController@myRedeems');
 
+Route::post('/customers/redeem/customer', 'Mobile\RedeemController@CustomerRedeem');
+Route::post('/offers/redeems/check', 'Mobile\RedeemController@StoreRedeemCheck');
+Route::post('/offers/redeems/use', 'Mobile\RedeemController@StoreRedeem');
+
 
 Route::get('/statistics/dashboard', 'OfferController@dashboard');
 Route::get('/statistics/storeOffers', 'StoreController@storeOffers');

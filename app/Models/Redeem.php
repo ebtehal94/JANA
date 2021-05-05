@@ -11,7 +11,7 @@ class Redeem extends Model
 {
     //
     use SoftDeletes;
-    protected $fillable = ['customer_id', 'offer_id', 'store_id', 'city_id', 'rating', 'comment'];
+    protected $fillable = ['customer_id', 'offer_id', 'store_id', 'city_id', 'rating', 'comment', 'used'];
 
 
     /**

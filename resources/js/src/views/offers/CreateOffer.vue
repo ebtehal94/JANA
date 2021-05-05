@@ -284,7 +284,7 @@ export default {
   },
   data() {
     return {
-      offer_data: {title_ar:null,title_en: null, category_id: null, desc_ar:null,desc_en:null,status:null,price_before:null,price:null,expiry:null,store_id:null},
+      offer_data: {title_ar:null,title_en: null, category_id: null, desc_ar:null,desc_en:null,status:0,price_before:null,price:null,expiry:null,store_id:null},
       // categories:[],
       status_list: [
         {text:this.$i18n.locale == 'en' ? 'Deactivated' : 'غير فعال',id:0},
