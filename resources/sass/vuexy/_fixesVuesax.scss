@@ -456,9 +456,11 @@
 // ======================================================================================
 .vs-pagination--li.is-current {
   border-radius: 50%;
+  
 
   .effect {
     border-radius: 50%;
+    background:linear-gradient(#E93F7D,#DA6653) ;
   }
 }
 

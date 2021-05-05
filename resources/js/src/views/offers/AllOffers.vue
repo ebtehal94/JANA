@@ -78,11 +78,11 @@ export default {
                 color: 'danger',
                 title: this.$t('Delete'),
                 text: 'هل أنت متأكد أنك تريد حذف هذا العرض نهائياً؟',
-                accept: this.deleteOffer,
+                accept: this.deleteOffer(id),
                 acceptText: "Delete"
             })
         },
-        deleteOffer(){
+        deleteOffer(id){
          this.$store.dispatch("offerManagement/removeOffer", id).catch(err => { console.error(err) })
         },
         updateStatus(id, status){

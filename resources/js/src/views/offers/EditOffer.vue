@@ -258,8 +258,6 @@
                 {{ $i18n.locale == 'en' ? 'Close' : 'خروج' }}
             </vs-button>
         </div>
-
-
       </div>
 
     </vx-card>
@@ -333,7 +331,6 @@ export default {
      },
      acceptAlert() {
        this.deleteImage()
-
        this.$vs.notify({
          color: 'danger',
          title: 'Deleted image',
@@ -342,7 +339,7 @@ export default {
      },
      deleteImage() {
        return new Promise((resolve, reject) => {
-         axios.get("/api/offers/"+this.offer_data.id + "/deleteImage/"+this.offer_images.id)
+         axios.get("/api/offers/"+ this.offer_data.id + "/deleteImage/"+ this.offer_images.id)
            .then((response) => {
              resolve(response)
            })

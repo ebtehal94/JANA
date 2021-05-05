@@ -190,9 +190,9 @@ export default {
       formData.append('mobile', this.user_data.mobile)
       formData.append('password', this.user_data.password)
       formData.append('status', this.user_data.status)
-      // if (this.dataUploadedImages){
-      //   formData.append('image', this.dataUploadedImages);
-      // }
+      if (this.dataUploadedImages){
+        formData.append('image', this.dataUploadedImages);
+      }
       if (this.user_data.id != null && this.user_data.id > 0){
         var link = "userManagement/updateUser"
       }else{
