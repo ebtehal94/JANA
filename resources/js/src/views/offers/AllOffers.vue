@@ -57,24 +57,6 @@ export default {
     },
     data() {
         return {
-            // AllOffers:[
-            //     {"id":1,src:require('@assets/images/image-1.png'),"title":"أدوات منزلية","status":"نشط",
-            //     "date":"15/04/2021","subtitle":"وصف مختصر وصف مختصر..","price":"350","disc_price":"297","discount":"15%"},
-            //     {"id":2,src:require('@assets/images/image-2.png'),"title":"أدوات منزلية","status":"نشط",
-            //     "date":"15/04/2021","subtitle":"وصف مختصر وصف مختصر..","price":"350","disc_price":"297","discount":"15%"},
-            //     {"id":3,src:require('@assets/images/image-3.png'),"title":"أدوات منزلية",
-            //     "status":"نشط","date":"15/04/2021","subtitle":"وصف مختصر وصف مختصر..","price":"350","disc_price":"297","discount":"15%"},
-            //     {"id":4,src:require('@assets/images/image-4.png'),"title":"أدوات منزلية",
-            //     "status":"نشط","date":"15/04/2021","subtitle":"وصف مختصر وصف مختصر..","price":"350","disc_price":"297","discount":"15%"},
-            //      {"id":5,src:require('@assets/images/image-4.png'),"title":"أدوات منزلية","status":"نشط",
-            //     "date":"15/04/2021","subtitle":"وصف مختصر وصف مختصر..","price":"350","disc_price":"297","discount":"15%"},
-            //     {"id":6,src:require('@assets/images/image-3.png'),"title":"أدوات منزلية","status":"نشط",
-            //     "date":"15/04/2021","subtitle":"وصف مختصر وصف مختصر..","price":"350","disc_price":"297","discount":"15%"},
-            //     {"id":7,src:require('@assets/images/image-2.png'),"title":"أدوات منزلية",
-            //     "status":"نشط","date":"15/04/2021","subtitle":"وصف مختصر وصف مختصر..","price":"350","disc_price":"297","discount":"15%"},
-            //     {"id":8,src:require('@assets/images/image-1.png'),"title":"أدوات منزلية",
-            //     "status":"نشط","date":"15/04/2021","subtitle":"وصف مختصر وصف مختصر..","price":"350","disc_price":"297","discount":"15%"},
-            // ],
             ItemToDelete: null,
             imgLink: 'https://janacard.s3.eu-central-1.amazonaws.com/offers/',
 
