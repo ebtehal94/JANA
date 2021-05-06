@@ -8,6 +8,7 @@ use App\Models\Customer;
 use App\Models\AppPhoto;
 use App\Models\Offer;
 use App\Models\Store;
+use App\Models\Redeem;
 use App\Models\OfferImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -50,11 +51,10 @@ class RedeemController extends Controller
           // $response['msg']          = 'Already used';
           // $response['statusCode']   = 402;
           // return $response;
-        }
-        $redeem                   = $Ofr->redeems()->create(['offer_id'     => $Ofr->id
+        $redeem                   = $Ofr->redeems()->create(['offer_id'     => $Ofr->id,
                                                              'store_id'     => $Ofr->store_id,
-                                                             'city_id'      => $Ofr->customer->city_id,
-                                                             'customer_id'  => $Ofr->customer_id]);
+                                                             'city_id'      => $customer->city_id,
+                                                             'customer_id'  => $customer->id]);
 
         $response['redeem_id']    = $redeem->id;
         $response['statusCode']   = 200;
@@ -109,6 +109,8 @@ class RedeemController extends Controller
           $response['statusCode']   = 402;
           return $response;
         }
+        $redeem->used             = 1;
+        $redeem->save();
 
         $response['offer']        = $offer;
         $response['statusCode']   = 200;
