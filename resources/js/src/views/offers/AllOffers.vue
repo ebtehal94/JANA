@@ -36,7 +36,7 @@
                 </vx-card>
             </div>
         </div>
-        <div>
+        <!-- <div>
             <export-excel
             :data   = "offers"
             worksheet = "My Worksheet"
@@ -49,7 +49,7 @@
                 {{ $i18n.locale == 'en' ? 'Export' : 'تصدير' }}
             </vs-button>
             </export-excel>
-        </div>
+        </div> -->
     </div>
 </template>
 
@@ -57,11 +57,15 @@
 import axios from "@/axios.js"
 import moduleOfferManagement from '@/store/offer-management/moduleOfferManagement.js'
 import StarRating from 'vue-star-rating'
+
 export default {
     components: {
         StarRating
     },
     props:{
+        search:{
+            required: false
+        },
         display:{
             required: false
         },
@@ -72,6 +76,8 @@ export default {
     data() {
         return {
             ItemToDelete: null,
+            fromDate: '2021-05-1',
+            toDate: '2021-05-6',
             imgLink: 'https://janacard.s3.eu-central-1.amazonaws.com/offers/',
 
         }
@@ -102,7 +108,7 @@ export default {
         updateStatus(id, status){
             this.$store.dispatch("offerManagement/updateOffer", {id, status})
             .then(()   => { this.showUpdateSuccess() })
-            .then(()  => {   
+            .then(()  => {
             this.$store.dispatch("offerManagement/fetchOffers", {status: [0]})
         })
             .catch(err => { console.error(err.response)})
@@ -114,7 +120,7 @@ export default {
                 text: 'تم بنجاح'
             })
         }
-        
+
     },
     created() {
         if(!moduleOfferManagement.isRegistered) {
@@ -124,15 +130,15 @@ export default {
         var link = "offerManagement/fetchOffers"
 
         if (this.display == 'pending'){
-            this.$store.dispatch(link, {status: [0],search:''}).catch(err => { console.error(err) })
+            this.$store.dispatch(link, {status: [0],search: this.search}).catch(err => { console.error(err) })
         }else if (this.display == 'active'){
-            this.$store.dispatch(link, {status: [1],search:''}).catch(err => { console.error(err) })
+            this.$store.dispatch(link, {status: [1],search: this.search}).catch(err => { console.error(err) })
         }
         // }else if (this.display == 'most_used'){
         //     this.$store.dispatch(link, {filter: 'most_used'}).catch(err => { console.error(err) })
         // }
         else
-            this.$store.dispatch(link,{search:''}).catch(err => { console.error(err) })
+            this.$store.dispatch(link,{search: this.search, from: this.fromDate, to: this.toDate}).catch(err => { console.error(err) })
     },
 
 }

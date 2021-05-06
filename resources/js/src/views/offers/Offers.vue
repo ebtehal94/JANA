@@ -11,15 +11,15 @@
     <div id="offers">
         <div class="vx-row my-2 justify-center md:justify-between ">
             <div class="vx-col search-page__search-bar flex">
-                <vs-input 
-                icon-no-border 
-                :placeholder="$t('SearchBar')" 
+                <vs-input
+                icon-no-border
+                :placeholder="$t('SearchBar')"
                 icon-after vs-icon-after="true"
-                v-model="search" 
-                class="sm:w-full md:w-full input-rounded-full" 
-                icon="icon-search" 
-                icon-pack="feather"
-                @input="getResults" />
+                v-model="search"
+                class="sm:w-full md:w-full input-rounded-full"
+                icon="icon-search"
+                icon-pack="feather" />
+                <!-- @input="getResults" -->
             </div>
             <div class="vx-col cursor-pointer flex">
                 <vs-button
@@ -34,19 +34,19 @@
                 </vs-button>
           </div>
         </div>
-        
+
         <div class="vx-row">
             <div class="vx-col w-full">
                 <vx-card class="mt-8 pt-0">
                     <vs-tabs class="tabs-shadow-none">
                         <vs-tab :label="$t('AllOffers')">
-                            <AllOffers :offers="offers"/>
+                            <AllOffers :search="search"/>
                         </vs-tab>
                         <vs-tab :label="$t('PendingOffers')">
-                            <AllOffers display ='pending' :offers="offers"/>
+                            <AllOffers display ='pending' :search="search"/>
                         </vs-tab>
                         <vs-tab :label="$t('ActiveOffers')">
-                            <AllOffers display="active" :offers="offers"/>
+                            <AllOffers display="active" :search="search"/>
                         </vs-tab>
                     </vs-tabs>
                 </vx-card>
@@ -74,21 +74,20 @@ export default{
     },
     data() {
         return {
-            search: '', 
-            offers:[]   
+            search: '',
+            // offers:[]
         }
     },
     methods: {
-        getResults(){
-            // console.log('searching')
-            axios.post("/api/offers/list/", {search:''})
-            .then((response) => {
-            this.offers = response.data.offers
-
-            })
-            .catch((error) => console.log(error))
-
-        },
+        // getResults(){
+        //     // console.log('searching')
+        //     axios.post("/api/offers/list/", {search: this.search})
+        //     .then((response) => {
+        //     this.offers = response.data.offers
+        //     })
+        //     .catch((error) => console.log(error))
+        //
+        // },
         addNewData() {
             this.$router.push({path: '/offers/create'})
         },
