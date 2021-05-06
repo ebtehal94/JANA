@@ -64,6 +64,9 @@ Vue.use(VueHammer)
 
 Vue.component('pagination', require('laravel-vue-pagination'));
 
+import excel from 'vue-excel-export' 
+Vue.use(excel)
+
 // PrismJS
 import 'prismjs'
 import 'prismjs/themes/prism-tomorrow.css'

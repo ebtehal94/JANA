@@ -1,5 +1,16 @@
 <template>
     <div id="locations">
+            <div class="vx-col search-page__search-bar flex">
+                <vs-input 
+                icon-no-border 
+                :placeholder="$t('SearchBar')" 
+                icon-after vs-icon-after="true"
+                v-model="search" 
+                class="sm:w-full md:w-full input-rounded-full" 
+                icon="icon-search" 
+                icon-pack="feather"
+                @input="getResults" />
+            </div>
         <div class="vx-row">
             <div class="vx-col w-full">
                 <vs-table max-items="10" pagination :data="cities">
@@ -38,16 +49,35 @@ export default{
     },
     data() {
         return {
-            cities: []
+            cities: [],
+            search: ''
+
         }
     },
-   created() {
+
+    methods: {
+        getResults(){
             axios.get('/api/statistics/offersByCity')
-            .then((res) => {
-                console.log(res.data)
-            this.cities = res.data.cities
-            })
-            .catch((error) => console.log(error))
+        .then((res) => {
+            if (this.search) {
+            this.cities = this.cities .filter(city =>
+              city.name_ar.startsWith(this.search)
+            );
+          } else {
+            this.cities = res.data.cities;
+          }
+        })
+        .catch((error) => console.log(error))
+    }
+        
+    },
+   created() {
+        axios.get('/api/statistics/offersByCity')
+        .then((res) => {
+            console.log(res.data)
+        this.cities = res.data.cities
+        })
+        .catch((error) => console.log(error))
     }
 }
 </script>

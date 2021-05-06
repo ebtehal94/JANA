@@ -20,6 +20,20 @@
                 </vx-card>
             </div>
         </div>
+        <div>
+            <export-excel
+                :data   = "stores"
+                worksheet = "My Worksheet"
+                type    = "csv"
+                name    = "filename.xls">
+                    <vs-button
+                        color="linear-gradient(to left,#E93F7D,#DA6653)"
+                        gradient
+                        class="export">
+                        {{ $i18n.locale == 'en' ? 'Export' : 'تصدير' }}
+                    </vs-button>
+            </export-excel>
+        </div>
     </div>
 </template>
 

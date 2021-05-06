@@ -2,18 +2,21 @@
     <div id="">
         <div class="vx-row">
             <div class="vx-col w-full">
-            <vs-prompt title="Export To Excel" class="export-options" @cancle="clearFields" @accept="exportToExcel" accept-text="Export" @close="clearFields" :active.sync="activePrompt">
-                <vs-input v-model="fileName" placeholder="Enter File Name.." class="w-full" />
-            </vs-prompt>
-                <vs-table max-items="10" pagination :data="payments">
-                    <template slot="header" class="float-right">
-                        <vs-button @click="activePrompt=true"
+                <!-- <div>
+                    <export-excel
+                    :data   = "payments"
+                    worksheet = "My Worksheet"
+                    type    = "csv"
+                    name    = "filename.xls">
+                    <vs-button
                         color="linear-gradient(to left,#E93F7D,#DA6653)"
                         gradient
                         class="export">
-                            {{ $i18n.locale == 'en' ? 'Export' : 'تصدير' }}
-                        </vs-button>
-                    </template>
+                        {{ $i18n.locale == 'en' ? 'Export' : 'تصدير' }}
+                    </vs-button>
+                    </export-excel>
+                </div> -->
+                <vs-table max-items="10" pagination :data="payments">
                     <template slot="thead">
                         <vs-th >{{$t('CustomerNumber')}}</vs-th>
                         <vs-th>{{$t('CardNumber')}}</vs-th>
@@ -66,13 +69,6 @@ export default {
     },
     data() {
         return {
-            fileName: '',
-            formats:['xlsx', 'csv', 'txt'],
-            cellAutoWidth: true,
-            selectedFormat: 'xlsx',
-            headerTitle: ['Customer id', 'Card Number', 'Amount', 'Refrenc'],
-            headerVal: ['customer_id ', 'card_number', 'amount', 'ref'],
-            activePrompt: false,
             payments: [],
             
         }
@@ -81,30 +77,7 @@ export default {
 
     },
     methods: {
-        exportToExcel () {
-            import('@/vendor/Export2Excel').then(excel => {
-                const list = this. payments
-                const data = this.formatJson(this.headerVal, list)
-                excel.export_json_to_excel({
-                header: this.headerTitle,
-                data,
-                filename: this.fileName,
-                autoWidth: this.cellAutoWidth,
-                bookType: this.selectedFormat
-                })
-                this.clearFields()
-            })
-        },
-        formatJson (filterVal, jsonData) {
-            return jsonData.map(v => filterVal.map(j => {
-                return v[j]
-            }))
-        },
-        clearFields () {
-            this.filename = ''
-            this.cellAutoWidth = true
-            this.selectedFormat = 'xlsx'
-            }
+
         },
 
     created() {
@@ -155,12 +128,26 @@ export default {
         font-size: .8rem;
         color: #acacaa;
     }
-    .export{
-        border-radius:30px ;
-    }
+    // .export{
+    //     border-radius:30px ;
+    // }
     .vs-button:not(.vs-radius):not(.includeIconOnly):not(.small):not(.large){
-        padding: .5rem 2rem;
-        
+        padding: .4rem 2rem;
+        margin-left: 85%;
+    }
+}
+@media only screen and (min-width: 375px) and (max-width: 600px) {
+    #financial-operations{
+        .vs-button:not(.vs-radius):not(.includeIconOnly):not(.small):not(.large){
+            margin-left: 70%;
+        }
+    }
+}
+@media only screen and (min-width: 360px) and (max-width: 375px) {
+    #financial-operations{
+        .vs-button:not(.vs-radius):not(.includeIconOnly):not(.small):not(.large){
+            margin-left: 55%;
+        }
     }
 }
 </style>

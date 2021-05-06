@@ -19,7 +19,7 @@
                 class="sm:w-full md:w-full input-rounded-full" 
                 icon="icon-search" 
                 icon-pack="feather"
-                @keyup.enter="getResults" />
+                @input="getResults" />
             </div>
             <div class="vx-col cursor-pointer flex">
                 <vs-button
@@ -81,7 +81,7 @@ export default{
     methods: {
         getResults(){
             // console.log('searching')
-            axios.post("/api/offers/list/", {search:this.search})
+            axios.post("/api/offers/list/", {search:''})
             .then((response) => {
             this.offers = response.data.offers
 

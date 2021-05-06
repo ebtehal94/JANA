@@ -1,6 +1,5 @@
 <template>
     <div id="all-customers">
-        <div class="p-2">
         <div class="vx-row mt-5">
             <div v-for="item in customers" class="flex flex-col flex-wrap vx-col w-full sm:w-1/2 lg:w-1/4 mb-base px-2.5" v-bind:key="item.id">
                 <vx-card class="customers shadow flex-1">
@@ -32,6 +31,19 @@
             <!-- <vs-pagination :data="customers" :total="10" :max="7" v-model="currentPage" @change="nextPage"/> -->
             <!-- <pagination :data="customers" @pagination-change-page="getResults"></pagination> -->
         </div>
+        <div>
+            <export-excel
+            :data   = "customers"
+            worksheet = "My Worksheet"
+            type    = "csv"
+            name    = "filename.xls">
+            <vs-button
+                color="linear-gradient(to left,#E93F7D,#DA6653)"
+                gradient
+                class="export">
+                {{ $i18n.locale == 'en' ? 'Export' : 'تصدير' }}
+            </vs-button>
+            </export-excel>
         </div>
     </div>
 </template>
