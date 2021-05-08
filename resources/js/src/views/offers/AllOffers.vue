@@ -36,20 +36,21 @@
                 </vx-card>
             </div>
         </div>
-        <!-- <div>
-            <export-excel
-            :data   = "offers"
-            worksheet = "My Worksheet"
-            type    = "csv"
-            name    = "filename.xls">
-            <vs-button
-                color="linear-gradient(to left,#E93F7D,#DA6653)"
-                gradient
-                class="export">
-                {{ $i18n.locale == 'en' ? 'Export' : 'تصدير' }}
-            </vs-button>
-            </export-excel>
-        </div> -->
+        <div class="vx-row">
+            <div class="vx-col">
+                <export-excel
+                :data = "offers"
+                worksheet = "My Worksheet"
+                type = "csv"
+                name = "filename.xls">
+                <vs-button
+                    color="linear-gradient(to left,#E93F7D,#DA6653)"
+                    gradient>
+                    {{ $i18n.locale == 'en' ? 'Export' : 'تصدير' }}
+                </vs-button>
+                </export-excel>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -60,24 +61,25 @@ import StarRating from 'vue-star-rating'
 
 export default {
     components: {
-        StarRating
+        StarRating,
     },
     props:{
-        search:{
-            required: false
-        },
         display:{
             required: false
         },
-        query:{
-            type: String
+        search:{
+            required: false
+        },
+        fromDate:{
+            required: false
+        },
+        toDate:{
+           required: false 
         }
     },
     data() {
         return {
             ItemToDelete: null,
-            fromDate: '2021-05-1',
-            toDate: '2021-05-6',
             imgLink: 'https://janacard.s3.eu-central-1.amazonaws.com/offers/',
 
         }
@@ -130,9 +132,9 @@ export default {
         var link = "offerManagement/fetchOffers"
 
         if (this.display == 'pending'){
-            this.$store.dispatch(link, {status: [0],search: this.search}).catch(err => { console.error(err) })
+            this.$store.dispatch(link, {status: [0],search: this.search,from: this.fromDate, to: this.toDate}).catch(err => { console.error(err) })
         }else if (this.display == 'active'){
-            this.$store.dispatch(link, {status: [1],search: this.search}).catch(err => { console.error(err) })
+            this.$store.dispatch(link, {status: [1],search: this.search,from: this.fromDate, to: this.toDate}).catch(err => { console.error(err) })
         }
         // }else if (this.display == 'most_used'){
         //     this.$store.dispatch(link, {filter: 'most_used'}).catch(err => { console.error(err) })
@@ -205,6 +207,9 @@ export default {
         .vs-button.small{
             font-size: .6rem;
             font-weight: bold;
+        }
+        .export{
+            margin-left: 85%;
         }
     }
 }

@@ -20,25 +20,26 @@
                 </vx-card>
             </div>
         </div>
-        <div>
-            <export-excel
-                :data   = "stores"
+        <div class="vx-row">
+            <div class="vx-col">
+                <export-excel
+                :data = "stores"
                 worksheet = "My Worksheet"
-                type    = "csv"
-                name    = "filename.xls">
-                    <vs-button
-                        color="linear-gradient(to left,#E93F7D,#DA6653)"
-                        gradient
-                        class="export">
-                        {{ $i18n.locale == 'en' ? 'Export' : 'تصدير' }}
-                    </vs-button>
-            </export-excel>
+                type = "csv"
+                name = "filename.xls">
+                <vs-button
+                    color="linear-gradient(to left,#E93F7D,#DA6653)"
+                    gradient>
+                    {{ $i18n.locale == 'en' ? 'Export' : 'تصدير' }}
+                </vs-button>
+                </export-excel>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
-
+import moduleStoreManagement from '@/store/store-management/moduleStoreManagement.js'
 export default {
     components: {
 
@@ -47,8 +48,14 @@ export default {
         display:{
             required: false
         },
-        stores:{
-            type: Array
+        search:{
+            required: false
+        },
+        fromDate:{
+            required: false
+        },
+        toDate:{
+           required: false 
         }
 
     },
@@ -57,6 +64,11 @@ export default {
             imgLink: 'https://janacard.s3.eu-central-1.amazonaws.com/stores/',
             ItemToDelete:null
         }
+    },
+    computed: {
+        stores() {
+            return this.$store.state.storeManagement.stores
+        },
     },
     methods: {
         gotoEdit(id){
@@ -84,7 +96,14 @@ export default {
                 text: 'تم بنجاح'
             })
         }
-  }
+    },
+    created() {
+     if(!moduleStoreManagement.isRegistered) {
+        this.$store.registerModule('storeManagement', moduleStoreManagement)
+        moduleStoreManagement.isRegistered = true
+      }
+        this.$store.dispatch("storeManagement/fetchStores",{search:this.query}).catch(err => { console.error(err) })
+    },
 }
 </script>
 

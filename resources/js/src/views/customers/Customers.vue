@@ -15,7 +15,7 @@
                 icon-no-border
                 :placeholder="$t('SearchBar')" 
                 icon-after vs-icon-after="true"
-                v-model="searchQuery"
+                v-model="search"
                 class="sm:w-full md:w-full input-rounded-full"
                 icon="icon-search"
                 icon-pack="feather" />
@@ -33,20 +33,29 @@
                 </vs-button>
           </div>
         </div>
-
+        <div class="vx-row ml-2 justify-center md:justify-start">
+            <flat-pickr
+            class="s:w-3/5 md:w-2/12 mt-2"
+            v-model="fromDate"
+            :placeholder="$t('From')"/>
+            
+            <flat-pickr
+            class="s:w-3/5 md:w-2/12 md:ml-4 mt-2"
+            v-model="toDate"
+            :placeholder="$t('To')"/>
+        </div>
         <div class="vx-row">
             <div class="vx-col w-full">
                 <vx-card class="mt-8 pt-0">
                     <vs-tabs class="tabs-shadow-none">
                         <vs-tab :label="$t('AllCustomers')">
-                            <AllCustomers :customers="customers"/>
+                            <AllCustomers :search="search" :fromDate="fromDate" :toDate="toDate"/>
                         </vs-tab>
                         <vs-tab :label="$t('PendingCustomers')">
-                            <AllCustomers display="pending" :customers="customers" />
-                            <!--<SuspendedAccounts pending=true :accounts="accounts"/>-->
+                            <AllCustomers display="pending" :search="search" :fromDate="fromDate" :toDate="toDate" />
                         </vs-tab>
                         <vs-tab :label="$t('NewCustomers')">
-                            <AllCustomers display="new_customer" :customers="customers" />
+                            <AllCustomers display="new_customer" :search="search" :fromDate="fromDate" :toDate="toDate" />
                         </vs-tab>
                     </vs-tabs>
                 </vx-card>
@@ -57,36 +66,28 @@
 
 <script>
 import axios from "@/axios.js"
-
-import AllCustomers from './AllCustomers.vue'
+import AllCustomers from './AllCustomers.vue';
+import flatPickr from 'vue-flatpickr-component';
+import 'flatpickr/dist/flatpickr.css';
 
 export default{
     components: {
         AllCustomers,
+        flatPickr
     },
    props:{
-        customers:{
-          type: Array
-        },
+        // customers:{
+        //   type: Array
+        // },
         display:{
             required: false
         }
     },
     data() {
         return {
-            searchQuery: '',
-            // customers:[
-            //     {"id":1,"name":"عميلة بطاقات جنا","subtitle":"مرحبا بك ,كيف نستطيع خدمتك",src:require('@assets/images/customers.png'),"phone":"0512345678","Email":"jana@jana.com","code":"058765485","Refrral":"كود الإحالة"},
-            //     {"id":2,"name":"عميلة بطاقات جنا","subtitle":"مرحبا بك ,كيف نستطيع خدمتك",src:require('@assets/images/customers.png'),"phone":"0512345678","Email":"jana@jana.com","code":"058765485","Refrral":"كود الإحالة"},
-            //     {"id":3,"name":"عميلة بطاقات جنا","subtitle":"مرحبا بك ,كيف نستطيع خدمتك",src:require('@assets/images/customers.png'),"phone":"0512345678","Email":"jana@jana.com","code":"058765485","Refrral":"كود الإحالة"},
-            //     {"id":4,"name":"عميلة بطاقات جنا","subtitle":"مرحبا بك ,كيف نستطيع خدمتك",src:require('@assets/images/customers.png'),"phone":"0512345678","Email":"jana@jana.com","code":"058765485","Refrral":"كود الإحالة"},
-            //     {"id":5,"name":"عميلة بطاقات جنا","subtitle":"مرحبا بك ,كيف نستطيع خدمتك",src:require('@assets/images/customers.png'),"phone":"0512345678","Email":"jana@jana.com","code":"058765485","Refrral":"كود الإحالة"},
-            //     {"id":6,"name":"عميلة بطاقات جنا","subtitle":"مرحبا بك ,كيف نستطيع خدمتك",src:require('@assets/images/customers.png'),"phone":"0512345678","Email":"jana@jana.com","code":"058765485","Refrral":"كود الإحالة"},
-            //     {"id":7,"name":"عميلة بطاقات جنا","subtitle":"مرحبا بك ,كيف نستطيع خدمتك",src:require('@assets/images/customers.png'),"phone":"0512345678","Email":"jana@jana.com","code":"058765485","Refrral":"كود الإحالة"},
-            //     {"id":8,"name":"عميلة بطاقات جنا","subtitle":"مرحبا بك ,كيف نستطيع خدمتك",src:require('@assets/images/customers.png'),"phone":"0512345678","Email":"jana@jana.com","code":"058765485","Refrral":"كود الإحالة"},
-            // ],
-           
-
+            search: '',
+            fromDate: '',
+            toDate: '',
         }
     },
 
@@ -117,6 +118,11 @@ export default{
     .vs-button:not(.vs-radius):not(.includeIconOnly):not(.small):not(.large) {
         padding: 0 2rem;
         box-shadow: none;
+    }
+    .flatpickr-input{
+      border-radius:20px ;
+      padding: .7rem 0 .8rem 1rem;
+    //   font-size: .9rem;
     }
 }
 @media only screen and (max-width: 512px){

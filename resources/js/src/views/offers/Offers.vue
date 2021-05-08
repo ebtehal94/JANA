@@ -18,7 +18,7 @@
                 v-model="search"
                 class="sm:w-full md:w-full input-rounded-full"
                 icon="icon-search"
-                icon-pack="feather" />
+                icon-pack="feather"/>
                 <!-- @input="getResults" -->
             </div>
             <div class="vx-col cursor-pointer flex">
@@ -34,23 +34,35 @@
                 </vs-button>
           </div>
         </div>
+        <div class="vx-row ml-2 justify-center md:justify-start">
+            <flat-pickr
+            class="s:w-3/5 md:w-2/12 mt-2"
+            v-model="fromDate"
+            :placeholder="$t('From')"/>
+            
+            <flat-pickr
+            class="s:w-3/5 md:w-2/12 sm:ml-4 mt-2"
+            v-model="toDate"
+            :placeholder="$t('To')"/>
+        </div>
 
         <div class="vx-row">
             <div class="vx-col w-full">
                 <vx-card class="mt-8 pt-0">
                     <vs-tabs class="tabs-shadow-none">
                         <vs-tab :label="$t('AllOffers')">
-                            <AllOffers :search="search"/>
+                            <AllOffers :search="search" :fromDate="fromDate" :toDate="toDate"/>
                         </vs-tab>
                         <vs-tab :label="$t('PendingOffers')">
-                            <AllOffers display ='pending' :search="search"/>
+                            <AllOffers display ='pending' :search="search" :fromDate="fromDate" :toDate="toDate"/>
                         </vs-tab>
                         <vs-tab :label="$t('ActiveOffers')">
-                            <AllOffers display="active" :search="search"/>
+                            <AllOffers display="active" :search="search" :fromDate="fromDate" :toDate="toDate"/>
                         </vs-tab>
                     </vs-tabs>
                 </vx-card>
             </div>
+            
         </div>
     </div>
 </template>
@@ -59,22 +71,27 @@
 import axios from "@/axios.js"
 import StarRating from 'vue-star-rating'
 import AllOffers from './AllOffers.vue'
+import flatPickr from 'vue-flatpickr-component';
+import 'flatpickr/dist/flatpickr.css';
 export default{
     components: {
         StarRating,
         AllOffers,
+        flatPickr
     },
     props:{
     //   offers:{
     //       type: Array
     //   },
-      display:{
-          required: false
-      }
+    //   display:{
+    //       required: false
+    //   }
     },
     data() {
         return {
             search: '',
+            fromDate: '',
+            toDate: '',
             // offers:[]
         }
     },
@@ -86,19 +103,12 @@ export default{
         //     this.offers = response.data.offers
         //     })
         //     .catch((error) => console.log(error))
-        //
+        
         // },
         addNewData() {
             this.$router.push({path: '/offers/create'})
         },
     },
-    // created() {
-    //     if(!moduleOfferManagement.isRegistered) {
-    //     this.$store.registerModule('offerManagement', moduleOfferManagement)
-    //     moduleOfferManagement.isRegistered = true
-    //   }
-    //   this.$store.dispatch("offerManagement/fetchOffers").catch(err => { console.error(err) })
-    // },
 }
 </script>
 
@@ -126,6 +136,11 @@ export default{
     .vs-button:not(.vs-radius):not(.includeIconOnly):not(.small):not(.large) {
         padding: 0 2rem;
         box-shadow: none;
+    }
+    .flatpickr-input{
+      border-radius:20px ;
+      padding: .7rem 0 .8rem 1rem;
+    //   font-size: .9rem;
     }
 }
 @media only screen and (max-width: 512px){

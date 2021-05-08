@@ -42,6 +42,8 @@ export default {
 		CreateStore:'Create New Account',
 
 		SearchBar: 'What are you looking for?',
+		From:'From',
+		To:'To',
 
 		customerNumber:'Number of customers',
 		newCustomer:'New customer',
@@ -399,6 +401,8 @@ export default {
 		CreateStore:'إنشاء حساب جديد',
 
 		SearchBar: 'ما الذي تبحث عنه؟',
+		From:'من',
+		To:'حتى',
 
 		customerNumber:'عدد الأعضاء',
 		newCustomer:'عضو جديد',

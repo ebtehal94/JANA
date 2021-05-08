@@ -29,21 +29,22 @@
 
 
             <!-- <vs-pagination :data="customers" :total="10" :max="7" v-model="currentPage" @change="nextPage"/> -->
-            <!-- <pagination :data="customers" @pagination-change-page="getResults"></pagination> -->
+        
         </div>
-        <div>
-            <export-excel
-            :data   = "customers"
-            worksheet = "My Worksheet"
-            type    = "csv"
-            name    = "filename.xls">
-            <vs-button
-                color="linear-gradient(to left,#E93F7D,#DA6653)"
-                gradient
-                class="export">
-                {{ $i18n.locale == 'en' ? 'Export' : 'تصدير' }}
-            </vs-button>
-            </export-excel>
+        <div class="vx-row">
+            <div class="vx-col">
+                <export-excel
+                :data = "customers"
+                worksheet = "My Worksheet"
+                type = "csv"
+                name = "filename.xls">
+                <vs-button
+                    color="linear-gradient(to left,#E93F7D,#DA6653)"
+                    gradient>
+                    {{ $i18n.locale == 'en' ? 'Export' : 'تصدير' }}
+                </vs-button>
+                </export-excel>
+            </div>
         </div>
     </div>
 </template>
@@ -59,6 +60,15 @@ export default {
         display:{
             required:false
         },
+        search:{
+            required: false
+        },
+        fromDate:{
+            required: false
+        },
+        toDate:{
+           required: false 
+        }
     },
   data() {
     return {
@@ -122,12 +132,7 @@ export default {
         }
         var link = "customerManagement/fetchCustomers"
         if (this.display == 'pending'){
-            // axios.post("/api/customers/list/",{status: [0]} )
-            // .then((res) => {
-            // console.log( res.data)
-            // })
-            // .catch((error) => console.log(error))
-            this.$store.dispatch(link, {status: [0] ,search:''}).catch(err => { console.error(err) })
+            this.$store.dispatch(link, {status: [0] ,search: this.search,from: this.fromDate, to: this.toDate}).catch(err => { console.error(err) })
         }else if (this.display == 'new_customer'){
             // axios.post("/api/customers/list/",{params:{filter: 'new_customer'}} )
             // .then((res) => {
@@ -136,7 +141,7 @@ export default {
             // .catch((error) => console.log(error))
             this.$store.dispatch(link, {filter: 'new_customer'}).catch(err => { console.error(err) })
         }else
-        this.$store.dispatch(link,{search:''}).catch(err => { console.error(err) })
+        this.$store.dispatch(link,{search: this.search,from: this.fromDate, to: this.toDate}).catch(err => { console.error(err) })
     }
 }
 </script>

@@ -5,7 +5,7 @@
                 <vs-input 
                 icon-no-border 
                 :placeholder="$t('SearchBar')"  
-                v-model="query"
+                v-model="search"
                 icon-after vs-icon-after="true"  
                 class="sm:w-full md:w-full input-rounded-full" 
                 icon="icon-search" 
@@ -22,14 +22,25 @@
                     @click="addNewData">
                     {{ $t('CreateNewStore') }}
                 </vs-button>
-          </div>
+            </div>
+        </div>
+        <div class="vx-row ml-2 justify-center md:justify-start">
+            <flat-pickr
+            class="s:w-3/5 md:w-2/12 mt-2"
+            v-model="fromDate"
+            :placeholder="$t('From')"/>
+            
+            <flat-pickr
+            class="s:w-3/5 md:w-2/12 md:ml-4 mt-2"
+            v-model="toDate"
+            :placeholder="$t('To')"/>
         </div>
         <div class="vx-row">
             <div class="vx-col w-full">
                 <vx-card class="mt-8 pt-0">
                     <vs-tabs class="tabs-shadow-none">
                         <vs-tab :label="$t('AllStores')">
-                            <AllStores :stores="stores" />
+                            <AllStores :search="search" :fromDate="fromDate" :toDate="toDate" />
                         </vs-tab>
                     </vs-tabs>
                 </vx-card>
@@ -40,12 +51,13 @@
 
 <script>
 import AllStores from './AllStores.vue'
-import SuspendedStore from './SuspendedStore.vue'
 import moduleStoreManagement from '@/store/store-management/moduleStoreManagement.js'
+import flatPickr from 'vue-flatpickr-component';
+import 'flatpickr/dist/flatpickr.css';
 export default {
     components: {
         AllStores,
-        SuspendedStore
+        flatPickr
     },
     props:{
         display:{
@@ -55,23 +67,15 @@ export default {
     },
     data() {
         return {
-            query:'',
-           // stores:[
-            //    {"id":1,"name":"اكسترا ستور","number":"14 عرض تم استخدامها 18 مرة",src:require('@assets/images/img-1.png'),"phone":"0512345678","Email":"jana@jana.com","location":"الشرقية-شارع الملك عبدالله"},
-            //    {"id":2,"name":"اكسترا ستور","number":"14 عرض تم استخدامها 18 مرة",src:require('@assets/images/img-2.png'),"phone":"0512345678","Email":"jana@jana.com","location":"الشرقية-شارع الملك عبدالله"},
-            //    {"id":3,"name":"اكسترا ستور","number":"14 عرض تم استخدامها 18 مرة",src:require('@assets/images/img-3.png'),"phone":"0512345678","Email":"jana@jana.com","location":"الشرقية-شارع الملك عبدالله"},
-            //    {"id":4,"name":"اكسترا ستور","number":"14 عرض تم استخدامها 18 مرة",src:require('@assets/images/img-4.png'),"phone":"0512345678","Email":"jana@jana.com","location":"الشرقية-شارع الملك عبدالله"},
-            //    {"id":5,"name":"اكسترا ستور","number":"14 عرض تم استخدامها 18 مرة",src:require('@assets/images/img-2.png'),"phone":"0512345678","Email":"jana@jana.com","location":"الشرقية-شارع الملك عبدالله"},
-            //    {"id":6,"name":"اكسترا ستور","number":"14 عرض تم استخدامها 18 مرة",src:require('@assets/images/img-1.png'),"phone":"0512345678","Email":"jana@jana.com","location":"الشرقية-شارع الملك عبدالله"},
-            //    {"id":7,"name":"اكسترا ستور","number":"14 عرض تم استخدامها 18 مرة",src:require('@assets/images/img-3.png'),"phone":"0512345678","Email":"jana@jana.com","location":"الشرقية-شارع الملك عبدالله"},
-            //    {"id":8,"name":"اكسترا ستور","number":"14 عرض تم استخدامها 18 مرة",src:require('@assets/images/img-4.png'),"phone":"0512345678","Email":"jana@jana.com","location":"الشرقية-شارع الملك عبدالله"}
-           // ],
+            search:'',
+            fromDate: '',
+            toDate: '',
         }
     },
     computed: {
-        stores() {
-            return this.$store.state.storeManagement.stores
-        },
+        // stores() {
+        //     return this.$store.state.storeManagement.stores
+        // },
     },
     methods: {
         addNewData() {
@@ -79,13 +83,13 @@ export default {
         },
     },
 
-    created() {
-     if(!moduleStoreManagement.isRegistered) {
-        this.$store.registerModule('storeManagement', moduleStoreManagement)
-        moduleStoreManagement.isRegistered = true
-      }
-        this.$store.dispatch("storeManagement/fetchStores",{search:this.query}).catch(err => { console.error(err) })
-    },
+    // created() {
+    //  if(!moduleStoreManagement.isRegistered) {
+    //     this.$store.registerModule('storeManagement', moduleStoreManagement)
+    //     moduleStoreManagement.isRegistered = true
+    //   }
+    //     this.$store.dispatch("storeManagement/fetchStores",{search:this.query}).catch(err => { console.error(err) })
+    // },
 }
 </script>
 
@@ -108,6 +112,11 @@ export default {
     .vs-con-table td {
         font-size: .8rem;
         color: #acacaa;
+    }
+    .flatpickr-input{
+      border-radius:20px ;
+      padding: .7rem 0 .8rem 1rem;
+    //   font-size: .9rem;
     }
 }
 @media only screen and (max-width: 512px){
