@@ -31,7 +31,7 @@
             :placeholder="$t('From')"/>
             
             <flat-pickr
-            class="s:w-3/5 md:w-2/12 md:ml-4 mt-2"
+            class="s:w-3/5 md:w-2/12 sm:ml-4 mt-2"
             v-model="toDate"
             :placeholder="$t('To')"/>
         </div>

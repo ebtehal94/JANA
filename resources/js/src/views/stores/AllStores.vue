@@ -1,40 +1,44 @@
 <template>
     <div id="all-store">
-        <div class="vx-row mt-5">
-            <div v-for="item in stores" class="vx-col w-full sm:w-1/2 lg:w-1/4 mb-base px-2.5" v-bind:key="item.id">
-                <vx-card class="store shadow text-center">
-                    <img v-if="item.image" :src="imgLink + item.image" alt="" class="text-center mx-auto" width="100px"/>
-                    <img v-else :src="require('@assets/images/store.png')" class="text-center mx-auto" width="100px"/>
-                        <div class="mx-auto -mt-4 cursor-pointer flex justify-around action" style="width: 4rem">
-                            <vs-button @click.stop="gotoEdit(item.id)" color="rgb(255,255,255)" text-color="rgb(255,159,67)" size="small" radius icon-pack="feather" icon="icon-edit" class=" shadow"/>
-                            <vs-button @click.stop="openDeleteConfirm(item.id)" color="rgb(255,255,255)" text-color="#EA5455" size="small" radius icon-pack="feather" icon="icon-trash-2" class=" shadow"/>
-                        </div>
-                    <h4 class="text-center">{{ $i18n.locale == 'en' ? (item.name_en || $t('NA')) : (item.name_ar  || $t('NA'))}}</h4>
-                    <!-- <div class="flex justify-between">
-                        <span>{{item.phone}}</span>
-                        <span> | </span>
-                        <span>{{item.Email}}</span>
-                    </div> -->
-                    <!-- <p class="text-center">{{item.location}}</p>
-                    <h6 class="text-center">{{item.number}}</h6>-->
-                </vx-card>
-            </div>
-        </div>
+        <!-- ITEM VIEW - GRID/LIST -->
         <div class="vx-row">
-            <div class="vx-col">
-                <export-excel
-                :data = "stores"
-                worksheet = "My Worksheet"
-                type = "csv"
-                name = "filename.xls">
-                <vs-button
-                    color="linear-gradient(to left,#E93F7D,#DA6653)"
-                    gradient>
-                    {{ $i18n.locale == 'en' ? 'Export' : 'تصدير' }}
-                </vs-button>
-                </export-excel>
+            <div class="vx-col w-full" >
+                <div class="float-right mr-4 mb-2 flex">
+                    <export-excel
+                        :data = "stores"
+                        worksheet = "My Worksheet"
+                        type = "csv"
+                        name = "filename.xls">
+                        <vs-button
+                            color="linear-gradient(to left,#E93F7D,#DA6653)"
+                            gradient
+                            size="small"
+                            class="text-base font-semibold">
+                            {{ $i18n.locale == 'en' ? 'Export' : 'تصدير' }}
+                        </vs-button>
+                    </export-excel>
+                    <feather-icon
+                        icon="GridIcon"
+                        @click="currentItemView='item-grid-view'"
+                        class="p-2 ml-4 shadow-drop rounded-lg d-theme-dark-bg cursor-pointer"
+                        :svgClasses="{'text-primary stroke-current': currentItemView == 'item-grid-view'}" />
+                    <feather-icon
+                        icon="ListIcon"
+                        @click="currentItemView='item-list-view'"
+                        class="p-2 ml-4 shadow-drop rounded-lg d-theme-dark-bg cursor-pointer sm:inline-flex"
+                        :svgClasses="{'text-primary stroke-current': currentItemView == 'item-list-view'}" />
+                </div>
             </div>
         </div>
+        
+        <!-- GRID VIEW -->
+        <template v-if="currentItemView == 'item-grid-view'">    
+            <item-grid-view :stores="stores"/> 
+        </template>
+        <!-- LIST VIEW -->
+        <template v-else>
+            <item-list-view :stores="stores"/>
+        </template>
     </div>
 </template>
 
@@ -42,7 +46,8 @@
 import moduleStoreManagement from '@/store/store-management/moduleStoreManagement.js'
 export default {
     components: {
-
+        ItemGridView: () => import('./components/ItemGridView.vue'),
+        ItemListView: () => import('./components/ItemListView.vue'),
     },
     props:{
         display:{
@@ -62,7 +67,8 @@ export default {
     data() {
         return {
             imgLink: 'https://janacard.s3.eu-central-1.amazonaws.com/stores/',
-            ItemToDelete:null
+            ItemToDelete:null,
+            currentItemView: 'item-grid-view',
         }
     },
     computed: {
@@ -70,39 +76,56 @@ export default {
             return this.$store.state.storeManagement.stores
         },
     },
-    methods: {
-        gotoEdit(id){
-            this.$router.push({path: 'stores/edit/' + id})
+    watch:{
+        search (val){
+          this.getResults()
         },
-        openDeleteConfirm(id) {
-            this.ItemToDelete = id;
-            this.$vs.dialog({
-                type: 'confirm',
-                color: 'danger',
-                title: this.$t('Delete'),
-                text: 'هل أنت متأكدأنك تريد حذف هذا المتجر نهائياً؟',
-                accept: this.deleteStore
-            })
+        fromDate (val){
+            this.getResults()
         },
-        deleteStore(){
-            this.$store.dispatch("storeManagement/removeStore", this.ItemToDelete)
-            .then(()   => { this.showDeleteSuccess() })
-            .catch(err => { console.error(err) })
-        },
-        showDeleteSuccess() {
-                this.$vs.notify({
-                color: 'success',
-                title: 'Successfull',
-                text: 'تم بنجاح'
-            })
+        toDate (val){
+            this.getResults()
         }
     },
+    methods: {
+        getResults(){
+            this.$store.dispatch("storeManagement/fetchStores",{search: this.search,from: this.fromDate, to: this.toDate})
+            .catch(err => { console.error(err) })
+        },
+        // gotoEdit(id){
+        //     this.$router.push({path: 'stores/edit/' + id})
+        // },
+        // openDeleteConfirm(id) {
+        //     this.ItemToDelete = id;
+        //     this.$vs.dialog({
+        //         type: 'confirm',
+        //         color: 'danger',
+        //         title: this.$t('Delete'),
+        //         text: 'هل أنت متأكدأنك تريد حذف هذا المتجر نهائياً؟',
+        //         accept: this.deleteStore
+        //     })
+        // },
+        // deleteStore(){
+        //     this.$store.dispatch("storeManagement/removeStore", this.ItemToDelete)
+        //     .then(()   => { this.showDeleteSuccess() })
+        //     .catch(err => { console.error(err) })
+        // },
+        // showDeleteSuccess() {
+        //         this.$vs.notify({
+        //         color: 'success',
+        //         title: 'Successfull',
+        //         text: 'تم بنجاح'
+        //     })
+        // }
+    },
     created() {
-     if(!moduleStoreManagement.isRegistered) {
-        this.$store.registerModule('storeManagement', moduleStoreManagement)
-        moduleStoreManagement.isRegistered = true
-      }
-        this.$store.dispatch("storeManagement/fetchStores",{search:this.query}).catch(err => { console.error(err) })
+        if(!moduleStoreManagement.isRegistered) {
+            this.$store.registerModule('storeManagement', moduleStoreManagement)
+            moduleStoreManagement.isRegistered = true
+        }
+        
+        this.getResults()
+
     },
 }
 </script>
@@ -131,11 +154,6 @@ export default {
             font-size: .6rem;
             color: #ACACAC;
         }
-        h6{
-            font-size: .6rem;
-            color: #F91D1D;
-            padding-top: .4rem;
-        }
         .vs-button.small:not(.includeIconOnly) {
             padding: 0 .9rem;
             border-radius: 30px;
@@ -146,6 +164,7 @@ export default {
             font-size: .6rem;
             font-weight: bold;
         }
+
     }
 }
 </style>

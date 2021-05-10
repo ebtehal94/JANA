@@ -77,7 +77,7 @@ export default{
     components: {
         StarRating,
         AllOffers,
-        flatPickr
+        flatPickr,
     },
     props:{
     //   offers:{

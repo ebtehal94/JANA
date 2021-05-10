@@ -206,6 +206,19 @@ const router = new Router({
             }
           },
           {
+            path: '/list',
+            name: 'customers',
+          //   component: () => import('@/views/pages/ComingSoon.vue'),
+            component: () => import('./views/customers/list.vue'),
+            meta: {
+              breadcrumb: [
+                  { title: 'Home', url: '/' },
+                  { title: 'Customers', active: true },
+              ],
+                rule: 'admin',
+            }
+          },
+          {
             path: '/customers/create',
             name: 'create-customer',
             //   component: () => import('@/views/pages/ComingSoon.vue'),

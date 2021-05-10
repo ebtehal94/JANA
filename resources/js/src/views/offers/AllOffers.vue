@@ -1,5 +1,24 @@
 <template>
     <div id="all-offers">
+                <div class="vx-row">
+            <div class="vx-col w-full" >
+                <div class="float-right mr-4 mb-2 ">
+                    <export-excel
+                        :data = "offers"
+                        worksheet = "My Worksheet"
+                        type = "csv"
+                        name = "filename.xls">
+                        <vs-button
+                            color="linear-gradient(to left,#E93F7D,#DA6653)"
+                            gradient
+                            size="small"
+                            class="text-base font-semibold">
+                            {{ $i18n.locale == 'en' ? 'Export' : 'تصدير' }}
+                        </vs-button>
+                    </export-excel>
+                </div>
+            </div>
+        </div>
         <div class="vx-row mt-5">
             <div v-for="item in offers" class="flex flex-col flex-wrap vx-col w-full sm:w-1/2 lg:w-1/4 mb-base" v-bind:key="item.id">
                 <vx-card class="offers shadow flex-1">
@@ -36,32 +55,17 @@
                 </vx-card>
             </div>
         </div>
-        <div class="vx-row">
-            <div class="vx-col">
-                <export-excel
-                :data = "offers"
-                worksheet = "My Worksheet"
-                type = "csv"
-                name = "filename.xls">
-                <vs-button
-                    color="linear-gradient(to left,#E93F7D,#DA6653)"
-                    gradient>
-                    {{ $i18n.locale == 'en' ? 'Export' : 'تصدير' }}
-                </vs-button>
-                </export-excel>
-            </div>
-        </div>
     </div>
 </template>
 
 <script>
-import axios from "@/axios.js"
 import moduleOfferManagement from '@/store/offer-management/moduleOfferManagement.js'
-import StarRating from 'vue-star-rating'
+import StarRating from 'vue-star-rating';
 
 export default {
     components: {
         StarRating,
+
     },
     props:{
         display:{
@@ -84,14 +88,40 @@ export default {
 
         }
     },
+    watch:{
+        search (val){
+          this.getResults()
+        },
+        fromDate (val){
+            this.getResults()
+        },
+        toDate (val){
+            this.getResults()
+        }
+    },
     computed: {
         offers() {
             return this.$store.state.offerManagement.offers
         },
     },
+    
     methods: {
+        getResults(){
+            var link = "offerManagement/fetchOffers"
+
+            if (this.display == 'pending'){
+                this.$store.dispatch(link, {status: [0],search: this.search,from: this.fromDate, to: this.toDate}).catch(err => { console.error(err) })
+            }else if (this.display == 'active'){
+                this.$store.dispatch(link, {status: [1],search: this.search,from: this.fromDate, to: this.toDate}).catch(err => { console.error(err) })
+            }
+            // }else if (this.display == 'most_used'){
+            //     this.$store.dispatch(link, {filter: 'most_used'}).catch(err => { console.error(err) })
+            // }
+            else
+                this.$store.dispatch(link,{search: this.search, from: this.fromDate, to: this.toDate}).catch(err => { console.error(err) })
+        },
         gotoEdit(id){
-        this.$router.push({path: 'offers/edit/' + id})
+            this.$router.push({path: 'offers/edit/' + id})
         },
         openDeleteConfirm(id) {
             this.ItemToDelete = id;
@@ -129,18 +159,7 @@ export default {
             this.$store.registerModule('offerManagement', moduleOfferManagement)
             moduleOfferManagement.isRegistered = true
         }
-        var link = "offerManagement/fetchOffers"
-
-        if (this.display == 'pending'){
-            this.$store.dispatch(link, {status: [0],search: this.search,from: this.fromDate, to: this.toDate}).catch(err => { console.error(err) })
-        }else if (this.display == 'active'){
-            this.$store.dispatch(link, {status: [1],search: this.search,from: this.fromDate, to: this.toDate}).catch(err => { console.error(err) })
-        }
-        // }else if (this.display == 'most_used'){
-        //     this.$store.dispatch(link, {filter: 'most_used'}).catch(err => { console.error(err) })
-        // }
-        else
-            this.$store.dispatch(link,{search: this.search, from: this.fromDate, to: this.toDate}).catch(err => { console.error(err) })
+        this.getResults()
     },
 
 }

@@ -40,7 +40,7 @@
             :placeholder="$t('From')"/>
             
             <flat-pickr
-            class="s:w-3/5 md:w-2/12 md:ml-4 mt-2"
+            class="s:w-3/5 md:w-2/12 sm:ml-4 mt-2"
             v-model="toDate"
             :placeholder="$t('To')"/>
         </div>
@@ -67,13 +67,17 @@
 <script>
 import axios from "@/axios.js"
 import AllCustomers from './AllCustomers.vue';
+import list from './list.vue';
 import flatPickr from 'vue-flatpickr-component';
 import 'flatpickr/dist/flatpickr.css';
+import List from './list.vue';
 
 export default{
     components: {
         AllCustomers,
-        flatPickr
+        flatPickr,
+        list,
+        List
     },
    props:{
         // customers:{

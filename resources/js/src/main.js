@@ -53,10 +53,15 @@ require('vue-tour/dist/vue-tour.css')
 
 
 // VeeValidate
-import VeeValidate from 'vee-validate'
-Vue.use(VeeValidate);
+// import VeeValidate from 'vee-validate'
+// Vue.use(VeeValidate);
 
-
+// use vee-validate (conflict will be reported as elmentui property has been used in the fields)
+import VeeValidate from 'vee-validate';
+const config = {
+    fieldsBagName: 'fieldBags',
+};
+Vue.use(VeeValidate, config);
 
 // Vuejs - Vue wrapper for hammerjs
 import { VueHammer } from 'vue2-hammer'
