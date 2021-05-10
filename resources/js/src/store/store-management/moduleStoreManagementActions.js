@@ -19,7 +19,7 @@ export default {
           }
         })
         .then((response) => {
-          commit('ADD_STORE', Object.assign(store, {id: response.data.store.id}))
+          // commit('ADD_STORE', Object.assign(store, {id: response.data.store.id}))
           resolve(response)
         })
         .catch((error) => { reject(error) })

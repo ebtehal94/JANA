@@ -45,6 +45,12 @@ export default{
       type: Array,
     },
   },
+    data() {
+        return {
+            imgLink: 'https://janacard.s3.eu-central-1.amazonaws.com/stores/',
+            ItemToDelete:null
+        }
+    },
 
   methods: {
         gotoEdit(id){
