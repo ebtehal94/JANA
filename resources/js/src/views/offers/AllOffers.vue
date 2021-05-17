@@ -33,7 +33,7 @@
                         </div>
                         <div class="p-3">
                             <div class="flex justify-between flex-wrap pt-2">
-                                <h5>{{ $i18n.locale == 'en' ? item.title_en : item.title_ar }}</h5>
+                                <h4>{{ $i18n.locale == 'en' ? item.title_en : item.title_ar }}</h4>
                                 <span class="date">{{item.expiry}}</span>
                                 <span class="status">{{item.status}}</span>
                             </div>
@@ -173,8 +173,8 @@ export default {
             top:10px;
             right: 2px;
         }
-        h5{
-            font-size: .7rem;
+        h4{
+            font-size: .8rem;
             color: #5E5E5E;
         }
         .status{

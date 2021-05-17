@@ -20,7 +20,7 @@
                                 </vs-td>
 
                                 <vs-td>
-                                <h4 class="font-bold text-base">{{ $i18n.locale == 'en' ? (tr.name_en || $t('NA')) : (tr.name_ar  || $t('NA'))}}</h4>
+                                <h4 class="font-bold">{{ $i18n.locale == 'en' ? (tr.name_en || $t('NA')) : (tr.name_ar  || $t('NA'))}}</h4>
                                 </vs-td>
 
                                 <vs-td class="whitespace-no-wrap">
@@ -85,20 +85,26 @@ export default{
 
 <style lang="scss" scoped>
 #all-store{
-    .vs-con-table {
-        .vs-table {
+        h4{
+            font-size: .9rem;
+        }
+        .vs-con-table {
+            .vs-table {
             border-collapse: separate;
             border-spacing: 0 1.3rem;
             padding: 0 1rem;
-            .tr{
-                box-shadow: 0 4px 20px 0 rgba(0,0,0,.05);
-                td{
-                    padding: 10px;
+                tr{
+                    box-shadow: 0 4px 20px 0 rgba(0,0,0,.05);
+                    td{
+                        padding: 10px;
+                        
+                    }
+                    td.td-check{
+                        padding: 20px !important;
+                    }
                 }
-                
             }
         }
-    }
     
 }
 </style>

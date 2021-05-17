@@ -54,17 +54,16 @@ export default {
      },
     deleteUser(){
         this.$store.dispatch("userManagement/removeUser", this.ItemToDelete)
-        .then(()   => { this.showDeleteSuccess() })
         .catch(err => { console.error(err) })
         }
     },
-    showDeleteSuccess() {
-            this.$vs.notify({
-            color: 'success',
-            title: 'Successfull',
-            text: 'تم بنجاح'
-        })
-    }
+    // showDeleteSuccess() {
+    //         this.$vs.notify({
+    //         color: 'success',
+    //         title: 'Successfull',
+    //         text: 'تم بنجاح'
+    //     })
+    // }
 }
 </script>
 
@@ -79,7 +78,7 @@ export default {
             margin-top: -1rem;
         }
         h4{
-            font-size: .8rem;
+            font-size: .9rem;
             font-weight: bold;
             padding: 1rem 0 .5rem;
         }

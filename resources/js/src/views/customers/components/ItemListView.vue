@@ -119,23 +119,20 @@ export default{
             font-weight: bold;
         }
         .vs-con-table {
-
             .vs-table {
             border-collapse: separate;
             border-spacing: 0 1.3rem;
             padding: 0 1rem;
-
-
-            tr{
-                box-shadow: 0 4px 20px 0 rgba(0,0,0,.05);
-                td{
-                    padding: 10px;
-                    
+                tr{
+                    box-shadow: 0 4px 20px 0 rgba(0,0,0,.05);
+                    td{
+                        padding: 10px;
+                        
+                    }
+                    td.td-check{
+                        padding: 20px !important;
+                    }
                 }
-                td.td-check{
-                    padding: 20px !important;
-                }
-            }
             }
         }
 }
