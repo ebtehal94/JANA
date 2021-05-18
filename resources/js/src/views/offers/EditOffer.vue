@@ -176,7 +176,7 @@
                   v-model="offer_data.price_before"
                   v-validate="'required'"
                   name="price_before" />
-                  <span class="text-danger text-sm"  v-show="errors.has('price_before')">{{ errors.first('price_before') }}</span>
+                  <!-- <span class="text-danger text-sm"  v-show="errors.has('price_before')">{{ errors.first('price_before') }}</span> -->
             </div>
 
             <div class="vx-col w-full">
@@ -193,7 +193,7 @@
                   v-model="offer_data.price"
                   v-validate="'required'"
                   name="price" />
-                  <span class="text-danger text-sm"  v-show="errors.has('price')">{{ errors.first('price') }}</span>
+                  <!-- <span class="text-danger text-sm"  v-show="errors.has('price')">{{ errors.first('price') }}</span> -->
 
             </div>
 
@@ -209,7 +209,7 @@
                   v-model="offer_data.expiry"
                   placeholder="14-14-2021"
                   v-validate="'required'" />
-                  <span class="text-danger text-sm"  v-show="errors.has('expiry')">{{ errors.first('expiry') }}</span>
+                  <!-- <span class="text-danger text-sm"  v-show="errors.has('expiry')">{{ errors.first('expiry') }}</span> -->
             </div>
           </div>
 
@@ -388,9 +388,7 @@ export default {
             })
           }
         })
-        .catch(function (error) {
-          console.log(error.response);
-        });
+        .catch(err => { console.error(err) })
     },
     goBack(){
       this.$router.go(-1)

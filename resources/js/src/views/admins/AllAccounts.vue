@@ -22,12 +22,15 @@
 </template>
 
 <script>
-
+import moduleUserManagement from '@/store/user-management/moduleUserManagement.js'
 export default {
         props:{
-            users:{
-                type: Array
+            search:{
+                required: false
             },
+            // users:{
+            //     type: Array
+            // },
         },
         data() {
         return {
@@ -35,10 +38,20 @@ export default {
         }
         
     },
+     watch:{
+        search (val){
+          this.getResults()
+        },
+     },
     computed: {
-
+        users() {
+            return this.$store.state.userManagement.users
+        },
     },
     methods: {
+        getResults(){
+             this.$store.dispatch("userManagement/fetchUsers",{search:this.search}).catch(err => { console.error(err) })
+        },
         gotoEdit(id){
         this.$router.push({path: 'admins/edit/' + id})
         },
@@ -52,18 +65,31 @@ export default {
             accept: this.deleteUser
         })
      },
-    deleteUser(){
+        deleteUser(){
         this.$store.dispatch("userManagement/removeUser", this.ItemToDelete)
         .catch(err => { console.error(err) })
+        },
+        showDeleteSuccess() {
+                this.$vs.notify({
+                color: 'success',
+                title: 'Successfull',
+                text: 'تم بنجاح'
+            })
         }
     },
-    // showDeleteSuccess() {
-    //         this.$vs.notify({
-    //         color: 'success',
-    //         title: 'Successfull',
-    //         text: 'تم بنجاح'
-    //     })
-    // }
+    created() {
+        if(!moduleUserManagement.isRegistered) {
+            this.$store.registerModule('userManagement', moduleUserManagement)
+            moduleUserManagement.isRegistered = true
+        }
+        this.getResults()
+
+        // this.$store.dispatch("userManagement/fetchUsers").catch(err => { console.error(err) })
+        },
+
+    
+ 
+    
 }
 </script>
 

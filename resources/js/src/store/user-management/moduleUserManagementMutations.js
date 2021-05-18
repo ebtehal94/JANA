@@ -17,7 +17,8 @@ export default {
   },
   UPDATE_USER(state, user) {
       const userIndex = state.users.findIndex((p) => p.id == user.id)
-      Object.assign(state.users[userIndex], user)
+      //  Object.assign(state.users[userIndex], user)
+       state.users[userIndex] = user
   },
   REMOVE_USER(state, userID) {
       const userIndex = state.users.findIndex((u) => u.id == userID)

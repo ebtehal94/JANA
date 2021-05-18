@@ -388,9 +388,7 @@ export default {
             })
           }
         })
-        .catch(function (error) {
-          console.log(error.response);
-        });
+        .catch(err => { console.error(err) })
     },
     goBack(){
       this.$router.go(-1)
@@ -518,11 +516,15 @@ export default {
   }
 }
 
-@media only screen and (min-width: 320px)  and (max-width: 360px) {
-
-}
-
-@media only screen  and (max-width: 320px) {
-
+@media only screen  and (min-width: 768px) {
+  #create-offer{
+    .offer-info {
+      .bg-input{
+        .left-icon{
+            left: 90%;
+        }
+      }
+     }
+  }
 }
 </style>
