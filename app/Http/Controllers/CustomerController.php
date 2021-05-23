@@ -21,11 +21,22 @@ class CustomerController extends Controller
       if (isset($info['status']) && count($info['status']) > 0){
         $customers                   = $customers->whereIn('status', $info['status']);
       }
-    
+
+      if (isset($info['search'])){
+        $customers                   = $customers->where('name', 'like', '%'.$info['search'].'%');
+      }
+
+      if (isset($info['from'])){
+        $customers                   = $customers->whereDate('created_at', '>=', $info['from']);
+      }
+      if (isset($info['to'])){
+        $customers                   = $customers->whereDate('created_at', '<=', $info['to']);
+      }
+
       $response['customers']    = $customers->get();
       $response['statusCode']   = 200;
       return $response;
-      
+
     }
 
 

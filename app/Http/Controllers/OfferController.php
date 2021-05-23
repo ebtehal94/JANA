@@ -39,6 +39,13 @@ class OfferController extends Controller
         }
       }
 
+      if (isset($info['from'])){
+        $offers                   = $offers->whereDate('created_at', '>=', $info['from']);
+      }
+      if (isset($info['to'])){
+        $offers                   = $offers->whereDate('created_at', '<=', $info['to']);
+      }
+
       $response['offers']       = $offers->get();
       $response['statusCode']   = 200;
       return $response;
@@ -144,6 +151,11 @@ class OfferController extends Controller
     {
       $response       = array();
       $info           = $request->all();
+      $user           = \Auth::Guard('api')->user();
+      if ($user->rule == 'vendor'){
+        $info['store_id']  = $user->store_id;
+      }
+
       $Ofr            = Offer::create($info);
       if (isset($Ofr)){
         if (isset($request->images)){
@@ -218,9 +230,13 @@ class OfferController extends Controller
     public function edit($offer_id)
     {
       $response       = array();
-      $Ofr            = Offer::where('id', $offer_id)
-                               ->with('images:id,offer_id,link')
-                               ->first();
+      $Ofr            = Offer::where('id', $offer_id);
+      $user           = \Auth::Guard('api')->user();
+      if ($user->rule == 'vendor'){
+        $Ofr            = $Ofr->where('store_id', $user->store_id);
+      }
+      $Ofr            = $Ofr->with('images:id,offer_id,link')
+                            ->first();
       if (isset($Ofr)){
         $response['offer']        = $Ofr;
         // $response['images']       = $Ofr->images()->select('id','link')->get();

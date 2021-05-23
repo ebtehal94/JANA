@@ -27,6 +27,21 @@ class StoreController extends Controller
         $stores                   = $stores->whereIn('status', $info['status']);
       }
 
+      if (isset($info['search'])){
+        if (isset($info['lang']) && $info['lang'] == 'en'){
+          $stores                   = $stores->where('name_en', 'like', '%'.$info['search'].'%');
+        }else{
+          $stores                   = $stores->where('name_ar', 'like', '%'.$info['search'].'%');
+        }
+      }
+
+      if (isset($info['from'])){
+        $stores                   = $stores->whereDate('created_at', '>=', $info['from']);
+      }
+      if (isset($info['to'])){
+        $stores                   = $stores->whereDate('created_at', '<=', $info['to']);
+      }
+
       $response['stores']       = $stores->get();
       $response['statusCode']   = 200;
       return $response;
