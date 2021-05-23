@@ -148,5 +148,6 @@ export default{
         padding: .5rem 2rem !important;
         margin-top: 1rem;
     }
+
 }
 </style>

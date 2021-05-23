@@ -1,6 +1,24 @@
 <template>
     <div id="locations">
         <div class="vx-row">
+            <div class="vx-col w-full" >
+                <div class="float-right mr-4 mb-2 flex">
+                    <export-excel
+                        :data = "cities"
+                        worksheet = "My Worksheet"
+                        name = "filename.xls">
+                        <vs-button
+                            color="linear-gradient(to left,#E93F7D,#DA6653)"
+                            gradient
+                            size="small"
+                            class="text-base font-semibold">
+                            {{ $i18n.locale == 'en' ? 'Export' : 'تصدير' }}
+                        </vs-button>
+                    </export-excel>
+                </div>
+            </div>
+        </div>
+        <div class="vx-row">
             <div class="vx-col w-full">
                 <vs-table max-items="10" pagination :data="cities">
                     <template slot-scope="{data}">

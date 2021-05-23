@@ -21,7 +21,7 @@
      <div id="content-overlay" />
 
     <!-- Navbar -->
-    <template v-if="mainLayoutType === 'horizontal' && windowWidth >= 1200">
+    <!-- <template v-if="mainLayoutType === 'horizontal' && windowWidth >= 1200">
      <div id="header">
         <the-navbar-horizontal
         :navbarType= "navbarType"
@@ -39,9 +39,9 @@
         ]"
         :navMenuItems="navMenuItems" />
      </div>
-    </template>
+    </template> -->
 
-    <template v-else>
+    <template>
       <the-navbar-vertical
         :navbarColor="navbarColor"
         :class="[

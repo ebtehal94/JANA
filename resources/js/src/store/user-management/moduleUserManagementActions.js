@@ -25,9 +25,9 @@ export default {
         .catch((error) => { reject(error) })
     })
   },
-  fetchUsers({ commit }) {
+  fetchUsers({ commit },obj) {
     return new Promise((resolve, reject) => {
-      axios.post("/api/users/list")
+      axios.post("/api/users/list",obj)
         .then((response) => {
           commit('SET_USERS', response.data)
           resolve(response)
@@ -50,7 +50,7 @@ export default {
       {
         headers: {
           'Content-Type': 'multipart/form-data'
-      }
+        }
       })
         .then((response) => {
           commit('UPDATE_USER', response.data.user)

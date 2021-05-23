@@ -25,9 +25,9 @@ export default {
    // const userOrders = payload.orders.filter((order) => order.customer_id == payload.id)
    // state.orders = userOrders
  // },
-  UPDATE_OFFER(state, offerid){
-    const offerIndex = state.offers.findIndex((p) => p.id == offerid)
-    state.offers[offerIndex] = offers
+  UPDATE_OFFER(state, offer){
+    const offerIndex = state.offers.findIndex((p) => p.id == offer.id)
+    state.offers[offerIndex] = offer
   },
   REMOVE_OFFER(state, offerID) {
       const offerIndex = state.offers.findIndex((u) => u.id == offerID)

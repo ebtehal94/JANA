@@ -15,8 +15,8 @@
                 icon-no-border 
                 :placeholder="$t('SearchBar')" 
                 icon-after vs-icon-after="true"
-                v-model="searchQuery" 
-                class="sm:w-full md:w-full  input-rounded-full" 
+                v-model="search" 
+                class="sm:w-full md:w-full input-rounded-full" 
                 icon="icon-search" 
                 icon-pack="feather" />
             </div>
@@ -39,7 +39,7 @@
                 <vx-card class="mt-8 pt-0">
                     <vs-tabs class="tabs-shadow-none">
                         <vs-tab :label="$t('AllAccounts')">
-                            <AllAccounts :users="users" />
+                            <AllAccounts :search="search"/>
                         </vs-tab>
                     </vs-tabs>
                 </vx-card>
@@ -49,7 +49,6 @@
 </template>
 
 <script>
-import axios from "@/axios.js"
 import AllAccounts from './AllAccounts.vue'
 
 // Store Module
@@ -60,19 +59,14 @@ export default{
     },
     data() {
         return {
-            // accounts:[
-                // {"id":1,"name":"محمد ناصر علي",src:require('@assets/images/admin.png'),"phone":"0512345678","Email":"jana@jana.com","title":"مدير العلاقات العامة"},
-                // {"id":2,"name":"محمد ناصر علي",src:require('@assets/images/admin.png'),"phone":"0512345678","Email":"jana@jana.com","title":"مدير العلاقات العامة"},
-                // {"id":3,"name":"محمد ناصر علي",src:require('@assets/images/admin.png'),"phone":"0512345678","Email":"jana@jana.com","title":"مدير العلاقات العامة"}
-            // ],
-            searchQuery: '',
+            search: '',
             
         }
     },
     computed: {
-        users() {
-            return this.$store.state.userManagement.users
-        },
+        // users() {
+        //     return this.$store.state.userManagement.users
+        // },
     },
     methods: {
         addNewData() {
@@ -80,12 +74,12 @@ export default{
         },
     },
     created() {
-        if(!moduleUserManagement.isRegistered) {
-            this.$store.registerModule('userManagement', moduleUserManagement)
-            moduleUserManagement.isRegistered = true
-        }
+        // if(!moduleUserManagement.isRegistered) {
+        //     this.$store.registerModule('userManagement', moduleUserManagement)
+        //     moduleUserManagement.isRegistered = true
+        // }
 
-        this.$store.dispatch("userManagement/fetchUsers").catch(err => { console.error(err) })
+        // this.$store.dispatch("userManagement/fetchUsers").catch(err => { console.error(err) })
         },
 
     }
