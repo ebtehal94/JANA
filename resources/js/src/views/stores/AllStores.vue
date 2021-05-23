@@ -7,7 +7,6 @@
                     <export-excel
                         :data = "stores"
                         worksheet = "My Worksheet"
-                        type = "csv"
                         name = "filename.xls">
                         <vs-button
                             color="linear-gradient(to left,#E93F7D,#DA6653)"

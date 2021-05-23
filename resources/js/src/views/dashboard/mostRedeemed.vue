@@ -1,5 +1,23 @@
 <template>
     <div id="all-offers">
+        <div class="vx-row">
+            <div class="vx-col w-full" >
+                <div class="float-right mr-4 mb-2 flex">
+                    <export-excel
+                        :data = "offers"
+                        worksheet = "My Worksheet"
+                        name = "filename.xls">
+                        <vs-button
+                            color="linear-gradient(to left,#E93F7D,#DA6653)"
+                            gradient
+                            size="small"
+                            class="text-base font-semibold">
+                            {{ $i18n.locale == 'en' ? 'Export' : 'تصدير' }}
+                        </vs-button>
+                    </export-excel>
+                </div>
+            </div>
+        </div>
         <div class="vx-row mt-5">
             <div v-for="item in offers" class="flex flex-col flex-wrap vx-col w-full sm:w-1/2 lg:w-1/4 mb-base" v-bind:key="item.id">
                 <vx-card class="offers shadow flex-1">

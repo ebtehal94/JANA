@@ -1,12 +1,11 @@
 <template>
     <div id="all-offers">
-                <div class="vx-row">
+        <div class="vx-row">
             <div class="vx-col w-full" >
                 <div class="float-right mr-4 mb-2 ">
                     <export-excel
                         :data = "offers"
                         worksheet = "My Worksheet"
-                        type = "csv"
                         name = "filename.xls">
                         <vs-button
                             color="linear-gradient(to left,#E93F7D,#DA6653)"
