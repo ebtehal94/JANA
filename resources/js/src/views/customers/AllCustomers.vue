@@ -88,12 +88,6 @@ export default {
         }
     },
     methods: {
-        // getResults(page = 1) {
-        //     axios.get('/api/customers/list/?page=' + page)
-        //         .then(response => {
-        //             this.customers = response.data.customers.data;
-        //         });
-        // },
     // nextPage(){
     //     this.currentPage++
     // },

@@ -34,15 +34,21 @@
           </div>
         </div>
         <div class="vx-row ml-2 justify-center md:justify-start">
-            <flat-pickr
-            class="s:w-3/5 md:w-2/12 mt-2"
-            v-model="fromDate"
-            :placeholder="$t('From')"/>
-            
-            <flat-pickr
-            class="s:w-3/5 md:w-2/12 sm:ml-4 mt-2"
-            v-model="toDate"
-            :placeholder="$t('To')"/>
+            <template>
+                <flat-pickr
+                class="s:w-3/5 md:w-2/12 mt-2"
+                :config="configFromdateTimePicker"
+                v-model="fromDate"
+                :placeholder="$t('From')"
+                @on-change="onFromChange" />
+                
+                <flat-pickr
+                class="s:w-3/5 md:w-2/12 sm:ml-4 mt-2"
+                :config="configTodateTimePicker"
+                v-model="toDate"
+                :placeholder="$t('To')"
+                @on-change="onToChange" />
+            </template>
         </div>
         <div class="vx-row">
             <div class="vx-col w-full">
@@ -92,10 +98,23 @@ export default{
             search: '',
             fromDate: '',
             toDate: '',
+            configFromdateTimePicker: {
+              minDate: new Date(),
+              maxDate: null
+            },
+            configTodateTimePicker: {
+              minDate: null
+            }
         }
     },
 
     methods: {
+        onFromChange(selectedDates, dateStr, instance) {
+            this.$set(this.configTodateTimePicker, 'minDate', dateStr);
+        },
+        onToChange(selectedDates, dateStr, instance) {
+            this.$set(this.configFromdateTimePicker, 'maxDate', dateStr);
+        },
         addNewData() {
         this.$router.push({path: '/customers/create'})
         },

@@ -47,7 +47,7 @@ export default [
     slug: 'Stores',
     icon: 'storeIcon',
     i18n:'Stores',
-    rule: 'vendor',
+    rule: 'admin',
   },
   {
     url: '/Accounts',
