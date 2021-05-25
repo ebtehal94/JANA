@@ -99,7 +99,6 @@ export default{
             fromDate: '',
             toDate: '',
             configFromdateTimePicker: {
-              minDate: new Date(),
               maxDate: null
             },
             configTodateTimePicker: {

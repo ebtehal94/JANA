@@ -115,7 +115,7 @@
                 <div class="bg-input text-sm">
                     <v-select class="w-full mt-2 text-sm"
                       :placeholder="$t('accountStatus')"
-                      v-model="offer_data.status"
+                      v-model="selected"
                       v-validate="'required'"
                       name="status"
                       label="text" :options="status_list"
@@ -145,14 +145,12 @@
                 <vs-button v-if="dataUploadedImages.length === 0" class="text-gray p-0" icon-pack="feather"  type="transparent" icon="icon-plus" @click="$refs.uploadImgInput.click()"/>
                 <h5 class="text-gray text-xs text-center">{{ $i18n.locale == 'en' ? 'Upload Image' : 'اضافة صورة' }}</h5>
               </div>
-              <div class="vx-col w-full md:w-1/3 mb-4">
+              <!-- <div class="vx-col w-full md:w-1/3 mb-4">
                 <img src="@assets/images/payment-methods.png" alt="Offer-image" class="mx-auto w-full lg:responsive" width="120">
-                <!-- <vs-button class="delete-img" @click="openConfirm(img)" icon-pack="feather" icon="icon-trash" size="small" color="danger" type="transparent" /> -->
               </div>
               <div class="vx-col w-full md:w-1/3 mb-4">
                 <img src="@assets/images/card.png" alt="Offer-image" class="mx-auto w-full lg:responsive relative" width="120">
-               <!-- <vs-button class="delete-img" @click="openConfirm(img)" icon-pack="feather" icon="icon-trash" size="small" color="danger" type="transparent" /> -->
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -171,7 +169,6 @@
                   class="w-full mt-4 -m-4 vs-input-no-shdow-focus"
                   :placeholder="$t('Price')"
                   v-model="offer_data.price_before"
-                  v-validate="'required'"
                   name="price_before" />
                   <!-- <span class="text-danger text-sm"  v-show="errors.has('price_before')">{{ errors.first('price_before') }}</span> -->
             </div>
@@ -188,7 +185,6 @@
                   class="w-full mt-4 -m-2 vs-input-no-shdow-focus"
                   :placeholder="$t('Price')"
                   v-model="offer_data.price"
-                  v-validate="'required'"
                   name="price" />
                   <!-- <span class="text-danger text-sm"  v-show="errors.has('price')">{{ errors.first('price') }}</span> -->
 
@@ -197,17 +193,17 @@
             <div class="vx-col w-full">
                 <!-- Col Header -->
                 <div class="flex items-end">
-                  <span class="leading-none font-semibold text-xs">{{$i18n.locale == "en" ? "Offer expiration date" : " تاريخ انتهاءالعرض"}}</span>
+                  <span class="leading-none font-semibold text-xs">{{$i18n.locale == "en" ? "Discount" : "الخصم"}}</span>
                 </div>
 
                 <!-- Col Content -->
-                  <flat-pickr
-                  class="w-full mt-4"
-                  v-model="offer_data.expiry"
-                  placeholder="14-14-2021"
-                  v-validate="'required'" />
+                  <vs-input
+                  class="w-full mt-4 vs-input-no-shdow-focus"
+                  v-model="offer_data.discount_perc"
+                  :placeholder="$t('Discount')"/>
                   <!-- <span class="text-danger text-sm"  v-show="errors.has('expiry')">{{ errors.first('expiry') }}</span> -->
             </div>
+            
           </div>
 
           <div v-if="$acl.check('admin')" class="vx-col w-full md:w-1/2 pt-4">
@@ -233,6 +229,26 @@
                   <icon name="cross" class="icon left-icon"/>
                 </span>
              </div>
+          </div>
+        </div>
+
+         <div class="vx-row my-4">
+          <div class="vx-col w-full md:w-1/2 flex pt-2">
+
+            <div class="vx-col w-1/2">
+                <!-- Col Header -->
+                <div class="flex items-end">
+                  <span class="leading-none font-semibold text-xs">{{$i18n.locale == "en" ? "Offer expiration date" : " تاريخ انتهاءالعرض"}}</span>
+                </div>
+
+                <!-- Col Content -->
+                  <flat-pickr
+                  class="w-full mt-4"
+                  v-model="offer_data.expiry"
+                  placeholder="14-14-2021"
+                  v-validate="'required'" />
+                  <!-- <span class="text-danger text-sm"  v-show="errors.has('expiry')">{{ errors.first('expiry') }}</span> -->
+            </div>
           </div>
         </div>
 
@@ -281,18 +297,13 @@ export default {
   },
   data() {
     return {
-      offer_data: {title_ar:null,title_en: null, category_id: null, desc_ar:null,desc_en:null,status:0,price_before:null,price:null,expiry:null,store_id:null},
+      offer_data: {title_ar:null,title_en: null, category_id: null, desc_ar:null,desc_en:null,status:0,price_before:'0',price:'0',expiry:null,store_id:null,discount_perc:'0'},
       // categories:[],
       status_list: [
         {text:'غير نشط',id:0},
         {text:'نشط',id:1},
       ],
-      // stores_list: [
-      //   {text:'المتجر الأول',value:1},
-      //   {text:'المتجر الثاني',value:2},
-      //   {text:'المتجر الثالث',value:3},
-      //   {text:'المتجر الرابع',value:4}
-      // ],
+      selected:{text:'غير نشط',id:0},
       dataUploadedImages: [],
       ImageToDelete: null,
       imgLink: 'https://janacard.s3.eu-central-1.amazonaws.com/offers/',
@@ -358,6 +369,7 @@ export default {
       formData.append('price_before', this.offer_data.price_before)
       formData.append('price', this.offer_data.price)
       formData.append('expiry', this.offer_data.expiry)
+      formData.append('discount_perc', this.offer_data.discount_perc)
       formData.append('store_id', this.offer_data.store_id)
       if (this.dataUploadedImages){
         for( var i = 0; i < this.dataUploadedImages.length; i++ ){

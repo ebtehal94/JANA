@@ -56,12 +56,7 @@ export default {
   },
   updateOffer({ commit }, offer) {
     return new Promise((resolve, reject) => {
-      axios.post(`/api/offers/update`, offer,
-      {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-      }
-      })
+      axios.post(`/api/offers/update`, offer)
         .then((response) => {
           commit('UPDATE_OFFER', response.data.offer)
           resolve(response)

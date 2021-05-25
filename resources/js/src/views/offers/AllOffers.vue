@@ -6,7 +6,7 @@
                     <export-excel
                         :data = "offers"
                         worksheet = "My Worksheet"
-                        name = "filename.xls">
+                        name = "Jana.xls">
                         <vs-button
                             color="linear-gradient(to left,#E93F7D,#DA6653)"
                             gradient
@@ -129,15 +129,23 @@ export default {
                 color: 'danger',
                 title: this.$t('Delete'),
                 text: 'هل أنت متأكد أنك تريد حذف هذا العرض نهائياً؟',
-                accept: this.deleteOffer(id),
-                acceptText: "Delete"
+                accept: this.deleteOffer
             })
         },
-        deleteOffer(id){
-         this.$store.dispatch("offerManagement/removeOffer", id).catch(err => { console.error(err) })
+        deleteOffer(){
+            this.$store.dispatch("offerManagement/removeOffer", this.ItemToDelete)
+            .then(()   => { this.showDeleteSuccess() })
+            .catch(err => { console.error(err) })
+        },
+        showDeleteSuccess() {
+                this.$vs.notify({
+                color: 'success',
+                title: 'Successfull',
+                text: 'تم بنجاح'
+            })
         },
         updateStatus(id, status){
-            this.$store.dispatch("offerManagement/updateOffer", {id, status})
+            this.$store.dispatch("offerManagement/updateOffer", {id:id, status:status})
             .then(()   => { this.showUpdateSuccess() })
             .then(()  => {
             this.$store.dispatch("offerManagement/fetchOffers", {status: [0]})

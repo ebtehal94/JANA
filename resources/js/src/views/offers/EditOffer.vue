@@ -174,7 +174,6 @@
                   class="w-full mt-4 -m-4 vs-input-no-shdow-focus"
                   :placeholder="$t('Price')"
                   v-model="offer_data.price_before"
-                  v-validate="'required'"
                   name="price_before" />
                   <!-- <span class="text-danger text-sm"  v-show="errors.has('price_before')">{{ errors.first('price_before') }}</span> -->
             </div>
@@ -191,7 +190,6 @@
                   class="w-full mt-4 -m-2 vs-input-no-shdow-focus"
                   :placeholder="$t('Price')"
                   v-model="offer_data.price"
-                  v-validate="'required'"
                   name="price" />
                   <!-- <span class="text-danger text-sm"  v-show="errors.has('price')">{{ errors.first('price') }}</span> -->
 
@@ -200,17 +198,17 @@
             <div class="vx-col w-full">
                 <!-- Col Header -->
                 <div class="flex items-end">
-                  <span class="leading-none font-semibold text-xs">{{$i18n.locale == "en" ? "Offer expiration date" : " تاريخ انتهاءالعرض"}}</span>
+                  <span class="leading-none font-semibold text-xs">{{$i18n.locale == "en" ? "Discount" : "الخصم"}}</span>
                 </div>
 
                 <!-- Col Content -->
-                  <flat-pickr
-                  class="w-full mt-4"
-                  v-model="offer_data.expiry"
-                  placeholder="14-14-2021"
-                  v-validate="'required'" />
+                  <vs-input
+                  class="w-full mt-4 vs-input-no-shdow-focus"
+                  v-model="offer_data.discount_perc"
+                  :placeholder="$t('Discount')"/>
                   <!-- <span class="text-danger text-sm"  v-show="errors.has('expiry')">{{ errors.first('expiry') }}</span> -->
             </div>
+            
           </div>
 
           <div v-if="$acl.check('admin')" class="vx-col w-full md:w-1/2 pt-4">
@@ -239,6 +237,26 @@
           </div>
         </div>
 
+        <div class="vx-row my-4">
+          <div class="vx-col w-full md:w-1/2 flex pt-2">
+
+            <div class="vx-col w-1/2">
+                <!-- Col Header -->
+                <div class="flex items-end">
+                  <span class="leading-none font-semibold text-xs">{{$i18n.locale == "en" ? "Offer expiration date" : " تاريخ انتهاءالعرض"}}</span>
+                </div>
+
+                <!-- Col Content -->
+                  <flat-pickr
+                  class="w-full mt-4"
+                  v-model="offer_data.expiry"
+                  placeholder="14-14-2021"
+                  v-validate="'required'" />
+                  <!-- <span class="text-danger text-sm"  v-show="errors.has('expiry')">{{ errors.first('expiry') }}</span> -->
+            </div>
+          </div>
+        </div>
+
         <!-- Save & Reset Button -->
         <div class="vx-row flex justify-center mt-10">
             <vs-button
@@ -247,7 +265,7 @@
               color="linear-gradient(to left,#E93F7D,#DA6653)"
               gradient
               @click="createOffer">
-                {{$i18n.locale == "en" ? "Create Offer" : "إنشاء العرض"}}
+                {{$i18n.locale == "en" ? "Save Changes" : "حفظ التغيرات"}}
             </vs-button>
 
             <vs-button
@@ -282,7 +300,7 @@ export default {
   },
   data() {
     return {
-      offer_data: {title_ar:null,title_en: null, category_id: null, desc_ar:null,desc_en:null,status:null,price_before:null,price:null,expiry:null,store_id:null},
+      offer_data: {title_ar:null,title_en: null, category_id: null, desc_ar:null,desc_en:null,status:null,price_before:'0',price:'0',expiry:null,store_id:null,discount_perc:'0'},
       // categories:[],
       status_list: [
         {text:this.$i18n.locale == 'en' ? 'Deactivated' : 'غير نشط',id:0},
@@ -349,6 +367,7 @@ export default {
     createOffer(){
         // if(!this.validateForm) return
       let formData = new FormData();
+      formData.append('id', this.offer_data.id)
       formData.append('title_ar', this.offer_data.title_ar)
       formData.append('title_en', this.offer_data.title_en)
       formData.append('desc_ar', this.offer_data.desc_ar)
@@ -357,6 +376,7 @@ export default {
       formData.append('status', this.offer_data.status)
       formData.append('price_before', this.offer_data.price_before)
       formData.append('price', this.offer_data.price)
+      formData.append('discount_perc', this.offer_data.discount_perc)
       formData.append('expiry', this.offer_data.expiry)
       formData.append('store_id', this.offer_data.store_id)
       if (this.dataUploadedImages){

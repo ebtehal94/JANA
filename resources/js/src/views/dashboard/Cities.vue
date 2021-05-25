@@ -6,7 +6,7 @@
                     <export-excel
                         :data = "cities"
                         worksheet = "My Worksheet"
-                        name = "filename.xls">
+                        name = "Jana.xls">
                         <vs-button
                             color="linear-gradient(to left,#E93F7D,#DA6653)"
                             gradient

@@ -81,6 +81,7 @@ export default {
 		Category: 'Category',
 		Price:'Price',
 		ChooseStore:'Choose store',
+		Discount:'Discount',
 
 		CreateNewCustomer:'Create Customer Account',
 		AllCustomers:'All Customers',
@@ -293,7 +294,7 @@ export default {
 		Prices: 'Prices',
 
 
-		AppName: 'OTANTIK HOME',
+		
 		Home: 'Home',
 		Store: 'Store',
 		Products: 'Products',
@@ -434,6 +435,7 @@ export default {
 		Category: 'الفئة (القسم)',
 		Price:'السعر',
 		ChooseStore:'اختر المتجر',
+		Discount:'الخصم',
 
 		CreateNewCustomer:'إنشاء حساب عميلة',
 		AllCustomers:'كل العملاء',
