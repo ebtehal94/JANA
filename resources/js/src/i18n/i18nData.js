@@ -20,7 +20,7 @@ export default {
 		email:'Email',
 		password:'Password',
 		confirmPassword:'Confirm Password',
-		
+
 		accountData:'Account Data',
 		Login: 'Login',
 
@@ -82,12 +82,13 @@ export default {
 		Price:'Price',
 		ChooseStore:'Choose store',
 		Discount:'Discount',
+		DiscountPerc:'Discount Perc. %',
 
 		CreateNewCustomer:'Create Customer Account',
 		AllCustomers:'All Customers',
 		PendingCustomers:'Pending accounts',
 		NewCustomers:'New customers used the referral code',
-		
+
 		CreateNewStore:'Create New Account',
 		AllStores:'All stores',
 		PendingAccounts:'Pending accounts',
@@ -294,7 +295,7 @@ export default {
 		Prices: 'Prices',
 
 
-		
+
 		Home: 'Home',
 		Store: 'Store',
 		Products: 'Products',
@@ -381,10 +382,10 @@ export default {
 		email:'البريد الإلكتروني',
 		password:'كلمة المرور',
 		confirmPassword:'تأكيد كلمة المرور',
-		
+
 		accountData:'بيانات الحساب',
 		Login: 'تسجيل الدخول',
-		
+
 		dashboard:'لوحة التحكم',
 		Operations:'العمليات المالية',
 		Offers:'العروض',
@@ -436,6 +437,7 @@ export default {
 		Price:'السعر',
 		ChooseStore:'اختر المتجر',
 		Discount:'الخصم',
+		DiscountPerc:'نسبة الخصم %',
 
 		CreateNewCustomer:'إنشاء حساب عميلة',
 		AllCustomers:'كل العملاء',
@@ -458,7 +460,7 @@ export default {
 		desc_lable:'الوصف',
 
 		recipients:'المستلمين',
-	
+
 
 		Home: 'الرئيسية',
 		ProductsList: 'قائمة المنتجات',

@@ -142,7 +142,7 @@
             <div class="vx-row flex mt-4 mx-0 offer-images">
               <div class="vx-col w-full md:w-1/3 mb-4 add-img">
                 <input type="file" class="hidden" ref="uploadImgInput" multiple @change="updateCurrImg" accept="image/*">
-                <vs-button v-if="dataUploadedImages.length === 0" class="text-gray p-0" icon-pack="feather"  type="transparent" icon="icon-plus" @click="$refs.uploadImgInput.click()"/>
+                <vs-button v-if="dataUploadedImages.length === 0" class="text-gray p-0 mt-6" icon-pack="feather"  type="transparent" icon="icon-plus" @click="$refs.uploadImgInput.click()"/>
                 <h5 class="text-gray text-xs text-center">{{ $i18n.locale == 'en' ? 'Upload Image' : 'اضافة صورة' }}</h5>
               </div>
               <!-- <div class="vx-col w-full md:w-1/3 mb-4">
@@ -203,7 +203,7 @@
                   :placeholder="$t('Discount')"/>
                   <!-- <span class="text-danger text-sm"  v-show="errors.has('expiry')">{{ errors.first('expiry') }}</span> -->
             </div>
-            
+
           </div>
 
           <div v-if="$acl.check('admin')" class="vx-col w-full md:w-1/2 pt-4">
@@ -297,7 +297,7 @@ export default {
   },
   data() {
     return {
-      offer_data: {title_ar:null,title_en: null, category_id: null, desc_ar:null,desc_en:null,status:0,price_before:'0',price:'0',expiry:null,store_id:null,discount_perc:'0'},
+      offer_data: {title_ar:null,title_en: null, category_id: null, desc_ar:null,desc_en:null,status:0,price_before:null,price:null,expiry:null,store_id:null,discount_perc:null},
       // categories:[],
       status_list: [
         {text:'غير نشط',id:0},
@@ -366,10 +366,10 @@ export default {
       formData.append('desc_en', this.offer_data.desc_en)
       formData.append('category_id', this.offer_data.category_id)
       formData.append('status', this.offer_data.status)
-      formData.append('price_before', this.offer_data.price_before)
-      formData.append('price', this.offer_data.price)
+      formData.append('price_before', (this.offer_data.price_before > 0) ? this.offer_data.price_before : '' )
+      formData.append('price', (this.offer_data.price > 0) ? this.offer_data.price : '')
+      formData.append('discount_perc', (this.offer_data.discount_perc > 0) ? this.offer_data.discount_perc : '')
       formData.append('expiry', this.offer_data.expiry)
-      formData.append('discount_perc', this.offer_data.discount_perc)
       formData.append('store_id', this.offer_data.store_id)
       if (this.dataUploadedImages){
         for( var i = 0; i < this.dataUploadedImages.length; i++ ){
@@ -383,8 +383,10 @@ export default {
         }else{
           var link = "offerManagement/addOffer"
         }
+        this.$vs.loading()
         this.$store.dispatch(link, formData)
         .then(res => {
+          this.$vs.loading.close()
           if( res.data.statusCode == 200 ){
             this.$vs.notify({
             color: 'success',
@@ -400,7 +402,9 @@ export default {
             })
           }
         })
-        .catch(err => { console.error(err) })
+        .catch(err => { console.error(err)
+          this.$vs.loading.close()
+        })
     },
     goBack(){
       this.$router.go(-1)

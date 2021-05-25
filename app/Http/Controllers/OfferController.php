@@ -306,7 +306,15 @@ class OfferController extends Controller
     public function deleteImage($offer_id, $image_id)
     {
       $Ofr = Offer::find($offer_id);
-      $Ofr->images()->where('id', $image_id)->delete();
-      return "deleted successfully";
+      if ($Ofr){
+        $image = $Ofr->images()->where('id', $image_id)->first();
+        if ($image){
+          $image->delete();
+          $response['statusCode']   = 200;
+          return $response;
+        }
+      }
+      $response['statusCode']   = 400;
+      return $response;
     }
 }

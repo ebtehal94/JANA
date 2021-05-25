@@ -22,7 +22,7 @@ class StoreController extends Controller
       $response                 = array();
       $info                     = $request->all();
       $stores                   = Store::orderby('id','desc')
-                                       ->select('id','name_ar', 'name_en', 'views', 'image');
+                                       ->select('id','name_ar', 'name_en', 'views', 'created_at', 'image');
       if (isset($info['status']) && count($info['status']) > 0){
         $stores                   = $stores->whereIn('status', $info['status']);
       }
