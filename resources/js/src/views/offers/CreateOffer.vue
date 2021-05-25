@@ -140,10 +140,17 @@
 
             <!-- Col Content -->
             <div class="vx-row flex mt-4 mx-0 offer-images">
-              <div class="vx-col w-full md:w-1/3 mb-4 add-img">
+              <div class="vx-col w-full md:w-1/3 mb-4">
+                 <div v-for="img in dataUploadedImages" :key="img.data" class="items-center">
+                    <img :src="img.url" class="mx-auto w-full lg:responsive" width="120">
+                  </div>
+              </div>
+              <div class="vx-col w-full mb-4">
                 <input type="file" class="hidden" ref="uploadImgInput" multiple @change="updateCurrImg" accept="image/*">
-                <vs-button v-if="dataUploadedImages.length === 0" class="text-gray p-0" icon-pack="feather"  type="transparent" icon="icon-plus" @click="$refs.uploadImgInput.click()"/>
-                <h5 class="text-gray text-xs text-center">{{ $i18n.locale == 'en' ? 'Upload Image' : 'اضافة صورة' }}</h5>
+                <vs-button v-if="dataUploadedImages.length === 0" size="small" color="linear-gradient(to left,#E93F7D,#DA6653)"
+                gradient class="rounded-full" icon-pack="feather" icon="icon-upload" @click="$refs.uploadImgInput.click()">{{ $i18n.locale == 'en' ? 'Upload Image' : 'رفع صورة' }}</vs-button>
+                <!-- <vs-button v-if="dataUploadedImages.length === 0" class="text-gray p-0" icon-pack="feather"  type="transparent" icon="icon-plus" @click="$refs.uploadImgInput.click()"/> -->
+                <!-- <h5 class="text-gray text-xs text-center">{{ $i18n.locale == 'en' ? 'Upload Image' : 'اضافة صورة' }}</h5> -->
               </div>
               <!-- <div class="vx-col w-full md:w-1/3 mb-4">
                 <img src="@assets/images/payment-methods.png" alt="Offer-image" class="mx-auto w-full lg:responsive" width="120">
@@ -285,6 +292,8 @@ import vSelect from 'vue-select'
 import icon from '@/layouts/components/icon.vue'
 import flatPickr from 'vue-flatpickr-component';
 import 'flatpickr/dist/flatpickr.css';
+import 'swiper/dist/css/swiper.min.css'
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
 
 // Store Module
 import moduleOfferManagement from '@/store/offer-management/moduleOfferManagement.js'
@@ -293,7 +302,9 @@ export default {
   components: {
     icon,
     vSelect,
-    flatPickr
+    flatPickr,
+    swiper,
+    swiperSlide,
   },
   data() {
     return {
@@ -307,7 +318,16 @@ export default {
       dataUploadedImages: [],
       ImageToDelete: null,
       imgLink: 'https://janacard.s3.eu-central-1.amazonaws.com/offers/',
-      //offer_images:[],
+      offer_images:[],
+      swiperOption: {
+        slidesPerView: 5,
+        spaceBetween: 30,
+        centeredSlides: false,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev'
+        }
+      },
     }
   },
   computed: {
@@ -319,16 +339,30 @@ export default {
     },
   },
   methods:{
-    updateCurrImg(input) {
-       if (input.target.files && input.target.files[0]) {
-         var reader = new FileReader()
-         reader.onload = e => {
-           this.dataUploadedImages= input.target.files
-           console.log(input.target.files[0])
-         }
-         reader.readAsDataURL(input.target.files[0])
-       }
+        updateCurrImg(input) {
+      if (input.target.files && input.target.files[0]) {
+        var reader = new FileReader()
+        reader.onload = e => {
+          this.dataUploadedImages = input.target.files
+
+          for (var i = 0; i < this.dataUploadedImages.length; i++) {
+            const url = URL.createObjectURL(this.dataUploadedImages[i])
+            this.dataUploadedImages[i].url = url
+          }
+        }
+        reader.readAsDataURL(input.target.files[0])
+      }
     },
+    // updateCurrImg(input) {
+    //    if (input.target.files && input.target.files[0]) {
+    //      var reader = new FileReader()
+    //      reader.onload = e => {
+    //        this.dataUploadedImages= input.target.files
+    //        console.log(input.target.files[0])
+    //      }
+    //      reader.readAsDataURL(input.target.files[0])
+    //    }
+    // },
     openConfirm(img) {
       this.ImageToDelete = img;
        this.$vs.dialog({
@@ -478,12 +512,13 @@ export default {
     }
 
     .vs-button.small:not(.includeIconOnly) {
-      padding: 0.4rem 5rem;
+      padding: 0.5rem 5rem;
     }
     .flatpickr-input{
       border-radius:30px ;
       font-size: .9rem;
     }
+    
 
 
 }
