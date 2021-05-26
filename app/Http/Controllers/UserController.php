@@ -15,7 +15,17 @@ class UserController extends Controller
    */
   public function index()
   {
-    $users          = User::orderby('id','desc')->get();
+    $info                   = $request->all();
+    $user                   = \Auth::Guard('api')->user();
+    if (!isset($user) || $user->rule != 'admin'){
+      return 'Unauthorized!';
+    }
+
+    $users          = User::orderby('id','desc');
+    if (isset($info['search'])){
+      $users                   = $users->where('name', 'like', '%'.$info['search'].'%');
+    }
+    $users                   = $users->get();
 
     return $users;
   }
