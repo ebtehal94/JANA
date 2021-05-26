@@ -143,7 +143,15 @@
 
             <!-- Col Content -->
             <div class="vx-row flex mt-4 mx-0 offer-images">
-                <div class="vx-col w-full md:w-1/3 mb-4">
+              <div class="vx-col w-full md:w-1/3 mb-4 cardBox" v-for="image in offer_data.images"  :key="image.link">
+                <vs-button class="cardTag text-danger mt-0" @click="openConfirm(image.id)" icon-pack="feather" icon="icon-trash-2" color="danger" type="flat" />
+                <img :src="imgLink + image.link"  alt=" " class="mx-auto w-full lg:responsive" width="120">
+              </div>
+              <div v-for="image in dataUploadedImages" :key="image.link" class="items-center vx-col w-full md:w-1/3 mb-4 cardBox">
+                <vs-button class="cardTag text-danger mt-0" @click="openConfirm(image.id)" icon-pack="feather" icon="icon-trash-2" color="danger" type="flat" />
+                <img :src="image.url" class="mx-auto w-full lg:responsive" width="120">
+              </div>
+                <!-- <div class="vx-col w-full md:w-1/3 mb-4">
                  <div v-for="img in offer_images" :key="img.id" class="items-center">
                           <img :src="imgLink+img.link" class="mx-auto w-full lg:responsive" width="120">
                           <vs-button @click="openConfirm(img)" icon-pack="feather" icon="icon-trash" size="small" color="danger" type="flat">{{ $i18n.locale == 'en' ? 'Delete' : 'حذف' }}</vs-button>
@@ -151,7 +159,7 @@
                  <div v-for="img in dataUploadedImages" :key="img.data" class="items-center">
                     <img :src="img.url" class="mx-auto w-full lg:responsive" width="120">
                   </div>
-              </div>
+              </div> -->
               <div class="vx-col w-full mb-4">
                 <input type="file" class="hidden" ref="uploadImgInput" multiple @change="updateCurrImg" accept="image/*">
                 <vs-button v-if="dataUploadedImages.length === 0" size="small" color="linear-gradient(to left,#E93F7D,#DA6653)"
@@ -159,19 +167,6 @@
                 <!-- <vs-button v-if="dataUploadedImages.length === 0" class="text-gray p-0" icon-pack="feather"  type="transparent" icon="icon-plus" @click="$refs.uploadImgInput.click()"/> -->
                 <!-- <h5 class="text-gray text-xs text-center">{{ $i18n.locale == 'en' ? 'Upload Image' : 'اضافة صورة' }}</h5> -->
               </div>
-              <!-- <div class="vx-col w-full md:w-1/3 mb-4 add-img">
-                <input type="file" class="hidden" ref="uploadImgInput" multiple @change="updateCurrImg" accept="image/*">
-                <vs-button v-if="dataUploadedImages.length === 0" class="text-gray p-0" icon-pack="feather"  type="transparent" icon="icon-plus" @click="$refs.uploadImgInput.click()"/>
-                <h5 class="text-gray text-xs text-center">{{ $i18n.locale == 'en' ? 'Upload Image' : 'اضافة صورة' }}</h5>
-              </div> -->
-              <!-- <div class="vx-col w-full md:w-1/3 mb-4">
-                <img :src="imgLink + offer_images.link"  alt=" " class="mx-auto w-full lg:responsive" width="120">
-                <vs-button class="delete-img" @click="openConfirm(id)" icon-pack="feather" icon="icon-trash" size="small" color="danger" type="transparent" />
-              </div>
-              <div class="vx-col w-full md:w-1/3 mb-4">
-                <img :src="imgLink + offer_images.link" alt="" class="mx-auto w-full lg:responsive relative" width="120">
-               <vs-button class="delete-img" @click="openConfirm(id)" icon-pack="feather" icon="icon-trash" size="small" color="danger" type="transparent" />
-              </div> -->
             </div>
           </div>
         </div>
@@ -189,6 +184,7 @@
                   <vs-input
                   class="w-full mt-4 -m-4 vs-input-no-shdow-focus"
                   v-model="offer_data.price_before"
+                  :placeholder="$t('Price')"
                   name="price_before" />
                   <!-- <span class="text-danger text-sm"  v-show="errors.has('price_before')">{{ errors.first('price_before') }}</span> -->
             </div>
@@ -204,6 +200,7 @@
                   <vs-input
                   class="w-full mt-4 -m-2 vs-input-no-shdow-focus"
                   v-model="offer_data.price"
+                  :placeholder="$t('Price')"
                   name="price" />
                   <!-- <span class="text-danger text-sm"  v-show="errors.has('price')">{{ errors.first('price') }}</span> -->
 
@@ -219,10 +216,11 @@
                   <vs-input
                   class="w-full mt-4 vs-input-no-shdow-focus"
                   v-model="offer_data.discount_perc"
-                  />
-                  <!-- <span class="text-danger text-sm"  v-show="errors.has('expiry')">{{ errors.first('expiry') }}</span> -->
+                  name="discount_perc"
+                  :placeholder="$t('DiscountPerc')"/>
+                  <!-- <span class="text-danger text-sm"  v-show="errors.has('discount_perc')">{{ errors.first('discount_perc') }}</span> -->
             </div>
-            
+
           </div>
 
           <div v-if="$acl.check('admin')" class="vx-col w-full md:w-1/2 pt-4">
@@ -253,7 +251,6 @@
 
         <div class="vx-row my-4">
           <div class="vx-col w-full md:w-1/2 flex pt-2">
-
             <div class="vx-col w-1/2">
                 <!-- Col Header -->
                 <div class="flex items-end">
@@ -314,7 +311,7 @@ export default {
   },
   data() {
     return {
-      offer_data: {title_ar:null,title_en: null, category_id: null, desc_ar:null,desc_en:null,status:null,price_before:'0',price:'0',expiry:null,store_id:null,discount_perc:'0'},
+      offer_data: {title_ar:null,title_en: null, category_id: null, desc_ar:null,desc_en:null,status:null,price_before:null,price:null,expiry:null,store_id:null,discount_perc:null},
       // categories:[],
       status_list: [
         {text:this.$i18n.locale == 'en' ? 'Deactivated' : 'غير نشط',id:0},
@@ -377,22 +374,30 @@ export default {
          color: 'danger',
          title: `Delete Image`,
          text: 'Are you sure you want to permenantly delete this image?',
-         accept: this.acceptAlert
-       })
-     },
-     acceptAlert() {
-       this.deleteImage()
-       this.$vs.notify({
-         color: 'danger',
-         title: 'Deleted image',
-         text: 'The selected image was successfully deleted'
+         accept: this.deleteImage
        })
      },
      deleteImage() {
        return new Promise((resolve, reject) => {
-         axios.get("/api/offers/"+ this.offer_data.id + "/deleteImage/"+ this.offer_images.id)
+         axios.get("/api/offers/"+ this.offer_data.id + "/deleteImage/"+ this.ImageToDelete)
            .then((response) => {
-             resolve(response)
+             if (response.data.statusCode == 200){
+               this.$vs.notify({
+                 color: 'success',
+                 title: 'Deleted',
+                 text: 'The selected image was successfully deleted'
+               })
+
+               const imageIndex = this.offer_data.images.findIndex((u) => u.id == this.ImageToDelete)
+               this.offer_data.images.splice(imageIndex, 1)
+               resolve(response)
+             }else{
+               this.$vs.notify({
+                 color: 'danger',
+                 title: 'Error',
+                 text: 'Error'
+               })
+             }
            })
            .catch((error) => { reject(error) })
        })
@@ -407,9 +412,9 @@ export default {
       formData.append('desc_en', this.offer_data.desc_en)
       formData.append('category_id', this.offer_data.category_id)
       formData.append('status', this.offer_data.status)
-      formData.append('price_before', this.offer_data.price_before)
-      formData.append('price', this.offer_data.price)
-      formData.append('discount_perc', this.offer_data.discount_perc)
+      formData.append('price_before', (this.offer_data.price_before > 0) ? this.offer_data.price_before : '')
+      formData.append('price', (this.offer_data.price > 0) ? this.offer_data.price : '')
+      formData.append('discount_perc', (this.offer_data.discount_perc > 0) ? this.offer_data.discount_perc : '')
       formData.append('expiry', this.offer_data.expiry)
       formData.append('store_id', this.offer_data.store_id)
       if (this.dataUploadedImages){
@@ -424,8 +429,12 @@ export default {
         }else{
           var link = "offerManagement/addOffer"
         }
+
+        this.$vs.loading()
+
         this.$store.dispatch(link, formData)
         .then(res => {
+          this.$vs.loading.close()
           if( res.data.statusCode == 200 ){
             this.$vs.notify({
             color: 'success',
@@ -441,7 +450,9 @@ export default {
             })
           }
         })
-        .catch(err => { console.error(err) })
+        .catch(err => { console.error(err)
+          this.$vs.loading.close()
+        })
     },
     goBack(){
       this.$router.go(-1)
@@ -472,6 +483,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.cardBox{
+  position: relative;
+}
+.cardTag{
+  position: absolute;
+  right: 0;
+  top: -1.4rem;
+  z-index: 999;
+}
+
 #create-offer {
     margin: 2rem 2.5rem;
 

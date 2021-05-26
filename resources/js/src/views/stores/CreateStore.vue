@@ -474,8 +474,10 @@ export default {
       }else{
         var link = "storeManagement/addStore"
       }
+      this.$vs.loading()
       this.$store.dispatch(link, formData)
         .then(res => {
+          this.$vs.loading.close()
           if( res.data.statusCode == 200 ){
             this.$vs.notify({
              color: 'success',
@@ -491,7 +493,9 @@ export default {
             })
           }
         })
-      .catch(err => { console.error(err) })
+        .catch(err => { console.error(err)
+          this.$vs.loading.close()
+        })
     },
   },
   created() {

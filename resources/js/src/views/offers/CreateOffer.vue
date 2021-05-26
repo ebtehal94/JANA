@@ -17,12 +17,12 @@
               :placeholder="$t('OfferTitle')"
               v-model="offer_data.title_ar"
               v-validate="'required|alpha_spaces'"
-              name="title_ar" />
-
-              <span v-if="!errors.has('title_ar') && offer_data.title_ar">
+              name="title" />
+              <span class="text-danger text-sm"  v-show="errors.has('title')">{{ errors.first('title') }}</span>
+              <span v-if="!errors.has('title') && offer_data.title_ar">
                 <icon name="confirm" class="icon left-icon"/>
               </span>
-              <span v-else-if="errors.has('title_ar')">
+              <span v-else-if="errors.has('title')">
                 <icon name="cross" class="icon left-icon"/>
               </span>
             </div>
@@ -58,12 +58,12 @@
                 :placeholder="$t('OfferTitle')"
                 v-model="offer_data.title_en"
                 v-validate="'required|alpha_spaces'"
-                name="title_en" />
-
-                <span v-if="!errors.has('title_en') && offer_data.title_en">
+                name="title" />
+                <span class="text-danger text-sm"  v-show="errors.has('title')">{{ errors.first('title') }}</span>
+                <span v-if="!errors.has('title') && offer_data.title_en">
                   <icon name="confirm" class="icon left-icon"/>
                 </span>
-                <span v-else-if="errors.has('title_en')">
+                <span v-else-if="errors.has('title')">
                   <icon name="cross" class="icon left-icon"/>
                 </span>
               </div>
@@ -102,14 +102,15 @@
                       v-validate="'required'"
                       label="title_ar" :options="categories"
                       :reduce="title_ar => title_ar.id"
-                      :dir="$vs.rtl ? 'rtl' : 'ltr'" />
+                      :dir="$vs.rtl ? 'rtl' : 'ltr'" 
+                      name="category"/>
 
-                    <span v-if="!errors.has('category_id') && offer_data.category_id">
+                    <!-- <span v-if="!errors.has('category') && offer_data.category_id">
                       <icon name="confirm" class="icon left-icon"/>
                     </span>
-                    <span v-else-if="errors.has('category_id')">
+                    <span v-else-if="errors.has('category')">
                       <icon name="cross" class="icon left-icon"/>
-                    </span>
+                    </span> -->
                 </div>
 
                 <div class="bg-input text-sm">
@@ -122,13 +123,13 @@
                       :reduce="text => text.id"
                       :dir="$vs.rtl ? 'rtl' : 'ltr'" />
 
-                    <span
+                    <!-- <span
                       v-if="!errors.has('status') && offer_data.status">
                       <icon name="confirm" class="icon left-icon"/>
                     </span>
                     <span v-else-if="errors.has('status')">
                       <icon name="cross" class="icon left-icon"/>
-                    </span>
+                    </span> -->
                 </div>
           </div>
 
@@ -148,9 +149,9 @@
               <div class="vx-col w-full mb-4">
                 <input type="file" class="hidden" ref="uploadImgInput" multiple @change="updateCurrImg" accept="image/*">
                 <vs-button v-if="dataUploadedImages.length === 0" size="small" color="linear-gradient(to left,#E93F7D,#DA6653)"
-                gradient class="rounded-full" icon-pack="feather" icon="icon-upload" @click="$refs.uploadImgInput.click()">{{ $i18n.locale == 'en' ? 'Upload Image' : 'رفع صورة' }}</vs-button>
-                <!-- <vs-button v-if="dataUploadedImages.length === 0" class="text-gray p-0" icon-pack="feather"  type="transparent" icon="icon-plus" @click="$refs.uploadImgInput.click()"/> -->
-                <!-- <h5 class="text-gray text-xs text-center">{{ $i18n.locale == 'en' ? 'Upload Image' : 'اضافة صورة' }}</h5> -->
+                gradient class="rounded-full mt-6" icon-pack="feather" icon="icon-upload" @click="$refs.uploadImgInput.click()">{{ $i18n.locale == 'en' ? 'Upload Image' : 'رفع صورة' }}</vs-button>
+                <!-- <vs-button v-if="dataUploadedImages.length === 0" class="text-gray p-0 mt-6" icon-pack="feather"  type="transparent" icon="icon-plus" @click="$refs.uploadImgInput.click()"/>
+                <h5 class="text-gray text-xs text-center">{{ $i18n.locale == 'en' ? 'Upload Image' : 'اضافة صورة' }}</h5> -->
               </div>
               <!-- <div class="vx-col w-full md:w-1/3 mb-4">
                 <img src="@assets/images/payment-methods.png" alt="Offer-image" class="mx-auto w-full lg:responsive" width="120">
@@ -207,10 +208,10 @@
                   <vs-input
                   class="w-full mt-4 vs-input-no-shdow-focus"
                   v-model="offer_data.discount_perc"
-                  :placeholder="$t('Discount')"/>
+                  :placeholder="$t('DiscountPerc')"/>
                   <!-- <span class="text-danger text-sm"  v-show="errors.has('expiry')">{{ errors.first('expiry') }}</span> -->
             </div>
-            
+
           </div>
 
           <div v-if="$acl.check('admin')" class="vx-col w-full md:w-1/2 pt-4">
@@ -228,13 +229,13 @@
                   :reduce="name_ar => name_ar.id"
                   :dir="$vs.rtl ? 'rtl' : 'ltr'" />
 
-                <span
+                <!-- <span
                   v-if="!errors.has('store_id') && offer_data.store_id">
                   <icon name="confirm" class="icon left-icon"/>
                 </span>
                 <span v-else-if="errors.has('store_id')">
                   <icon name="cross" class="icon left-icon"/>
-                </span>
+                </span> -->
              </div>
           </div>
         </div>
@@ -308,7 +309,7 @@ export default {
   },
   data() {
     return {
-      offer_data: {title_ar:null,title_en: null, category_id: null, desc_ar:null,desc_en:null,status:0,price_before:'0',price:'0',expiry:null,store_id:null,discount_perc:'0'},
+      offer_data: {title_ar:null,title_en: null, category_id: null, desc_ar:null,desc_en:null,status:0,price_before:null,price:null,expiry:null,store_id:null,discount_perc:null},
       // categories:[],
       status_list: [
         {text:'غير نشط',id:0},
@@ -400,10 +401,10 @@ export default {
       formData.append('desc_en', this.offer_data.desc_en)
       formData.append('category_id', this.offer_data.category_id)
       formData.append('status', this.offer_data.status)
-      formData.append('price_before', this.offer_data.price_before)
-      formData.append('price', this.offer_data.price)
+      formData.append('price_before', (this.offer_data.price_before > 0) ? this.offer_data.price_before : '' )
+      formData.append('price', (this.offer_data.price > 0) ? this.offer_data.price : '')
+      formData.append('discount_perc', (this.offer_data.discount_perc > 0) ? this.offer_data.discount_perc : '')
       formData.append('expiry', this.offer_data.expiry)
-      formData.append('discount_perc', this.offer_data.discount_perc)
       formData.append('store_id', this.offer_data.store_id)
       if (this.dataUploadedImages){
         for( var i = 0; i < this.dataUploadedImages.length; i++ ){
@@ -417,8 +418,10 @@ export default {
         }else{
           var link = "offerManagement/addOffer"
         }
+        this.$vs.loading()
         this.$store.dispatch(link, formData)
         .then(res => {
+          this.$vs.loading.close()
           if( res.data.statusCode == 200 ){
             this.$vs.notify({
             color: 'success',
@@ -434,7 +437,9 @@ export default {
             })
           }
         })
-        .catch(err => { console.error(err) })
+        .catch(err => { console.error(err)
+          this.$vs.loading.close()
+        })
     },
     goBack(){
       this.$router.go(-1)

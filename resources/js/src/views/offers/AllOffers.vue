@@ -39,16 +39,16 @@
                             <p>{{item.subtitle}}</p>
                             <div class="flex justify-between">
                                 <star-rating :rtl="$vs.rtl" :star-size="12" :rating="3" :read-only="true" :increment="1"></star-rating>
-                                <ul>
+                                <ul v-if="item.price || item.price_before">
                                     <li class="price linetThrough"><span>{{item.price_before}} SAR</span></li>
                                     <li class="disc-price"><span>{{item.price}} SAR</span></li>
                                 </ul>
-                                <span class="discount">{{item.discount_perc}}</span>
+                                <span v-if="item.discount_perc > 0" class="discount">{{item.discount_perc}} %</span>
                             </div>
                         </div>
-                        <div class="-ml-6 cursor-pointer flex justify-center" v-if="display == 'pending'">
-                            <vs-button color="#6FDD68" size="small" @click="updateStatus(item.id, 1)">{{$i18n.locale == "en" ? "Accept" : "موافقة"}}</vs-button>
-                            <vs-button color="danger" size="small" @click="updateStatus(item.id, 0)">{{$i18n.locale == "en" ? "Reject" : "رفض"}}</vs-button>
+                        <div class="-ml-6 cursor-pointer flex justify-center"  v-if="display == 'pending'">
+                            <vs-button v-if="$acl.check('admin')" color="#6FDD68" size="small" @click="updateStatus(item.id, 1)">{{$i18n.locale == "en" ? "Accept" : "موافقة"}}</vs-button>
+                            <vs-button v-if="$acl.check('admin')" color="danger" size="small" @click="updateStatus(item.id, 0)">{{$i18n.locale == "en" ? "Reject" : "رفض"}}</vs-button>
                         </div>
                     </template>
                 </vx-card>
@@ -77,7 +77,7 @@ export default {
             required: false
         },
         toDate:{
-           required: false 
+           required: false
         }
     },
     data() {
@@ -103,7 +103,7 @@ export default {
             return this.$store.state.offerManagement.offers
         },
     },
-    
+
     methods: {
         getResults(){
             var link = "offerManagement/fetchOffers"

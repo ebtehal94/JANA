@@ -18,7 +18,7 @@
         <div slot="no-body">
           <div class="vx-row no-gutter justify-center items-center py-10">
             <div class="vx-col hidden lg:block lg:w-2/5 pl-1.5">
-              <img src="@assets/images/logo/logo-3.png" alt="jana" class="mx-auto" width="130">
+              <img src="@assets/images/logo/jana-plus.png" alt="jana" class="mx-auto" width="110">
             </div>
 
             <div class="vx-col sm:w-full md:w-full lg:w-1/2">
