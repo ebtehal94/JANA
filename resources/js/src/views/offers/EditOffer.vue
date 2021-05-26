@@ -142,7 +142,7 @@
             </div>
 
             <!-- Col Content -->
-            <div class="vx-row flex mt-4 mx-0 offer-images">
+            <div class="vx-row flex mt-8 mx-0 offer-images">
               <div class="vx-col w-full md:w-1/3 mb-4 cardBox" v-for="image in offer_data.images"  :key="image.link">
                 <vs-button class="cardTag text-danger mt-0" @click="openConfirm(image.id)" icon-pack="feather" icon="icon-trash-2" color="danger" type="flat" />
                 <img :src="imgLink + image.link"  alt=" " class="mx-auto w-full lg:responsive" width="120">
@@ -218,7 +218,7 @@
                   v-model="offer_data.discount_perc"
                   name="discount_perc"
                   :placeholder="$t('DiscountPerc')"
-                  v-validate="'max:100'"/>
+                  v-validate="'max_value:100'"/>
                   <!-- <span class="text-danger text-sm"  v-show="errors.has('discount_perc')">{{ errors.first('discount_perc') }}</span> -->
             </div>
 

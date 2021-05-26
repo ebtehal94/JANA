@@ -18,7 +18,7 @@
               v-model="offer_data.title_ar"
               v-validate="'required|alpha_spaces'"
               name="title" />
-              <span class="text-danger text-sm"  v-show="errors.has('title')">{{ errors.first('title') }}</span>
+              <!-- <span class="text-danger text-sm"  v-show="errors.has('title')">{{ errors.first('title') }}</span> -->
               <span v-if="!errors.has('title') && offer_data.title_ar">
                 <icon name="confirm" class="icon left-icon"/>
               </span>
@@ -59,7 +59,7 @@
                 v-model="offer_data.title_en"
                 v-validate="'required|alpha_spaces'"
                 name="title" />
-                <span class="text-danger text-sm"  v-show="errors.has('title')">{{ errors.first('title') }}</span>
+                <!-- <span class="text-danger text-sm"  v-show="errors.has('title')">{{ errors.first('title') }}</span> -->
                 <span v-if="!errors.has('title') && offer_data.title_en">
                   <icon name="confirm" class="icon left-icon"/>
                 </span>
@@ -140,7 +140,7 @@
             </div>
 
             <!-- Col Content -->
-            <div class="vx-row flex mt-4 mx-0 offer-images">
+            <div class="vx-row flex mt-8 mx-0 offer-images">
               <div class="vx-col w-full md:w-1/3 mb-4">
                  <div v-for="img in dataUploadedImages" :key="img.data" class="items-center">
                     <img :src="img.url" class="mx-auto w-full lg:responsive" width="120">
@@ -209,8 +209,9 @@
                   class="w-full mt-4 vs-input-no-shdow-focus"
                   v-model="offer_data.discount_perc"
                   :placeholder="$t('DiscountPerc')"
-                  v-validate="'min:0|max:100'"/>
-                  <!-- <span class="text-danger text-sm"  v-show="errors.has('expiry')">{{ errors.first('expiry') }}</span> -->
+                  v-validate="'max_value:100'"
+                  name="discount_perc"/>
+                  <span class="text-danger text-sm"  v-show="errors.has('discount_perc')">{{ errors.first('discount_perc') }}</span>
             </div>
 
           </div>

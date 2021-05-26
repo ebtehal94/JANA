@@ -82,12 +82,14 @@ export default {
 		Price:'Price',
 		ChooseStore:'Choose store',
 		Discount:'Discount',
-		DiscountPerc:'Discount Perc. %',
+		DiscountPerc:'Discount Perc %',
 
 		CreateNewCustomer:'Create Customer Account',
 		AllCustomers:'All Customers',
 		PendingCustomers:'Pending accounts',
 		NewCustomers:'New customers used the referral code',
+
+		expiry:'Expiry Date',
 
 		CreateNewStore:'Create New Account',
 		AllStores:'All stores',
@@ -443,6 +445,8 @@ export default {
 		AllCustomers:'كل العملاء',
 		PendingCustomers:'الحسابات المعلقة',
 		NewCustomers:'عملاء جدد استخدموا كود الإحالات',
+
+		expiry:'تاريخ الإنتهاء',
 
 		CreateNewStore:'إنشاء حساب جديد',
 		AllStores:'كل المتاجر',
