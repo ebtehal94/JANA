@@ -143,14 +143,29 @@
 
             <!-- Col Content -->
             <div class="vx-row flex mt-4 mx-0 offer-images">
-              <div class="vx-col w-full md:w-1/3 mb-4 add-img">
-                <input type="file" class="hidden" ref="uploadImgInput" multiple @change="updateCurrImg" accept="image/*">
-                <vs-button v-if="dataUploadedImages.length === 0" class="text-gray p-0 mt-6" icon-pack="feather"  type="transparent" icon="icon-plus" @click="$refs.uploadImgInput.click()"/>
-                <h5 class="text-gray text-xs text-center">{{ $i18n.locale == 'en' ? 'Upload Image' : 'اضافة صورة' }}</h5>
-              </div>
               <div class="vx-col w-full md:w-1/3 mb-4 cardBox" v-for="image in offer_data.images"  :key="image.link">
                 <vs-button class="cardTag text-danger mt-0" @click="openConfirm(image.id)" icon-pack="feather" icon="icon-trash-2" color="danger" type="flat" />
                 <img :src="imgLink + image.link"  alt=" " class="mx-auto w-full lg:responsive" width="120">
+              </div>
+              <div v-for="image in dataUploadedImages" :key="image.link" class="items-center vx-col w-full md:w-1/3 mb-4 cardBox">
+                <vs-button class="cardTag text-danger mt-0" @click="openConfirm(image.id)" icon-pack="feather" icon="icon-trash-2" color="danger" type="flat" />
+                <img :src="image.url" class="mx-auto w-full lg:responsive" width="120">
+              </div>
+                <!-- <div class="vx-col w-full md:w-1/3 mb-4">
+                 <div v-for="img in offer_images" :key="img.id" class="items-center">
+                          <img :src="imgLink+img.link" class="mx-auto w-full lg:responsive" width="120">
+                          <vs-button @click="openConfirm(img)" icon-pack="feather" icon="icon-trash" size="small" color="danger" type="flat">{{ $i18n.locale == 'en' ? 'Delete' : 'حذف' }}</vs-button>
+                  </div>
+                 <div v-for="img in dataUploadedImages" :key="img.data" class="items-center">
+                    <img :src="img.url" class="mx-auto w-full lg:responsive" width="120">
+                  </div>
+              </div> -->
+              <div class="vx-col w-full mb-4">
+                <input type="file" class="hidden" ref="uploadImgInput" multiple @change="updateCurrImg" accept="image/*">
+                <vs-button v-if="dataUploadedImages.length === 0" size="small" color="linear-gradient(to left,#E93F7D,#DA6653)"
+                gradient class="rounded-full" icon-pack="feather" icon="icon-upload" @click="$refs.uploadImgInput.click()">{{ $i18n.locale == 'en' ? 'Upload Image' : 'رفع صورة' }}</vs-button>
+                <!-- <vs-button v-if="dataUploadedImages.length === 0" class="text-gray p-0" icon-pack="feather"  type="transparent" icon="icon-plus" @click="$refs.uploadImgInput.click()"/> -->
+                <!-- <h5 class="text-gray text-xs text-center">{{ $i18n.locale == 'en' ? 'Upload Image' : 'اضافة صورة' }}</h5> -->
               </div>
             </div>
           </div>
@@ -168,8 +183,8 @@
 
                   <vs-input
                   class="w-full mt-4 -m-4 vs-input-no-shdow-focus"
-                  :placeholder="$t('Price')"
                   v-model="offer_data.price_before"
+                  :placeholder="$t('Price')"
                   name="price_before" />
                   <!-- <span class="text-danger text-sm"  v-show="errors.has('price_before')">{{ errors.first('price_before') }}</span> -->
             </div>
@@ -184,8 +199,8 @@
 
                   <vs-input
                   class="w-full mt-4 -m-2 vs-input-no-shdow-focus"
-                  :placeholder="$t('Price')"
                   v-model="offer_data.price"
+                  :placeholder="$t('Price')"
                   name="price" />
                   <!-- <span class="text-danger text-sm"  v-show="errors.has('price')">{{ errors.first('price') }}</span> -->
 
@@ -236,7 +251,6 @@
 
         <div class="vx-row my-4">
           <div class="vx-col w-full md:w-1/2 flex pt-2">
-
             <div class="vx-col w-1/2">
                 <!-- Col Header -->
                 <div class="flex items-end">
@@ -324,16 +338,35 @@ export default {
     },
   },
   methods:{
-    updateCurrImg(input) {
-       if (input.target.files && input.target.files[0]) {
-         var reader = new FileReader()
-         reader.onload = e => {
-           this.dataUploadedImages= input.target.files
-           console.log(input.target.files[0])
-         }
-         reader.readAsDataURL(input.target.files[0])
-       }
+        updateCurrImg(input) {
+      if (input.target.files && input.target.files[0]) {
+        var reader = new FileReader()
+        reader.onload = e => {
+          this.dataUploadedImages           = input.target.files
+
+          for (var i = 0; i < this.dataUploadedImages.length; i++) {
+            const url = URL.createObjectURL(this.dataUploadedImages[i])
+            this.dataUploadedImages[i].url = url
+          }
+
+          // this.dataImg.push(input.target.files[0])
+          // this.dataImg = input.target.files[0]
+          // this.dataImg = e.target.result
+
+        }
+        reader.readAsDataURL(input.target.files[0])
+      }
     },
+    // updateCurrImg(input) {
+    //    if (input.target.files && input.target.files[0]) {
+    //      var reader = new FileReader()
+    //      reader.onload = e => {
+    //        this.dataUploadedImages= input.target.files
+    //        console.log(input.target.files[0])
+    //      }
+    //      reader.readAsDataURL(input.target.files[0])
+    //    }
+    // },
     openConfirm(id) {
       this.ImageToDelete = id;
        this.$vs.dialog({

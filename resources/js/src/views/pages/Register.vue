@@ -11,7 +11,7 @@
         <div slot="no-body">
           <div class="vx-row no-gutter justify-center items-center py-8">
             <div class="vx-col hidden lg:block w-full lg:block lg:w-2/5 pl-1.5 bg-logo">
-              <img src="@assets/images/logo/logo-3.png" alt="jana" class="mx-auto" width="130">
+              <img src="@assets/images/logo/jana-plus.png" alt="jana" class="mx-auto" width="110">
 
               <div class="w-full bg-footer text-center" v-if="page_num < 4">
                 <span @click="goToPage(1)" class="steps-btn inline-block font-semibold" :class="{ active : page_num == 1}">1</span>
@@ -711,6 +711,7 @@ export default {
   }
   .bg-logo{
     position: relative;
+    margin-top:-2rem,
   }
   .bg-footer{
     position: absolute;
