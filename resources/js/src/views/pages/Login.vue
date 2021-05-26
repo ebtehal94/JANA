@@ -151,7 +151,7 @@ export default{
                             text: 'تم تسجيل الدخول بنجاح'
                           })
                           this.$acl.change(res.data.userData.rule)
-                          if(this.$acl.check('admin')){
+                          if(this.$acl.check('vendor')){
                             this.$store.dispatch('updateMainLayout', 'vertical')
                             this.$router.push('/dashboard')
                           }else {

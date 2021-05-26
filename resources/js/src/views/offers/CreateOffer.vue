@@ -208,7 +208,8 @@
                   <vs-input
                   class="w-full mt-4 vs-input-no-shdow-focus"
                   v-model="offer_data.discount_perc"
-                  :placeholder="$t('DiscountPerc')"/>
+                  :placeholder="$t('DiscountPerc')"
+                  v-validate="'min:0|max:100'"/>
                   <!-- <span class="text-danger text-sm"  v-show="errors.has('expiry')">{{ errors.first('expiry') }}</span> -->
             </div>
 
@@ -242,7 +243,6 @@
 
          <div class="vx-row my-4">
           <div class="vx-col w-full md:w-1/2 flex pt-2">
-
             <div class="vx-col w-1/2">
                 <!-- Col Header -->
                 <div class="flex items-end">
@@ -257,6 +257,19 @@
                   v-validate="'required'" />
                   <!-- <span class="text-danger text-sm"  v-show="errors.has('expiry')">{{ errors.first('expiry') }}</span> -->
             </div>
+            <div class="vx-col w-1/2 ml-4">
+                <!-- Col Header -->
+                <div class="flex items-end">
+                  <span class="leading-none font-semibold text-xs">{{$i18n.locale == "en" ? "Barcode" : "كود الخصم"}}</span>
+                </div>
+
+                <!-- Col Content -->
+                  <vs-input
+                  class="w-full mt-4 vs-input-no-shdow-focus"
+                  placeholder="كود الخصم"/>
+                  <!-- <span class="text-danger text-sm"  v-show="errors.has('expiry')">{{ errors.first('expiry') }}</span> -->
+            
+          </div>
           </div>
         </div>
 
@@ -429,7 +442,20 @@ export default {
             text: 'تم بنجاح'
             })
             this.$router.go(-1)
-          }else{
+          }else if( res.data.statusCode == 402 ){
+            this.$vs.notify({
+            color: 'danger',
+            title: 'Error',
+            text: 'Existing Email'
+            })
+          }else if( res.data.statusCode == 400 ){
+            this.$vs.notify({
+            color: 'danger',
+            title: 'Error',
+            text: 'Existing Mobail'
+            })
+          }
+          else{
             this.$vs.notify({
             color: 'danger',
             title: 'Error',

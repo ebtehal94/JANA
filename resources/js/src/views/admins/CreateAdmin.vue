@@ -203,12 +203,25 @@ export default {
         .then(res => {
           if( res.data.statusCode == 200 ){
             this.$vs.notify({
-             color: 'success',
-             title: 'Successfull',
-             text: 'تم بنجاح'
-             })
-             this.$router.go(-1)
-          }else{
+            color: 'success',
+            title: 'Successfull',
+            text: 'تم بنجاح'
+            })
+            this.$router.go(-1)
+          }else if( res.data.statusCode == 402 ){
+            this.$vs.notify({
+            color: 'danger',
+            title: 'Error',
+            text: 'Existing Email'
+            })
+          }else if( res.data.statusCode == 400 ){
+            this.$vs.notify({
+            color: 'danger',
+            title: 'Error',
+            text: 'Existing Mobail'
+            })
+          }
+          else{
             this.$vs.notify({
             color: 'danger',
             title: 'Error',
