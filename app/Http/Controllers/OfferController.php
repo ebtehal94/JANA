@@ -25,6 +25,7 @@ class OfferController extends Controller
     {
       $response                 = array();
       $info                     = $request->all();
+      $user                     = \Auth::Guard('api')->user();
       $offers                   = Offer::with('images', 'category:id,title_en,title_ar', 'store:id,name_en,name_ar')
                                        ->orderby('id','desc');
       if (isset($info['status']) && count($info['status']) > 0){
@@ -44,6 +45,10 @@ class OfferController extends Controller
       }
       if (isset($info['to'])){
         $offers                   = $offers->whereDate('created_at', '<=', $info['to']);
+      }
+
+      if (isset($user) && $user->rule != 'admin'){
+        $offers                   = $offers->where('store_id', $user->store_id);
       }
 
       $response['offers']       = $offers->get();
@@ -258,6 +263,11 @@ class OfferController extends Controller
     {
       $response       = array();
       $offer          = $request->all();
+      $user           = \Auth::Guard('api')->user();
+      if ($user->rule == 'vendor'){
+        $offer['store_id']  = $user->store_id;
+      }
+
       $Ofr            = Offer::find($request->id);
 
       // $existingID     = Offer::where('id', '!=', $Ofr->id)->where('code', $request->code)->first();
