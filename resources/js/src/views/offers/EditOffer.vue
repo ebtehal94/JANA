@@ -490,7 +490,7 @@ export default {
 .cardTag{
   position: absolute;
   right: 0;
-  top: -1.4rem;
+  top: -2rem;
   z-index: 999;
 }
 
