@@ -243,7 +243,7 @@ const router = new Router({
                   { title: 'Home', url: '/' },
                   { title: 'Stores', active: true },
               ],
-                rule: 'admin',
+                rule: 'vendor',
             }
           },
           {
@@ -257,12 +257,12 @@ const router = new Router({
                   { title: 'Stores'},
                   { title: 'CreateStore', active: true },
               ],
-                rule: 'admin',
+                rule: 'vendor',
             }
           },
           {
             path: '/stores/edit/:storeID',
-            name: 'edit-customer',
+            name: 'edit-store',
             //   component: () => import('@/views/pages/ComingSoon.vue'),
             component: () => import('./views/stores/CreateStore.vue'),
             meta: {
@@ -271,7 +271,7 @@ const router = new Router({
                 { title: 'Stores'},
                 { title: 'Edit', active: true },
               ],
-              rule: 'admin',
+              rule: 'vendor',
             }
           },
         {

@@ -83,6 +83,7 @@ export default {
 		ChooseStore:'Choose store',
 		Discount:'Discount',
 		DiscountPerc:'Discount Perc %',
+		DiscountCode:'Discount Code',
 
 		CreateNewCustomer:'Create Customer Account',
 		AllCustomers:'All Customers',
@@ -440,6 +441,7 @@ export default {
 		ChooseStore:'اختر المتجر',
 		Discount:'الخصم',
 		DiscountPerc:'نسبة الخصم %',
+		DiscountCode:'كود الخصم',
 
 		CreateNewCustomer:'إنشاء حساب عميلة',
 		AllCustomers:'كل العملاء',
@@ -612,7 +614,7 @@ export default {
 		All:'الكل',
 		AppName:'أوتانتك هوم',
 		Home:'الرئيسية',
-		GeneralSettings:'إعدادات',
+		GeneralSettings:'الإعدادات',
 		GeneralInfo: 'البيانات',
 		CountrySettings: 'إعدادات البلد',
 		Products: 'المنتجات',
