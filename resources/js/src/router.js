@@ -113,6 +113,14 @@ const router = new Router({
             meta: {
                 rule: 'public'
             }
+        },
+        {
+            path: '/support',
+            name: 'support',
+            component: () => import('@/views/pages/Support.vue'),
+            meta: {
+                rule: 'public'
+            }
         }
       ]
     },
