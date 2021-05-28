@@ -142,7 +142,7 @@
             </div>
 
             <!-- Col Content -->
-            <div class="vx-row flex mt-4 mx-0 offer-images">
+            <div class="vx-row flex mt-8 mx-0 offer-images">
               <div class="vx-col w-full md:w-1/3 mb-4 cardBox" v-for="image in offer_data.images"  :key="image.link">
                 <vs-button class="cardTag text-danger mt-0" @click="openConfirm(image.id)" icon-pack="feather" icon="icon-trash-2" color="danger" type="flat" />
                 <img :src="imgLink + image.link"  alt=" " class="mx-auto w-full lg:responsive" width="120">
@@ -151,15 +151,6 @@
                 <vs-button class="cardTag text-danger mt-0" @click="openConfirm(image.id)" icon-pack="feather" icon="icon-trash-2" color="danger" type="flat" />
                 <img :src="image.url" class="mx-auto w-full lg:responsive" width="120">
               </div>
-                <!-- <div class="vx-col w-full md:w-1/3 mb-4">
-                 <div v-for="img in offer_images" :key="img.id" class="items-center">
-                          <img :src="imgLink+img.link" class="mx-auto w-full lg:responsive" width="120">
-                          <vs-button @click="openConfirm(img)" icon-pack="feather" icon="icon-trash" size="small" color="danger" type="flat">{{ $i18n.locale == 'en' ? 'Delete' : 'حذف' }}</vs-button>
-                  </div>
-                 <div v-for="img in dataUploadedImages" :key="img.data" class="items-center">
-                    <img :src="img.url" class="mx-auto w-full lg:responsive" width="120">
-                  </div>
-              </div> -->
               <div class="vx-col w-full mb-4">
                 <input type="file" class="hidden" ref="uploadImgInput" multiple @change="updateCurrImg" accept="image/*">
                 <vs-button v-if="dataUploadedImages.length === 0" size="small" color="linear-gradient(to left,#E93F7D,#DA6653)"
@@ -218,7 +209,7 @@
                   v-model="offer_data.discount_perc"
                   name="discount_perc"
                   :placeholder="$t('DiscountPerc')"
-                  v-validate="'max:100'"/>
+                  v-validate="'max_value:100'"/>
                   <!-- <span class="text-danger text-sm"  v-show="errors.has('discount_perc')">{{ errors.first('discount_perc') }}</span> -->
             </div>
 
@@ -251,7 +242,7 @@
         </div>
 
         <div class="vx-row my-4">
-<div class="vx-col w-full md:w-1/2 flex pt-2">
+          <div class="vx-col w-full md:w-1/2 flex pt-2">
             <div class="vx-col w-1/2">
                 <!-- Col Header -->
                 <div class="flex items-end">
@@ -275,7 +266,7 @@
                 <!-- Col Content -->
                   <vs-input
                   class="w-full mt-4 vs-input-no-shdow-focus"
-                  placeholder="كود الخصم"/>
+                 :placeholder="$t('DiscountCode')"/>
                   <!-- <span class="text-danger text-sm"  v-show="errors.has('expiry')">{{ errors.first('expiry') }}</span> -->
             
           </div>
@@ -459,14 +450,14 @@ export default {
           }else if( res.data.statusCode == 402 ){
             this.$vs.notify({
             color: 'danger',
-            title: 'Error',
-            text: 'Existing Email'
+            title: 'خطاء',
+            text: 'رقم الجوال مسجل بالفعل'
             })
-          }else if( res.data.statusCode == 400 ){
+          }else if( res.data.statusCode == 403 ){
             this.$vs.notify({
             color: 'danger',
-            title: 'Error',
-            text: 'Existing Mobail'
+            title: 'خطاء',
+            text: 'هذا البريد الالكتروني مسجل بالفعل'
             })
           }
           else{

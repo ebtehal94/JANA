@@ -82,12 +82,15 @@ export default {
 		Price:'Price',
 		ChooseStore:'Choose store',
 		Discount:'Discount',
-		DiscountPerc:'Discount Perc. %',
+		DiscountPerc:'Discount Perc %',
+		DiscountCode:'Discount Code',
 
 		CreateNewCustomer:'Create Customer Account',
 		AllCustomers:'All Customers',
 		PendingCustomers:'Pending accounts',
 		NewCustomers:'New customers used the referral code',
+
+		expiry:'Expiry Date',
 
 		CreateNewStore:'Create New Account',
 		AllStores:'All stores',
@@ -438,11 +441,14 @@ export default {
 		ChooseStore:'اختر المتجر',
 		Discount:'الخصم',
 		DiscountPerc:'نسبة الخصم %',
+		DiscountCode:'كود الخصم',
 
 		CreateNewCustomer:'إنشاء حساب عميلة',
 		AllCustomers:'كل العملاء',
 		PendingCustomers:'الحسابات المعلقة',
 		NewCustomers:'عملاء جدد استخدموا كود الإحالات',
+
+		expiry:'تاريخ الإنتهاء',
 
 		CreateNewStore:'إنشاء حساب جديد',
 		AllStores:'كل المتاجر',
@@ -608,7 +614,7 @@ export default {
 		All:'الكل',
 		AppName:'أوتانتك هوم',
 		Home:'الرئيسية',
-		GeneralSettings:'إعدادات',
+		GeneralSettings:'الإعدادات',
 		GeneralInfo: 'البيانات',
 		CountrySettings: 'إعدادات البلد',
 		Products: 'المنتجات',

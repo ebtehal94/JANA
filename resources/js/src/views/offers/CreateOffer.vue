@@ -18,7 +18,7 @@
               v-model="offer_data.title_ar"
               v-validate="'required|alpha_spaces'"
               name="title" />
-              <span class="text-danger text-sm"  v-show="errors.has('title')">{{ errors.first('title') }}</span>
+              <!-- <span class="text-danger text-sm"  v-show="errors.has('title')">{{ errors.first('title') }}</span> -->
               <span v-if="!errors.has('title') && offer_data.title_ar">
                 <icon name="confirm" class="icon left-icon"/>
               </span>
@@ -59,7 +59,7 @@
                 v-model="offer_data.title_en"
                 v-validate="'required|alpha_spaces'"
                 name="title" />
-                <span class="text-danger text-sm"  v-show="errors.has('title')">{{ errors.first('title') }}</span>
+                <!-- <span class="text-danger text-sm"  v-show="errors.has('title')">{{ errors.first('title') }}</span> -->
                 <span v-if="!errors.has('title') && offer_data.title_en">
                   <icon name="confirm" class="icon left-icon"/>
                 </span>
@@ -140,11 +140,9 @@
             </div>
 
             <!-- Col Content -->
-            <div class="vx-row flex mt-4 mx-0 offer-images">
-              <div class="vx-col w-full md:w-1/3 mb-4">
-                 <div v-for="img in dataUploadedImages" :key="img.data" class="items-center">
-                    <img :src="img.url" class="mx-auto w-full lg:responsive" width="120">
-                  </div>
+            <div class="vx-row flex mt-8 mx-0 offer-images">
+              <div v-for="img in dataUploadedImages" :key="img.data" class="items-center vx-col w-full md:w-1/3 mb-4 cardBox">
+                <img :src="img.url" class="mx-auto w-full lg:responsive" width="120">
               </div>
               <div class="vx-col w-full mb-4">
                 <input type="file" class="hidden" ref="uploadImgInput" multiple @change="updateCurrImg" accept="image/*">
@@ -209,8 +207,9 @@
                   class="w-full mt-4 vs-input-no-shdow-focus"
                   v-model="offer_data.discount_perc"
                   :placeholder="$t('DiscountPerc')"
-                  v-validate="'min:0|max:100'"/>
-                  <!-- <span class="text-danger text-sm"  v-show="errors.has('expiry')">{{ errors.first('expiry') }}</span> -->
+                  v-validate="'max_value:100'"
+                  name="discount_perc"/>
+                  <span class="text-danger text-sm"  v-show="errors.has('discount_perc')">{{ errors.first('discount_perc') }}</span>
             </div>
 
           </div>
@@ -266,7 +265,7 @@
                 <!-- Col Content -->
                   <vs-input
                   class="w-full mt-4 vs-input-no-shdow-focus"
-                  placeholder="كود الخصم"/>
+                  :placeholder="$t('DiscountCode')"/>
                   <!-- <span class="text-danger text-sm"  v-show="errors.has('expiry')">{{ errors.first('expiry') }}</span> -->
             
           </div>
@@ -442,17 +441,17 @@ export default {
             text: 'تم بنجاح'
             })
             this.$router.go(-1)
-          }else if( res.data.statusCode == 402 ){
+          } else if( res.data.statusCode == 402 ){
             this.$vs.notify({
             color: 'danger',
-            title: 'Error',
-            text: 'Existing Email'
+            title: 'خطاء',
+            text: 'رقم الجوال مسجل بالفعل'
             })
-          }else if( res.data.statusCode == 400 ){
+          }else if( res.data.statusCode == 403 ){
             this.$vs.notify({
             color: 'danger',
-            title: 'Error',
-            text: 'Existing Mobail'
+            title: 'خطاء',
+            text: 'هذا البريد الالكتروني مسجل بالفعل'
             })
           }
           else{
@@ -498,6 +497,9 @@ export default {
 <style lang="scss" scoped>
 #create-offer {
     margin: 2rem 2.5rem;
+    .cardBox{
+      position: relative;
+    }
 
     .offer-info {
       padding: 2.5rem;

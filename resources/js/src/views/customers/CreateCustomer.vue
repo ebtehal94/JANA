@@ -209,17 +209,17 @@ export default {
             text: 'تم بنجاح'
             })
             this.$router.go(-1)
+          }else if( res.data.statusCode == 401 ){
+            this.$vs.notify({
+            color: 'danger',
+            title: 'خطاء',
+            text: 'رقم الجوال مسجل بالفعل'
+            })
           }else if( res.data.statusCode == 402 ){
             this.$vs.notify({
             color: 'danger',
-            title: 'Error',
-            text: 'Existing Email'
-            })
-          }else if( res.data.statusCode == 400 ){
-            this.$vs.notify({
-            color: 'danger',
-            title: 'Error',
-            text: 'Existing Mobail'
+            title: 'خطاء',
+            text: 'هذا البريد الالكتروني مسجل بالفعل'
             })
           }
           else{
