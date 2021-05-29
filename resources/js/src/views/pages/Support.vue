@@ -14,7 +14,7 @@
             <img src="@assets/images/pages/500.png" alt="graphic-500" class="mx-auto mb-4">
             <h1 class="sm:mx-0 mx-4 mb-4 sm:mb-12 text-5xl d-theme-heading-color">Need Support?</h1>
             <p class="sm:mx-0 mx-4 mb-4 sm:mb-16" dir="ltr">هل تحتاج للمساعدة ؟</p>
-            <vs-button size="large"  target href="https://wa.me/966500000000">Chat</vs-button>
+            <vs-button size="large"  target href="https://wa.me/966500000000">Chat Now</vs-button>
         </div>
     </div>
 </template>

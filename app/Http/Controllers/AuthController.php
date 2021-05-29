@@ -72,6 +72,9 @@ class AuthController extends Controller
 
 
       if ($user){
+        if (isset($request->image)){
+          $this->addImage($store, $request->image);
+        }
         // $token                    = auth()->login($user);
       //   $cc                       = $info['cc'];
       //   $otp                      = mt_rand(1000, 9999);
@@ -93,6 +96,18 @@ class AuthController extends Controller
       }
     }
 
+    public function addImage(Store $Str,$image=array()){
+      if(isset($image) && !empty($image)){
+        $file                   = $image;
+        $name                   = time().$file->getClientOriginalName();
+        $filePath               = 'stores/' . $name;
+        $fileStored             = Storage::disk('s3')->put($filePath, file_get_contents($file));
+        if (isset($fileStored)){
+          // $info['url']              = Storage::disk('s3')->url($filePath);
+          $Str->update(['image' => $name]);
+        }
+      }
+    }
 
     /**
     * Get a JWT via given credentials.

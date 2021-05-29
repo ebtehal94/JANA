@@ -77,7 +77,7 @@ class CustomerController extends Controller
         $message                  = 'Activation code: '.$otp;
         $customer->otp            = $otp;
         $customer->save();
-        // $this->sendSMSHiSMS($mobile,$message);
+        $this->sendSMSHiSMS($mobile,$message);
 
         // $sendSMSResult            = $this->sendSMSunifonic($mobile,$message);
         $response['customer']     = $customer;
@@ -157,8 +157,8 @@ class CustomerController extends Controller
 
     public function sendSMSHiSMS($mobile,$msg){
       $settings                 = array();
-      $username                 = '966540212744';
-      $pwd                      = 'farabi@321';
+      $username                 = '966540012329';
+      $pwd                      = 'jana1234';
       $msg                      = preg_replace("/ /", "%20", $msg);
       $url                      = "https://www.hisms.ws/api.php?send_sms&username=$username&password=$pwd&sender=FARABI&numbers=$mobile&message=$msg";
 

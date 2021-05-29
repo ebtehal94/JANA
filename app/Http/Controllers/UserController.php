@@ -13,7 +13,7 @@ class UserController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function index()
+  public function index(Request $request)
   {
     $info                   = $request->all();
     $user                   = \Auth::Guard('api')->user();
