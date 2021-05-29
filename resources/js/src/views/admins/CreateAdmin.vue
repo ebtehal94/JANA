@@ -229,7 +229,9 @@ export default {
             })
           }
         })
-      .catch(err => { console.error(err) })
+      .catch(function (error) {
+            console.log(error.response);
+        });
     },
 
 

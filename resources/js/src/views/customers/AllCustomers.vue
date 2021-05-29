@@ -3,7 +3,7 @@
         <!-- ITEM VIEW - GRID/LIST -->
         <div class="vx-row">
             <div class="vx-col w-full" >
-                <div class="float-right mr-4 mb-2 flex">
+                <div class="float-right mr-4  mb-2 flex">
                     <export-excel
                         :data = "customers"
                         worksheet = "My Worksheet"
@@ -15,7 +15,8 @@
                             class="text-base font-semibold">
                             {{ $i18n.locale == 'en' ? 'Export' : 'تصدير' }}
                         </vs-button>
-                    </export-excel>
+                    </export-excel >
+                    <!-- <import-excel/> -->
                     <feather-icon
                         icon="GridIcon"
                         @click="currentItemView='item-grid-view'"
@@ -45,10 +46,12 @@
 <script>
 import axios from "@/axios.js"
 import moduleCustomerManagement from '@/store/customer-management/moduleCustomerManagement.js'
+import importExcel from './components/ImportExcel.vue'
 export default {
     components: {
         ItemGridView: () => import('./components/ItemGridView.vue'),
         ItemListView: () => import('./components/ItemListView.vue'),
+        importExcel
     },
     props:{
         display:{
