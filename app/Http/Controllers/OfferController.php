@@ -83,17 +83,21 @@ class OfferController extends Controller
     {
       $response                 = array();
       $user                     = \Auth::Guard('api')->user();
-      // if (!isset($user) || $user->rule != 'admin'){
-      //   return 'Unauthorized!';
+        // if (!isset($user) || $user->rule != 'admin'){
+        //   return 'Unauthorized!';
       // }
       $offers                   = Offer::select('id','title_en', 'title_ar', 'created_at', 'status', 'price', 'price_before', 'discount_perc')
-                                       ->with('mainImage')
-                                       ->get()
-                                       ->sortByDesc(function($offer)
-                                         {
-                                             return $offer->redeems->count();
-                                         })
-                                       ->take(20);
+                                       ->with('mainImage');
+      if (isset($user) && $user->rule != 'admin'){
+       $offers                    = $offers->where('store_id', $user->store_id);
+      }
+
+      $offers                   = $offers->get()
+                                         ->sortByDesc(function($offer)
+                                           {
+                                               return $offer->redeems->count();
+                                           })
+                                         ->take(20);
       foreach ($offers as $offer) {
         unset($offer['redeems']);
         $offer->redeems            = $offer->redeems()->count();
