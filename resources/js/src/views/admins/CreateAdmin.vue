@@ -33,7 +33,7 @@
                 icon-no-border
                 icon="icon"
                 name="name"/>
-
+                
                 <span v-if="!errors.has('name') && user_data.name">
                   <icon name="confirm" class="icon left-icon"/>
                 </span>
@@ -212,13 +212,13 @@ export default {
             this.$vs.notify({
             color: 'danger',
             title: 'Error',
-            text: 'Existing Email'
+            text: 'رقم الجوال مسجل بالفعل'
             })
-          }else if( res.data.statusCode == 400 ){
+          }else if( res.data.statusCode == 403){
             this.$vs.notify({
             color: 'danger',
             title: 'Error',
-            text: 'Existing Mobail'
+            text: 'هذا البريد الالكتروني مسجل بالفعل'
             })
           }
           else{

@@ -222,12 +222,12 @@ export default {
         .discount{
             color: #F91D1D;
             font-weight: bold;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
         }
         .vs-button.small:not(.includeIconOnly) {
             padding: .2rem .9rem;
             border-radius: 30px;
-            margin-bottom: -7px;
+            margin-bottom: -9px;
             margin-left: .5rem;
         }
         .vs-button.small{

@@ -85,7 +85,7 @@
                 :isDisabled="item.isDisabled"
                 :slug="item.slug">
                 <Sidebar-icon :name="item.icon" class="pr-4 icon"/>
-                <!-- <feather-icon class="w-5 h-5" :icon="item.icon" />-->
+                <!-- <feather-icon class="w-5 h-5" :icon="item.icon" /> -->
                 <span v-show="!verticalNavMenuItemsMin" class="text-sm">{{ $t(item.i18n) || item.name }}</span>
                   <vs-chip class="ml-auto" :color="item.tagColor" v-if="item.tag && (isMouseEnter || !reduce)">{{ item.tag }}</vs-chip>
               </v-nav-menu-item>
@@ -111,6 +111,16 @@
               </template>
               <!-- /Nav-Group -->
             </template>
+          </template>
+          
+          <template v-if="$acl.not.check('admin')">
+            <v-nav-menu-item
+                :to="'/stores/edit/activeUserInfo.id'"
+                :href="'/stores/edit/activeUserInfo.id'"
+                slug="setting">
+                <Sidebar-icon name='storeIcon' class="pr-4 icon"/>
+              <span v-show="!verticalNavMenuItemsMin" class="text-sm">{{$i18n.locale == "en" ? "Setting" : "الإعدادات"}}</span>
+            </v-nav-menu-item>
           </template>
 
           <!-- List of Categories -->
@@ -160,6 +170,16 @@
   </div>
 </template>
 
+//  v-if="$acl.not.check('vendor')">
+//  {
+//     url: '/stores/edit/activeUserInfo.id',
+//     name: "General Settings",
+//     slug: "settings",
+//     icon: "storeIcon",
+//     i18n: "GeneralSettings",
+//     rule: "vendor"
+//   },
+
 
 <script>
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'
@@ -200,6 +220,9 @@ export default {
     showShadowBottom    : false
   }),
   computed: {
+    activeUserInfo () {
+      return this.$store.state.AppActiveUser
+    },
     categoriesIconsFolder () {
       return this.$store.state.theme === 'dark' ? 'icons-w' : 'icons-b'
     },
