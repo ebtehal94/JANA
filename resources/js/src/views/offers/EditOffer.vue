@@ -18,7 +18,7 @@
               v-model="offer_data.title_ar"
               v-validate="'required|alpha_spaces'"
               name="title_ar" />
-
+              <!-- <span class="text-danger text-sm"  v-show="errors.has('title')">{{ errors.first('title_ar') }}</span> -->
               <span v-if="!errors.has('title_ar') && offer_data.title_ar">
                 <icon name="confirm" class="icon left-icon"/>
               </span>
@@ -59,7 +59,7 @@
                 v-model="offer_data.title_en"
                 v-validate="'required|alpha_spaces'"
                 name="title_en" />
-
+                <!-- <span class="text-danger text-sm"  v-show="errors.has('title_en')">{{ errors.first('title_en') }}</span> -->
                 <span v-if="!errors.has('title_en') && offer_data.title_en">
                   <icon name="confirm" class="icon left-icon"/>
                 </span>
@@ -447,18 +447,6 @@ export default {
             text: 'تم بنجاح'
             })
             this.$router.go(-1)
-          }else if( res.data.statusCode == 402 ){
-            this.$vs.notify({
-            color: 'danger',
-            title: 'خطاء',
-            text: 'رقم الجوال مسجل بالفعل'
-            })
-          }else if( res.data.statusCode == 403 ){
-            this.$vs.notify({
-            color: 'danger',
-            title: 'خطاء',
-            text: 'هذا البريد الالكتروني مسجل بالفعل'
-            })
           }
           else{
             this.$vs.notify({

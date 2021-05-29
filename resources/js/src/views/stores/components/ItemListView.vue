@@ -15,8 +15,8 @@
                         <tbody>
                             <vs-tr :data="tr" :key="indextr" v-for="(tr, indextr) in data">
                                 <vs-td class="img-container">
-                                    <img v-if="tr.image" :src="imgLink + tr.image" alt="store-image" class="text-center" width="100px"/>
-                                    <img v-else :src="require('@assets/images/store.png')" alt="store-image" class="text-center" width="100px"/>
+                                    <!-- <img v-if="tr.image" :src="imgLink + tr.image" alt="store-image" class="text-center" width="100px"/> -->
+                                    <img  :src="require('@assets/images/store.png')" alt="store-image" class="text-center" width="100px"/>
                                 </vs-td>
 
                                 <vs-td>

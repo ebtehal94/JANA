@@ -33,14 +33,14 @@ export default [
     i18n:'Offers',
     rule: 'vendor',
   },
-  {
-    url: '/stores/edit/activeUserInfo.id',
-    name: "General Settings",
-    slug: "settings",
-    icon: "storeIcon",
-    i18n: "GeneralSettings",
-    rule: "vendor"
-  },
+  // {
+  //   url: '/stores/edit/activeUserInfo.id',
+  //   name: "General Settings",
+  //   slug: "settings",
+  //   icon: "storeIcon",
+  //   i18n: "GeneralSettings",
+  //   rule: "vendor"
+  // },
   {
     url: '/Customers',
     name: 'Customers',

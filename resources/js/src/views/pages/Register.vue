@@ -622,20 +622,6 @@ export default {
   registerUser() {
       if(!this.validateForm) return
       this.$vs.loading()
-      // const obj = {
-      //     name_ar: this.store_data.name_ar,
-      //     name_en: this.store_data.name_en,
-      //     cr_number:this.store_data.cr_number,
-      //     name:this.store_data.name,
-      //     email: this.store_data.email,
-      //     password: this.store_data.password,
-      //     cc: this.store_data.cc,
-      //     mobile: this.store_data.mobile,
-      //     status: this.store_data.status
-      // }
-      // if (this.store_data.password){
-          // obj.password = this.store_data.password
-      // }
       return new Promise((resolve, reject) => {
           this.$store.dispatch('auth/registerUserJWT', {store: this.store_data,
                                                             branches: this.branches_data,
@@ -653,12 +639,6 @@ export default {
               })
               localStorage.setItem('isRegistered', true)
               this.page_num = 4
-              // this.$acl.change('customer')
-              // if(this.cartItems.length > 0) {
-              //   this.$router.push('/checkout')
-              // } else {
-              //   this.$router.push('/')
-              // }
           } else if( res.data.statusCode == 402 ){
             this.$vs.notify({
             color: 'danger',
