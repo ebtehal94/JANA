@@ -60,11 +60,12 @@
 <script>
 import moduleOfferManagement from '@/store/offer-management/moduleOfferManagement.js'
 import StarRating from 'vue-star-rating';
+import moment from 'moment';
 
 export default {
     components: {
         StarRating,
-
+        moment
     },
     props:{
         display:{
@@ -105,6 +106,10 @@ export default {
     },
 
     methods: {
+        expiryDate(){
+            var a = offers.expiry
+            var b = moment("a").subtract(7,'days')
+        },
         getResults(){
             var link = "offerManagement/fetchOffers"
 

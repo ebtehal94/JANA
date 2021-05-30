@@ -19,7 +19,9 @@ export default {
       }
       })
         .then((response) => {
+          if(response.data.statusCode == 200){
           commit('ADD_USER', Object.assign(user, {id: response.data.user.id}))
+          }
           resolve(response)
         })
         .catch((error) => { reject(error) })

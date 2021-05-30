@@ -14,7 +14,9 @@ export default {
     return new Promise((resolve, reject) => {
       axios.post("/api/customers/create", customer)
         .then((response) => {
+          if(response.data.statusCode == 200){
           commit('ADD_CUSTOMER', Object.assign(customer, {id: response.data.customer.id}))
+        }
           resolve(response)
         })
         .catch((error) => { reject(error) })

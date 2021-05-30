@@ -27,10 +27,10 @@ import XLSX from 'xlsx'
 
 export default {
   props: {
-    // onSuccess: {
-    //   type: Function,
-    //   required: true
-    // }
+    onSuccess: {
+      type: Function,
+      required: true
+    }
   },
   data () {
     return {
@@ -46,7 +46,7 @@ export default {
       this.excelData.header = header
       this.excelData.results = results
       this.excelData.meta = meta
-      // if (this.onSuccess) this.onSuccess(this.excelData)
+      if (this.onSuccess) this.onSuccess(this.excelData)
     },
     getHeaderRow (sheet) {
       const headers = []
