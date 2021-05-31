@@ -266,6 +266,7 @@
               <!-- Col Content -->
               <vs-input
               class="w-full mt-4 vs-input-no-shdow-focus"
+              v-model="offer_data.code"
               :placeholder="$t('DiscountCode')"/>
               <!-- <span class="text-danger text-sm"  v-show="errors.has('expiry')">{{ errors.first('expiry') }}</span> -->
           </div>
@@ -315,7 +316,7 @@ export default {
   },
   data() {
     return {
-      offer_data: {title_ar:null,title_en: null, category_id: null, desc_ar:null,desc_en:null,status:null,price_before:null,price:null,expiry:null,store_id:null,discount_perc:null},
+      offer_data: {title_ar:null,title_en: null, category_id: null, desc_ar:null,desc_en:null,status:null,price_before:null,price:null,expiry:null,store_id:null,discount_perc:null,code:null},
       // categories:[],
       status_list: [
         {text:this.$i18n.locale == 'en' ? 'Deactivated' : 'غير نشط',id:0},
@@ -408,6 +409,7 @@ export default {
       formData.append('price', (this.offer_data.price > 0) ? this.offer_data.price : '')
       formData.append('discount_perc', (this.offer_data.discount_perc > 0) ? this.offer_data.discount_perc : '')
       formData.append('expiry', this.offer_data.expiry)
+      formData.append('code', this.offer_data.code)
       formData.append('store_id', this.offer_data.store_id)
       if (this.dataUploadedImages){
         for( var i = 0; i < this.dataUploadedImages.length; i++ ){

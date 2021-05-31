@@ -23,9 +23,9 @@ export default {
     })
   },
 
-  fetchCustomers({ commit },status) {
+  fetchCustomers({ commit },obj) {
     return new Promise((resolve, reject) => {
-      axios.post("/api/customers/list" , status )
+      axios.post("/api/customers/list" , obj )
         .then((response) => {
           commit('SET_CUSTOMERS', response.data.customers)
           resolve(response)
@@ -46,7 +46,9 @@ export default {
     return new Promise((resolve, reject) => {
       axios.post(`/api/customers/update`, customer)
         .then((response) => {
+          if(response.data.statusCode == 200){
           commit('UPDATE_CUSTOMER', response.data.customer)
+          }
           resolve(response)
         })
         .catch((error) => { reject(error) })

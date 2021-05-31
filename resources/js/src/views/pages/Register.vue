@@ -32,6 +32,19 @@
             </div>
 
             <div class="vx-col sm:w-full md:w-full lg:w-1/2" v-if="page_num === 1">
+              <div class="vx-row justify-center items-center">
+                <div class="center">
+                  <div class="items-center vx-col w-full ">
+                    <img :src="dataUploadedImages.url" >
+                  </div>
+                  <div>
+                    <input type="file" class="hidden" ref="uploadImgInput" @change="updateCurrImg" accept="image/*">
+                    <vs-button v-if="dataUploadedImages.length === 0" class="mt-12 mx-auto" type="transparent" @click="$refs.uploadImgInput.click()">
+                    <img src="@assets/images/Uploader.png" alt="upload" width="90"/>
+                    </vs-button>
+                  </div>
+              </div>
+            </div>
               <div class="p-8 login-tabs-container">
                 <div class="vx-card__title">
                   <div class="separator">
@@ -479,27 +492,6 @@ export default {
   data() {
     return {
         cities_list: CitiesList,
-        // cities_list: [
-        //   {text:'الدمام',value:1},
-        //   {text:'الخبر',value:2},
-        //   {text:'الجبيل',value:3},
-        //   {text:'الاحساء',value:4},
-        //   {text:'بقيق',value:5},
-        //   {text:'ينبع',value:6},
-        //   {text:'املج',value:7},
-        //   {text:'محافظة بدر',value:8},
-        //   {text:'الباحة',value:9},
-        //   {text:'الرياض',value:10},
-        //   {text:'جدة',value:11},
-        //   {text:'مكة',value:12},
-        //   {text:'المدينة',value:13},
-        //   {text:'خميس مشيط',value:14},
-        //   {text:'جازان',value:15},
-        //   {text:'القصيم (عنيزة-بريدة)',value:16},
-        //   {text:'حائل',value:17},
-        //   {text:'عرعر',value:18},
-        //   {text:'الجوف',value:19},
-        // ],
         stores: [
           {text:' المراكز الصحية والعيادات ' ,value:1},
           {text:' المطاعم والمقاهي' ,value:2},
@@ -545,7 +537,8 @@ export default {
       },
       branches_data: [{type: null, title: null, city_id: null, url: null}],
       page_num:1,
-      disabled: true
+      disabled: true,
+      dataUploadedImages: [],
     }
   },
   computed: {
@@ -584,6 +577,18 @@ export default {
     addBranch() {
       this.branches_data.push({type: null, title: null, city_id: null, url: null})
     },
+      updateCurrImg(input) {
+       if (input.target.files && input.target.files[0]) {
+         var reader = new FileReader()
+         reader.onload = e => {
+           this.dataUploadedImages= input.target.files[0]
+           console.log(input.target.files[0])
+           const url = URL.createObjectURL(this.dataUploadedImages)
+            this.dataUploadedImages.url = url
+         }
+         reader.readAsDataURL(input.target.files[0])
+       }
+    },
   changeNumber(num){
     if((num == 2)
     && !this.errors.any()
@@ -621,12 +626,21 @@ export default {
   },
   registerUser() {
       if(!this.validateForm) return
+      let formData = new FormData();
+      // formData.append('id', this.store_data.id)
+      // formData.append('name_ar', this.store_data.name_ar)
+      // formData.append('name_en', this.store_data.name_en)
+      // formData.append('cr_number', this.store_data.cr_number)
+      // formData.append('city_id', this.store_data.city_id)
+      // formData.append('user', JSON.stringify(this.user))
+      // formData.append('branches', JSON.stringify(this.branches_data))
+      if (this.dataUploadedImages){
+          formData.append('image', this.dataUploadedImages);
+      }
       this.$vs.loading()
       return new Promise((resolve, reject) => {
-          this.$store.dispatch('auth/registerUserJWT', {store: this.store_data,
-                                                            branches: this.branches_data,
-                                                            user: this.user,
-                                                            })
+          this.$store.dispatch('auth/registerUserJWT', {formData,store:this.store_data,branches: this.branches_data,
+                                                            user: this.user})
           .then(res => {
             this.$vs.loading.close()
           if( res.data.statusCode == 200 ){
@@ -686,6 +700,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .center{
+      text-align: -webkit-center;
+    }
   .rounded-corner{
     border-radius: 25px;
   }

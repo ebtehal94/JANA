@@ -6,7 +6,10 @@
         <div class="vx-row">
           <div class="vx-col w-full md:w-1/2 pr-8 mt-4 justify-center items-center">
           <div class="center">
-            <div class="upload">
+            <div>
+              <div class="items-center vx-col w-full ">
+                <img :src="dataUploadedImages.url" >
+              </div>
               <input type="file" class="hidden" ref="uploadImgInput" @change="updateCurrImg" accept="image/*">
               <vs-button v-if="dataUploadedImages.length === 0" class="mt-12 mx-auto" type="transparent" @click="$refs.uploadImgInput.click()">
               <img src="@assets/images/Uploader.png" alt="upload" width="90"/>
@@ -232,9 +235,13 @@
                   <div class="mt-8" v-if="branchIndex > 0">
                     <div class="separator">
                       <h4 class="mb-4 text-lg font-bold">{{$t('additionalBranch')}}</h4>
-                      <span class="ml-4" @click="openBranchDeleteConfirm(branchIndex)">
+                      <!-- <span class="ml-4" @click="openBranchDeleteConfirm(branchIndex)">
                         <icon name="cross" class="icon left-icon"/>
-                      </span>
+                      </span> -->
+                    </div>
+                    <div class="flex justify-end mr-2">
+                        <vs-button  class="text-warning" type="flat" color="warning" icon-pack="feather" icon="icon-edit" size="small">{{$t('SaveChanges')}}</vs-button>
+                        <vs-button  @click="openBranchDeleteConfirm(branchIndex)" type="flat" class="justify-end mx-2 text-danger" color="danger" icon-pack="feather" icon="icon-trash-2" size="small">{{$t('Delete')}}</vs-button>
                     </div>
                   </div>
                   <div class="bg-input">
@@ -450,10 +457,13 @@ export default {
          reader.onload = e => {
            this.dataUploadedImages= input.target.files[0]
            console.log(input.target.files[0])
+           const url = URL.createObjectURL(this.dataUploadedImages)
+            this.dataUploadedImages.url = url
          }
          reader.readAsDataURL(input.target.files[0])
        }
     },
+ 
     save_changes() {
       //if(!this.validateForm) return
 

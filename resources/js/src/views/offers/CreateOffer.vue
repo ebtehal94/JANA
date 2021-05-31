@@ -265,6 +265,7 @@
                 <!-- Col Content -->
                   <vs-input
                   class="w-full mt-4 vs-input-no-shdow-focus"
+                  v-model="offer_data.code"
                   :placeholder="$t('DiscountCode')"/>
                   <!-- <span class="text-danger text-sm"  v-show="errors.has('expiry')">{{ errors.first('expiry') }}</span> -->
             
@@ -305,8 +306,6 @@ import vSelect from 'vue-select'
 import icon from '@/layouts/components/icon.vue'
 import flatPickr from 'vue-flatpickr-component';
 import 'flatpickr/dist/flatpickr.css';
-import 'swiper/dist/css/swiper.min.css'
-import { swiper, swiperSlide } from 'vue-awesome-swiper'
 
 // Store Module
 import moduleOfferManagement from '@/store/offer-management/moduleOfferManagement.js'
@@ -321,7 +320,7 @@ export default {
   },
   data() {
     return {
-      offer_data: {title_ar:null,title_en: null, category_id: null, desc_ar:null,desc_en:null,status:0,price_before:null,price:null,expiry:null,store_id:null,discount_perc:null},
+      offer_data: {title_ar:null,title_en: null, category_id: null, desc_ar:null,desc_en:null,status:0,price_before:null,price:null,expiry:null,store_id:null,discount_perc:null,code:null},
       // categories:[],
       status_list: [
         {text:'غير نشط',id:0},
@@ -332,15 +331,6 @@ export default {
       ImageToDelete: null,
       imgLink: 'https://janacard.s3.eu-central-1.amazonaws.com/offers/',
       offer_images:[],
-      swiperOption: {
-        slidesPerView: 5,
-        spaceBetween: 30,
-        centeredSlides: false,
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev'
-        }
-      },
     }
   },
   computed: {
@@ -417,6 +407,7 @@ export default {
       formData.append('price', (this.offer_data.price > 0) ? this.offer_data.price : '')
       formData.append('discount_perc', (this.offer_data.discount_perc > 0) ? this.offer_data.discount_perc : '')
       formData.append('expiry', this.offer_data.expiry)
+      formData.append('code', this.offer_data.code)
       formData.append('store_id', this.offer_data.store_id)
       if (this.dataUploadedImages){
         for( var i = 0; i < this.dataUploadedImages.length; i++ ){

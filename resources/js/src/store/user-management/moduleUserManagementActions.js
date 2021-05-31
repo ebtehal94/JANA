@@ -55,7 +55,9 @@ export default {
         }
       })
         .then((response) => {
+          if(response.data.statusCode == 200){
           commit('UPDATE_USER', response.data.user)
+          }
           resolve(response)
         })
         .catch((error) => { reject(error) })

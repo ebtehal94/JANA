@@ -33,7 +33,7 @@
                         <div class="p-3">
                             <div class="flex justify-between flex-wrap pt-2">
                                 <h4>{{ $i18n.locale == 'en' ? item.title_en : item.title_ar }}</h4>
-                                <span class="date">{{item.expiry}}</span>
+                                <span class="date">{{expiryDate(item.expiry)}}</span>
                                 <span class="status">{{item.status}}</span>
                             </div>
                             <p>{{item.subtitle}}</p>
@@ -106,9 +106,16 @@ export default {
     },
 
     methods: {
-        expiryDate(){
-            var a = offers.expiry
-            var b = moment("a").subtract(7,'days')
+        expiryDate(expiry){
+            // console.log(expiry)
+            var date1 = moment().add(7,'days')
+            var date2 = moment(expiry)
+            if(date1 > date2){
+                return expiry
+             }
+             else{
+                 return 
+             }
         },
         getResults(){
             var link = "offerManagement/fetchOffers"
@@ -118,9 +125,6 @@ export default {
             }else if (this.display == 'active'){
                 this.$store.dispatch(link, {status: [1],search: this.search,from: this.fromDate, to: this.toDate}).catch(err => { console.error(err) })
             }
-            // }else if (this.display == 'most_used'){
-            //     this.$store.dispatch(link, {filter: 'most_used'}).catch(err => { console.error(err) })
-            // }
             else
                 this.$store.dispatch(link,{search: this.search, from: this.fromDate, to: this.toDate}).catch(err => { console.error(err) })
         },
