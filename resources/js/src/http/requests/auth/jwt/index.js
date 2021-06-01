@@ -48,7 +48,12 @@ export default {
     return axios.post("/api/auth/login", {email: email, password: pwd})
   },
   registerUser(payload) {
-    return axios.post("/api/auth/register", payload)
+    return axios.post("/api/auth/register", payload,
+    {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+    }
+    })
   },
   refreshToken() {
     return axios.post("/api/auth/refresh-token", {accessToken: localStorage.getItem("accessToken")})

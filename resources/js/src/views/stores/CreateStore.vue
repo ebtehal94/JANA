@@ -347,6 +347,7 @@
 </template>
 
 <script>
+import axios from "@/axios.js"
 import vSelect from 'vue-select'
 import icon from '@/layouts/components/icon.vue';
 import { CitiesList } from '../pages/extra/CitiesList.js'
@@ -409,7 +410,7 @@ export default {
         password: null,
       },
       branches_data: [
-        {type: null, title: null, city_id: null, url: null}
+        {id: null, type: null, title: null, city_id: null, url: null}
         ],
       dataUploadedImages: [],
 
@@ -433,6 +434,21 @@ export default {
      },
      deleteBranch() {
        if (this.branches_data.length > 1){
+        //   return new Promise((resolve, reject) => {
+        //   axios.delete("/api/store" + this.store_data.id +"/delete/"+ this.branches_data.id)
+        //   .then((response) => {
+        //     if (response.data.statusCode == 200){
+        //       this.$vs.notify({
+        //         color: 'success',
+        //         title: this.$t('Successfull'),
+        //         text: this.$t('DeletedSuccussfully')
+        //       })
+        //     }
+        //     this.branches_data.splice(this.ItemToDelete, 1)
+        //     resolve(response)
+        //   })
+        //   .catch((error) => { reject(error) })
+        // })
          // const branchIndex = this.branches_data.findIndex((u) => u.type == this.ItemToDelete)
          this.branches_data.splice(this.ItemToDelete, 1)
            this.$vs.notify({
@@ -448,6 +464,31 @@ export default {
          })
        }
      },
+    updateBranch(){
+      if (this.branches_data.length > 1){
+         return new Promise((resolve, reject) => {
+          axios.post("/api/branches/update", this.branches_data)
+          .then((response) => {
+            if (response.data.statusCode == 200){
+              this.$vs.notify({
+                color: 'success',
+                title: 'Successfull',
+                text: 'updated successfully'
+              })
+            }
+            else{
+            this.$vs.notify({
+              color: 'danger',
+              title: 'Error',
+              text: 'Error updating'
+            })
+          }
+            resolve(response)
+          })
+          .catch((error) => { reject(error) })
+        })
+      }
+    },
     addBranch() {
       this.branches_data.push({type: null, title: null, city_id: null, url: null})
     },
@@ -550,6 +591,7 @@ export default {
     }
     .center{
       text-align: -webkit-center;
+      margin-bottom: 4.7rem;
     }
     .separator{
     display: flex;
@@ -615,7 +657,7 @@ export default {
     color: #ACACAC;
   }
   .vs-button.small:not(.includeIconOnly) {
-    padding: 0.5rem 4rem 0.5rem 1.5rem;
+    padding: 0.5rem 1rem 0.5rem 1rem;
 
   }
   .vs-button:not(.vs-radius):not(.includeIconOnly):not(.small):not(.large) {
