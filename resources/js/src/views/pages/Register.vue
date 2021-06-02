@@ -535,7 +535,7 @@ export default {
         password: null,
         confirm_password: null,
       },
-      branches_data: [{type: null, title: null, city_id: null, url: null}],
+      branches_data: [{id:null,type: null, title: null, city_id: null, url: null}],
       page_num:1,
       disabled: true,
       dataUploadedImages: [],
@@ -633,7 +633,13 @@ export default {
       formData.append('name_en', this.store_data.name_en)
       formData.append('cr_number', this.store_data.cr_number)
       formData.append('city_id', this.store_data.city_id)
-      formData.append('user', JSON.stringify(this.user))
+      // formData.append('email', this.user.email)
+      // formData.append('cc', this.user.cc)
+      // formData.append('mobile', this.user.mobile)
+      // formData.append('phone', this.user.phone)
+      // formData.append('password', this.user.password)
+      // formData.append('confirm_password', this.user.confirm_password)
+      formData.append('user',JSON.stringify(this.user))
       formData.append('branches',JSON.stringify(this.branches_data))
       if (this.dataUploadedImages){
           formData.append('image', this.dataUploadedImages);

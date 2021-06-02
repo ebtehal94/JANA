@@ -466,27 +466,51 @@ export default {
      },
     updateBranch(){
       if (this.branches_data.length > 1){
-         return new Promise((resolve, reject) => {
-          axios.post("/api/branches/update", this.branches_data)
+        if (this.branches_data.id != null && this.branches_data.id > 0 ){
+          return new Promise((resolve, reject) => {
+            axios.post("/api/branches/update", this.branches_data)
+            .then((response) => {
+              if (response.data.statusCode == 200){
+                this.$vs.notify({
+                  color: 'success',
+                  title: 'Successfull',
+                  text: 'updated successfully'
+                })
+              }
+              else{
+              this.$vs.notify({
+                color: 'danger',
+                title: 'Error',
+                text: 'Error updating'
+              })
+            }
+              resolve(response)
+            })
+            .catch((error) => { reject(error) })
+          })
+      }else{
+        return new Promise((resolve, reject) => {
+          axios.post("/api/branches/create", this.branches_data)
           .then((response) => {
             if (response.data.statusCode == 200){
               this.$vs.notify({
                 color: 'success',
                 title: 'Successfull',
-                text: 'updated successfully'
+                text: 'تم بنجاح'
               })
             }
             else{
             this.$vs.notify({
               color: 'danger',
               title: 'Error',
-              text: 'Error updating'
+              text: 'حدث خطأ ما'
             })
           }
             resolve(response)
           })
           .catch((error) => { reject(error) })
         })
+      }
       }
     },
     addBranch() {
