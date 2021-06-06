@@ -197,6 +197,7 @@ class StoreController extends Controller
       $response       = array();
       $store          = $request->all();
       $Str            = Store::find($request->id);
+      $userInfo       = json_decode($store['user'], true);
 
 
       if (isset($Str)){
@@ -205,7 +206,9 @@ class StoreController extends Controller
         if (isset($request->image)){
           $this->addImage($Str, $request->image);
         }
-
+        if (isset($userInfo)){
+          $Str->user->update($userInfo);
+        }
 
         $response['store']        = $Str;
         $response['statusCode']   = 200;
