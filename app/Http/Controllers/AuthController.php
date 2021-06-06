@@ -53,7 +53,8 @@ class AuthController extends Controller
       }
 
 
-      $storeInfo                = $info['store'];
+      // $storeInfo                = $info['store'];
+      $storeInfo                = json_decode($info['store'], true);
       $branchesInfo             = json_decode($info['branches'], true);
       // $branchesInfo             = $info['branches'];
       if (isset($storeInfo) && !empty($storeInfo)){
