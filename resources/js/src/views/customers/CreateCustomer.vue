@@ -200,8 +200,10 @@ export default {
         }else{
           var link = "customerManagement/addCustomer"
         }
+        // this.$vs.loading()
         this.$store.dispatch(link, this.customer_data)
         .then(res => {
+          // this.$vs.loading.close()
           if( res.data.statusCode == 200 ){
             this.$vs.notify({
             color: 'success',
@@ -231,7 +233,8 @@ export default {
           }
         })
         .catch(function (error) {
-            console.log(error.response);
+            console.log(error)
+            // this.$vs.loading.close()
         });
     },
   },

@@ -115,8 +115,8 @@
 
           <template v-if="$acl.not.check('admin')">
             <v-nav-menu-item
-                :to="'/stores/edit/'+ this.activeUserInfo.id"
-                :href="'/stores/edit/'+ this.activeUserInfo.id"
+                :to="('/stores/edit/'+ activeUserInfo.store_id)"
+                :href="('/stores/edit/'+ activeUserInfo.store_id)"
                 slug="setting">
                 <Sidebar-icon name='storeIcon' class="pr-4 icon"/>
               <span v-show="!verticalNavMenuItemsMin" class="text-sm">{{$i18n.locale == "en" ? "Setting" : "الإعدادات"}}</span>

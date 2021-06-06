@@ -108,37 +108,6 @@ export default {
         }else
         this.$store.dispatch(link,{search: this.search,from: this.fromDate, to: this.toDate}).catch(err => { console.error(err) })
     },
-    // gotoEdit(id){
-    //   // console.log('customers/edit/' + id)
-    //   this.$router.push({path: 'customers/edit/' + id})
-    // },
-    // openDeleteConfirm(id) {
-    //   this.ItemToDelete = id;
-    //    this.$vs.dialog({
-    //      type: 'confirm',
-    //      color: 'danger',
-    //      title: this.$t('Delete'),
-    //      text: 'هل أنت متأكدأنك تريد حذف هذا العميل نهائياً؟',
-    //      accept: this.deleteCustoemr
-    //    })
-    //  },
-    // deleteCustoemr(){
-    //   this.$store.dispatch("customerManagement/removeCustomer", this.ItemToDelete).catch(err => { console.error(err) })
-    // },
-    // updateStatus(id, status){
-    //   this.$store.dispatch("customerManagement/updateCustomer", {id:id, status:status})
-    //     .then(()   => { this.showUpdateSuccess() })
-    //     .then(()  => { this.$store.dispatch("customerManagement/fetchCustomers", {status: [0]})
-    //     })
-    //     .catch(err => { console.error(err.response)})
-    // },
-    // showUpdateSuccess() {
-    //         this.$vs.notify({
-    //         color: 'success',
-    //         title: 'Successfull',
-    //         text: 'تم بنجاح'
-    //     })
-    // }
     
   },
 

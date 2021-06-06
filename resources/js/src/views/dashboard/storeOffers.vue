@@ -1,6 +1,6 @@
 <template>
     <div id="supplier-offers">
-        <div class="vx-row">
+        <!-- <div class="vx-row">
             <div class="vx-col w-full" >
                 <div class="float-right mr-4 mb-2 flex">
                     <export-excel
@@ -17,7 +17,7 @@
                     </export-excel>
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="vx-row mt-5"> 
             <div v-for="item in stores" class="flex flex-col flex-wrap vx-col w-full sm:w-1/2 lg:w-1/5 mb-base px-2.5" v-bind:key="item.id">
                 <vx-card class="offer shadow flex-1">
@@ -44,18 +44,6 @@ export default {
         return {
             stores:[],
             imgLink: 'https://janacard.s3.eu-central-1.amazonaws.com/stores/'
-            // supplierOffers:[
-            //     {"id":1,"name":"اكسترا ستور","number":"27 عرض",src:require('@assets/images/img-1.png')},
-            //     {"id":2,"name":"اكسترا ستور","number":"27 عرض",src:require('@assets/images/img-1.png')},
-            //     {"id":3,"name":"اكسترا ستور","number":"27 عرض",src:require('@assets/images/img-2.png')},
-            //     {"id":4,"name":"اكسترا ستور","number":"27 عرض",src:require('@assets/images/img-3.png')},
-            //     {"id":5,"name":"اكسترا ستور","number":"27 عرض",src:require('@assets/images/img-4.png')},
-            //     {"id":6,"name":"اكسترا ستور","number":"27 عرض",src:require('@assets/images/img-2.png')},
-            //     {"id":7,"name":"اكسترا ستور","number":"27 عرض",src:require('@assets/images/img-1.png')},
-            //     {"id":8,"name":"اكسترا ستور","number":"27 عرض",src:require('@assets/images/img-3.png')},
-            //     {"id":9,"name":"اكسترا ستور","number":"27 عرض",src:require('@assets/images/img-4.png')},
-            //     {"id":10,"name":"اكسترا ستور","number":"27 عرض",src:require('@assets/images/img-2.png')}
-            // ],
         }
     },
         computed: {

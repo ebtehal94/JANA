@@ -165,7 +165,7 @@
         <div class="vx-row my-4">
           <div class="vx-col w-full md:w-1/2 flex pt-4">
             <div class="vx-col w-full">
-                <!-- Col Header -->
+              <!-- Col Header -->
                 <div class="flex items-end ">
                   <span class="leading-none font-semibold text-xs">{{$i18n.locale == "en" ? "Before discount" : "السعر قبل الخصم"}}</span>
                 </div>
@@ -244,53 +244,53 @@
         <div class="vx-row my-4">
           <div class="vx-col w-full md:w-1/2 flex pt-2">
             <div class="vx-col w-1/2">
-                <!-- Col Header -->
-                <div class="flex items-end">
-                  <span class="leading-none font-semibold text-xs">{{$i18n.locale == "en" ? "Offer expiration date" : " تاريخ انتهاءالعرض"}}</span>
-                </div>
+              <!-- Col Header -->
+              <div class="flex items-end">
+                <span class="leading-none font-semibold text-xs">{{$i18n.locale == "en" ? "Offer expiration date" : " تاريخ انتهاءالعرض"}}</span>
+              </div>
 
-                <!-- Col Content -->
-                  <flat-pickr
-                  class="w-full mt-4"
-                  v-model="offer_data.expiry"
-                  placeholder="14-14-2021"
-                  v-validate="'required'" />
-                  <!-- <span class="text-danger text-sm"  v-show="errors.has('expiry')">{{ errors.first('expiry') }}</span> -->
+              <!-- Col Content -->
+              <flat-pickr
+              class="w-full mt-4"
+              v-model="offer_data.expiry"
+              placeholder="14-14-2021"
+              v-validate="'required'" />
+              <!-- <span class="text-danger text-sm"  v-show="errors.has('expiry')">{{ errors.first('expiry') }}</span> -->
             </div>
             <div class="vx-col w-1/2 ml-4">
-                <!-- Col Header -->
-                <div class="flex items-end">
-                  <span class="leading-none font-semibold text-xs">{{$i18n.locale == "en" ? "Barcode" : "كود الخصم"}}</span>
-                </div>
+              <!-- Col Header -->
+              <div class="flex items-end">
+                <span class="leading-none font-semibold text-xs">{{$i18n.locale == "en" ? "Barcode" : "كود الخصم"}}</span>
+              </div>
 
-                <!-- Col Content -->
-                  <vs-input
-                  class="w-full mt-4 vs-input-no-shdow-focus"
-                 :placeholder="$t('DiscountCode')"/>
-                  <!-- <span class="text-danger text-sm"  v-show="errors.has('expiry')">{{ errors.first('expiry') }}</span> -->
-            
+              <!-- Col Content -->
+              <vs-input
+              class="w-full mt-4 vs-input-no-shdow-focus"
+              v-model="offer_data.code"
+              :placeholder="$t('DiscountCode')"/>
+              <!-- <span class="text-danger text-sm"  v-show="errors.has('expiry')">{{ errors.first('expiry') }}</span> -->
           </div>
           </div>
         </div>
 
         <!-- Save & Reset Button -->
         <div class="vx-row flex justify-center mt-10">
-            <vs-button
-              size="small"
-              class="mx-4 mb-4 font-semibold text-sm rounded-full"
-              color="linear-gradient(to left,#E93F7D,#DA6653)"
-              gradient
-              @click="createOffer">
-                {{$i18n.locale == "en" ? "Save Changes" : "حفظ التغيرات"}}
-            </vs-button>
+          <vs-button
+            size="small"
+            class="mx-4 mb-4 font-semibold text-sm rounded-full"
+            color="linear-gradient(to left,#E93F7D,#DA6653)"
+            gradient
+            @click="createOffer">
+            {{$i18n.locale == "en" ? "Save Changes" : "حفظ التغيرات"}}
+          </vs-button>
 
-            <vs-button
-              size="small"
-              class="mx-4 mb-4 font-semibold text-sm rounded-full px-24"
-              color="#ACACAC" type="border"
-              @click="goBack">
-                {{ $i18n.locale == 'en' ? 'Close' : 'خروج' }}
-            </vs-button>
+          <vs-button
+            size="small"
+            class="mx-4 mb-4 font-semibold text-sm rounded-full px-24"
+            color="#ACACAC" type="border"
+            @click="goBack">
+            {{ $i18n.locale == 'en' ? 'Close' : 'خروج' }}
+          </vs-button>
         </div>
       </div>
 
@@ -316,18 +316,12 @@ export default {
   },
   data() {
     return {
-      offer_data: {title_ar:null,title_en: null, category_id: null, desc_ar:null,desc_en:null,status:null,price_before:null,price:null,expiry:null,store_id:null,discount_perc:null},
+      offer_data: {title_ar:null,title_en: null, category_id: null, desc_ar:null,desc_en:null,status:null,price_before:null,price:null,expiry:null,store_id:null,discount_perc:null,code:null},
       // categories:[],
       status_list: [
         {text:this.$i18n.locale == 'en' ? 'Deactivated' : 'غير نشط',id:0},
         {text:this.$i18n.locale == 'en' ? 'Active' : 'نشط',id:1},
       ],
-      // stores_list: [
-      //   {text:'المتجر الأول',value:1},
-      //   {text:'المتجر الثاني',value:2},
-      //   {text:'المتجر الثالث',value:3},
-      //   {text:'المتجر الرابع',value:4}
-      // ],
       dataUploadedImages: [],
       ImageToDelete: null,
       imgLink: 'https://janacard.s3.eu-central-1.amazonaws.com/offers/',
@@ -347,17 +341,11 @@ export default {
       if (input.target.files && input.target.files[0]) {
         var reader = new FileReader()
         reader.onload = e => {
-          this.dataUploadedImages           = input.target.files
-
+          this.dataUploadedImages = input.target.files
           for (var i = 0; i < this.dataUploadedImages.length; i++) {
             const url = URL.createObjectURL(this.dataUploadedImages[i])
             this.dataUploadedImages[i].url = url
           }
-
-          // this.dataImg.push(input.target.files[0])
-          // this.dataImg = input.target.files[0]
-          // this.dataImg = e.target.result
-
         }
         reader.readAsDataURL(input.target.files[0])
       }
@@ -421,6 +409,7 @@ export default {
       formData.append('price', (this.offer_data.price > 0) ? this.offer_data.price : '')
       formData.append('discount_perc', (this.offer_data.discount_perc > 0) ? this.offer_data.discount_perc : '')
       formData.append('expiry', this.offer_data.expiry)
+      formData.append('code', this.offer_data.code)
       formData.append('store_id', this.offer_data.store_id)
       if (this.dataUploadedImages){
         for( var i = 0; i < this.dataUploadedImages.length; i++ ){
@@ -553,8 +542,6 @@ export default {
       border-radius:30px ;
       font-size: .9rem;
     }
-
-
 }
 
 @media only screen and (min-width: 360px) and (max-width: 375px) {
@@ -597,11 +584,4 @@ export default {
   }
 }
 
-@media only screen and (min-width: 320px)  and (max-width: 360px) {
-
-}
-
-@media only screen  and (max-width: 320px) {
-
-}
 </style>

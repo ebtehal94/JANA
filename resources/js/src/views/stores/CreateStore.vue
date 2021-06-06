@@ -6,7 +6,10 @@
         <div class="vx-row">
           <div class="vx-col w-full md:w-1/2 pr-8 mt-4 justify-center items-center">
           <div class="center">
-            <div class="upload">
+            <div>
+              <div class="items-center vx-col w-full ">
+                <img :src="dataUploadedImages.url" >
+              </div>
               <input type="file" class="hidden" ref="uploadImgInput" @change="updateCurrImg" accept="image/*">
               <vs-button v-if="dataUploadedImages.length === 0" class="mt-12 mx-auto" type="transparent" @click="$refs.uploadImgInput.click()">
               <img src="@assets/images/Uploader.png" alt="upload" width="90"/>
@@ -232,9 +235,13 @@
                   <div class="mt-8" v-if="branchIndex > 0">
                     <div class="separator">
                       <h4 class="mb-4 text-lg font-bold">{{$t('additionalBranch')}}</h4>
-                      <span class="ml-4" @click="openBranchDeleteConfirm(branchIndex)">
+                      <!-- <span class="ml-4" @click="openBranchDeleteConfirm(branchIndex)">
                         <icon name="cross" class="icon left-icon"/>
-                      </span>
+                      </span> -->
+                    </div>
+                    <div class="flex justify-end mr-2">
+                        <vs-button  class="text-warning" type="flat" color="warning" icon-pack="feather" icon="icon-edit" size="small">{{$t('SaveChanges')}}</vs-button>
+                        <vs-button  @click="openBranchDeleteConfirm(branchIndex)" type="flat" class="justify-end mx-2 text-danger" color="danger" icon-pack="feather" icon="icon-trash-2" size="small">{{$t('Delete')}}</vs-button>
                     </div>
                   </div>
                   <div class="bg-input">
@@ -340,6 +347,7 @@
 </template>
 
 <script>
+import axios from "@/axios.js"
 import vSelect from 'vue-select'
 import icon from '@/layouts/components/icon.vue';
 import { CitiesList } from '../pages/extra/CitiesList.js'
@@ -402,7 +410,7 @@ export default {
         password: null,
       },
       branches_data: [
-        {type: null, title: null, city_id: null, url: null}
+        {id: null, type: null, title: null, city_id: null, url: null}
         ],
       dataUploadedImages: [],
 
@@ -426,6 +434,21 @@ export default {
      },
      deleteBranch() {
        if (this.branches_data.length > 1){
+        //   return new Promise((resolve, reject) => {
+        //   axios.delete("/api/store" + this.store_data.id +"/delete/"+ this.branches_data.id)
+        //   .then((response) => {
+        //     if (response.data.statusCode == 200){
+        //       this.$vs.notify({
+        //         color: 'success',
+        //         title: this.$t('Successfull'),
+        //         text: this.$t('DeletedSuccussfully')
+        //       })
+        //     }
+        //     this.branches_data.splice(this.ItemToDelete, 1)
+        //     resolve(response)
+        //   })
+        //   .catch((error) => { reject(error) })
+        // })
          // const branchIndex = this.branches_data.findIndex((u) => u.type == this.ItemToDelete)
          this.branches_data.splice(this.ItemToDelete, 1)
            this.$vs.notify({
@@ -441,6 +464,55 @@ export default {
          })
        }
      },
+    updateBranch(){
+      if (this.branches_data.length > 1){
+        if (this.branches_data.id != null && this.branches_data.id > 0 ){
+          return new Promise((resolve, reject) => {
+            axios.post("/api/branches/update", this.branches_data)
+            .then((response) => {
+              if (response.data.statusCode == 200){
+                this.$vs.notify({
+                  color: 'success',
+                  title: 'Successfull',
+                  text: 'updated successfully'
+                })
+              }
+              else{
+              this.$vs.notify({
+                color: 'danger',
+                title: 'Error',
+                text: 'Error updating'
+              })
+            }
+              resolve(response)
+            })
+            .catch((error) => { reject(error) })
+          })
+      }else{
+        return new Promise((resolve, reject) => {
+          axios.post("/api/branches/create", this.branches_data)
+          .then((response) => {
+            if (response.data.statusCode == 200){
+              this.$vs.notify({
+                color: 'success',
+                title: 'Successfull',
+                text: 'تم بنجاح'
+              })
+            }
+            else{
+            this.$vs.notify({
+              color: 'danger',
+              title: 'Error',
+              text: 'حدث خطأ ما'
+            })
+          }
+            resolve(response)
+          })
+          .catch((error) => { reject(error) })
+        })
+      }
+      }
+    },
     addBranch() {
       this.branches_data.push({type: null, title: null, city_id: null, url: null})
     },
@@ -450,10 +522,13 @@ export default {
          reader.onload = e => {
            this.dataUploadedImages= input.target.files[0]
            console.log(input.target.files[0])
+           const url = URL.createObjectURL(this.dataUploadedImages)
+            this.dataUploadedImages.url = url
          }
          reader.readAsDataURL(input.target.files[0])
        }
     },
+ 
     save_changes() {
       //if(!this.validateForm) return
 
@@ -540,6 +615,7 @@ export default {
     }
     .center{
       text-align: -webkit-center;
+      margin-bottom: 4.7rem;
     }
     .separator{
     display: flex;
@@ -605,7 +681,7 @@ export default {
     color: #ACACAC;
   }
   .vs-button.small:not(.includeIconOnly) {
-    padding: 0.5rem 4rem 0.5rem 1.5rem;
+    padding: 0.5rem 1rem 0.5rem 1rem;
 
   }
   .vs-button:not(.vs-radius):not(.includeIconOnly):not(.small):not(.large) {
