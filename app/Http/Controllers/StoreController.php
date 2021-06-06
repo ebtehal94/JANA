@@ -172,7 +172,7 @@ class StoreController extends Controller
     {
       $response       = array();
       $Str            = Store::where('id', $store_id)
-                             ->with('branches:id,store_id,title','user:id,store_id,name,mobile,email,phone')
+                             ->with('branches:id,store_id,title,city_id,url,type','user:id,store_id,name,mobile,email,phone')
                              ->first();
       if (isset($Str)){
         $response['store']        = $Str;
