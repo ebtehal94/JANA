@@ -174,7 +174,7 @@ class StoreController extends Controller
     {
       $response       = array();
       $Str            = Store::where('id', $store_id)
-                             ->with('branches:id,store_id,title','user:id,store_id,name,mobile,email')
+                             ->with('branches:id,store_id,title','user:id,store_id,name,mobile,email,phone')
                              ->first();
       if (isset($Str)){
         $response['store']        = $Str;
@@ -206,7 +206,13 @@ class StoreController extends Controller
         if (isset($request->image)){
           $this->addImage($Str, $request->image);
         }
+
         if (isset($userInfo)){
+          if (isset($userInfo['password']) && !empty($userInfo['password'])){
+            $userInfo['password']       = bcrypt($userInfo['password']);
+          }else{
+            unset($userInfo['password']);
+          }
           $Str->user->update($userInfo);
         }
 
