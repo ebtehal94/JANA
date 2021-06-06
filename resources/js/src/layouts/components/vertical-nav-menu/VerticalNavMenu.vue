@@ -57,7 +57,7 @@
         <!-- /Header -->
 
         <!-- Header Shadow -->
-        <div class="shadow-bottom" v-show="showShadowBottom" /> 
+        <div class="shadow-bottom" v-show="showShadowBottom" />
 
         <!-- Menu Items -->
         <component :is="scrollbarTag" ref="verticalNavMenuPs" class="scroll-area-v-nav-menu pt-2" :settings="settings" @ps-scroll-y="psSectionScroll" :key="$vs.rtl">
@@ -112,7 +112,7 @@
               <!-- /Nav-Group -->
             </template>
           </template>
-          
+
           <template v-if="$acl.not.check('admin')">
             <v-nav-menu-item
                 :to="'/stores/edit/'+ this.activeUserInfo.id"

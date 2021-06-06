@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Models\Branch;
 use App\Models\Store;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -200,12 +201,59 @@ class StoreController extends Controller
 
       if (isset($Str)){
         $Str->update($store);
+
         if (isset($request->image)){
           $this->addImage($Str, $request->image);
         }
 
 
         $response['store']        = $Str;
+        $response['statusCode']   = 200;
+      }else{
+        $response['statusCode']   = 400;
+      }
+      return $response;
+    }
+
+
+    public function createBranch(Request $request)
+    {
+      $response       = array();
+      $info           = $request->all();
+      $branch         = Branch::find($request->id);
+      if (isset($branch) && $branch->store_id == $info['store_id']){
+        $branch->update($info);
+        $response['branch']       = $branch;
+        $response['statusCode']   = 200;
+      }else{
+        $response['statusCode']   = 400;
+      }
+      return $response;
+    }
+
+
+    public function updateBranch(Request $request)
+    {
+      $response       = array();
+      $info           = $request->all();
+      $branch         = Branch::find($request->id);
+      if (isset($branch) && $branch->store_id == $info['store_id']){
+        $branch->update($info);
+        $response['branch']       = $branch;
+        $response['statusCode']   = 200;
+      }else{
+        $response['statusCode']   = 400;
+      }
+      return $response;
+    }
+
+    public function removeBranch($branch_id)
+    {
+      $response       = array();
+      $info           = $request->all();
+      $branch            = Branch::find($branch_id);
+      if (isset($branch) && ){
+        $branch->delete();
         $response['statusCode']   = 200;
       }else{
         $response['statusCode']   = 400;
