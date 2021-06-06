@@ -25,8 +25,8 @@
               <div class="p-8 login-tabs-container">
                 <div class="vx-card__title mb-4">
                   <div class="separator">
-                    <h4 class="mb-4 text-lg font-bold">{{$t('accountData')}}</h4> 
-                  </div> 
+                    <h4 class="mb-4 text-lg font-bold">{{$t('accountData')}}</h4>
+                  </div>
                 </div>
 
                 <div class="bg-input">
@@ -80,17 +80,17 @@
                       color="linear-gradient(to left,#E93F7D,#DA6653)"
                       gradient
                       @click="loginJWT">
-                      {{$t('Login')}} 
+                      {{$t('Login')}}
                       </vs-button>
                 </div>
                 <div class="w-full text-center">
                     <span class="account pl-0.5 text-sm">{{ $i18n.locale == 'en' ? "Don't have an account ?" : 'ليس لديك حساب؟' }}</span>
-                    <vs-button 
+                    <vs-button
                     class="login-btn p-0 text-sm"
-                    size="small" 
-                    type="transparent" 
-                    to="/">
-                      {{ $i18n.locale == 'en' ? 'Create Account' : ' أنشئ حسابك الآن' }}  
+                    size="small"
+                    type="transparent"
+                    to="/register">
+                      {{ $i18n.locale == 'en' ? 'Create Account' : ' أنشئ حسابك الآن' }}
                      </vs-button>
                 </div>
               </div>
@@ -108,9 +108,9 @@
 import icon from '../../layouts/components/icon.vue';
 import I18n  from "@/layouts/components/navbar/components/I18n.vue"
 export default{
-  components: { 
+  components: {
     icon,
-    I18n 
+    I18n
     },
   data () {
     return {
@@ -233,7 +233,7 @@ export default{
       top:18px;
       left: 90%;
       z-index: 9999;
-      
+
     }
   }
   .register-btn{

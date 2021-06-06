@@ -140,7 +140,7 @@ class OfferController extends Controller
                              // ->where('status', 1)
                              ->first();
       if (isset($customer)){
-        $redeems          = $customer->redeems();
+        $redeems          = $customer->redeems;
         foreach ($redeems as $redeem) {
           $redeem->offer        = $redeem->offer()->select('id','title_en', 'title_ar', 'desc_en', 'desc_ar', 'price_before', 'price', 'discount_perc')->with('mainImage:id,link')->first();
         }

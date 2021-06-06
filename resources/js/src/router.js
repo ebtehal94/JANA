@@ -67,7 +67,7 @@ const router = new Router({
         // PAGES
         // =============================================================================
         {
-          path: '/',
+          path: '/register',
           name: 'page-register',
           component: () => import('@/views/pages/Register.vue'),
           meta: {
@@ -75,7 +75,7 @@ const router = new Router({
           }
         },
         {
-          path: '/login',
+          path: '/',
           name: 'page-login',
           component: () => import('@/views/pages/Login.vue'),
           meta: {
