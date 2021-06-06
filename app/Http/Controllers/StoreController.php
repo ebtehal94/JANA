@@ -252,7 +252,7 @@ class StoreController extends Controller
       $response       = array();
       $info           = $request->all();
       $branch            = Branch::find($branch_id);
-      if (isset($branch) && ){
+      if (isset($branch)){
         $branch->delete();
         $response['statusCode']   = 200;
       }else{
