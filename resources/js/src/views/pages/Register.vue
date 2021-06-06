@@ -628,17 +628,13 @@ export default {
   registerUser() {
       if(!this.validateForm) return
       let formData = new FormData();
-      formData.append('id', this.store_data.id)
-      formData.append('name_ar', this.store_data.name_ar)
-      formData.append('name_en', this.store_data.name_en)
-      formData.append('cr_number', this.store_data.cr_number)
-      formData.append('city_id', this.store_data.city_id)
-      // formData.append('email', this.user.email)
-      // formData.append('cc', this.user.cc)
-      // formData.append('mobile', this.user.mobile)
-      // formData.append('phone', this.user.phone)
-      // formData.append('password', this.user.password)
-      // formData.append('confirm_password', this.user.confirm_password)
+      // formData.append('id', this.store_data.id)
+      // formData.append('name_ar', this.store_data.name_ar)
+      // formData.append('name_en', this.store_data.name_en)
+      // formData.append('cr_number', this.store_data.cr_number)
+      // formData.append('city_id', this.store_data.city_id)
+
+      formData.append('store',JSON.stringify(this.store_data))
       formData.append('user',JSON.stringify(this.user))
       formData.append('branches',JSON.stringify(this.branches_data))
       if (this.dataUploadedImages){
