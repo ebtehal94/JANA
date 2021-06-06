@@ -240,7 +240,7 @@
                       </span> -->
                     </div>
                     <div class="flex justify-end mr-2">
-                        <vs-button  class="text-warning" type="flat" color="warning" icon-pack="feather" icon="icon-edit" size="small">{{$t('SaveChanges')}}</vs-button>
+                        <vs-button @click="updateBranch(branch)"  class="text-warning" type="flat" color="warning" icon-pack="feather" icon="icon-edit" size="small">{{$t('SaveChanges')}}</vs-button>
                         <vs-button  @click="openBranchDeleteConfirm(branchIndex)" type="flat" class="justify-end mx-2 text-danger" color="danger" icon-pack="feather" icon="icon-trash-2" size="small">{{$t('Delete')}}</vs-button>
                     </div>
                   </div>
@@ -434,21 +434,21 @@ export default {
      },
      deleteBranch() {
        if (this.branches_data.length > 1){
-        //   return new Promise((resolve, reject) => {
-        //   axios.delete("/api/store" + this.store_data.id +"/delete/"+ this.branches_data.id)
-        //   .then((response) => {
-        //     if (response.data.statusCode == 200){
-        //       this.$vs.notify({
-        //         color: 'success',
-        //         title: this.$t('Successfull'),
-        //         text: this.$t('DeletedSuccussfully')
-        //       })
-        //     }
-        //     this.branches_data.splice(this.ItemToDelete, 1)
-        //     resolve(response)
-        //   })
-        //   .catch((error) => { reject(error) })
-        // })
+          return new Promise((resolve, reject) => {
+          axios.delete("/api/branches/delete/"+ this.branches_data.id)
+          .then((response) => {
+            if (response.data.statusCode == 200){
+              this.$vs.notify({
+                color: 'success',
+                title: this.$t('Successfull'),
+                text: this.$t('DeletedSuccussfully')
+              })
+            }
+            this.branches_data.splice(this.ItemToDelete, 1)
+            resolve(response)
+          })
+          .catch((error) => { reject(error) })
+        })
          // const branchIndex = this.branches_data.findIndex((u) => u.type == this.ItemToDelete)
          this.branches_data.splice(this.ItemToDelete, 1)
            this.$vs.notify({
@@ -464,11 +464,11 @@ export default {
          })
        }
      },
-    updateBranch(){
+    updateBranch(branch){
       if (this.branches_data.length > 1){
-        if (this.branches_data.id != null && this.branches_data.id > 0 ){
+        if (branch.id != null && branch.id > 0 ){
           return new Promise((resolve, reject) => {
-            axios.post("/api/branches/update", this.branches_data)
+            axios.post("/api/branches/update", branch)
             .then((response) => {
               if (response.data.statusCode == 200){
                 this.$vs.notify({
@@ -490,7 +490,7 @@ export default {
           })
       }else{
         return new Promise((resolve, reject) => {
-          axios.post("/api/branches/create", this.branches_data)
+          axios.post("/api/branches/create", branch)
           .then((response) => {
             if (response.data.statusCode == 200){
               this.$vs.notify({
