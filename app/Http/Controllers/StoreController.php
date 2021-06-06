@@ -128,8 +128,6 @@ class StoreController extends Controller
     }
 
 
-
-
     public function addImage(Store $Str,$image=array()){
       if(isset($image) && !empty($image)){
         $file                   = $image;

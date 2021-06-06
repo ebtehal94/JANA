@@ -28,15 +28,15 @@ class AuthController extends Controller
     public function register(Request $request)
     {
       $info                     = $request->all();
-      $this->validate($request, [
-      // 'store_data.name_ar'      => 'required',
-      'user.email'     => 'required|email',
-      'user.password'  => 'required|min:6',
-      // 'cc'        => 'required',
-      // 'mobile'    => 'required',
-      ]);
-
-      $userInfo                 = $info['user'];
+      // $this->validate($request, [
+      // // 'store_data.name_ar'      => 'required',
+      // 'user.email'     => 'required|email',
+      // 'user.password'  => 'required|min:6',
+      // // 'cc'        => 'required',
+      // // 'mobile'    => 'required',
+      // ]);
+      $userInfo                 = json_decode($info['user'], true);
+      // $userInfo                 = $info['user'];
       $existingMobile           = User::where('mobile', $userInfo['mobile'])
                                      ->where('cc', $userInfo['cc'])
                                      ->first();
@@ -54,7 +54,8 @@ class AuthController extends Controller
 
 
       $storeInfo                = $info['store'];
-      $branchesInfo             = $info['branches'];
+      $branchesInfo             = json_decode($info['branches'], true);
+      // $branchesInfo             = $info['branches'];
       if (isset($storeInfo) && !empty($storeInfo)){
         $store                     = Store::create($storeInfo);
       }
