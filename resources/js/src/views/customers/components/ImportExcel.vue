@@ -27,10 +27,10 @@ import XLSX from 'xlsx'
 
 export default {
   props: {
-    onSuccess: {
-      type: Function,
-      required: true
-    }
+    // onSuccess: {
+    //   type: Function,
+    //   required: true
+    // }
   },
   data () {
     return {
@@ -42,12 +42,12 @@ export default {
     }
   },
   methods: {
-    generateData ({ header, results, meta }) {
-      this.excelData.header = header
-      this.excelData.results = results
-      this.excelData.meta = meta
-      if (this.onSuccess) this.onSuccess(this.excelData)
-    },
+    // generateData ({ header, results, meta }) {
+    //   this.excelData.header = header
+    //   this.excelData.results = results
+    //   this.excelData.meta = meta
+    //   if (this.onSuccess) this.onSuccess(this.excelData)
+    // },
     getHeaderRow (sheet) {
       const headers = []
       const range = XLSX.utils.decode_range(sheet['!ref'])
@@ -106,7 +106,7 @@ export default {
           const header = this.getHeaderRow(worksheet)
           const results = XLSX.utils.sheet_to_json(worksheet)
           const meta = { sheetName: firstSheetName }
-          this.generateData({ header, results, meta })
+          // this.generateData({ header, results, meta })
           resolve()
         }
         reader.readAsArrayBuffer(rawFile)

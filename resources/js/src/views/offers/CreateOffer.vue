@@ -315,8 +315,8 @@ export default {
     icon,
     vSelect,
     flatPickr,
-    swiper,
-    swiperSlide,
+    // swiper,
+    // swiperSlide,
   },
   data() {
     return {
@@ -342,7 +342,7 @@ export default {
     },
   },
   methods:{
-        updateCurrImg(input) {
+      updateCurrImg(input) {
       if (input.target.files && input.target.files[0]) {
         var reader = new FileReader()
         reader.onload = e => {
