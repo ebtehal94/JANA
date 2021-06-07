@@ -229,6 +229,10 @@
               <div class="vx-card__title mt-4">
                 <div class="separator">
                   <h4 class="mb-4 text-base font-bold">{{$t('branchData')}}</h4>
+                  <div class="flex justify-end mr-2">
+                      <!-- <vs-button @click="updateBranch(branch)"  class="text-warning" type="flat" color="warning" icon-pack="feather" icon="icon-edit" size="small">{{$t('SaveChanges')}}</vs-button> -->
+                      <!-- <vs-button  @click="openBranchDeleteConfirm(branchIndex)" type="flat" class="justify-end mx-2 text-danger" color="danger" icon-pack="feather" icon="icon-trash-2" size="small">{{$t('Delete')}}</vs-button> -->
+                  </div>
                 </div>
               </div>
                 <div v-for="branch, branchIndex in branches_data"  :key="branch.name">
@@ -435,7 +439,7 @@ export default {
      deleteBranch() {
        if (this.branches_data.length > 1){
           return new Promise((resolve, reject) => {
-          axios.delete("/api/branches/delete/"+ this.branches_data.id)
+          axios.delete("/api/branches/delete/"+ branches_data.id)
           .then((response) => {
             if (response.data.statusCode == 200){
               this.$vs.notify({
@@ -450,12 +454,12 @@ export default {
           .catch((error) => { reject(error) })
         })
          // const branchIndex = this.branches_data.findIndex((u) => u.type == this.ItemToDelete)
-         this.branches_data.splice(this.ItemToDelete, 1)
-           this.$vs.notify({
-             color: 'success',
-             title: 'تم الحذف',
-             text: 'تم حذف الفرع بنجاح',
-           })
+        //  this.branches_data.splice(this.ItemToDelete, 1)
+        //    this.$vs.notify({
+        //      color: 'success',
+        //      title: 'تم الحذف',
+        //      text: 'تم حذف الفرع بنجاح',
+        //    })
        }else {
          this.$vs.notify({
            color: 'danger',
