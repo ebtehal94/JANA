@@ -12,7 +12,7 @@ import axios from "@/axios.js"
 export default {
   addAppinfo({ commit }, appinfo) {
     return new Promise((resolve, reject) => {
-      axios.post("/api/appinfos/create", appinfo,
+      axios.post("/api/app/settings/create", appinfo,
         {
           headers: {
             'Content-Type': 'multipart/form-data'
@@ -25,19 +25,13 @@ export default {
         .catch((error) => { reject(error) })
     })
   },
-  fetchAppinfos({ commit }) {
-    return new Promise((resolve, reject) => {
-      axios.post("/api/appinfos/list")
-        .then((response) => {
-          commit('SET_APPINFOS', response.data.appinfos)
-          resolve(response)
-        })
-        .catch((error) => { reject(error) })
-    })
-  },
+  // fetchAppinfos({ commit }) {
+  //   return new Promise((resolve, reject) => {
+  //   })
+  // },
   fetchAppinfo({ commit }, appinfoId) {
     return new Promise((resolve, reject) => {
-      axios.get(`/api/appinfos/edit/${appinfoId}`)
+      axios.get(`/api/app/settings/edit/${appinfoId}`)
         .then((response) => {
           resolve(response)
         })
@@ -46,7 +40,7 @@ export default {
   },
   updateAppinfo({ commit }, appinfo) {
     return new Promise((resolve, reject) => {
-      axios.post(`/api/appinfos/update`, appinfo,
+      axios.post(`/api/app/settings/update`, appinfo,
         {
           headers: {
               'Content-Type': 'multipart/form-data'

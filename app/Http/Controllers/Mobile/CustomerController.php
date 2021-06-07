@@ -57,29 +57,32 @@ class CustomerController extends Controller
     {
       $customer                 = $request->all();
       $response                 = array();
-      $existingMobile           = Customer::where('mobile', $customer['mobile'])->first();
-      $existingEmail            = Customer::where('email', $customer['email'])->first();
-
-      if (isset($existingMobile)){
-        $response['statusCode']   = 401;
-        return $response;
-      }
-      if (isset($existingEmail)){
-        $response['statusCode']   = 402;
-        return $response;
-      }
+      // $existingMobile           = Customer::where('mobile', $customer['mobile'])->first();
+      // $existingEmail            = Customer::where('email', $customer['email'])->first();
+      //
+      // if (isset($existingMobile)){
+      //   $response['statusCode']   = 401;
+      //   return $response;
+      // }
+      // if (isset($existingEmail)){
+      //   $response['statusCode']   = 402;
+      //   return $response;
+      // }
 
       $customer['password']     = $this->AES_Encode($customer['password']);
       $customer                 = Customer::create($customer);
       if ($customer){
         $otp                      = mt_rand(1000, 9999);
         $mobile                   = '966' . $customer->mobile;
-        $message                  = 'Activation code: '.$otp;
+        $fullName                 = explode(" ", $customer->name, 2);
+        $firstName                = $fullName[0];
+        $message                  = "مرحباً بك، ". $firstName
+                                    ."%0aرمز التفعيل هو: ". $otp;
         $customer->otp            = $otp;
         $customer->save();
-        $this->sendSMSHiSMS($mobile,$message);
 
         // $sendSMSResult            = $this->sendSMSunifonic($mobile,$message);
+        $response['sms_status']   =  $this->sendSMSHiSMS($mobile,$message);
         $response['customer']     = $customer;
         $response['otp']          = $otp;
         $response['statusCode']   = 200;
@@ -160,7 +163,8 @@ class CustomerController extends Controller
       $username                 = '966540012329';
       $pwd                      = 'jana1234';
       $msg                      = preg_replace("/ /", "%20", $msg);
-      $url                      = "https://www.hisms.ws/api.php?send_sms&username=$username&password=$pwd&sender=FARABI&numbers=$mobile&message=$msg";
+      $sender                   = preg_replace("/ /", "%20", 'JANA PLUS');
+      $url                      = "https://www.hisms.ws/api.php?send_sms&username=$username&password=$pwd&sender=$sender&numbers=$mobile&message=$msg";
 
       $ch = curl_init($url);
       // curl_setopt($ch, CURLOPT_URL, );

@@ -60,19 +60,22 @@ class OfferController extends Controller
     {
       $response                 = array();
       $user                     = \Auth::Guard('api')->user();
-      if (!isset($user) || $user->rule != 'admin'){
-        return 'Unauthorized!';
-      }
       $todaysDate               = Carbon::now()->toDateString();
       $aWeekAgo                 = Carbon::now()->subDays(7)->toDateString();
       $statistics               = array();
-      $statistics['all_offers']     = Offer::count();
-      $statistics['active_offers']  = Offer::where('status', 1)->whereDate('expiry', '>', $todaysDate)->count();
-      $statistics['new_offers']     = Offer::whereDate('created_at', '>=', $aWeekAgo)->count();
-      $statistics['all_stores']     = Store::count();
-      $statistics['new_stores']     = Store::whereDate('created_at', '>=', $aWeekAgo)->count();
-      $statistics['all_customers']  = Customer::count();
-      $statistics['new_customers']  = Customer::whereDate('created_at', '>=', $aWeekAgo)->count();
+      if (isset($user) && $user->rule == 'admin'){
+        $statistics['all_offers']     = Offer::count();
+        $statistics['active_offers']  = Offer::where('status', 1)->whereDate('expiry', '>', $todaysDate)->count();
+        $statistics['new_offers']     = Offer::whereDate('created_at', '>=', $aWeekAgo)->count();
+        $statistics['all_stores']     = Store::count();
+        $statistics['new_stores']     = Store::whereDate('created_at', '>=', $aWeekAgo)->count();
+        $statistics['all_customers']  = Customer::count();
+        $statistics['new_customers']  = Customer::whereDate('created_at', '>=', $aWeekAgo)->count();
+      }else{
+        $statistics['all_offers']     = $user->store->offers()->count();
+        $statistics['active_offers']  = $user->store->offers()->where('status', 1)->whereDate('expiry', '>', $todaysDate)->count();
+        $statistics['new_offers']     = $user->store->offers()->whereDate('created_at', '>=', $aWeekAgo)->count();
+      }
       $response['statistics']       = $statistics;
       $statistics['statusCode']     = 200;
       return $response;

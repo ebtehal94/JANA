@@ -5,6 +5,7 @@ use App\Models\AppPhoto;
 use App\Models\AppSetting;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AppPhotoController extends Controller
 {
@@ -17,7 +18,7 @@ class AppPhotoController extends Controller
       return 'Unauthorized!';
     }
     $response['settings']     = AppSetting::first();
-    $response['settings']['images'] = AppPhoto::select('id', 'link')->get();
+    $response['images']       = AppPhoto::select('id', 'link')->get();
     $response['statusCode']   = 200;
     return $response;
   }
@@ -32,11 +33,29 @@ class AppPhotoController extends Controller
     }
 
     if (isset($request->images)){
-      $this->addImages($Ofr, $request->images);
+      $this->addImages($request->images);
     }
-    $AppSetting               = AppSetting::update($info);
+    $AppSetting               = AppSetting::first()->update($info);
     $response['settings']     = $AppSetting;
     $response['statusCode']   = 200;
+    return $response;
+  }
+
+
+  public function deleteImage($id)
+  {
+    $response                 = array();
+    $user                     = \Auth::Guard('api')->user();
+    if (!isset($user) || $user->rule != 'admin'){
+      return 'Unauthorized!';
+    }
+    $AppPhoto                 = AppPhoto::find($id);
+    if ($AppPhoto){
+      $AppPhoto->delete();
+      $response['statusCode']   = 200;
+    }else{
+      $response['statusCode']   = 400;
+    }
     return $response;
   }
 

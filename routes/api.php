@@ -78,6 +78,10 @@ Route::get('/users/edit/{id}', 'UserController@edit');
 Route::post('/users/update', 'UserController@update');
 Route::get('/users/delete/{id}', 'UserController@remove');
 
+Route::post('/app/settings/list', 'AppPhotoController@index');
+Route::post('/app/settings/update', 'AppPhotoController@update');
+Route::delete('/app/settings/deleteImage/{id}', 'AppPhotoController@deleteImage');
+
 Route::post('/branches/create', 'StoreController@createBranch');
 Route::post('/branches/update', 'StoreController@updateBranch');
 Route::delete('/branches/delete/{id}', 'StoreController@removeBranch');

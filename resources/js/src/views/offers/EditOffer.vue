@@ -112,7 +112,7 @@
                     </span>
                 </div>
 
-                <div class="bg-input text-sm">
+                <div v-if="$acl.check('admin')" class="bg-input text-sm">
                     <v-select class="w-full mt-2 text-sm"
                       :placeholder="$t('accountStatus')"
                       v-model="offer_data.status"
