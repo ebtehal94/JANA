@@ -74,7 +74,7 @@ export default {
 		AllOffers:'All offers',
 		PendingOffers:'Pending offers',
 		ActiveOffers:'Active offers',
-		StopOffers:'Stop offers',
+		RejectOffers:'Reject offers',
 
 		OfferTitle: 'Title',
 		OfferDesc: 'Description',
@@ -94,7 +94,9 @@ export default {
 
 		CreateNewStore:'Create New Account',
 		AllStores:'All stores',
-		PendingAccounts:'Pending accounts',
+		
+		Delete:'Delete',
+		SaveChanges:'Save Changes',
 
 		CreateNewAdmin:'Create New Account',
 		AllAccounts:'All accounts',
@@ -432,7 +434,7 @@ export default {
 		AllOffers:'كل العروض',
 		PendingOffers:'العروض المعلقة',
 		ActiveOffers:'العروض النشطة',
-		StopOffers:'العروض المتوقفة',
+		RejectOffers:'العروض المرفوضة',
 
 		OfferTitle: 'العنوان',
 		OfferDesc: 'الوصف',
@@ -452,7 +454,9 @@ export default {
 
 		CreateNewStore:'إنشاء حساب جديد',
 		AllStores:'كل المتاجر',
-		PendingAccounts:'الحسابات المعلقة',
+		
+		Delete:'حذف',
+		SaveChanges:'حفظ التغيرات',
 
 		CreateNewAdmin:'إنشاء حساب جديد',
 		AllAccounts:'كل الحسابات',

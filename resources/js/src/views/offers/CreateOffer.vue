@@ -340,6 +340,9 @@ export default {
     stores() {
         return this.$store.state.offerManagement.stores
     },
+    validateForm() {
+      return ( !this.errors.any()) ;
+    }
   },
   methods:{
       updateCurrImg(input) {
@@ -395,7 +398,7 @@ export default {
        })
      },
     createOffer(){
-        // if(!this.validateForm) return
+        if(!this.validateForm) return
       let formData = new FormData();
       formData.append('title_ar', this.offer_data.title_ar)
       formData.append('title_en', this.offer_data.title_en)

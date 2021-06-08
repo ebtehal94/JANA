@@ -134,6 +134,12 @@
                 @click="registerUser">
                 {{$i18n.locale == "en" ? "Create Account" : "إنشاء الحساب"}} 
                 </vs-button>
+                <vs-button
+                  class="w-full mt-6 font-medium register-btn rounded-full"
+                  color="#ACACAC" type="border"
+                  @click="goBack">
+                  {{ $i18n.locale == 'en' ? 'Close' : 'خروج' }}
+                 </vs-button>
               </div>
           </div>
         </div>       
@@ -232,6 +238,9 @@ export default {
       .catch(function (error) {
             console.log(error);
         });
+    },
+    goBack(){
+      this.$router.go(-1)
     },
 
 

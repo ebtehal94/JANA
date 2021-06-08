@@ -101,7 +101,7 @@ export default {
       notice_data:{customer_id:null,title_ar:null,desc_ar:null},
       customers_list: [
         {name_ar:'المتاجر',id:1},
-        {name_ar:'العروض', id:2},
+        {name_ar:'العملاء', id:2},
       ],
     }
   },
