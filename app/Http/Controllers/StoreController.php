@@ -227,9 +227,8 @@ class StoreController extends Controller
     {
       $response       = array();
       $info           = $request->all();
-      $branch         = Branch::find($request->id);
-      if (isset($branch) && $branch->store_id == $info['store_id']){
-        $branch->update($info);
+      $branch         = Branch::create($info);
+      if (isset($branch)){
         $response['branch']       = $branch;
         $response['statusCode']   = 200;
       }else{
@@ -257,8 +256,7 @@ class StoreController extends Controller
     public function removeBranch($branch_id)
     {
       $response       = array();
-      $info           = $request->all();
-      $branch            = Branch::find($branch_id);
+      $branch         = Branch::find($branch_id);
       if (isset($branch)){
         $branch->delete();
         $response['statusCode']   = 200;
