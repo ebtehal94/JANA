@@ -90,7 +90,7 @@
           <div class="vx-col w-full md:w-1/2">
             <!-- Col Header -->
             <div class="flex items-end pt-4">
-              <span class="leading-none font-semibold text-sm">{{$i18n.locale == "en" ? "Offer properties" : "خصائص العرض"}}</span>
+              <span class="leading-none font-semibold text-sm">{{$i18n.locale == "en" ? "Offer properties" : "خصائص العرض"}}<span class="text-danger"> * </span></span>
             </div>
 
             <!-- Col Content -->
@@ -146,7 +146,7 @@
               </div>
               <div class="vx-col w-full mb-4">
                 <input type="file" class="hidden" ref="uploadImgInput" multiple @change="updateCurrImg" accept="image/*">
-                <vs-button v-if="dataUploadedImages.length === 0" size="small" color="linear-gradient(to left,#E93F7D,#DA6653)"
+                <vs-button  size="small" color="linear-gradient(to left,#E93F7D,#DA6653)"
                 gradient class="rounded-full mt-6" icon-pack="feather" icon="icon-upload" @click="$refs.uploadImgInput.click()">{{ $i18n.locale == 'en' ? 'Upload Image' : 'رفع صورة' }}</vs-button>
                 <!-- <vs-button v-if="dataUploadedImages.length === 0" class="text-gray p-0 mt-6" icon-pack="feather"  type="transparent" icon="icon-plus" @click="$refs.uploadImgInput.click()"/>
                 <h5 class="text-gray text-xs text-center">{{ $i18n.locale == 'en' ? 'Upload Image' : 'اضافة صورة' }}</h5> -->
@@ -217,7 +217,7 @@
           <div v-if="$acl.check('admin')" class="vx-col w-full md:w-1/2 pt-4">
             <!-- Col Header -->
             <div class="flex items-end">
-              <span class="leading-none font-semibold text-xs">{{$i18n.locale == "en" ? "The Store" : "المتجر"}}</span>
+              <span class="leading-none font-semibold text-sm">{{$i18n.locale == "en" ? "The Store" : "المتجر"}}<span class="text-danger"> * </span></span>
             </div>
 
             <div class="bg-input text-sm">
@@ -245,21 +245,21 @@
             <div class="vx-col w-1/2">
                 <!-- Col Header -->
                 <div class="flex items-end">
-                  <span class="leading-none font-semibold text-xs">{{$i18n.locale == "en" ? "Offer expiration date" : " تاريخ انتهاءالعرض"}}</span>
+                  <span class="leading-none font-semibold text-sm">{{$i18n.locale == "en" ? "Offer expiration date" : " تاريخ انتهاءالعرض"}}<span class="text-danger"> * </span></span>
                 </div>
 
                 <!-- Col Content -->
                   <flat-pickr
                   class="w-full mt-4"
                   v-model="offer_data.expiry"
-                  placeholder="14-14-2021"
+                  placeholder="تاريخ الانتهاء"
                   v-validate="'required'" />
                   <!-- <span class="text-danger text-sm"  v-show="errors.has('expiry')">{{ errors.first('expiry') }}</span> -->
             </div>
             <div class="vx-col w-1/2 ml-4">
                 <!-- Col Header -->
                 <div class="flex items-end">
-                  <span class="leading-none font-semibold text-xs">{{$i18n.locale == "en" ? "Barcode" : "كود الخصم"}}</span>
+                  <span class="leading-none font-semibold text-sm">{{$i18n.locale == "en" ? "Barcode" : "كود الخصم"}}</span>
                 </div>
 
                 <!-- Col Content -->
@@ -398,7 +398,7 @@ export default {
        })
      },
     createOffer(){
-        if(!this.validateForm) return
+      if(!this.validateForm) return
       let formData = new FormData();
       formData.append('title_ar', this.offer_data.title_ar)
       formData.append('title_en', this.offer_data.title_en)
@@ -437,6 +437,7 @@ export default {
             this.$router.go(-1)
           } 
           else{
+            this.$vs.loading.close()
             this.$vs.notify({
             color: 'danger',
             title: 'Error',
@@ -446,6 +447,12 @@ export default {
         })
         .catch(err => { console.error(err)
           this.$vs.loading.close()
+          this.$vs.notify({
+          color: 'danger',
+          title: 'خطاء',
+          text: 'الرجاء اكمال جميع الحقول المطلوبة',
+          // position: 'bottom-center'
+          })
         })
     },
     goBack(){

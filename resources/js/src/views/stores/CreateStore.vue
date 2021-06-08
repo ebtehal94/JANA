@@ -578,7 +578,7 @@ export default {
             .catch((error) => { reject(error) })
           })
       }else{
-        branch.store_id = this.store_data;
+        // branch.store_id = this.store_data;
         return new Promise((resolve, reject) => {
           axios.post("/api/branches/create", branch)
           .then((response) => {
@@ -673,6 +673,12 @@ export default {
         })
         .catch(err => { console.error(err)
           this.$vs.loading.close()
+          this.$vs.notify({
+          color: 'danger',
+          title: 'خطاء',
+          text: 'الرجاء اكمال جميع الحقول المطلوبة',
+          // position: 'bottom-center'
+          })
         })
     },
     goBack(){

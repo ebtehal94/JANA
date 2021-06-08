@@ -170,16 +170,6 @@
   </div>
 </template>
 
-//  v-if="$acl.not.check('vendor')">
-//  {
-//     url: '/stores/edit/activeUserInfo.id',
-//     name: "General Settings",
-//     slug: "settings",
-//     icon: "storeIcon",
-//     i18n: "GeneralSettings",
-//     rule: "vendor"
-//   },
-
 
 <script>
 import VuePerfectScrollbar from 'vue-perfect-scrollbar'

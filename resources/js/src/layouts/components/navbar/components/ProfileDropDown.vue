@@ -4,10 +4,10 @@
         <img class="h-5 w-5 mr-2"  :src="require(`@assets/images/navbar/user.svg`)" alt="login" />
         {{ $t('loginLabel') }}
     </span>
-    <!-- <div class="text-right leading-tight hidden sm:block text-white">
-      <p class="font-semibold">{{ activeUserInfo.displayName }}</p>
-      <small>Available</small>
-    </div> -->
+    <div class="text-right leading-tight hidden sm:block text-white">
+      <p class="font-semibold">{{ activeUserInfo.name}}</p>
+      <!-- <small>Available</small> -->
+    </div>
     <!-- <router-link v-if="activeUserInfo.id == 0"  to="/login" class="p-2 cursor-pointer text-right leading-tight">
       <span style="color: #000; font-family: 'Cairo', sans-serif;">
         <img class="h-5 w-5 mr-2"  :src="require(`@assets/images/navbar/user.svg`)" alt="qt" />
@@ -84,7 +84,7 @@ export default {
       // if(localStorage.getItem("accessToken")) {
         localStorage.removeItem("accessToken")
         // localStorage.removeItem("userInfo")
-        // this.$router.push('/pages/login').catch(() => {})
+        this.$router.push('/pages/login').catch(() => {})
       // }
 
       // Change role on logout. Same value as initialRole of acj.js
