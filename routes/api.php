@@ -32,6 +32,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/customers/register', 'Mobile\CustomerController@register');
 Route::post('/customers/otpCheck', 'Mobile\CustomerController@otpCheck');
 
+Route::post('/notifications/updateToken', 'NotificationController@updateToken');
+
+
 Route::post('/customers/home', 'Mobile\OfferController@home');
 Route::get('/customers/categories/list', 'CategoryController@index');
 
@@ -65,28 +68,6 @@ Route::post('/offers/addImages', 'OfferController@addImages');
 Route::get('/offers/{offer_id}/deleteImage/{image_id}', 'OfferController@deleteImage');
 
 
-Route::post('/store/list', 'StoreController@index');
-Route::post('/store/create', 'StoreController@create');
-Route::get('/store/edit/{id}', 'StoreController@edit');
-Route::post('/store/update', 'StoreController@update');
-Route::delete('/store/delete/{id}', 'StoreController@remove');
-Route::post('/store/updateImage', 'StoreController@updateImage');
-
-Route::post('/users/list', 'UserController@index');
-Route::post('/users/create', 'UserController@create');
-Route::get('/users/edit/{id}', 'UserController@edit');
-Route::post('/users/update', 'UserController@update');
-Route::get('/users/delete/{id}', 'UserController@remove');
-
-Route::post('/app/settings/list', 'AppPhotoController@index');
-Route::post('/app/settings/update', 'AppPhotoController@update');
-Route::delete('/app/settings/deleteImage/{id}', 'AppPhotoController@deleteImage');
-
-Route::post('/branches/list', 'StoreController@listBarnches');
-Route::post('/branches/create', 'StoreController@createBranch');
-Route::post('/branches/update', 'StoreController@updateBranch');
-Route::delete('/branches/delete/{id}', 'StoreController@removeBranch');
-
 Route::post('/customers/login', 'Mobile\CustomerController@login');
 
 Route::post('/customers/otpCheck', 'Mobile\CustomerController@otpCheck');
@@ -97,11 +78,36 @@ Route::get('/customers/edit/{id}', 'CustomerController@edit');
 Route::post('/customers/update', 'CustomerController@update');
 Route::get('/customers/delete/{id}', 'CustomerController@remove');
 
-Route::get('/payments/list', 'PaymentController@index');
-
 
 Route::middleware('auth:api')->group(function () {
 
+  Route::post('/store/list', 'StoreController@index');
+  Route::post('/store/create', 'StoreController@create');
+  Route::get('/store/edit/{id}', 'StoreController@edit');
+  Route::post('/store/update', 'StoreController@update');
+  Route::delete('/store/delete/{id}', 'StoreController@remove');
+  Route::post('/store/updateImage', 'StoreController@updateImage');
+
+
+  Route::post('/app/settings/list', 'AppPhotoController@index');
+  Route::post('/app/settings/update', 'AppPhotoController@update');
+  Route::delete('/app/settings/deleteImage/{id}', 'AppPhotoController@deleteImage');
+
+  Route::post('/branches/list', 'StoreController@listBarnches');
+  Route::post('/branches/create', 'StoreController@createBranch');
+  Route::post('/branches/update', 'StoreController@updateBranch');
+  Route::delete('/branches/delete/{id}', 'StoreController@removeBranch');
+
+  Route::post('/users/list', 'UserController@index');
+  Route::post('/users/create', 'UserController@create');
+  Route::get('/users/edit/{id}', 'UserController@edit');
+  Route::post('/users/update', 'UserController@update');
+  Route::get('/users/delete/{id}', 'UserController@remove');
+
+
+  Route::get('/payments/list', 'PaymentController@index');
+
+  Route::post('/notifications/send', 'NotificationController@notify');
 
 });
 

@@ -81,7 +81,8 @@ class CustomerController extends Controller
         $customer->otp            = $otp;
         $customer->save();
 
-        // $sendSMSResult            = $this->sendSMSunifonic($mobile,$message);
+        if ($customer && !$customer->device_type && $customer->device_token) $this->updateFCMToken($customer);
+
         $response['sms_status']   =  $this->sendSMSHiSMS($mobile,$message);
         $response['customer']     = $customer;
         $response['otp']          = $otp;
@@ -177,4 +178,48 @@ class CustomerController extends Controller
 
     }
 
+
+
+
+
+    public function updateFCMToken(Customer $customer){
+
+      if($customer && $customer->device_token)
+      {
+         $headers = array(
+        'Authorization: key='.env('FCM_SERVER_KEY'),
+        'Content-Type: application/json'
+            );
+
+         $fcmFields['apns_tokens']     =	array();
+         $fcmFields['apns_tokens'][]   =	$customer->device_token;
+         $fcmFields['application']     = "com.basmtak.app";
+         $fcmFields['sandbox']         = false;
+
+
+         $ch                           = curl_init();
+         curl_setopt( $ch,CURLOPT_URL, 'https://iid.googleapis.com/iid/v1:batchImport' );
+         curl_setopt( $ch,CURLOPT_POST, true );
+         curl_setopt( $ch,CURLOPT_HTTPHEADER, $headers );
+         curl_setopt( $ch,CURLOPT_RETURNTRANSFER, true );
+         curl_setopt( $ch,CURLOPT_SSL_VERIFYPEER, false );
+         curl_setopt( $ch,CURLOPT_POSTFIELDS, json_encode( $fcmFields ) );
+
+         $response                     = curl_exec($ch);
+         curl_close($ch);
+
+         $response                     = json_decode($response, true);
+
+
+         if ( isset($response['results'][0]) && $response['results'][0]['status'] == "OK" ) {
+           $customer->device_token = $response['results'][0]['registration_token'];
+           $customer->save();
+           return true;
+         }else{
+           return false;
+         }
+
+       }
+
+    }
 }

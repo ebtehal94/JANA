@@ -19,7 +19,7 @@
                       <div>
                             <v-select class="w-full mt-2  text-sm"
                             :placeholder="$t('recipients')"
-                            v-model="notice_data.customer_id"
+                            v-model="notice_data.receivers"
                             v-validate="'required'"
                             label="name_ar" :options="customers_list"
                             :reduce="name_ar => name_ar.id"
@@ -40,17 +40,17 @@
                       <vs-input
                         class="w-full text-base mt-2 "
                         :placeholder="$t('title')"
-                        v-model="notice_data.title_ar"
+                        v-model="notice_data.title"
                         v-validate="'required'"
-                        name="title_ar"/>
+                        name="title"/>
 
                       <div class="mt-4">
-                        <vs-textarea 
+                        <vs-textarea
                         :placeholder="$t('desc')"
-                        v-model="notice_data.desc_ar" 
-                        class="mt-2" 
+                        v-model="notice_data.desc"
+                        class="mt-2"
                         height="130px"
-                        name="desc_ar"/>
+                        name="desc"/>
                       </div>
                   </div>
                 </div>
@@ -72,7 +72,7 @@
                   class="w-full font-semibold text-base rounded-full "
                   color="#ACACAC" type="border"
                   @click="goBack">
-                    {{$i18n.locale == "en" ? "Close" : "خروج"}} 
+                    {{$i18n.locale == "en" ? "Close" : "خروج"}}
                 </vs-button>
               </div>
             </div>
@@ -98,10 +98,10 @@ export default {
   },
   data() {
     return {
-      notice_data:{customer_id:null,title_ar:null,desc_ar:null},
+      notice_data:{receivers:null,title:null,desc:null},
       customers_list: [
-        {name_ar:'المتاجر',id:1},
-        {name_ar:'العملاء', id:2},
+        {name_ar:'المتاجر',id:0},
+        {name_ar:'العملاء', id:1},
       ],
     }
   },
@@ -110,7 +110,7 @@ export default {
   },
   methods: {
     sendNotice(){
-        axios.post("/api/notices/create",this.notice_data)
+        axios.post("/api/notifications/send",this.notice_data)
         .then(res => {
           if( res.data.statusCode == 200 ){
             this.$vs.notify({
@@ -171,7 +171,7 @@ export default {
   //   }
   //   }
   // }
-  
+
 }
 
 @media only screen and (min-width: 375px) and (max-width: 600px) {
