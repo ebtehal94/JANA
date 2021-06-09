@@ -252,9 +252,10 @@
                   <flat-pickr
                   class="w-full mt-4"
                   v-model="offer_data.expiry"
-                  placeholder="تاريخ الانتهاء"
+                  :placeholder="$t('ExpiryDate')"
+                  :config="configFromdateTimePicker"
                   v-validate="'required'" />
-                  <!-- <span class="text-danger text-sm"  v-show="errors.has('expiry')">{{ errors.first('expiry') }}</span> -->
+                  <span class="text-danger text-sm"  v-show="errors.has('expiry')">{{ errors.first('expiry') }}</span>
             </div>
             <div class="vx-col w-1/2 ml-4">
                 <!-- Col Header -->
@@ -331,6 +332,10 @@ export default {
       ImageToDelete: null,
       imgLink: 'https://janacard.s3.eu-central-1.amazonaws.com/offers/',
       offer_images:[],
+      configFromdateTimePicker: {
+          minDate: new Date(),
+          maxDate: null
+      },
     }
   },
   computed: {
@@ -341,7 +346,7 @@ export default {
         return this.$store.state.offerManagement.stores
     },
     validateForm() {
-      return ( !this.errors.any()) ;
+      return (!this.errors.any() && (!this.offer_data.price_before || (this.offer_data.price_before > 0 && this.offer_data.price > 0 && this.offer_data.price_before < this.offer_data.price)))
     }
   },
   methods:{

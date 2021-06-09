@@ -7,8 +7,12 @@
           <div class="vx-col w-full md:w-1/2 pr-8 mt-4 justify-center items-center">
           <div class="center">
             <div>
+              <div class="vx-col w-full cardBox">
+                <!-- <vs-button class="cardTag text-danger mt-0" @click="openConfirm(image.id)" icon-pack="feather" icon="icon-trash-2" color="danger" type="flat" /> -->
+                <img  :src="imgLink + store_data.image"  alt=" "  width="100">
+              </div>
               <div class="items-center vx-col w-full ">
-                <img :src="dataUploadedImages.url" >
+                <img :src="dataUploadedImages.url" alt=" "  width="100">
               </div>
               <input type="file" class="hidden" ref="uploadImgInput" @change="updateCurrImg" accept="image/*">
               <vs-button v-if="dataUploadedImages.length === 0" class="mt-12 mx-auto" type="transparent" @click="$refs.uploadImgInput.click()">
@@ -31,6 +35,7 @@
                 type="number"
                 icon-no-border
                 icon="icon"
+                name="mobile"
                 v-validate="'required|min:7'"
                 class="w-3/4 mt-2 px-3"/>
 
@@ -44,11 +49,9 @@
                 class="w-1/5 mt-2"
                 placeholder="966+"/>
 
-                <span v-if="!errors.has('mobile') && user.mobile">
-                  <icon name="confirm" class="icon left-phone-icon"/>
-                </span>
-                <span v-else-if="errors.has('mobile')">
-                  <icon name="cross" class="icon left-phone-icon"/>
+                <span >
+                  <icon v-if="errors.has('mobile')" name="cross" class="icon left-phone-icon"/>
+                  <icon v-else name="confirm" class="icon left-phone-icon"/>
                 </span>
               </div>
               <div class="vx-row bg-input">
@@ -392,6 +395,7 @@ export default {
         cr_number:null,
         city_id:null,
         status:null,
+        Image:null
       },
       cities_list:CitiesList,
       status_list: [
@@ -438,6 +442,7 @@ export default {
         {id: null, type: null, title: null, city_id: null, url: null}
         ],
       dataUploadedImages: [],
+      imgLink: 'https://janacard.s3.eu-central-1.amazonaws.com/stores/',
 
     }
   },
@@ -494,37 +499,6 @@ export default {
            })
         }
        }
-      //  if (this.branches_data.length > 1){
-      //     return new Promise((resolve, reject) => {
-      //     axios.delete("/api/branches/delete/"+ branch.id)
-      //     .then((response) => {
-      //       if (response.data.statusCode == 200){
-      //         this.$vs.notify({
-      //           color: 'success',
-      //           title: this.$t('Successfull'),
-      //           text: this.$t('DeletedSuccussfully')
-      //         })
-      //       }
-      //       this.branches_data.splice(this.ItemToDelete, 1)
-      //       resolve(response)
-            
-      //     })
-      //     .catch((error) => { reject(error) })
-      //   })
-         // const branchIndex = this.branches_data.findIndex((u) => u.type == this.ItemToDelete)
-        //  this.branches_data.splice(this.ItemToDelete, 1)
-        //    this.$vs.notify({
-        //      color: 'success',
-        //      title: 'تم الحذف',
-        //      text: 'تم حذف الفرع بنجاح',
-        //    })
-      //  }else {
-      //    this.$vs.notify({
-      //      color: 'danger',
-      //      title: 'خطاء',
-      //      text: 'يجب ابقاء فرع واحد على الاقل',
-      //    })
-      //  }
      },
      SaveChanges(){
       if (this.branches_data.length > 1){

@@ -12,14 +12,14 @@
                         <div class="vx-row flex mt-4 mx-0 slider-img">
                           <div class="vx-col w-full md:w-1/4 add-img ">
                               <input type="file" class="hidden" ref="uploadImgInput" multiple @change="updateCurrImg" accept="image/*">
-                              <vs-button v-if="dataUploadedImages.length === 0" class="text-gray mt-2 lg:mt-6 p-0" icon-pack="feather" type="transparent" icon="icon-plus" @click="$refs.uploadImgInput.click()"/>
+                              <vs-button  class="text-gray mt-2 lg:mt-6 p-0" icon-pack="feather" type="transparent" icon="icon-plus" @click="$refs.uploadImgInput.click()"/>
                               <h5 class="text-gray text-xs text-center mb-4">{{ $i18n.locale == 'en' ? 'Upload Image' : 'اضافة صورة' }}</h5>
                           </div>
-                          <div class="vx-col w-full md:w-1/4 cardBox" v-for="image in appControl_images"  :key="image.link">
+                          <div class="vx-col w-full md:w-1/4  mb-12 cardBox" v-for="image in appControl_images"  :key="image.link">
                             <vs-button class="cardTag text-danger mt-0" @click="openConfirm(image.id)" icon-pack="feather" icon="icon-trash-2" color="danger" type="flat" />
                             <img :src="imgLink + image.link"  alt=" " class="mx-auto w-full lg:responsive" width="120">
                           </div>
-                          <div v-for="image in dataUploadedImages" :key="image.link" class="items-center vx-col w-full md:w-1/4 mb-4 cardBox">
+                          <div v-for="image in dataUploadedImages" :key="image.link" class="items-center vx-col w-full md:w-1/4 mb-12 cardBox">
                             <vs-button class="cardTag text-danger mt-0" @click="openConfirm(image.id)" icon-pack="feather" icon="icon-trash-2" color="danger" type="flat" />
                             <img :src="image.url" class="mx-auto w-full lg:responsive" width="120">
                           </div>
@@ -160,15 +160,28 @@ export default {
     },
     methods: {
         updateCurrImg(input) {
-            if (input.target.files && input.target.files[0]) {
-                var reader = new FileReader()
-                reader.onload = e => {
-                this.dataUploadedImages= input.target.files
-                console.log(input.target.files[0])
-                }
-                reader.readAsDataURL(input.target.files[0])
-            }
-        },
+        if (input.target.files && input.target.files[0]) {
+        var reader = new FileReader()
+        reader.onload = e => {
+          this.dataUploadedImages = input.target.files
+          for (var i = 0; i < this.dataUploadedImages.length; i++) {
+            const url = URL.createObjectURL(this.dataUploadedImages[i])
+            this.dataUploadedImages[i].url = url
+          }
+        }
+        reader.readAsDataURL(input.target.files[0])
+      }
+    },
+        // updateCurrImg(input) {
+        //     if (input.target.files && input.target.files[0]) {
+        //         var reader = new FileReader()
+        //         reader.onload = e => {
+        //         this.dataUploadedImages= input.target.files
+        //         console.log(input.target.files[0])
+        //         }
+        //         reader.readAsDataURL(input.target.files[0])
+        //     }
+        // },
         openConfirm(id) {
           this.ImageToDelete = id;
            this.$vs.dialog({
@@ -269,11 +282,12 @@ export default {
 <style lang="scss" scoped>
 .cardBox{
   position: relative;
+  
 }
 .cardTag{
   position: absolute;
   right: 0;
-  top: -2rem;
+  top: -2.5rem;
   z-index: 999;
 }
 
@@ -301,8 +315,8 @@ export default {
         }
     }
     .add-img{
-      border: 1px solid #b1b1b1;
-      border-radius: 15px;
+    //   border: 1px solid #b1b1b1;
+    //   border-radius: 15px;
       text-align: center;
       text-align: -webkit-center;
     }

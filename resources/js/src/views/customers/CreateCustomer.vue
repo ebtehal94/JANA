@@ -200,7 +200,7 @@ export default {
   },
   methods: {
     registerUser() {
-      // if(!this.validateForm) return
+      if(!this.validateForm) return
         if (this.customer_data.id != null && this.customer_data.id > 0){
           var link = "customerManagement/updateCustomer"
         }else{
@@ -230,13 +230,7 @@ export default {
             text: 'هذا البريد الالكتروني مسجل بالفعل'
             })
           }
-          else{
-            this.$vs.notify({
-            color: 'danger',
-            title: 'Error',
-            text: 'حدث خطأ ما'
-            })
-          }
+        
         })
         .catch(function (error) {
             console.log(error)

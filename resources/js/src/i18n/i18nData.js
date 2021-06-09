@@ -83,6 +83,7 @@ export default {
 		ChooseStore:'Choose store',
 		Discount:'Discount',
 		DiscountPerc:'Discount Perc %',
+		ExpiryDate:'Expiry Date',
 		DiscountCode:'Discount Code',
 
 		CreateNewCustomer:'Create Customer Account',
@@ -443,6 +444,7 @@ export default {
 		ChooseStore:'اختر المتجر',
 		Discount:'الخصم',
 		DiscountPerc:'نسبة الخصم %',
+		ExpiryDate:'تاريخ الإنتهاء',
 		DiscountCode:'كود الخصم',
 
 		CreateNewCustomer:'إنشاء حساب عميلة',

@@ -253,7 +253,8 @@
               <flat-pickr
               class="w-full mt-4"
               v-model="offer_data.expiry"
-              placeholder="تاريخ الانتهاء"
+              :placeholder="$t('ExpiryDate')"
+              :config="configFromdateTimePicker"
               v-validate="'required'" />
               <span class="text-danger text-sm"  v-show="errors.has('expiry')">{{ errors.first('expiry') }}</span>
             </div>
@@ -326,6 +327,10 @@ export default {
       ImageToDelete: null,
       imgLink: 'https://janacard.s3.eu-central-1.amazonaws.com/offers/',
       offer_images:[],
+      configFromdateTimePicker: {
+          minDate: new Date(),
+          maxDate: null
+      },
     }
   },
   computed: {
