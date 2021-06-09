@@ -40,7 +40,7 @@ class OfferController extends Controller
                                         });
       }
 
-      if (isset($info['active'])){
+      if (isset($info['active']) && $info['active'] == 1){
         $offers                   = $offers->whereDate('expiry', '>=', Carbon::now()->toDateString());
       }
 
