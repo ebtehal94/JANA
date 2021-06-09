@@ -82,6 +82,7 @@ Route::post('/app/settings/list', 'AppPhotoController@index');
 Route::post('/app/settings/update', 'AppPhotoController@update');
 Route::delete('/app/settings/deleteImage/{id}', 'AppPhotoController@deleteImage');
 
+Route::post('/branches/list', 'StoreController@listBarnches');
 Route::post('/branches/create', 'StoreController@createBranch');
 Route::post('/branches/update', 'StoreController@updateBranch');
 Route::delete('/branches/delete/{id}', 'StoreController@removeBranch');

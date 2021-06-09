@@ -228,18 +228,11 @@ class StoreController extends Controller
       $response                 = array();
       $user                     = \Auth::Guard('api')->user();
       $todaysDate               = Carbon::now()->toDateString();
-      $branches                 = Branch::select('id','name_ar', 'name_en', 'views', 'image')
-                                       ->get()
-                                       ->sortByDesc(function($branch)
-                                         {
-                                             return $branch->offers->count();
-                                         })
-                                       ->take(20);
+      $branches                 = Branch::where('store_id', $request->store_id)
+                                        ->select('id','name_ar', 'name_en')
+                                        ->get();
 
-      if (isset($info['from'])){
-       $offers                    = $offers->whereDate('created_at', '>=', $info['from']);
-      }
-
+      $response['statusCode']   = 200;
       $response['branches']     = $branches;
       return $response;
     }
