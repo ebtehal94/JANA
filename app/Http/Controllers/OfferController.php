@@ -33,7 +33,7 @@ class OfferController extends Controller
       }
 
       if (isset($info['search'])){
-        $search         = $info['search'];
+        $search                   = $info['search'];
         $offers                   = $offers->where(function ($query) use ($search) {
                                           return $query->where('title_ar', 'like', '%'.$search.'%')
                                                        ->orWhere('title_en', 'like', '%'.$search.'%');
@@ -76,8 +76,8 @@ class OfferController extends Controller
         $statistics['active_offers']  = $user->store->offers()->where('status', 1)->whereDate('expiry', '>', $todaysDate)->count();
         $statistics['new_offers']     = $user->store->offers()->whereDate('created_at', '>=', $aWeekAgo)->count();
       }
-      $response['statistics']       = $statistics;
-      $statistics['statusCode']     = 200;
+      $response['statistics']   = $statistics;
+      $statistics['statusCode'] = 200;
       return $response;
     }
 

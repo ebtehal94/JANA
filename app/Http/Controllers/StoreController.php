@@ -29,7 +29,7 @@ class StoreController extends Controller
       }
 
       if (isset($info['search'])){
-        $search         = $info['search'];
+        $search                   = $info['search'];
         $stores                   = $stores->where(function ($query) use ($search) {
                                         return $query->where('name_en', 'like', '%'.$search.'%')
                                                      ->orWhere('name_ar', 'like', '%'.$search.'%');

@@ -59,12 +59,14 @@ class OfferController extends Controller
     {
       $response                 = array();
       $info                     = $request->all();
+      $user                     = \Auth::Guard('api')->user();
       $offers                   = Offer::with('mainImage', 'category:id,title_en,title_ar', 'store:id,name_en,name_ar')
                                        ->with('category:id,title_en,title_ar', 'store:id,name_en,name_ar,image')
                                        ->select('id','title_en', 'title_ar', 'price_before', 'price', 'discount_perc')
                                        ->orderby('id','desc');
-      if (isset($info['status'])){
-        $offers                   = $offers->whereIn('status', $info['status']);
+      if (!isset($user)){
+        $offers                   = $offers->where('status', 1)
+                                           ->whereDate('expiry', '>=', Carbon::now()->toDateString());
       }
       // if (isset($info['city_id'])){
       //   $city_id                  = $info['city_id'];
@@ -79,11 +81,11 @@ class OfferController extends Controller
         $offers                   = $offers->where('store_id', $info['store_id']);
       }
       if (isset($info['search'])){
-        if (isset($info['lang']) && $info['lang'] == 'en'){
-          $offers                   = $offers->where('title_en', 'like', '%'.$info['search'].'%');
-        }else{
-          $offers                   = $offers->where('title_ar', 'like', '%'.$info['search'].'%');
-        }
+        $search                   = $info['search'];
+        $offers                   = $offers->where(function ($query) use ($search) {
+                                          return $query->where('title_ar', 'like', '%'.$search.'%')
+                                                       ->orWhere('title_en', 'like', '%'.$search.'%');
+                                        });
       }
       if (isset($info['skip'])){
         $offers                   = $offers->skip($info['skip']);
