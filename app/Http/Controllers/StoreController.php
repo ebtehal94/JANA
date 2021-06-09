@@ -29,11 +29,11 @@ class StoreController extends Controller
       }
 
       if (isset($info['search'])){
-        if (isset($info['lang']) && $info['lang'] == 'en'){
-          $stores                   = $stores->where('name_en', 'like', '%'.$info['search'].'%');
-        }else{
-          $stores                   = $stores->where('name_ar', 'like', '%'.$info['search'].'%');
-        }
+        $search         = $info['search'];
+        $stores                   = $stores->where(function ($query) use ($search) {
+                                        return $query->where('name_en', 'like', '%'.$search.'%')
+                                                     ->orWhere('name_ar', 'like', '%'.$search.'%');
+        });
       }
 
       if (isset($info['from'])){

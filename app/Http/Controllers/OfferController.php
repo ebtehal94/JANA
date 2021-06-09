@@ -34,15 +34,10 @@ class OfferController extends Controller
 
       if (isset($info['search'])){
         $search         = $info['search'];
-        // if (isset($info['lang']) && $info['lang'] == 'en'){
         $offers                   = $offers->where(function ($query) use ($search) {
-                                            $query->where('title_ar', 'like', '%'.$search.'%')
-                                                  ->orWwhere('title_en', 'like', '%'.$search.'%');
+                                          return $query->where('title_ar', 'like', '%'.$search.'%')
+                                                       ->orWhere('title_en', 'like', '%'.$search.'%');
                                         });
-// ;
-        // }else{
-        //   $offers                   = $offers->where('title_ar', 'like', '%'.$info['search'].'%');
-        // }
       }
 
       if (isset($info['from'])){
