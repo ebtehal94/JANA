@@ -223,6 +223,28 @@ class StoreController extends Controller
     }
 
 
+    public function listBarnches(Request $request)
+    {
+      $response                 = array();
+      $user                     = \Auth::Guard('api')->user();
+      $todaysDate               = Carbon::now()->toDateString();
+      $branches                 = Branch::select('id','name_ar', 'name_en', 'views', 'image')
+                                       ->get()
+                                       ->sortByDesc(function($branch)
+                                         {
+                                             return $branch->offers->count();
+                                         })
+                                       ->take(20);
+
+      if (isset($info['from'])){
+       $offers                    = $offers->whereDate('created_at', '>=', $info['from']);
+      }
+
+      $response['branches']     = $branches;
+      return $response;
+    }
+
+
     public function createBranch(Request $request)
     {
       $response       = array();
