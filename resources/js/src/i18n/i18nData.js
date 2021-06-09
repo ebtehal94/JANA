@@ -52,6 +52,7 @@ export default {
 		offerNumber:'Number of offers',
 		newOffer:'New offer',
 		activeOffers:'Active Offers',
+		
 
 		UsedOffers:'Most used offers',
 		SuppliersOffers:'The number of added offers from suppliers',
@@ -75,6 +76,7 @@ export default {
 		PendingOffers:'Pending offers',
 		ActiveOffers:'Active offers',
 		RejectOffers:'Reject offers',
+		ExpireOffers:'Expire Offers',
 
 		OfferTitle: 'Title',
 		OfferDesc: 'Description',
@@ -89,6 +91,7 @@ export default {
 		CreateNewCustomer:'Create Customer Account',
 		AllCustomers:'All Customers',
 		PendingCustomers:'Pending accounts',
+		RejectCustomers:'Reject customers',
 		NewCustomers:'New customers used the referral code',
 
 		expiry:'Expiry Date',
@@ -436,6 +439,7 @@ export default {
 		PendingOffers:'العروض المعلقة',
 		ActiveOffers:'العروض النشطة',
 		RejectOffers:'العروض المرفوضة',
+		ExpireOffers:'العروض المنتهية',
 
 		OfferTitle: 'العنوان',
 		OfferDesc: 'الوصف',
@@ -450,6 +454,7 @@ export default {
 		CreateNewCustomer:'إنشاء حساب عميلة',
 		AllCustomers:'كل العملاء',
 		PendingCustomers:'الحسابات المعلقة',
+		RejectCustomers:'الحسابات المرفوضة',
 		NewCustomers:'عملاء جدد استخدموا كود الإحالات',
 
 		expiry:'تاريخ الإنتهاء',

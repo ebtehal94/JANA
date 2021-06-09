@@ -82,6 +82,22 @@ const router = new Router({
               rule: 'public',
           }
         },
+        // {
+        //   path: '/forgot-password',
+        //   name: 'page-forgot-password',
+        //   component: () => import('./views/pages/PasswordForgot.vue'),
+        //   meta: {
+        //       rule: 'public',
+        //   }
+        // },
+        // {
+        //   path: '/reset-password/:token',
+        //   name: 'page-reset-password',
+        //   component: () => import('@/views/pages/PasswordReset.vue'),
+        //   meta: {
+        //       rule: 'public',
+        //   }
+        // },
         {
             path: '/pages/comingsoon',
             name: 'page-coming-soon',

@@ -68,6 +68,9 @@
                         <vs-tab :label="$t('RejectOffers')">
                             <AllOffers display="reject" :search="search" :fromDate="fromDate" :toDate="toDate"/>
                         </vs-tab>
+                        <vs-tab :label="$t('ExpireOffers')">
+                            <AllOffers display="expire" :search="search" :fromDate="fromDate" :toDate="toDate"/>
+                        </vs-tab>
                     </vs-tabs>
                 </vx-card>
             </div>

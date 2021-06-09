@@ -51,7 +51,7 @@
                 </div>
 
                 <div class="vx-row mt-8">
-                    <div class="vx-col w-full md:w-1/2">
+                    <div class="vx-col w-full md:w-1/2"> 
                         <!-- Col Header -->
                         <div class="flex items-end">
                             <span class="leading-none font-semibold text-sm">{{ $i18n.locale == 'en' ? 'Terms and Conditions (ar)' : 'الشروط والأحكام باللغة العربية' }}</span>
@@ -215,6 +215,7 @@ export default {
                })
                .catch((error) => { reject(error) })
            })
+            
          },
         save_changes(){
                 // if(!this.validateForm) return

@@ -60,9 +60,13 @@
                         <vs-tab :label="$t('PendingCustomers')">
                             <AllCustomers display="pending" :search="search" :fromDate="fromDate" :toDate="toDate" />
                         </vs-tab>
+                        <vs-tab :label="$t('RejectCustomers')">
+                            <AllCustomers display="reject" :search="search" :fromDate="fromDate" :toDate="toDate" />
+                        </vs-tab>
                         <vs-tab :label="$t('NewCustomers')">
                             <AllCustomers display="new_customer" :search="search" :fromDate="fromDate" :toDate="toDate" />
                         </vs-tab>
+
                     </vs-tabs>
                 </vx-card>
             </div>

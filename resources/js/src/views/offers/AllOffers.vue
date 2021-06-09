@@ -129,7 +129,10 @@ export default {
                 this.$store.dispatch(link, {status: [1],search: this.search,from: this.fromDate, to: this.toDate}).catch(err => { console.error(err) })
             }else if (this.display == 'reject'){
                 this.$store.dispatch(link, {status: [2],search: this.search,from: this.fromDate, to: this.toDate}).catch(err => { console.error(err) })
-            }else
+            }else if (this.display == 'expire'){
+                this.$store.dispatch(link, {active: "1",search: this.search,from: this.fromDate, to: this.toDate}).catch(err => { console.error(err) })
+            }
+            else
                 this.$store.dispatch(link,{search: this.search, from: this.fromDate, to: this.toDate}).catch(err => { console.error(err) })
         },
         gotoEdit(id){
