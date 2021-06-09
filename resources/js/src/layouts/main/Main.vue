@@ -73,7 +73,7 @@
               </div>
                <vs-spacer />
               <div>
-                <i18n class="mr-2 mt-1"/>
+                <i18n class="mr-2 mt-2"/>
               </div>
               <div>
                 <profile-drop-down />

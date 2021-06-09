@@ -48,7 +48,10 @@
                         </div>
                         <div class="-ml-6 cursor-pointer flex justify-center"  v-if="display == 'pending'">
                             <vs-button v-if="$acl.check('admin')" color="#6FDD68" size="small" @click="updateStatus(item.id, 1)">{{$i18n.locale == "en" ? "Accept" : "موافقة"}}</vs-button>
-                            <vs-button v-if="$acl.check('admin')" color="danger" size="small" @click="updateStatus(item.id, 0)">{{$i18n.locale == "en" ? "Reject" : "رفض"}}</vs-button>
+                            <vs-button v-if="$acl.check('admin')" color="danger" size="small" @click="updateStatus(item.id, 2)">{{$i18n.locale == "en" ? "Reject" : "رفض"}}</vs-button>
+                        </div>
+                        <div class="-ml-6 cursor-pointer flex justify-center"  v-if="display == 'reject'">
+                            <vs-button v-if="$acl.check('admin')" color="#6FDD68" size="small" @click="updateStatus(item.id, 1)">{{$i18n.locale == "en" ? "Accept" : "موافقة"}}</vs-button>
                         </div>
                     </template>
                 </vx-card>
@@ -124,8 +127,9 @@ export default {
                 this.$store.dispatch(link, {status: [0],search: this.search,from: this.fromDate, to: this.toDate}).catch(err => { console.error(err) })
             }else if (this.display == 'active'){
                 this.$store.dispatch(link, {status: [1],search: this.search,from: this.fromDate, to: this.toDate}).catch(err => { console.error(err) })
-            }
-            else
+            }else if (this.display == 'reject'){
+                this.$store.dispatch(link, {status: [2],search: this.search,from: this.fromDate, to: this.toDate}).catch(err => { console.error(err) })
+            }else
                 this.$store.dispatch(link,{search: this.search, from: this.fromDate, to: this.toDate}).catch(err => { console.error(err) })
         },
         gotoEdit(id){

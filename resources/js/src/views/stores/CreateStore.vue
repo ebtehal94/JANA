@@ -15,10 +15,6 @@
               <img src="@assets/images/Uploader.png" alt="upload" width="90"/>
               </vs-button>
             </div>
-            <!-- <div class="text-center text-xs mt-8">
-              <p>تاريخ الإنضمام<span class="pl-4 date">15/4/2021</span></p>
-              <p>تاريخ آخر عرض<span class="pl-4 date">15/4/2021</span></p>
-            </div> -->
           </div>
             <!-- Col Header -->
               <div class="vx-card__title mt-5">
@@ -63,7 +59,7 @@
                 type="number"
                 icon-no-border
                 icon="icon"
-                v-validate="'required|min:7'"
+                v-validate="'required|min:7|max:10'"
                 class="w-3/4 mt-2 px-3"/>
 
                 <vs-input
@@ -229,11 +225,12 @@
               <div class="vx-card__title mt-4">
                 <div class="separator">
                   <h4 class="mb-4 text-base font-bold">{{$t('branchData')}}</h4>
-                  <div class="flex justify-end mr-2">
-                      <!-- <vs-button @click="updateBranch(branch)"  class="text-warning" type="flat" color="warning" icon-pack="feather" icon="icon-edit" size="small">{{$t('SaveChanges')}}</vs-button> -->
-                      <!-- <vs-button  @click="openBranchDeleteConfirm(branchIndex)" type="flat" class="justify-end mx-2 text-danger" color="danger" icon-pack="feather" icon="icon-trash-2" size="small">{{$t('Delete')}}</vs-button> -->
-                  </div>
                 </div>
+                <!-- <div class="flex justify-end mr-2">
+                      <vs-button @click="SaveChanges()"  class="text-warning" type="flat" color="warning" icon-pack="feather" icon="icon-edit" size="small">{{$t('SaveChanges')}}</vs-button>
+                        
+                  </div> -->
+                
               </div>
                 <div v-for="branch, branchIndex in branches_data"  :key="branch.name">
                   <div class="mt-8" v-if="branchIndex > 0">
@@ -333,7 +330,7 @@
                     </span>
                   </vs-button>
                 </div>
-              <div class=" mb-3">
+              <!-- <div class=" mb-3">
                 <vs-button
                 class="w-full mt-6 font-medium register-btn rounded-full"
                 color="linear-gradient(to left,#E93F7D,#DA6653)"
@@ -341,9 +338,33 @@
                 @click="save_changes">
                 {{$i18n.locale == "en" ? "Save Change" : "حفظ التغيرات"}}
                 </vs-button>
-              </div>
+                <vs-button
+                class="w-full mt-6 font-medium register-btn rounded-full"
+                color="#ACACAC" type="border"
+                @click="goBack">
+                {{ $i18n.locale == 'en' ? 'Close' : 'خروج' }}
+              </vs-button>
+              </div> -->
             </div>
           </div>
+        </div>
+          <div class="vx-row flex justify-center mt-10">
+            <vs-button
+              size="small"
+              class="mx-4 mb-4 font-semibold text-sm rounded-full"
+              color="linear-gradient(to left,#E93F7D,#DA6653)"
+              gradient
+              @click="save_changes">
+                {{$i18n.locale == "en" ? "Save Change" : "حفظ التغيرات"}}
+            </vs-button>
+
+            <vs-button
+              size="small"
+              class="mx-4 mb-4 font-semibold text-sm rounded-full px-24"
+              color="#ACACAC" type="border"
+              @click="goBack">
+                {{ $i18n.locale == 'en' ? 'Close' : 'خروج' }}
+            </vs-button>
         </div>
       </div>
     </vx-card>
@@ -437,22 +458,59 @@ export default {
        })
      },
      deleteBranch() {
+       const obj = this.branches_data[this.ItemToDelete]
        if (this.branches_data.length > 1){
-          return new Promise((resolve, reject) => {
-          axios.delete("/api/branches/delete/"+ branches_data.id)
+         if (obj.id != null ){
+           return new Promise((resolve, reject) => {
+          axios.delete("/api/branches/delete/"+ obj.id)
           .then((response) => {
             if (response.data.statusCode == 200){
               this.$vs.notify({
                 color: 'success',
-                title: this.$t('Successfull'),
-                text: this.$t('DeletedSuccussfully')
+                title: 'تم الحذف',
+                text: 'تم حذف الفرع بنجاح',
               })
+              this.branches_data.splice(this.ItemToDelete, 1)
+              
             }
-            this.branches_data.splice(this.ItemToDelete, 1)
+            else {
+            this.$vs.notify({
+              color: 'danger',
+              title: 'خطاء',
+              text: 'يجب ابقاء فرع واحد على الاقل',
+            })
+          }
             resolve(response)
           })
           .catch((error) => { reject(error) })
         })
+        }
+        else{
+          this.branches_data.splice(this.ItemToDelete, 1)
+           this.$vs.notify({
+             color: 'success',
+             title: 'تم الحذف',
+             text: 'تم حذف الفرع بنجاح',
+           })
+        }
+       }
+      //  if (this.branches_data.length > 1){
+      //     return new Promise((resolve, reject) => {
+      //     axios.delete("/api/branches/delete/"+ branch.id)
+      //     .then((response) => {
+      //       if (response.data.statusCode == 200){
+      //         this.$vs.notify({
+      //           color: 'success',
+      //           title: this.$t('Successfull'),
+      //           text: this.$t('DeletedSuccussfully')
+      //         })
+      //       }
+      //       this.branches_data.splice(this.ItemToDelete, 1)
+      //       resolve(response)
+            
+      //     })
+      //     .catch((error) => { reject(error) })
+      //   })
          // const branchIndex = this.branches_data.findIndex((u) => u.type == this.ItemToDelete)
         //  this.branches_data.splice(this.ItemToDelete, 1)
         //    this.$vs.notify({
@@ -460,14 +518,41 @@ export default {
         //      title: 'تم الحذف',
         //      text: 'تم حذف الفرع بنجاح',
         //    })
-       }else {
-         this.$vs.notify({
-           color: 'danger',
-           title: 'خطاء',
-           text: 'يجب ابقاء فرع واحد على الاقل',
-         })
-       }
+      //  }else {
+      //    this.$vs.notify({
+      //      color: 'danger',
+      //      title: 'خطاء',
+      //      text: 'يجب ابقاء فرع واحد على الاقل',
+      //    })
+      //  }
      },
+     SaveChanges(){
+      if (this.branches_data.length > 1){
+        
+          return new Promise((resolve, reject) => {
+            axios.post("/api/branches/update", this.branches_data)
+            .then((response) => {
+              if (response.data.statusCode == 200){
+                this.$vs.notify({
+                  color: 'success',
+                  title: 'Successfull',
+                  text: 'updated successfully'
+                })
+              }
+              else{
+              this.$vs.notify({
+                color: 'danger',
+                title: 'Error',
+                text: 'Error updating'
+              })
+            }
+              resolve(response)
+            })
+            .catch((error) => { reject(error) })
+          })
+      
+      }
+    },
     updateBranch(branch){
       if (this.branches_data.length > 1){
         if (branch.id != null && branch.id > 0 ){
@@ -493,6 +578,7 @@ export default {
             .catch((error) => { reject(error) })
           })
       }else{
+        // branch.store_id = this.store_data;
         return new Promise((resolve, reject) => {
           axios.post("/api/branches/create", branch)
           .then((response) => {
@@ -587,7 +673,16 @@ export default {
         })
         .catch(err => { console.error(err)
           this.$vs.loading.close()
+          this.$vs.notify({
+          color: 'danger',
+          title: 'خطاء',
+          text: 'الرجاء اكمال جميع الحقول المطلوبة',
+          // position: 'bottom-center'
+          })
         })
+    },
+    goBack(){
+      this.$router.go(-1)
     },
   },
   created() {
@@ -694,6 +789,9 @@ export default {
   .register-btn{
     border-radius: 30px;
   }
+  .vs-button.small:not(.includeIconOnly) {
+      padding: 0.4rem 5rem;
+    }
 }
 
 @media (min-width: 768px) and (max-width: 991.98px){
