@@ -227,7 +227,6 @@ class StoreController extends Controller
     {
       $response                 = array();
       $user                     = \Auth::Guard('api')->user();
-      $todaysDate               = Carbon::now()->toDateString();
       $branches                 = Branch::where('store_id', $request->store_id)
                                         ->select('id','name_ar', 'name_en')
                                         ->get();
