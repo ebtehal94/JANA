@@ -79,6 +79,8 @@ Route::post('/customers/update', 'CustomerController@update');
 Route::get('/customers/delete/{id}', 'CustomerController@remove');
 
 
+Route::post('/branches/list', 'StoreController@listBarnches');
+
 Route::middleware('auth:api')->group(function () {
 
   Route::post('/store/list', 'StoreController@index');
@@ -93,7 +95,6 @@ Route::middleware('auth:api')->group(function () {
   Route::post('/app/settings/update', 'AppPhotoController@update');
   Route::delete('/app/settings/deleteImage/{id}', 'AppPhotoController@deleteImage');
 
-  Route::post('/branches/list', 'StoreController@listBarnches');
   Route::post('/branches/create', 'StoreController@createBranch');
   Route::post('/branches/update', 'StoreController@updateBranch');
   Route::delete('/branches/delete/{id}', 'StoreController@removeBranch');
