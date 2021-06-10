@@ -231,9 +231,9 @@
                 </div>
                 <!-- <div class="flex justify-end mr-2">
                       <vs-button @click="SaveChanges()"  class="text-warning" type="flat" color="warning" icon-pack="feather" icon="icon-edit" size="small">{{$t('SaveChanges')}}</vs-button>
-                        
+
                   </div> -->
-                
+
               </div>
                 <div v-for="branch, branchIndex in branches_data"  :key="branch.name">
                   <div class="mt-8" v-if="branchIndex > 0">
@@ -476,7 +476,7 @@ export default {
                 text: 'تم حذف الفرع بنجاح',
               })
               this.branches_data.splice(this.ItemToDelete, 1)
-              
+
             }
             else {
             this.$vs.notify({
@@ -502,7 +502,7 @@ export default {
      },
      SaveChanges(){
       if (this.branches_data.length > 1){
-        
+
           return new Promise((resolve, reject) => {
             axios.post("/api/branches/update", this.branches_data)
             .then((response) => {
@@ -524,7 +524,7 @@ export default {
             })
             .catch((error) => { reject(error) })
           })
-      
+
       }
     },
     updateBranch(branch){
@@ -592,7 +592,7 @@ export default {
          reader.readAsDataURL(input.target.files[0])
        }
     },
- 
+
     save_changes() {
       //if(!this.validateForm) return
 
@@ -604,7 +604,7 @@ export default {
       formData.append('status', this.store_data.status)
       formData.append('user', JSON.stringify(this.user))
       formData.append('branches', JSON.stringify(this.branches_data))
-      if (this.dataUploadedImages){
+      if (this.dataUploadedImages.length > 0){
           formData.append('image', this.dataUploadedImages);
       }
       if (this.store_data.id != null && this.store_data.id > 0 ){
