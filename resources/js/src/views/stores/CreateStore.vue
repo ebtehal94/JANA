@@ -604,7 +604,7 @@ export default {
       formData.append('status', this.store_data.status)
       formData.append('user', JSON.stringify(this.user))
       formData.append('branches', JSON.stringify(this.branches_data))
-      if (this.dataUploadedImages.length > 0){
+      if (this.dataUploadedImages.url.length > 0){
           formData.append('image', this.dataUploadedImages);
       }
       if (this.store_data.id != null && this.store_data.id > 0 ){
