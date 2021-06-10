@@ -272,6 +272,33 @@
             
           </div>
           </div>
+
+          <!-- <div class="vx-col w-full md:w-1/2"> -->
+            <!-- Col Header -->
+            <!-- <div class="flex items-end">
+              <span class="leading-none font-semibold text-sm">{{$i18n.locale == "en" ? "Branches" : "الفروع"}}<span class="text-danger"> * </span></span>
+            </div> -->
+
+            <!-- <div class="bg-input text-sm">
+                <v-select class="w-full mt-4 text-sm"
+                  :placeholder="$t('Choosebranche')"
+                  v-model="branches.id"
+                  v-validate="'required'"
+                  multiple 
+                  :closeOnSelect="false"
+                  label="name_ar" :options="branches"
+                  :reduce="name_ar => name_ar.id"
+                  :dir="$vs.rtl ? 'rtl' : 'ltr'" /> -->
+
+                <!-- <span
+                  v-if="!errors.has('store_id') && offer_data.store_id">
+                  <icon name="confirm" class="icon left-icon"/>
+                </span>
+                <span v-else-if="errors.has('store_id')">
+                  <icon name="cross" class="icon left-icon"/>
+                </span> -->
+             <!-- </div>
+          </div> -->
         </div>
 
         <!-- Save & Reset Button -->
@@ -322,7 +349,7 @@ export default {
   data() {
     return {
       offer_data: {title_ar:null,title_en: null, category_id: null, desc_ar:null,desc_en:null,status:0,price_before:null,price:null,expiry:null,store_id:null,discount_perc:null,code:null},
-      // categories:[],
+      branches:[],
       status_list: [
         {text:'غير نشط',id:0},
         {text:'نشط',id:1},
@@ -484,19 +511,21 @@ export default {
     })
     .catch((error) => console.log(error))
 
-    if($acl.check('vendor')){
-      axios.post('/api/branches/list')
-      .then((res) => {
-        console.log(res.data)
-        })
-      .catch((error) => { console.log(error) })
-    }else if($acl.check('admin')){
-      axios.post('/api/branches/list')
-      .then((res) => {
-        console.log(res.data)
-        })
-      .catch((error) => { console.log(error) })
-    }
+  
+
+    // if($acl.check('vendor')){
+    //   axios.post('/api/branches/list')
+    //   .then((res) => {
+    //     console.log(res.data)
+    //     })
+    //   .catch((error) => { console.log(error) })
+    // }else if($acl.check('admin')){
+    //   axios.post('/api/branches/list')
+    //   .then((res) => {
+    //     console.log(res.data)
+    //     })
+    //   .catch((error) => { console.log(error) })
+    // }
 
   }
   

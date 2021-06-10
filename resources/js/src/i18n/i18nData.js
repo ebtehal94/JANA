@@ -87,6 +87,7 @@ export default {
 		Category: 'Category',
 		Price:'Price',
 		ChooseStore:'Choose store',
+		Choosebranche:'Choose branche',
 		Discount:'Discount',
 		DiscountPerc:'Discount Perc %',
 		ExpiryDate:'Expiry Date',

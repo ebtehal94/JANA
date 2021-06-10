@@ -9,11 +9,11 @@
             <div>
               <div class="vx-col w-full cardBox">
                 <!-- <vs-button class="cardTag text-danger mt-0" @click="openConfirm(image.id)" icon-pack="feather" icon="icon-trash-2" color="danger" type="flat" /> -->
-                <img v-if="dataUploadedImages.length === 0" :src="imgLink + store_data.image"  alt=" "  width="100">
+                <img  v-if="dataUploadedImages.length === 0" :src="imgLink + store_data.image"  alt=" "  width="100">
                 <img v-else :src="dataUploadedImages.url" alt=" "  width="100">
               </div>
               <div class="items-center vx-col w-full ">
-                
+                <!-- <img  :src="dataUploadedImages.url" alt=" "  width="100"> -->
               </div>
               <input type="file" class="hidden" ref="uploadImgInput" @change="updateCurrImg" accept="image/*">
               <vs-button  class="mt-12 mx-auto" type="transparent" @click="$refs.uploadImgInput.click()">
@@ -605,7 +605,7 @@ export default {
       formData.append('status', this.store_data.status)
       formData.append('user', JSON.stringify(this.user))
       formData.append('branches', JSON.stringify(this.branches_data))
-      if (this.dataUploadedImages.url.length > 0){
+      if (this.dataUploadedImages.url != null){
           formData.append('image', this.dataUploadedImages);
       }
       if (this.store_data.id != null && this.store_data.id > 0 ){
