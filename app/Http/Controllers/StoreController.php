@@ -201,7 +201,7 @@ class StoreController extends Controller
       if (isset($Str)){
         $Str->update($store);
 
-        if (isset($request->image)){
+        if (isset($request->image) && $request->hasFile('image')){
           $this->addImage($Str, $request->image);
         }
 
