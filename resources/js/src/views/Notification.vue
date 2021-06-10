@@ -21,8 +21,8 @@
                             :placeholder="$t('recipients')"
                             v-model="notice_data.receivers"
                             v-validate="'required'"
-                            label="name_ar" :options="customers_list"
-                            :reduce="name_ar => name_ar.id"
+                            label="text" :options="receivers_list"
+                            :reduce="text => text.id"
                             :dir="$vs.rtl ? 'rtl' : 'ltr'"
                             />
                       </div>
@@ -99,9 +99,9 @@ export default {
   data() {
     return {
       notice_data:{receivers:null,title:null,desc:null},
-      customers_list: [
-        {name_ar:'المتاجر',id:0},
-        {name_ar:'العملاء', id:1},
+      receivers_list: [
+        {text:'المتاجر',id:0},
+        {text:'العملاء', id:1},
       ],
     }
   },

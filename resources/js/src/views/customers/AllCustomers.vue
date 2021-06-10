@@ -98,6 +98,8 @@ export default {
         var link = "customerManagement/fetchCustomers"
         if (this.display == 'pending'){
             this.$store.dispatch(link, {status: [0] ,search: this.search,from: this.fromDate, to: this.toDate}).catch(err => { console.error(err) })
+        }else if (this.display == 'reject'){
+            this.$store.dispatch(link, {status: [2],search: this.search,from: this.fromDate, to: this.toDate}).catch(err => { console.error(err) })
         }else if (this.display == 'new_customer'){
             // axios.post("/api/customers/list/",{params:{filter: 'new_customer'}} )
             // .then((res) => {
