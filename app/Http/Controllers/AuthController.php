@@ -78,6 +78,8 @@ class AuthController extends Controller
         if (isset($request->image)){
           $this->addImage($store, $request->image);
         }
+        if ($user && !$user->device_type && $user->device_token) $this->updateFCMToken($user);
+
         // $token                    = auth()->login($user);
       //   $cc                       = $info['cc'];
       //   $otp                      = mt_rand(1000, 9999);
