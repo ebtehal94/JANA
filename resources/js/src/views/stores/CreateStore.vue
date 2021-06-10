@@ -9,13 +9,14 @@
             <div>
               <div class="vx-col w-full cardBox">
                 <!-- <vs-button class="cardTag text-danger mt-0" @click="openConfirm(image.id)" icon-pack="feather" icon="icon-trash-2" color="danger" type="flat" /> -->
-                <img  :src="imgLink + store_data.image"  alt=" "  width="100">
+                <img v-if="dataUploadedImages.length === 0" :src="imgLink + store_data.image"  alt=" "  width="100">
+                <img v-else :src="dataUploadedImages.url" alt=" "  width="100">
               </div>
               <div class="items-center vx-col w-full ">
-                <img :src="dataUploadedImages.url" alt=" "  width="100">
+                
               </div>
               <input type="file" class="hidden" ref="uploadImgInput" @change="updateCurrImg" accept="image/*">
-              <vs-button v-if="dataUploadedImages.length === 0" class="mt-12 mx-auto" type="transparent" @click="$refs.uploadImgInput.click()">
+              <vs-button  class="mt-12 mx-auto" type="transparent" @click="$refs.uploadImgInput.click()">
               <img src="@assets/images/Uploader.png" alt="upload" width="90"/>
               </vs-button>
             </div>
