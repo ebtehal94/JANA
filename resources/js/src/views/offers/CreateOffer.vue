@@ -484,7 +484,22 @@ export default {
     })
     .catch((error) => console.log(error))
 
+    if($acl.check('vendor')){
+      axios.post('/api/branches/list')
+      .then((res) => {
+        console.log(res.data)
+        })
+      .catch((error) => { console.log(error) })
+    }else if($acl.check('admin')){
+      axios.post('/api/branches/list')
+      .then((res) => {
+        console.log(res.data)
+        })
+      .catch((error) => { console.log(error) })
+    }
+
   }
+  
   
 }
 </script>

@@ -261,9 +261,6 @@ export default {
         },
     },
     created() {
-        // if(!moduleAppControlManagement .isRegistered) {
-        // this.$store.registerModule('appControlManagement', moduleAppControlManagement )
-        // moduleAppControlManagement .isRegistered = true
         axios.post("/api/app/settings/list")
           .then((res) => {
             this.appControl_data = res.data.settings
@@ -271,8 +268,6 @@ export default {
           })
           .catch((error) => { reject(error) })
 
-        // this.$store.dispatch("appControlManagement/fetchAppinfo").catch(err => { console.error(err) })
-        // }
     }
 
 

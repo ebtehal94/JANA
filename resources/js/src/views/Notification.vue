@@ -19,10 +19,10 @@
                       <div>
                             <v-select class="w-full mt-2  text-sm"
                             :placeholder="$t('recipients')"
-                            v-model="notice_data.customer_id"
+                            v-model="notice_data.recipient"
                             v-validate="'required'"
-                            label="name_ar" :options="customers_list"
-                            :reduce="name_ar => name_ar.id"
+                            label="text" :options="recipients_list"
+                            :reduce="text => text.id"
                             :dir="$vs.rtl ? 'rtl' : 'ltr'"
                             />
                       </div>
@@ -98,10 +98,10 @@ export default {
   },
   data() {
     return {
-      notice_data:{customer_id:null,title_ar:null,desc_ar:null},
-      customers_list: [
-        {name_ar:'المتاجر',id:1},
-        {name_ar:'العملاء', id:2},
+      notice_data:{recipient:null,title_ar:null,desc_ar:null},
+      recipients_list: [
+        {text:'المتاجر',id:1},
+        {text:'العملاء', id:2},
       ],
     }
   },

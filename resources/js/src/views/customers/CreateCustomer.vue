@@ -43,6 +43,7 @@
                     data-vv-validate-on="blur"
                     icon-no-border
                     icon="icon"
+                    name="email"
                     :placeholder="$t('email')"
                     v-model="customer_data.email"
                     class="w-full mt-2"/>
@@ -61,9 +62,10 @@
                     :placeholder="$t('mobile')"
                     v-model="customer_data.mobile"
                     type="number"
+                    name="mobile"
                     icon-no-border
                     icon="icon"
-                    v-validate="'required|min:7'"
+                    v-validate="'required|min:7|max:10'"
                     class="w-3/4 mt-2 px-3"/>
 
                   <vs-input

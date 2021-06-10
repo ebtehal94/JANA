@@ -24,6 +24,10 @@ export default {
 		accountData:'Account Data',
 		Login: 'Login',
 
+		ResetPassword:'Reset Password',
+		ResetPasswordText1:'Please enter your email address and we will send you instructions on how to reset your password',
+		BackToLogin:'Back To Login',
+		Send:'Send',
 
 		dashboard:'Dashboard',
 		Operations:'Financial Oprations',
@@ -394,6 +398,11 @@ export default {
 
 		accountData:'بيانات الحساب',
 		Login: 'تسجيل الدخول',
+
+		ResetPassword:'إعادة تعيين كلمة المرور',
+		ResetPasswordText1:'فضلاً قم بإدخال بريدك الإلكتروني وسوف نقوم بإرسال الخطوات التالية لإعادة تعيين كلمة مرورك',
+		BackToLogin:'العودة لتسجيل الدخول',
+		Send:'إرسال',
 
 		dashboard:'لوحة التحكم',
 		Operations:'العمليات المالية',
