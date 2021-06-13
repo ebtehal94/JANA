@@ -1,3 +1,4 @@
+/* eslint-disable no-var */
 <template>
   <div id="create-offer">
     <vx-card class="offer-info">
@@ -329,11 +330,11 @@
 </template>
 
 <script>
-import axios from "@/axios.js"
+import axios from '@/axios.js'
 import vSelect from 'vue-select'
 import icon from '@/layouts/components/icon.vue'
-import flatPickr from 'vue-flatpickr-component';
-import 'flatpickr/dist/flatpickr.css';
+import flatPickr from 'vue-flatpickr-component'
+import 'flatpickr/dist/flatpickr.css'
 
 // Store Module
 import moduleOfferManagement from '@/store/offer-management/moduleOfferManagement.js'
@@ -342,48 +343,49 @@ export default {
   components: {
     icon,
     vSelect,
-    flatPickr,
+    flatPickr
     // swiper,
     // swiperSlide,
   },
-  data() {
+  data () {
     return {
-      offer_data: {title_ar:null,title_en: null, category_id: null, desc_ar:null,desc_en:null,status:0,price_before:null,price:null,expiry:null,store_id:null,discount_perc:null,code:null},
+      offer_data: {title_ar:null, title_en: null, category_id: null, desc_ar:null, desc_en:null, status:0, price_before:null, price:null, expiry:null, store_id:null, discount_perc:null, code:null},
       branches:[],
       status_list: [
-        {text:'غير نشط',id:0},
-        {text:'نشط',id:1},
+        {text:'غير نشط', id:0},
+        {text:'نشط', id:1}
       ],
-      selected:{text:'غير نشط',id:0},
+      selected:{text:'غير نشط', id:0},
       dataUploadedImages: [],
       ImageToDelete: null,
       imgLink: 'https://janacard.s3.eu-central-1.amazonaws.com/offers/',
       offer_images:[],
       configFromdateTimePicker: {
-          minDate: new Date(),
-          maxDate: null
-      },
+        minDate: new Date(),
+        maxDate: null
+      }
     }
   },
   computed: {
-    categories() {
-        return this.$store.state.offerManagement.categories
+    categories () {
+      return this.$store.state.offerManagement.categories
     },
-    stores() {
-        return this.$store.state.offerManagement.stores
+    stores () {
+      return this.$store.state.offerManagement.stores
     },
-    validateForm() {
+    validateForm () {
       return (!this.errors.any() && (!this.offer_data.price_before || (this.offer_data.price_before > 0 && this.offer_data.price > 0 && this.offer_data.price_before < this.offer_data.price)))
     }
   },
   methods:{
-      updateCurrImg(input) {
+    updateCurrImg (input) {
       if (input.target.files && input.target.files[0]) {
-        var reader = new FileReader()
+        const reader = new FileReader()
+        
         reader.onload = e => {
           this.dataUploadedImages = input.target.files
 
-          for (var i = 0; i < this.dataUploadedImages.length; i++) {
+          for (let i = 0; i < this.dataUploadedImages.length; i++) {
             const url = URL.createObjectURL(this.dataUploadedImages[i])
             this.dataUploadedImages[i].url = url
           }
@@ -401,99 +403,101 @@ export default {
     //      reader.readAsDataURL(input.target.files[0])
     //    }
     // },
-    openConfirm(img) {
-      this.ImageToDelete = img;
-       this.$vs.dialog({
-         type: 'confirm',
-         color: 'danger',
-         title: `Delete Image`,
-         text: 'Are you sure you want to permenantly delete this image?',
-         accept: this.acceptAlert
-       })
-     },
-     acceptAlert() {
-       this.deleteImage()
+    openConfirm (img) {
+      this.ImageToDelete = img
+      this.$vs.dialog({
+        type: 'confirm',
+        color: 'danger',
+        title: 'Delete Image',
+        text: 'Are you sure you want to permenantly delete this image?',
+        accept: this.acceptAlert
+      })
+    },
+    acceptAlert () {
+      this.deleteImage()
 
-       this.$vs.notify({
-         color: 'danger',
-         title: 'Deleted image',
-         text: 'The selected image was successfully deleted'
-       })
-     },
-     deleteImage(img) {
-       return new Promise((resolve, reject) => {
-         axios.get("/api//offers/{offer_id}/deleteImage/{image_id}")
-           .then((response) => {
-             resolve(response)
-           })
-           .catch((error) => { reject(error) })
-       })
-     },
-    createOffer(){
-      if(!this.validateForm) return
-      let formData = new FormData();
+      this.$vs.notify({
+        color: 'danger',
+        title: 'Deleted image',
+        text: 'The selected image was successfully deleted'
+      })
+    },
+    deleteImage () {
+      return new Promise((resolve, reject) => {
+        axios.get('/api//offers/{offer_id}/deleteImage/{image_id}')
+          .then((response) => {
+            resolve(response)
+          })
+          .catch((error) => { reject(error) })
+      })
+    },
+    createOffer () {
+      if (!this.validateForm) return
+      const formData = new FormData()
       formData.append('title_ar', this.offer_data.title_ar)
       formData.append('title_en', this.offer_data.title_en)
       formData.append('desc_ar', this.offer_data.desc_ar)
       formData.append('desc_en', this.offer_data.desc_en)
       formData.append('category_id', this.offer_data.category_id)
       formData.append('status', this.offer_data.status)
-      formData.append('price_before', (this.offer_data.price_before > 0) ? this.offer_data.price_before : '' )
+      formData.append('price_before', (this.offer_data.price_before > 0) ? this.offer_data.price_before : '')
       formData.append('price', (this.offer_data.price > 0) ? this.offer_data.price : '')
       formData.append('discount_perc', (this.offer_data.discount_perc > 0) ? this.offer_data.discount_perc : '')
       formData.append('expiry', this.offer_data.expiry)
       formData.append('code', this.offer_data.code)
       formData.append('store_id', this.offer_data.store_id)
-      if (this.dataUploadedImages){
-        for( var i = 0; i < this.dataUploadedImages.length; i++ ){
-          let file = this.dataUploadedImages[i];
-          formData.append('images[' + i + ']', file);
+      if (this.dataUploadedImages) {
+        for (let i = 0; i < this.dataUploadedImages.length; i++) {
+          const file = this.dataUploadedImages[i]
+          formData.append('images[' + i + ']', file)
         }
       }
 
-        if (this.offer_data.id != null && this.offer_data.id > 0){
-          var link = "offerManagement/updateOffer"
-        }else{
-          var link = "offerManagement/addOffer"
-        }
-        this.$vs.loading()
-        this.$store.dispatch(link, formData)
+      
+      if (this.offer_data.id != null && this.offer_data.id > 0) {
+        
+        var link = 'offerManagement/updateOffer'
+      } else {
+        var link = 'offerManagement/addOffer'
+      }
+      this.$vs.loading()
+      this.$store.dispatch(link, formData)
         .then(res => {
           this.$vs.loading.close()
-          if( res.data.statusCode == 200 ){
+          if (res.data.statusCode == 200) {
             this.$vs.notify({
-            color: 'success',
-            title: 'Successfull',
-            text: 'تم بنجاح'
+              color: 'success',
+              title: 'Successfull',
+              text: 'تم بنجاح'
             })
             this.$router.go(-1)
-          } 
-          else{
+          } else {
             this.$vs.loading.close()
             this.$vs.notify({
-            color: 'danger',
-            title: 'Error',
-            text: 'حدث خطأ ما'
+              color: 'danger',
+              title: 'Error',
+              text: 'حدث خطأ ما'
             })
           }
         })
-        .catch(err => { console.error(err)
+        .catch(err => {
+          console.error(err)
           this.$vs.loading.close()
           this.$vs.notify({
-          color: 'danger',
-          title: 'خطاء',
-          text: 'الرجاء اكمال جميع الحقول المطلوبة',
+            color: 'danger',
+            title: 'خطاء',
+            text: 'الرجاء اكمال جميع الحقول المطلوبة'
           // position: 'bottom-center'
           })
         })
     },
-    goBack(){
+    goBack () {
       this.$router.go(-1)
-    },
+    }
   },
-  created() {
+  created () {
     // Register Module OfferManagement Module
-    if(!moduleOfferManagement.isRegistered) {
+    if (!moduleOfferManagement.isRegistered) {
       this.$store.registerModule('offerManagement', moduleOfferManagement)
       moduleOfferManagement.isRegistered = true
     }
@@ -505,21 +509,21 @@ export default {
     //   .catch((error) => console.log(error))
     // }
 
-    this.$store.dispatch("offerManagement/fetchInfo").catch(err => { console.error(err) })
-    .then((res) => {
+    this.$store.dispatch('offerManagement/fetchInfo').catch(err => { console.error(err) })
+      // eslint-disable-next-line no-unused-vars
+      .then((res) => {
       // this.categories = res.data.categories
-    })
-    .catch((error) => console.log(error))
-
+      })
+      .catch((error) => console.log(error))
   
 
-    // if($acl.check('vendor')){
+    // if(this.$acl.check('vendor')){
     //   axios.post('/api/branches/list')
     //   .then((res) => {
     //     console.log(res.data)
     //     })
     //   .catch((error) => { console.log(error) })
-    // }else if($acl.check('admin')){
+    // }else if(this.$acl.check('admin')){
     //   axios.post('/api/branches/list')
     //   .then((res) => {
     //     console.log(res.data)
@@ -590,7 +594,6 @@ export default {
       border-radius:30px ;
       font-size: .9rem;
     }
-    
 
 
 }

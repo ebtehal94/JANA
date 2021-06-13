@@ -122,11 +122,16 @@
 <script>
 // import LoginJwt from "./LoginJWT.vue"
 import axios from "@/axios.js"
-
+import icon from '../../layouts/components/icon.vue';
+import I18n  from "@/layouts/components/navbar/components/I18n.vue"
 
 
 
 export default{
+  components:{
+    icon,
+    I18n
+  },
   data () {
     return {
       email: '',

@@ -395,7 +395,7 @@ export default {
         name_en:null,
         cr_number:null,
         city_id:null,
-        status:null,
+        status:0,
         Image:null
       },
       cities_list:CitiesList,

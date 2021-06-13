@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 <template>
     <div id="all-customers">
         <!-- ITEM VIEW - GRID/LIST -->
@@ -44,83 +45,86 @@
 </template>
 
 <script>
-import axios from "@/axios.js"
+import axios from '@/axios.js'
 import moduleCustomerManagement from '@/store/customer-management/moduleCustomerManagement.js'
 import importExcel from './components/ImportExcel.vue'
 export default {
-    components: {
-        ItemGridView: () => import('./components/ItemGridView.vue'),
-        ItemListView: () => import('./components/ItemListView.vue'),
-        importExcel
+  components: {
+    ItemGridView: () => import('./components/ItemGridView.vue'),
+    ItemListView: () => import('./components/ItemListView.vue'),
+    importExcel
+  },
+  props:{
+    display:{
+      required:false
     },
-    props:{
-        display:{
-            required:false
-        },
-        search:{
-            required: false
-        },
-        fromDate:{
-            required: false
-        },
-        toDate:{
-           required: false 
-        }
+    search:{
+      required: false
     },
-  data() {
+    fromDate:{
+      required: false
+    },
+    toDate:{
+      required: false 
+    }
+  },
+  data () {
     return {
       ItemToDelete: null,
-      currentItemView: 'item-grid-view',
+      currentItemView: 'item-grid-view'
     //   currentPage:1
     }
   },
-    computed: {
-      customers() {
-        return this.$store.state.customerManagement.customers
-      },
+  computed: {
+    customers () {
+      return this.$store.state.customerManagement.customers
+    }
+  },
+  watch:{
+    // eslint-disable-next-line no-unused-vars
+    search (val) {
+      this.getResults()
     },
-    watch:{
-        search (val){
-          this.getResults()
-        },
-        fromDate (val){
-            this.getResults()
-        },
-        toDate (val){
-            this.getResults()
-        }
+    // eslint-disable-next-line no-unused-vars
+    fromDate (val) {
+      this.getResults()
     },
-    methods: {
+    // eslint-disable-next-line no-unused-vars
+    toDate (val) {
+      this.getResults()
+    }
+  },
+  methods: {
     // nextPage(){
     //     this.currentPage++
     // },
-    getResults(){
-        var link = "customerManagement/fetchCustomers"
-        if (this.display == 'pending'){
-            this.$store.dispatch(link, {status: [0] ,search: this.search,from: this.fromDate, to: this.toDate}).catch(err => { console.error(err) })
-        }else if (this.display == 'reject'){
-            this.$store.dispatch(link, {status: [2],search: this.search,from: this.fromDate, to: this.toDate}).catch(err => { console.error(err) })
-        }else if (this.display == 'new_customer'){
-            // axios.post("/api/customers/list/",{params:{filter: 'new_customer'}} )
-            // .then((res) => {
-            // (res.data)
-            // })
-            // .catch((error) => console.log(error))
-            this.$store.dispatch(link, {filter: 'new_customer'}).catch(err => { console.error(err) })
-        }else
-        this.$store.dispatch(link,{search: this.search,from: this.fromDate, to: this.toDate}).catch(err => { console.error(err) })
-    },
+    getResults () {
+      const link = 'customerManagement/fetchCustomers'
+      // eslint-disable-next-line eqeqeq
+      if (this.display == 'pending') {
+        this.$store.dispatch(link, {status: [0], search: this.search, from: this.fromDate, to: this.toDate}).catch(err => { console.error(err) })
+      } else if (this.display == 'reject') {
+        this.$store.dispatch(link, {status: [2], search: this.search, from: this.fromDate, to: this.toDate}).catch(err => { console.error(err) })
+      } else if (this.display == 'new_customer') {
+        // axios.post("/api/customers/list/",{params:{filter: 'new_customer'}} )
+        // .then((res) => {
+        // (res.data)
+        // })
+        // .catch((error) => console.log(error))
+        this.$store.dispatch(link, {filter: 'new_customer'}).catch(err => { console.error(err) })
+      } else this.$store.dispatch(link, {search: this.search, from: this.fromDate, to: this.toDate}).catch(err => { console.error(err) })
+    }
     
   },
 
-    created() {
-        if(!moduleCustomerManagement.isRegistered) {
-            this.$store.registerModule('customerManagement', moduleCustomerManagement)
-            moduleCustomerManagement.isRegistered = true
-        }
-        this.getResults()
-
+  created () {
+    if (!moduleCustomerManagement.isRegistered) {
+      this.$store.registerModule('customerManagement', moduleCustomerManagement)
+      moduleCustomerManagement.isRegistered = true
     }
+    this.getResults()
+
+  }
 }
 </script>
 
