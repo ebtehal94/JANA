@@ -50,10 +50,16 @@
                 class="w-1/5 mt-2"
                 placeholder="966+"/>
 
-                <span >
+                <span v-if="!errors.has('mobile')">
+                  <icon name="confirm" class="icon left-phone-icon"/>
+                </span>
+                <span v-else-if="errors.has('mobile')">
+                  <icon name="cross" class="icon left-phone-icon"/>
+                </span>
+                <!-- <span >
                   <icon v-if="errors.has('mobile')" name="cross" class="icon left-phone-icon"/>
                   <icon v-else name="confirm" class="icon left-phone-icon"/>
-                </span>
+                </span> -->
               </div>
               <div class="vx-row bg-input">
                 <icon name="phone" class="icon phone-icon"/>
@@ -197,7 +203,8 @@
                 icon-no-border
                 icon="icon"
                 v-validate="'required|min:6'"
-                class="w-full mt-2"/>
+                class="w-full mt-2"
+                name="cr_number"/>
 
                 <span v-if="!errors.has('cr_number') && store_data.cr_number && store_data.cr_number.length >= 6">
                   <icon name="confirm" class="icon left-icon"/>
@@ -231,9 +238,8 @@
                   <h4 class="mb-4 text-base font-bold">{{$t('branchData')}}</h4>
                 </div>
                 <!-- <div class="flex justify-end mr-2">
-                      <vs-button @click="SaveChanges()"  class="text-warning" type="flat" color="warning" icon-pack="feather" icon="icon-edit" size="small">{{$t('SaveChanges')}}</vs-button>
-
-                  </div> -->
+                  <vs-button @click="updateBranch(branch)"  class="text-warning" type="flat" color="warning" icon-pack="feather" icon="icon-edit" size="small">{{$t('SaveChanges')}}</vs-button>
+                </div> -->
 
               </div>
                 <div v-for="branch, branchIndex in branches_data"  :key="branch.name">
@@ -505,7 +511,7 @@ export default {
       if (this.branches_data.length > 1){
 
           return new Promise((resolve, reject) => {
-            axios.post("/api/branches/update", this.branches_data)
+            axios.post("/api/branches/update", branch)
             .then((response) => {
               if (response.data.statusCode == 200){
                 this.$vs.notify({
@@ -648,12 +654,6 @@ export default {
         })
         .catch(err => { console.error(err)
           this.$vs.loading.close()
-          this.$vs.notify({
-          color: 'danger',
-          title: 'خطاء',
-          text: 'الرجاء اكمال جميع الحقول المطلوبة',
-          // position: 'bottom-center'
-          })
         })
     },
     goBack(){

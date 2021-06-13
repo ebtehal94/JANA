@@ -93,7 +93,7 @@ export default {
       this.$store.dispatch('updateMainLayout', 'horizontal')
 
       // This is just for demo Purpose. If user clicks on logout -> redirect
-      this.$router.push('/login').catch(() => {})
+      this.$router.push('/').catch(() => {})
     }
   }
 }

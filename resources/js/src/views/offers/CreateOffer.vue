@@ -152,12 +152,6 @@
                 <!-- <vs-button v-if="dataUploadedImages.length === 0" class="text-gray p-0 mt-6" icon-pack="feather"  type="transparent" icon="icon-plus" @click="$refs.uploadImgInput.click()"/>
                 <h5 class="text-gray text-xs text-center">{{ $i18n.locale == 'en' ? 'Upload Image' : 'اضافة صورة' }}</h5> -->
               </div>
-              <!-- <div class="vx-col w-full md:w-1/3 mb-4">
-                <img src="@assets/images/payment-methods.png" alt="Offer-image" class="mx-auto w-full lg:responsive" width="120">
-              </div>
-              <div class="vx-col w-full md:w-1/3 mb-4">
-                <img src="@assets/images/card.png" alt="Offer-image" class="mx-auto w-full lg:responsive relative" width="120">
-              </div> -->
             </div>
           </div>
         </div>

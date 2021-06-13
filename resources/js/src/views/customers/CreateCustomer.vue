@@ -202,7 +202,7 @@ export default {
   },
   methods: {
     registerUser() {
-      if(!this.validateForm) return
+      // if(!this.validateForm) return
         if (this.customer_data.id != null && this.customer_data.id > 0){
           var link = "customerManagement/updateCustomer"
         }else{
