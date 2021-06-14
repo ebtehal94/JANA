@@ -23,6 +23,16 @@
                                 <h4 class="font-bold">{{ $i18n.locale == 'en' ? (tr.name_en || $t('NA')) : (tr.name_ar  || $t('NA'))}}</h4>
                                 </vs-td>
 
+                                <vs-td>
+                                    <div class="mt-3 cursor-pointer flex items-cente justify-center" v-if="display == 'pending'">
+                                        <vs-button color="#6FDD68" size="small" @click="updateStatus(tr.id, 1)">{{$i18n.locale == "en" ? "Accept" : "موافقة"}}</vs-button>
+                                        <vs-button color="danger" size="small" @click="updateStatus(tr.id, 2)">{{$i18n.locale == "en" ? "Reject" : "رفض"}}</vs-button>
+                                    </div>
+                                    <div class="-ml-6 cursor-pointer flex justify-center"  v-if="display == 'reject'">
+                                        <vs-button v-if="$acl.check('admin')" color="#6FDD68" size="small" @click="updateStatus(item.id, 1)">{{$i18n.locale == "en" ? "Accept" : "موافقة"}}</vs-button>
+                                    </div>
+                                </vs-td>
+
                                 <vs-td class="whitespace-no-wrap">
                                     <div class="mx-auto cursor-pointer flex justify-around action" style="width: 5rem">
                                         <vs-button @click.stop="gotoEdit(tr.id)" color="rgb(255,255,255)" text-color="rgb(255,159,67)" size="small" radius icon-pack="feather" icon="icon-edit" class=" shadow"/>
@@ -77,6 +87,21 @@ export default{
                 title: 'Successfull',
                 text: 'تم بنجاح'
             })
+        },
+        updateStatus(id, status){
+            this.$store.dispatch("storeManagement/updateStore", {id:id, status:status})
+            .then(()   => { this.showUpdateSuccess() })
+            .then(()  => {
+            this.$store.dispatch("storeManagement/fetchStores", {status: [0]})
+        })
+            .catch(err => { console.error(err.response)})
+        },
+        showUpdateSuccess() {
+                this.$vs.notify({
+                color: 'success',
+                title: 'Successfull',
+                text: 'تم بنجاح'
+            })
         }
 
   }
@@ -87,6 +112,14 @@ export default{
 #all-store{
         h4{
             font-size: .9rem;
+        }
+        .vs-button.small:not(.includeIconOnly) {
+            border-radius: 30px;
+            margin-left: .5rem;
+        }
+        .vs-button.small{
+            font-size: .6rem;
+            font-weight: bold;
         }
         .vs-con-table {
             .vs-table {

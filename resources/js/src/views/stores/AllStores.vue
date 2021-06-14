@@ -88,34 +88,19 @@ export default {
     },
     methods: {
         getResults(){
-            this.$store.dispatch("storeManagement/fetchStores",{search: this.search,from: this.fromDate, to: this.toDate})
-            .catch(err => { console.error(err) })
+            var link = "storeManagement/fetchStores"
+            if (this.display == 'pending'){
+                this.$store.dispatch(link, {status: [0],search: this.search,from: this.fromDate, to: this.toDate}).catch(err => { console.error(err) })
+            }else if (this.display == 'active'){
+                this.$store.dispatch(link, {status: [1],search: this.search,from: this.fromDate, to: this.toDate}).catch(err => { console.error(err) })
+            }else if (this.display == 'reject'){
+                this.$store.dispatch(link, {status: [2],search: this.search,from: this.fromDate, to: this.toDate}).catch(err => { console.error(err) })
+            }
+            else
+                this.$store.dispatch(link,{search: this.search, from: this.fromDate, to: this.toDate}).catch(err => { console.error(err) })
+            // this.$store.dispatch("storeManagement/fetchStores",{search: this.search,from: this.fromDate, to: this.toDate})
+            // .catch(err => { console.error(err) })
         },
-        // gotoEdit(id){
-        //     this.$router.push({path: 'stores/edit/' + id})
-        // },
-        // openDeleteConfirm(id) {
-        //     this.ItemToDelete = id;
-        //     this.$vs.dialog({
-        //         type: 'confirm',
-        //         color: 'danger',
-        //         title: this.$t('Delete'),
-        //         text: 'هل أنت متأكدأنك تريد حذف هذا المتجر نهائياً؟',
-        //         accept: this.deleteStore
-        //     })
-        // },
-        // deleteStore(){
-        //     this.$store.dispatch("storeManagement/removeStore", this.ItemToDelete)
-        //     .then(()   => { this.showDeleteSuccess() })
-        //     .catch(err => { console.error(err) })
-        // },
-        // showDeleteSuccess() {
-        //         this.$vs.notify({
-        //         color: 'success',
-        //         title: 'Successfull',
-        //         text: 'تم بنجاح'
-        //     })
-        // }
     },
     created() {
         if(!moduleStoreManagement.isRegistered) {

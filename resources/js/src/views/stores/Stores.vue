@@ -48,6 +48,15 @@
                         <vs-tab :label="$t('AllStores')">
                             <AllStores :search="search" :fromDate="fromDate" :toDate="toDate" />
                         </vs-tab>
+                        <vs-tab :label="$t('PendingStores')">
+                            <AllStores  display ='pending' :search="search" :fromDate="fromDate" :toDate="toDate"/>
+                        </vs-tab>
+                        <vs-tab :label="$t('ActiveStores')">
+                            <AllStores  display="active" :search="search" :fromDate="fromDate" :toDate="toDate"/>
+                        </vs-tab>
+                        <vs-tab :label="$t('RejectStores')">
+                            <AllStores  display="reject" :search="search" :fromDate="fromDate" :toDate="toDate"/>
+                        </vs-tab>
                     </vs-tabs>
                 </vx-card>
             </div>

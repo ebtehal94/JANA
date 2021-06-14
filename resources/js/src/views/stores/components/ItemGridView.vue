@@ -19,6 +19,13 @@
                             <vs-button @click.stop="openDeleteConfirm(item.id)" color="rgb(255,255,255)" text-color="#EA5455" size="small" radius icon-pack="feather" icon="icon-trash-2" class=" shadow"/>
                         </div>
                     <h4 class="text-center">{{ $i18n.locale == 'en' ? (item.name_en || $t('NA')) : (item.name_ar  || $t('NA'))}}</h4>
+                    <div class="-ml-6 cursor-pointer flex justify-center" v-if="display == 'pending'">
+                        <vs-button v-if="$acl.check('admin')" color="#6FDD68" size="small" @click="updateStatus(item.id, 1)">{{$i18n.locale == "en" ? "Accept" : "موافقة"}}</vs-button>
+                        <vs-button v-if="$acl.check('admin')" color="danger" size="small" @click="updateStatus(item.id, 2)">{{$i18n.locale == "en" ? "Reject" : "رفض"}}</vs-button>
+                    </div>
+                    <div class="-ml-6 cursor-pointer flex justify-center"  v-if="display == 'reject'">
+                        <vs-button v-if="$acl.check('admin')" color="#6FDD68" size="small" @click="updateStatus(item.id, 1)">{{$i18n.locale == "en" ? "Accept" : "موافقة"}}</vs-button>
+                    </div>
                 </vx-card>
             </div>
         </div>
@@ -67,6 +74,21 @@ export default{
                 title: 'Successfull',
                 text: 'تم بنجاح'
             })
+        },
+        updateStatus(id, status){
+            this.$store.dispatch("storeManagement/updateStore", {id:id, status:status})
+            .then(()   => { this.showUpdateSuccess() })
+            .then(()  => {
+            this.$store.dispatch("storeManagement/fetchStores", {status: [0]})
+        })
+            .catch(err => { console.error(err.response)})
+        },
+        showUpdateSuccess() {
+                this.$vs.notify({
+                color: 'success',
+                title: 'Successfull',
+                text: 'تم بنجاح'
+            })
         }
 
   }
@@ -86,7 +108,7 @@ export default{
         h4{
             font-size: .9rem;
             font-weight: bold;
-            padding: 1rem 0 .4rem;
+            padding: 1rem 0 1rem;
         }
         p{
             font-size:.6rem ;
@@ -96,7 +118,7 @@ export default{
         .vs-button.small:not(.includeIconOnly) {
             padding: 0 .9rem;
             border-radius: 30px;
-            margin-bottom: -1.9rem;
+            margin-bottom: -2rem;
             margin-left: .5rem;
         }
         .vs-button.small{

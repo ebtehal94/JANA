@@ -37,7 +37,7 @@
                 icon-no-border
                 icon="icon"
                 name="mobile"
-                v-validate="'required|min:7'"
+                v-validate="'required|min:7|max:10'"
                 class="w-3/4 mt-2 px-3"/>
 
                 <vs-input
@@ -50,14 +50,14 @@
                 class="w-1/5 mt-2"
                 placeholder="966+"/>
 
-                <span v-if="!errors.has('mobile')">
+                <span v-if="!errors.has('mobile') && user.mobile">
                   <icon name="confirm" class="icon left-phone-icon"/>
                 </span>
                 <span v-else-if="errors.has('mobile')">
                   <icon name="cross" class="icon left-phone-icon"/>
                 </span>
-                <!-- <span >
-                  <icon v-if="errors.has('mobile')" name="cross" class="icon left-phone-icon"/>
+                <!-- <span>
+                  <icon v-if="errors.has('mobile') && user.mobile" name="cross" class="icon left-phone-icon"/>
                   <icon v-else name="confirm" class="icon left-phone-icon"/>
                 </span> -->
               </div>

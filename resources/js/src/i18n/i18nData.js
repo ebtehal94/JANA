@@ -45,7 +45,7 @@ export default {
 		AdminEdit:'Edit',
 		CreateStore:'Create New Account',
 
-		SearchBar: 'What are you looking for?',
+		SearchBar: 'Search..',
 		From:'From',
 		To:'To',
 
@@ -67,7 +67,7 @@ export default {
 		CustomerNumber:"Customer id",
 		CardNumber:'Card Number',
 		amount:'Amount',
-		ref:'Referanc',
+		ref:'Reference',
 
 		fullName:'Full Name',
 		accountStatus:'Account Status (Active)',
@@ -80,7 +80,7 @@ export default {
 		PendingOffers:'Pending offers',
 		ActiveOffers:'Active offers',
 		RejectOffers:'Reject offers',
-		ExpireOffers:'Expire Offers',
+		ExpireOffers:'Expire offers',
 
 		OfferTitle: 'Title',
 		OfferDesc: 'Description',
@@ -92,6 +92,7 @@ export default {
 		DiscountPerc:'Discount Perc %',
 		ExpiryDate:'Expiry Date',
 		DiscountCode:'Discount Code',
+		expiry:'Expiry Date',
 
 		CreateNewCustomer:'Create Customer Account',
 		AllCustomers:'All Customers',
@@ -99,10 +100,11 @@ export default {
 		RejectCustomers:'Reject customers',
 		NewCustomers:'New customers used the referral code',
 
-		expiry:'Expiry Date',
-
 		CreateNewStore:'Create New Account',
 		AllStores:'All stores',
+		PendingStores:'Pending stores',
+		ActiveStores:'Active stores',
+		RejectStores:'Reject stores',
 		
 		Delete:'Delete',
 		SaveChanges:'Save Changes',
@@ -421,7 +423,7 @@ export default {
 		AdminEdit:'تعديل ',
 		CreateStore:'إنشاء حساب جديد',
 
-		SearchBar: 'ما الذي تبحث عنه؟',
+		SearchBar: 'Search..',
 		From:'من',
 		To:'حتى',
 
@@ -460,6 +462,7 @@ export default {
 		DiscountPerc:'نسبة الخصم %',
 		ExpiryDate:'تاريخ الإنتهاء',
 		DiscountCode:'كود الخصم',
+		expiry:'تاريخ الإنتهاء',
 
 		CreateNewCustomer:'إنشاء حساب عميلة',
 		AllCustomers:'كل العملاء',
@@ -467,10 +470,11 @@ export default {
 		RejectCustomers:'الحسابات المرفوضة',
 		NewCustomers:'عملاء جدد استخدموا كود الإحالات',
 
-		expiry:'تاريخ الإنتهاء',
-
 		CreateNewStore:'إنشاء حساب جديد',
 		AllStores:'كل المتاجر',
+		PendingStores:'المتاجر المعلقة',
+		ActiveStores:'المتاجر النشطة',
+		RejectStores:'المتاجر المرفوضة',
 		
 		Delete:'حذف',
 		SaveChanges:'حفظ التغيرات',
@@ -483,9 +487,7 @@ export default {
 
 		title:'العنوان',
 		desc:'الوصف',
-
 		desc_lable:'الوصف',
-
 		recipients:'المستلمين',
 
 

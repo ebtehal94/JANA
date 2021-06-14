@@ -34,7 +34,7 @@
                             <vs-td>
                                 <div class="mt-3 cursor-pointer flex items-cente justify-center" v-if="display == 'pending'">
                                     <vs-button color="#6FDD68" size="small" @click="updateStatus(tr.id, 1)">{{$i18n.locale == "en" ? "Accept" : "موافقة"}}</vs-button>
-                                    <vs-button color="danger" size="small" @click="updateStatus(tr.id, 0)">{{$i18n.locale == "en" ? "Reject" : "رفض"}}</vs-button>
+                                    <vs-button color="danger" size="small" @click="updateStatus(tr.id, 2)">{{$i18n.locale == "en" ? "Reject" : "رفض"}}</vs-button>
                                 </div>
                             </vs-td>
 
