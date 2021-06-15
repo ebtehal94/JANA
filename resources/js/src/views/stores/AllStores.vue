@@ -32,11 +32,11 @@
         
         <!-- GRID VIEW -->
         <template v-if="currentItemView == 'item-grid-view'">    
-            <item-grid-view :stores="stores"/> 
+            <item-grid-view :stores="stores" :display="display"/> 
         </template>
         <!-- LIST VIEW -->
         <template v-else>
-            <item-list-view :stores="stores"/>
+            <item-list-view :stores="stores" :display="display"/>
         </template>
     </div>
 </template>

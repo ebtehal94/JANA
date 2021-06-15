@@ -103,7 +103,8 @@
                       icon-no-border
                       icon="icon"
                       v-validate="'required|min:6'"
-                      class="w-full mt-2"/>
+                      class="w-full mt-2"
+                      name="cr_number"/>
 
                     <span
                       v-if="!errors.has('cr_number') && store_data.cr_number && store_data.cr_number.length >= 6">
@@ -323,8 +324,9 @@
                     type="number"
                     icon-no-border
                     icon="icon"
-                    v-validate="'required|min:7'"
-                    class="w-3/4 mt-2 px-3"/>
+                    v-validate="'required|min:7|max:10'"
+                    class="w-3/4 mt-2 px-3"
+                    name="mobile"/>
 
                   <vs-input
                   size="large"
@@ -355,7 +357,8 @@
                     icon-no-border
                     icon="icon"
                     v-validate="'required|min:7'"
-                    class="w-3/4 mt-2 px-3"/>
+                    class="w-3/4 mt-2 px-3"
+                    name="phone"/>
 
                   <vs-input
                     size="large"
@@ -386,7 +389,8 @@
                     icon="icon"
                     :placeholder="$t('email')"
                     v-model="user.email"
-                    class="w-full mt-2"/>
+                    class="w-full mt-2"
+                    name="email"/>
 
                    <span v-if="!errors.has('email') && user.email">
                     <icon name="confirm" class="icon left-icon"/>
