@@ -195,7 +195,6 @@ class StoreController extends Controller
       $response       = array();
       $store          = $request->all();
       $Str            = Store::find($request->id);
-      $userInfo       = json_decode($store['user'], true);
 
 
       if (isset($Str)){
@@ -205,9 +204,11 @@ class StoreController extends Controller
           $this->addImage($Str, $request->image);
         }
 
-        if (isset($userInfo)){
+
+        if (isset($store['user']) && isset(json_decode($store['user'], true))){
+          $userInfo       = json_decode($store['user'], true);
           if (isset($userInfo['password']) && !empty($userInfo['password'])){
-            $userInfo['p  assword']       = bcrypt($userInfo['password']);
+            $userInfo['password']       = bcrypt($userInfo['password']);
           }else{
             unset($userInfo['password']);
           }
