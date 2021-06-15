@@ -24,18 +24,20 @@ class OfferController extends Controller
      */
     public function home(Request $request)
     {
+      $date                     = Carbon::now()->toDateString();
       $response                 = array();
       $response['slider']       = AppPhoto::select('id', 'link')->get();
       $info                     = $request->all();
       $stores                   = Store::orderby('views','desc')
                                        ->select('id','name_ar', 'name_en', 'views', 'image')
+                                       ->where('status', 1)
                                        ->take(6);
-
       $response['stores']       = $stores->get();
 
       $offers                   = Offer::with('mainImage', 'category:id,title_en,title_ar', 'store:id,name_en,name_ar')
                                        ->orderby('id','desc')
-                                       ->whereIn('status', [1,2])
+                                       ->where('status', 1)
+                                       ->whereDate('expiry', '>=', $date)
                                        ->take(9);
 
       // if (isset($info['city_id'])){
@@ -68,12 +70,7 @@ class OfferController extends Controller
         $offers                   = $offers->where('status', 1)
                                            ->whereDate('expiry', '>=', Carbon::now()->toDateString());
       }
-      // if (isset($info['city_id'])){
-      //   $city_id                  = $info['city_id'];
-      //   $offers                   = $offers->whereHas('branches', function ($query) use ($city_id) {
-      //                                         return $query->where('city_id', $city_id);
-      //                                       });
-      // }
+
       if (isset($info['category_id'])){
         $offers                   = $offers->where('category_id', $info['category_id']);
       }
@@ -110,9 +107,11 @@ class OfferController extends Controller
     public function view(Request $request)
     {
       $response       = array();
+      $date           = Carbon::now()->toDateString();
       $info           = $request->all();
       $Ofr            = Offer::where('id', $info['offer_id'])
-                             // ->where('status', 1)
+                             ->where('status', 1)
+                             ->whereDate('expiry', '>=', $date)
                              ->with('category:id,title_en,title_ar', 'store:id,name_en,name_ar,image','images')
                              ->first();
       if (isset($Ofr)){
@@ -139,10 +138,9 @@ class OfferController extends Controller
       $response       = array();
       $info           = $request->all();
       $customer       = Customer::where('id', $info['customer_id'])
-                             // ->where('status', 1)
-                             ->first();
+                                ->first();
       if (isset($customer)){
-        $redeems          = $customer->redeems;
+        $redeems          = $customer->redeems()->where('used', 1)->get();
         foreach ($redeems as $redeem) {
           $redeem->offer        = $redeem->offer()->select('id','title_en', 'title_ar', 'desc_en', 'desc_ar', 'price_before', 'price', 'discount_perc')->with('mainImage:id,link')->first();
         }

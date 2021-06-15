@@ -23,6 +23,16 @@ class AppPhotoController extends Controller
     return $response;
   }
 
+
+  // a seperate API for mobile apps
+  public function mobileAppsSettings(Request $request)
+  {
+    $response                 = array();
+    $response['settings']     = AppSetting::first();
+    $response['statusCode']   = 200;
+    return $response;
+  }
+
   public function update(Request $request)
   {
     $response                 = array();

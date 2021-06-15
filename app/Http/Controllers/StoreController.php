@@ -285,7 +285,13 @@ class StoreController extends Controller
       $store = Store::find($id);
 
       if($store) {
-        // $store->image()->delete();
+        if (isset($store->branches)){
+          $store->branches()->delete();
+        }
+        if (isset($store->offers)){
+          $store->offers()->delete();
+        }
+
         $store->delete();
 
         return 'Deleted Successfully';

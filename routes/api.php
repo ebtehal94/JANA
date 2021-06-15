@@ -31,6 +31,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // Route::post('/orders/customer', 'OrderController@customer');
 Route::post('/customers/register', 'Mobile\CustomerController@register');
 Route::post('/customers/otpCheck', 'Mobile\CustomerController@otpCheck');
+Route::post('/customers/otpResend', 'Mobile\CustomerController@otpResend');
+
+Route::post('/customers/appSettings', 'Mobile\CustomerController@mobileAppsSettingss');
 
 Route::post('/notifications/updateToken', 'NotificationController@updateToken');
 

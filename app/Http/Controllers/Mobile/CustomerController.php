@@ -119,6 +119,36 @@ class CustomerController extends Controller
 
 
 
+    public function otpResend(Request $request)
+    {
+      $response                 = array();
+
+      $request->validate([
+          'mobile' => 'required',
+      ]);
+
+      $info                     = $request->all();
+      $customer                 = Customer::where('mobile', $info['mobile'])
+                                          ->first();
+      if ( $customer ){
+        $otp                      = mt_rand(1000, 9999);
+        $mobile                   = '966' . $customer->mobile;
+        $fullName                 = explode(" ", $customer->name, 2);
+        $firstName                = $fullName[0];
+        $message                  = "مرحباً بك، ". $firstName
+                                    ."%0aرمز التفعيل هو: ". $otp;
+        $customer->otp            = $otp;
+        $customer->save();
+        $response['sms_status']   =  $this->sendSMSHiSMS($mobile,$message);
+        $response['statusCode']   = 200;
+      }else{
+        $response['statusCode']   = 400;
+        $response['msg']          = 'Invalid OTP / Mobile Number';
+      }
+      return $response;
+    }
+
+
 
 
     public function edit(Request $request, $id)
