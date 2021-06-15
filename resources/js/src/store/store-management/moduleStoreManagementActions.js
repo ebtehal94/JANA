@@ -46,12 +46,7 @@ export default {
   },
   updateStore({ commit }, store) {
     return new Promise((resolve, reject) => {
-      axios.post(`/api/store/update`, store,
-        {
-          headers: {
-              'Content-Type': 'multipart/form-data'
-          }
-        })
+      axios.post(`/api/store/update`, store)
         .then((response) => {
           commit('UPDATE_STORE', response.data.store)
           resolve(response)
