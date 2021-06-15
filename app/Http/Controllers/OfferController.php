@@ -258,12 +258,12 @@ class OfferController extends Controller
       $Ofr            = $Ofr->with('images:id,offer_id,link')
                             ->first();
       if (isset($Ofr)){
-        // $branches       = $Ofr->branches;
-        // foreach ($branches as $key => $branch){
-        //   if (isset($branch)){
-        //     $Ofr['branches'][$key]   = strval($offday->pivot->offday_id);
-        //   }
-        // }
+        $branches       = $Ofr->branches;
+        foreach ($branches as $key => $branch){
+          if (isset($branch)){
+            $Ofr['branches'][$key]   = strval($branch->pivot->branch_id);
+          }
+        }
 
         $response['offer']        = $Ofr;
         // $response['images']       = $Ofr->images()->select('id','link')->get();
@@ -304,6 +304,9 @@ class OfferController extends Controller
         if (isset($request->images)){
           $this->addImages($Ofr, $request->images);
           $Ofr->images  = $Ofr->images;
+        }
+        if (isset($request->branches)){
+          $Ofr->branches()->sync($request->branches);
         }
 
         $response['offer']        = $Ofr;
