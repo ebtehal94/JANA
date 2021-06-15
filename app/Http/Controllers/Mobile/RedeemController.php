@@ -80,6 +80,12 @@ class RedeemController extends Controller
           return $response;
         }
 
+        if (isset($Ofr->used) && $Ofr->used == 1){
+          $response['msg']          = 'Used';
+          $response['statusCode']   = 402;
+          return $response;
+        }
+
         $response['offer']        = $offer;
         $response['statusCode']   = 200;
       }else{
