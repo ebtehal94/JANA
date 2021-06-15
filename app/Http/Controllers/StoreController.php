@@ -196,7 +196,6 @@ class StoreController extends Controller
       $store          = $request->all();
       $Str            = Store::find($request->id);
 
-
       if (isset($Str)){
         $Str->update($store);
 
@@ -205,7 +204,7 @@ class StoreController extends Controller
         }
 
 
-        if (isset($store['user']) && isset(json_decode($store['user'], true))){
+        if (isset($store['user'])){
           $userInfo       = json_decode($store['user'], true);
           if (isset($userInfo['password']) && !empty($userInfo['password'])){
             $userInfo['password']       = bcrypt($userInfo['password']);
