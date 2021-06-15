@@ -207,7 +207,7 @@ class StoreController extends Controller
 
         if (isset($userInfo)){
           if (isset($userInfo['password']) && !empty($userInfo['password'])){
-            $userInfo['password']       = bcrypt($userInfo['password']);
+            $userInfo['p  assword']       = bcrypt($userInfo['password']);
           }else{
             unset($userInfo['password']);
           }
@@ -228,11 +228,11 @@ class StoreController extends Controller
       $response                 = array();
       $user                     = \Auth::Guard('api')->user();
       $branches                 = Branch::where('store_id', $request->store_id)
-                                        ->select('id','name_ar', 'name_en')
+                                        ->select('id','title')
                                         ->get();
 
-      $response['statusCode']   = 200;
       $response['branches']     = $branches;
+      $response['statusCode']   = 200;
       return $response;
     }
 

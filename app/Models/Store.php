@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Store extends Model
 {
   use SoftDeletes;
-  protected  $fillable = ['id', 'city_id','name_en','name_ar','image','cr_number'];
+  protected  $fillable = ['id', 'city_id','name_en','name_ar','image','cr_number', 'status'];
 
 
   public function offers()
