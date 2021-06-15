@@ -5,7 +5,7 @@
         {{ $t('loginLabel') }}
     </span>
     <div class="text-right leading-tight hidden sm:block text-white">
-      <p class="font-semibold">{{ activeUserInfo.name}}</p>
+      <p class="font-semibold user-name">{{ activeUserInfo.name}}</p>
       <!-- <small>Available</small> -->
     </div>
     <!-- <router-link v-if="activeUserInfo.id == 0"  to="/login" class="p-2 cursor-pointer text-right leading-tight">
@@ -98,3 +98,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.user-name{
+  font-size: .9rem;
+}
+</style>

@@ -155,7 +155,7 @@
               </div>
             </div>
 
-            <div>
+            
               <div class="bg-input">
                 <icon name="store-name" class="icon"/>
                 <vs-input
@@ -250,9 +250,9 @@
                         <icon name="cross" class="icon left-icon"/>
                       </span> -->
                     </div>
-                    <div class="flex justify-end mr-2">
+                    <div class="sm:flex  justify-end mr-2">
                         <vs-button @click="updateBranch(branch)"  class="text-warning" type="flat" color="warning" icon-pack="feather" icon="icon-edit" size="small">{{$t('SaveChanges')}}</vs-button>
-                        <vs-button  @click="openBranchDeleteConfirm(branchIndex)" type="flat" class="justify-end mx-2 text-danger" color="danger" icon-pack="feather" icon="icon-trash-2" size="small">{{$t('Delete')}}</vs-button>
+                        <vs-button  @click="openBranchDeleteConfirm(branchIndex)" type="flat" class="mx-2 text-danger" color="danger" icon-pack="feather" icon="icon-trash-2" size="small">{{$t('Delete')}}</vs-button>
                     </div>
                   </div>
                   <div class="bg-input">
@@ -355,7 +355,7 @@
                 {{ $i18n.locale == 'en' ? 'Close' : 'خروج' }}
               </vs-button>
               </div> -->
-            </div>
+            
           </div>
         </div>
           <div class="vx-row flex justify-center mt-10">

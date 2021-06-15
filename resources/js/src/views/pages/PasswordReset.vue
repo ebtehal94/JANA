@@ -76,7 +76,6 @@
                       data-vv-as="password"
                       type="password"
                       name="confirm_password"
-                      ref="password"
                       icon-no-border
                       icon="icon"
                       :placeholder="$t('confirmPassword') "

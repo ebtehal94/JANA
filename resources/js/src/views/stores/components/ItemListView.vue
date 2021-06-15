@@ -29,7 +29,7 @@
                                         <vs-button color="danger" size="small" @click="updateStatus(tr.id, 2)">{{$i18n.locale == "en" ? "Reject" : "رفض"}}</vs-button>
                                     </div>
                                     <div class="-ml-6 cursor-pointer flex justify-center"  v-if="display == 'reject'">
-                                        <vs-button v-if="$acl.check('admin')" color="#6FDD68" size="small" @click="updateStatus(item.id, 1)">{{$i18n.locale == "en" ? "Accept" : "موافقة"}}</vs-button>
+                                        <vs-button v-if="$acl.check('admin')" color="#6FDD68" size="small" @click="updateStatus(tr.id, 1)">{{$i18n.locale == "en" ? "Accept" : "موافقة"}}</vs-button>
                                     </div>
                                 </vs-td>
 
@@ -53,6 +53,9 @@ export default{
   props: {
     stores: {
       type: Array,
+    },
+    display:{
+        required: false
     },
   },
     data() {
