@@ -167,7 +167,7 @@ class OfferController extends Controller
     {
       $response       = array();
       $info           = $request->all();
-      return $info;
+      dd($info);
       $user           = \Auth::Guard('api')->user();
       if ($user->rule == 'vendor'){
         $info['store_id']  = $user->store_id;
