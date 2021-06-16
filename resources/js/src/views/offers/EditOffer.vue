@@ -215,7 +215,7 @@
 
           </div>
 
-          <div v-if="$acl.check('admin')" class="vx-col w-full md:w-1/2 pt-4">
+          <div v-if="$acl.check('admin')"  class="vx-col w-full md:w-1/2 pt-4">
             <!-- Col Header -->
             <div class="flex items-end">
               <span class="leading-none font-semibold text-sm">{{$i18n.locale == "en" ? "The Store" : "المتجر"}}<span class="text-danger"> * </span></span>
@@ -272,6 +272,30 @@
               <!-- <span class="text-danger text-sm"  v-show="errors.has('expiry')">{{ errors.first('expiry') }}</span> -->
           </div>
           </div>
+                    <div class="vx-col w-full md:w-1/2 mt-2">
+            <div class="flex items-end">
+              <span class="leading-none font-semibold text-sm">{{$i18n.locale == "en" ? "Branches" : "الفروع"}}<span class="text-danger"> * </span></span>
+            </div>
+
+            <div class="mt-4">
+              <ul class="flex flex-wrap">
+                <li v-for="branch in branches" :key="branch.id">
+                  <vs-checkbox v-model="selected_branches" :vs-value="branch.id" >{{ branch.title }}</vs-checkbox>
+                </li>
+              </ul>
+            </div>
+            <!-- <div class="bg-input text-sm">
+                <v-select class="w-full mt-4 text-sm"
+                  :placeholder="$t('Choosebranche')"
+                  v-model="branches.branche_id"
+                  v-validate="'required'"
+                  multiple 
+                  :closeOnSelect="false"
+                  label="name_ar" :options="branches"
+                  :reduce="name_ar => name_ar.id"
+                  :dir="$vs.rtl ? 'rtl' : 'ltr'" /> 
+             </div> -->
+          </div>
         </div>
 
         <!-- Save & Reset Button -->
@@ -281,6 +305,7 @@
             class="mx-4 mb-4 font-semibold text-sm rounded-full"
             color="linear-gradient(to left,#E93F7D,#DA6653)"
             gradient
+            :disabled="$acl.not.check('admin') && offer_data.status == 1"
             @click="createOffer">
             {{$i18n.locale == "en" ? "Save Changes" : "حفظ التغيرات"}}
           </vs-button>
@@ -319,6 +344,9 @@ export default {
     return {
       offer_data: {title_ar:null,title_en: null, category_id: null, desc_ar:null,desc_en:null,status:null,price_before:null,price:null,expiry:null,store_id:null,discount_perc:null,code:null},
       // categories:[],
+      branches:[], 
+      selected_branches:[],
+      brache_offer:[],
       status_list: [
         {text:this.$i18n.locale == 'en' ? 'Deactivated' : 'غير نشط',id:0},
         {text:this.$i18n.locale == 'en' ? 'Active' : 'نشط',id:1},
@@ -342,7 +370,10 @@ export default {
     },
      validateForm() {
       return ( !this.errors.any()) ;
-    }
+    },
+    activeUserInfo () {
+      return this.$store.state.AppActiveUser
+    },
   },
   methods:{
         updateCurrImg(input) {
@@ -419,6 +450,7 @@ export default {
       formData.append('expiry', this.offer_data.expiry)
       formData.append('code', this.offer_data.code)
       formData.append('store_id', this.offer_data.store_id)
+      formData.append('branches', this.selected_branches)
       if (this.dataUploadedImages){
         for( var i = 0; i < this.dataUploadedImages.length; i++ ){
           let file = this.dataUploadedImages[i];
@@ -486,6 +518,16 @@ export default {
       // this.categories = res.data.categories
     })
     .catch((error) => console.log(error))
+
+    if(this.$acl.check('vendore')){
+      axios.post('/api/branches/list',{store_id:this.offer_data.store_id})
+      .then((res) => {
+        this.branches = res.data.branches
+        this.selected_branches = this.brache_offer.braches
+        console.log(res.data)
+        })
+      .catch((error) => { console.log(error) })
+    }
 
   }
 }

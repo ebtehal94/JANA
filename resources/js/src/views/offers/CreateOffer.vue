@@ -219,6 +219,7 @@
                 <v-select class="w-full mt-4 text-sm"
                   :placeholder="$t('ChooseStore')"
                   v-model="offer_data.store_id"
+                  @input="setSelected" 
                   v-validate="'required'"
                   label="name_ar" :options="stores"
                   :reduce="name_ar => name_ar.id"
@@ -268,12 +269,19 @@
           </div>
           </div>
 
-          <!-- <div class="vx-col w-full md:w-1/2">
+          <div class="vx-col w-full md:w-1/2 mt-2">
             <div class="flex items-end">
               <span class="leading-none font-semibold text-sm">{{$i18n.locale == "en" ? "Branches" : "الفروع"}}<span class="text-danger"> * </span></span>
             </div>
 
-            <div class="bg-input text-sm">
+            <div class="mt-4">
+              <ul class="flex flex-wrap">
+                <li v-for="branch in branches" :key="branch.id">
+                  <vs-checkbox v-model="selected_branches" :vs-value="branch.id" >{{ branch.title }}</vs-checkbox>
+                </li>
+              </ul>
+            </div>
+            <!-- <div class="bg-input text-sm">
                 <v-select class="w-full mt-4 text-sm"
                   :placeholder="$t('Choosebranche')"
                   v-model="branches.branche_id"
@@ -283,8 +291,8 @@
                   label="name_ar" :options="branches"
                   :reduce="name_ar => name_ar.id"
                   :dir="$vs.rtl ? 'rtl' : 'ltr'" /> 
-             </div>
-          </div> -->
+             </div> -->
+          </div>
         </div>
 
         <!-- Save & Reset Button -->
@@ -334,8 +342,8 @@ export default {
   },
   data () {
     return {
-      offer_data: {title_ar:null, title_en: null, category_id: null, desc_ar:null, desc_en:null, status:0, price_before:null, price:null, expiry:null, store_id:null, discount_perc:null, code:null,branches: []},
-      branches:[],
+      offer_data: {title_ar:null, title_en: null, category_id: null, desc_ar:null, desc_en:null, status:0, price_before:null, price:null, expiry:null, store_id:null, discount_perc:null, code:null},
+      branches:[], 
       selected_branches:[],
       status_list: [
         {text:'غير نشط', id:0},
@@ -348,7 +356,7 @@ export default {
       configFromdateTimePicker: {
         minDate: new Date(),
         maxDate: null
-      }
+      },
     }
   },
   computed: {
@@ -359,10 +367,25 @@ export default {
       return this.$store.state.offerManagement.stores
     },
     validateForm () {
-      return (!this.errors.any() && (!this.offer_data.price_before || (this.offer_data.price_before > 0 && this.offer_data.price > 0 && this.offer_data.price_before < this.offer_data.price)))
-    }
+      return (!this.errors.any() && (!this.offer_data.price_before || (this.offer_data.price_before > 0 && this.offer_data.price > 0 && this.offer_data.price_before > this.offer_data.price)))
+    },
+    activeUserInfo () {
+      return this.$store.state.AppActiveUser
+    },
   },
   methods:{
+     setSelected(value){
+      console.log(value)
+      this.offer_data.store_id = value
+      if(this.$acl.check('admin')){
+      axios.post('/api/branches/list',{store_id:value})
+      .then((res) => {
+        this.branches = res.data.branches
+        console.log(res.data)
+        })
+      .catch((error) => { console.log(error) })
+    }
+    },
     updateCurrImg (input) {
       if (input.target.files && input.target.files[0]) {
         const reader = new FileReader()
@@ -431,6 +454,7 @@ export default {
       formData.append('expiry', this.offer_data.expiry)
       formData.append('code', this.offer_data.code)
       formData.append('store_id', this.offer_data.store_id)
+      formData.append('branches', JSON.stringify(this.selected_branches))
       if (this.dataUploadedImages) {
         for (let i = 0; i < this.dataUploadedImages.length; i++) {
           const file = this.dataUploadedImages[i]
@@ -501,11 +525,11 @@ export default {
       })
       .catch((error) => console.log(error))
   
-
-    if(this.$acl.check('vendor')){
-      axios.post('/api/branches/list')
+    
+    if(this.$acl.not.check('admin')){
+      axios.post('/api/branches/list',{store_id:this.activeUserInfo.store_id})
       .then((res) => {
-        this.branches = res.branches
+        this.branches = res.data.branches
         console.log(res.data)
         })
       .catch((error) => { console.log(error) })

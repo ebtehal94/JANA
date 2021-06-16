@@ -172,14 +172,19 @@ class OfferController extends Controller
         $info['store_id']  = $user->store_id;
       }
 
+
       $Ofr            = Offer::create($info);
       if (isset($Ofr)){
         if (isset($request->images)){
           $this->addImages($Ofr, $request->images);
           $Ofr->images   = $Ofr->images;
         }
-        if (isset($request->branches) && count($request->branches) > 0){
-          $Ofr->branches()->attach($request->branches);
+
+        if (isset($request->branches)){
+          $branches = json_decode($request->branches, true);
+          if (isset($branches) && count($branches) > 0){
+            $Ofr->branches()->attach($branches);
+          }
         }
 
         $response['offer']      = $Ofr;
