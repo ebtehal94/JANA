@@ -64,6 +64,9 @@ class OfferController extends Controller
       $user                     = \Auth::Guard('api')->user();
       $offers                   = Offer::with('mainImage', 'category:id,title_en,title_ar', 'store:id,name_en,name_ar')
                                        ->with('category:id,title_en,title_ar', 'store:id,name_en,name_ar,image')
+                                       ->whereHas('store', function ($query) {
+                                          return $query->where('status', 1);
+                                       })
                                        ->select('id','title_en', 'title_ar', 'price_before', 'price', 'discount_perc')
                                        ->orderby('id','desc');
       if (!isset($user)){
