@@ -221,7 +221,10 @@
               <span class="leading-none font-semibold text-sm">{{$i18n.locale == "en" ? "The Store" : "المتجر"}}<span class="text-danger"> * </span></span>
             </div>
 
-            <div class="bg-input text-sm">
+            <div class="w-full mt-4 text-sm">
+              <label>{{offer_data.store_id}}</label>
+            </div>
+            <!-- <div class="bg-input text-sm">
                 <v-select class="w-full mt-4 text-sm"
                   :placeholder="$t('ChooseStore')"
                   v-model="offer_data.store_id"
@@ -237,7 +240,7 @@
                 <span v-else-if="errors.has('store_id')">
                   <icon name="cross" class="icon left-icon"/>
                 </span>
-             </div>
+             </div> -->
           </div>
         </div>
 
@@ -376,7 +379,15 @@ export default {
     },
   },
   methods:{
-        updateCurrImg(input) {
+      getBranch(){
+        axios.post('/api/branches/list',{store_id:this.offer_data.store_id})
+        .then((res) => {
+          this.branches = res.data.branches
+          console.log(res.data)
+          })
+        .catch((error) => { console.log(error) })
+      },
+      updateCurrImg(input) {
       if (input.target.files && input.target.files[0]) {
         var reader = new FileReader()
         reader.onload = e => {
@@ -450,7 +461,7 @@ export default {
       formData.append('expiry', this.offer_data.expiry)
       formData.append('code', this.offer_data.code)
       formData.append('store_id', this.offer_data.store_id)
-      formData.append('branches', this.selected_branches)
+      formData.append('branches', JSON.stringify(this.selected_branches))
       if (this.dataUploadedImages){
         for( var i = 0; i < this.dataUploadedImages.length; i++ ){
           let file = this.dataUploadedImages[i];
@@ -490,7 +501,7 @@ export default {
           this.$vs.notify({
           color: 'danger',
           title: 'خطاء',
-          text: 'الرجاء اكمال جميع الحقول المطلوبة',
+          text: 'حدث خطأ ما',
           // position: 'bottom-center'
           })
         })
@@ -509,6 +520,15 @@ export default {
       this.$store.dispatch("offerManagement/fetchOffer", this.$route.params.offerID).catch(err => { console.error(err) })
       .then((res) => {
         this.offer_data = res.data.offer
+        this.selected_branches = this.offer_data.branches
+      })
+      .then(() =>{
+        axios.post('/api/branches/list',{store_id:this.offer_data.store_id})
+        .then((res) => {
+          this.branches = res.data.branches
+          console.log(res.data)
+          })
+        .catch((error) => { console.log(error) })
       })
       .catch((error) => console.log(error))
     }
@@ -518,16 +538,7 @@ export default {
       // this.categories = res.data.categories
     })
     .catch((error) => console.log(error))
-
-    if(this.$acl.check('vendore')){
-      axios.post('/api/branches/list',{store_id:this.offer_data.store_id})
-      .then((res) => {
-        this.branches = res.data.branches
-        this.selected_branches = this.brache_offer.braches
-        console.log(res.data)
-        })
-      .catch((error) => { console.log(error) })
-    }
+  
 
   }
 }
