@@ -84,11 +84,12 @@ Route::get('/customers/delete/{id}', 'CustomerController@remove');
 
 Route::post('/branches/list', 'StoreController@listBarnches');
 
+Route::get('/store/edit/{id}', 'StoreController@edit');
+
 Route::middleware('auth:api')->group(function () {
 
   Route::post('/store/list', 'StoreController@index');
   Route::post('/store/create', 'StoreController@create');
-  Route::get('/store/edit/{id}', 'StoreController@edit');
   Route::post('/store/update', 'StoreController@update');
   Route::delete('/store/delete/{id}', 'StoreController@remove');
   Route::post('/store/updateImage', 'StoreController@updateImage');
