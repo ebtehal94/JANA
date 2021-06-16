@@ -33,7 +33,7 @@ Route::post('/customers/register', 'Mobile\CustomerController@register');
 Route::post('/customers/otpCheck', 'Mobile\CustomerController@otpCheck');
 Route::post('/customers/otpResend', 'Mobile\CustomerController@otpResend');
 
-Route::get('/customers/appSettings', 'Mobile\CustomerController@mobileAppsSettings');
+Route::get('/customers/appSettings', 'AppPhotoController@mobileAppsSettings');
 
 Route::post('/notifications/updateToken', 'NotificationController@updateToken');
 
