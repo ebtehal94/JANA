@@ -103,7 +103,7 @@
                       v-validate="'required'"
                       label="title_ar" :options="categories"
                       :reduce="title_ar => title_ar.id"
-                      :dir="$vs.rtl ? 'rtl' : 'ltr'" 
+                      :dir="$vs.rtl ? 'rtl' : 'ltr'"
                       name="category"/>
 
                     <!-- <span v-if="!errors.has('category') && offer_data.category_id">
@@ -219,7 +219,7 @@
                 <v-select class="w-full mt-4 text-sm"
                   :placeholder="$t('ChooseStore')"
                   v-model="offer_data.store_id"
-                  @input="setSelected" 
+                  @input="setSelected"
                   v-validate="'required'"
                   label="name_ar" :options="stores"
                   :reduce="name_ar => name_ar.id"
@@ -265,7 +265,7 @@
                   v-model="offer_data.code"
                   :placeholder="$t('DiscountCode')"/>
                   <!-- <span class="text-danger text-sm"  v-show="errors.has('expiry')">{{ errors.first('expiry') }}</span> -->
-            
+
           </div>
           </div>
 
@@ -286,11 +286,11 @@
                   :placeholder="$t('Choosebranche')"
                   v-model="branches.branche_id"
                   v-validate="'required'"
-                  multiple 
+                  multiple
                   :closeOnSelect="false"
                   label="name_ar" :options="branches"
                   :reduce="name_ar => name_ar.id"
-                  :dir="$vs.rtl ? 'rtl' : 'ltr'" /> 
+                  :dir="$vs.rtl ? 'rtl' : 'ltr'" />
              </div> -->
           </div>
         </div>
@@ -343,7 +343,7 @@ export default {
   data () {
     return {
       offer_data: {title_ar:null, title_en: null, category_id: null, desc_ar:null, desc_en:null, status:0, price_before:null, price:null, expiry:null, store_id:null, discount_perc:null, code:null},
-      branches:[], 
+      branches:[],
       selected_branches:[],
       status_list: [
         {text:'غير نشط', id:0},
@@ -374,6 +374,32 @@ export default {
     },
   },
   methods:{
+    checkTheForm() {
+      console.log(this.errors)
+      if (this.errors.any()){
+        this.$vs.notify({
+          color: 'danger',
+          title: this.$t('Error'),
+          text: this.$t('PleaseCheckAllFields'),
+        })
+        return false
+      }else if ( this.offer_data.price_before > 0 && this.offer_data.price > 0 && (this.offer_data.price_before < this.offer_data.price) ){
+        this.$vs.notify({
+          color: 'danger',
+          title: this.$t('Error'),
+          text: this.$t('PriceAfterDiscountCannotBeHigher'),
+        })
+        return false
+      }else if ( this.offer_data.price_before <= 0 && this.offer_data.price <= 0 && this.offer_data.discount_perc <= 0 ){
+        this.$vs.notify({
+          color: 'danger',
+          title: this.$t('Error'),
+          text: this.$t('PleaseFillEitherDiscountOrPriceBeforeAndPriceAfter'),
+        })
+        return false
+      }
+     return true;
+    },
      setSelected(value){
       console.log(value)
       this.offer_data.store_id = value
@@ -389,7 +415,7 @@ export default {
     updateCurrImg (input) {
       if (input.target.files && input.target.files[0]) {
         const reader = new FileReader()
-        
+
         reader.onload = e => {
           this.dataUploadedImages = input.target.files
 
@@ -440,7 +466,7 @@ export default {
       })
     },
     createOffer () {
-      if (!this.validateForm) return
+      if (!this.checkTheForm()) return
       const formData = new FormData()
       formData.append('title_ar', this.offer_data.title_ar)
       formData.append('title_en', this.offer_data.title_en)
@@ -462,9 +488,9 @@ export default {
         }
       }
 
-      
+
       if (this.offer_data.id != null && this.offer_data.id > 0) {
-        
+
         var link = 'offerManagement/updateOffer'
       } else {
         var link = 'offerManagement/addOffer'
@@ -524,8 +550,8 @@ export default {
       // this.categories = res.data.categories
       })
       .catch((error) => console.log(error))
-  
-    
+
+
     if(this.$acl.not.check('admin')){
       axios.post('/api/branches/list',{store_id:this.activeUserInfo.store_id})
       .then((res) => {
@@ -543,8 +569,8 @@ export default {
     // }
 
   }
-  
-  
+
+
 }
 </script>
 
