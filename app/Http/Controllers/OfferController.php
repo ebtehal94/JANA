@@ -167,7 +167,6 @@ class OfferController extends Controller
     {
       $response       = array();
       $info           = $request->all();
-      dd($info);
       $user           = \Auth::Guard('api')->user();
       if ($user->rule == 'vendor'){
         $info['store_id']  = $user->store_id;
@@ -184,6 +183,9 @@ class OfferController extends Controller
         }
 
         $response['offer']      = $Ofr;
+        $response['wholeRequest']   = $request;
+        $response['offerInfo']   = $info;
+        $response['$request']   = $request;
         $response['statusCode']   = 200;
       }else{
         $response['statusCode']   = 400;
