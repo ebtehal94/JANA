@@ -314,10 +314,11 @@ class OfferController extends Controller
           $Ofr->images  = $Ofr->images;
         }
 
-        if (isset($request->branches)){
+        if (isset($request->branches) && json_decode($request->branches, true) != null){
           $branches = json_decode($request->branches, true);
-          if (isset($branches)){
-            $Ofr->branches()->sync($request->branches);
+          $Ofr->branches()->detach();
+          foreach ($branches as $key => $branch) {
+            $Ofr->branches()->attach($branch);
           }
         }
 
