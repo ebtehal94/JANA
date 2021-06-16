@@ -179,11 +179,11 @@ export default {
             })
         },
         // updateExpairy(id,expiry){
-        //     var date = moment().subtract(1,'days')
-        //     this.$store.dispatch("offerManagement/updateOffer", {id:id, expiry:date})
+        //      moment().subtract(1,'days')
+        //     this.$store.dispatch("offerManagement/updateOffer", {id:id, expiry:expiry})
         //     .then(()   => { this.showUpdateSuccess() })
         //     .then(()  => {
-        //     this.$store.dispatch("offerManagement/fetchOffers", {status: [0]})
+        //     this.$store.dispatch("offerManagement/fetchOffers", {status: [1]})
         // })
         //     .catch(err => { console.error(err.response)})
         // },
