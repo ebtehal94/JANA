@@ -24,7 +24,7 @@ class StoreController extends Controller
       $response                 = array();
       $info                     = $request->all();
       $stores                   = Store::orderby('id','desc')
-                                       ->select('id','name_ar', 'name_en', 'views', 'image')
+                                       ->select('id','name_ar', 'name_en', 'views', 'image', 'status')
                                        ->where('status', 1);
       // if (isset($info['city_id'])){
       //   $city_id                  = $info['city_id'];
@@ -86,6 +86,7 @@ class StoreController extends Controller
       }
       return $response;
     }
+
 
     public function offers(Request $request)
     {
