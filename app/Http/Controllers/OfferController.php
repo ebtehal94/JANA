@@ -313,8 +313,12 @@ class OfferController extends Controller
           $this->addImages($Ofr, $request->images);
           $Ofr->images  = $Ofr->images;
         }
+
         if (isset($request->branches)){
-          $Ofr->branches()->sync($request->branches);
+          $branches = json_decode($request->branches, true);
+          if (isset($branches)){
+            $Ofr->branches()->sync($request->branches);
+          }
         }
 
         $response['offer']        = $Ofr;
