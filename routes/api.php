@@ -122,4 +122,6 @@ Route::group(['prefix' => 'auth'], function ($router) {
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh-token', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
+    Route::post('forgotPassword', 'AuthController@forgotPassword');
+    Route::post('resetPassword', 'AuthController@resetPassword');
 });

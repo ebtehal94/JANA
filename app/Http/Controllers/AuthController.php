@@ -2,10 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use DB;
+use Carbon\Carbon;
 use App\Models\Store;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+
+use App\Mail\PasswordReset;
+
+
+use Illuminate\Support\Facades\Mail;
+
+use Illuminate\Support\Str;
 
 
 class AuthController extends Controller
@@ -17,7 +26,74 @@ class AuthController extends Controller
     */
     public function __construct()
     {
-      $this->middleware('auth:api', ['except' => ['login', 'register']]);
+      $this->middleware('auth:api', ['except' => ['login', 'register', 'forgotPassword', 'resetPassword']]);
+    }
+
+    public function forgotPassword(Request $request)
+    {
+      $response               = array();
+      $this->validate($request, [
+                                  'email' => 'required|email',
+                                ]);
+      $info                   = $request->all();
+      $user                   = User::where('email', $info['email'])->select('id', 'name', 'email')->first();
+      if (!$user){
+        $response['msg']        = 'البريد الإلكتروني غير صحيح';
+        $response['statusCode'] = 400;
+        return $response;
+      }
+
+      $user['token']          = Str::random(40);
+      $saveToken              = DB::table('password_resets')
+                                  ->insert(['email' => $info['email'],
+                                            'token' => $user['token'],
+                                            'created_at' => Carbon::now()->toDateTimeString()
+                                          ]);
+      $email                  = Mail::to($info['email'])->send(new PasswordReset($user));
+      $response['statusCode'] = 200;
+      return $response;
+    }
+
+
+    public function resetPassword(Request $request)
+    {
+      $response               = array();
+      $this->validate($request, [
+                                  'email' => 'required|email',
+                                  'token' => 'required',
+                                  'password' => 'required',
+                                ]);
+      $info                   = $request->all();
+      $token                  = DB::table('password_resets')
+                                  ->where('email', $info['email'])
+                                  ->where('token', $info['token'])
+                                  ->first();
+      if (!$token){
+        $response['msg']        = 'Link not valid';
+        $response['statusCode'] = 400;
+        return $response;
+      }
+
+      if ( $token && Carbon::parse($token->created_at) < Carbon::now()->subDays(1) ){
+        $response['msg']        = 'Link expired';
+        $response['statusCode'] = 401;
+        return $response;
+      }
+
+      $user                   = User::where('email', $info['email'])->first();
+      if (!$user){
+        $response['msg']        = 'البريد الإلكتروني غير صحيح';
+        $response['statusCode'] = 400;
+        return $response;
+      }
+
+      $user->password         = bcrypt($info['password']);
+      $user->save();
+      DB::table('password_resets')->where('email', $info['email'])
+                                  ->where('token', $info['token'])
+                                  ->delete();
+      $response['statusCode'] = 200;
+      return $response;
     }
 
 
