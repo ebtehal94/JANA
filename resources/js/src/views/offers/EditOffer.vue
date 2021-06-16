@@ -380,8 +380,31 @@ export default {
     },
   },
   methods:{
-    isFormValid() {
-     return ( !this.errors.any() && (!(this.offer_data.price_before > 0) || !(this.offer_data.price > 0))) ;
+    checkTheForm() {
+      console.log(this.errors)
+      if (this.errors.any()){
+        this.$vs.notify({
+          color: 'danger',
+          title: this.$t('Error'),
+          text: this.$t('PleaseCheckAllFields'),
+        })
+        return false
+      }else if ( this.offer_data.price_before > 0 && this.offer_data.price > 0 && (this.offer_data.price_before < this.offer_data.price) ){
+        this.$vs.notify({
+          color: 'danger',
+          title: this.$t('Error'),
+          text: this.$t('PriceAfterDiscountCannotBeHigher'),
+        })
+        return false
+      }else if ( this.offer_data.price_before <= 0 && this.offer_data.price <= 0 && this.offer_data.discount_perc <= 0 ){
+        this.$vs.notify({
+          color: 'danger',
+          title: this.$t('Error'),
+          text: this.$t('PleaseFillEitherDiscountOrPriceBeforeAndPriceAfter'),
+        })
+        return false
+      }
+     return true;
     },
     getBranch(){
       axios.post('/api/branches/list',{store_id:this.offer_data.store_id})
@@ -450,7 +473,7 @@ export default {
        })
      },
     createOffer(){
-      // if(!this.validateForm) return
+      if(!this.checkTheForm()) return
       let formData = new FormData();
       formData.append('id', this.offer_data.id)
       formData.append('title_ar', this.offer_data.title_ar)

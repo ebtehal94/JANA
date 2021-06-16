@@ -91,7 +91,7 @@ u + #body a {color:inherit;text-decoration:none;font-size:inherit;font-family:in
                         <table border="0" align="center" cellpadding="0" cellspacing="0" role="presentation" width="100%" style="width:100%;max-width:100%;">
   <!-- lotus-header-4 -->
   <tbody><tr>
-    <td align="center" bgcolor="#ffffff" class="container-padding">
+    <td align="center" bgcolor="#e15665" class="container-padding">
 <!-- Content -->
 <table border="0" align="center" cellpadding="0" cellspacing="0" role="presentation" class="row" width="580" style="width:580px;max-width:580px;">
   <tbody><tr>
@@ -184,7 +184,7 @@ u + #body a {color:inherit;text-decoration:none;font-size:inherit;font-family:in
             <![endif]-->
 
             <a href="https://janacard.com/reset-password/{{$email_content['token']}}" target="_blank" style="font-family:Cairo, Arial, Helvetica, sans-serif;font-size:16px;line-height:19px;font-weight:700;font-style:normal;color:rgb(0, 0, 0);text-decoration:none;letter-spacing:0px;padding:20px 50px;display:inline-block;"><span>إعادة تعيين كلمة المرور</span></a>
-
+              
             <!--[if (gte mso 9)|(IE)]>
             </td>
             <td align="center" width="50"></td>
