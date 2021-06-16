@@ -188,6 +188,9 @@ class OfferController extends Controller
         }
 
         $response['offer']      = $Ofr;
+        $response['wholeRequest']   = $request;
+        $response['offerInfo']   = $info;
+        $response['$request']   = $request;
         $response['statusCode']   = 200;
       }else{
         $response['statusCode']   = 400;
