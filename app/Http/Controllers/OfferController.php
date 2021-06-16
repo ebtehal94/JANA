@@ -263,7 +263,7 @@ class OfferController extends Controller
       if ($user->rule == 'vendor'){
         $Ofr            = $Ofr->where('store_id', $user->store_id);
       }
-      $Ofr            = $Ofr->with('images:id,offer_id,link')
+      $Ofr            = $Ofr->with('images:id,offer_id,link', 'store:id,name_en,name_ar,image')
                             ->first();
       if (isset($Ofr)){
         $branches       = $Ofr->branches;

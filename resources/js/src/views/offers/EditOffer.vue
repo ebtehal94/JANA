@@ -222,7 +222,8 @@
             </div>
 
             <div class="w-full mt-4 text-sm">
-              <label>{{offer_data.store_id}}</label>
+              <!-- <label>{{offer_data.store_id}}</label> -->
+              <label>{{($i18n.locale == "en") ? offer_data.store.name_en :  offer_data.store.name_ar }}</label>
             </div>
             <!-- <div class="bg-input text-sm">
                 <v-select class="w-full mt-4 text-sm"
@@ -292,11 +293,11 @@
                   :placeholder="$t('Choosebranche')"
                   v-model="branches.branche_id"
                   v-validate="'required'"
-                  multiple 
+                  multiple
                   :closeOnSelect="false"
                   label="name_ar" :options="branches"
                   :reduce="name_ar => name_ar.id"
-                  :dir="$vs.rtl ? 'rtl' : 'ltr'" /> 
+                  :dir="$vs.rtl ? 'rtl' : 'ltr'" />
              </div> -->
           </div>
         </div>
@@ -347,7 +348,7 @@ export default {
     return {
       offer_data: {title_ar:null,title_en: null, category_id: null, desc_ar:null,desc_en:null,status:null,price_before:null,price:null,expiry:null,store_id:null,discount_perc:null,code:null},
       // categories:[],
-      branches:[], 
+      branches:[],
       selected_branches:[],
       brache_offer:[],
       status_list: [
@@ -372,15 +373,18 @@ export default {
         return this.$store.state.offerManagement.stores
     },
      validateForm() {
-      return ( !this.errors.any()) ;
+      return ( !this.errors.any() ) ;
     },
     activeUserInfo () {
       return this.$store.state.AppActiveUser
     },
   },
   methods:{
-      getBranch(){
-        axios.post('/api/branches/list',{store_id:this.offer_data.store_id})
+    isFormValid() {
+     return ( !this.errors.any() && (!(this.offer_data.price_before > 0) || !(this.offer_data.price > 0))) ;
+    },
+    getBranch(){
+      axios.post('/api/branches/list',{store_id:this.offer_data.store_id})
         .then((res) => {
           this.branches = res.data.branches
           console.log(res.data)
@@ -538,7 +542,7 @@ export default {
       // this.categories = res.data.categories
     })
     .catch((error) => console.log(error))
-  
+
 
   }
 }
