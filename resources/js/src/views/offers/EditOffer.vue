@@ -544,6 +544,7 @@ export default {
       moduleOfferManagement.isRegistered = true
     }
     if (this.$route.params.offerID != null){
+      this.selected_branches = []
       this.$store.dispatch("offerManagement/fetchOffer", this.$route.params.offerID).catch(err => { console.error(err) })
       .then((res) => {
         this.offer_data = res.data.offer

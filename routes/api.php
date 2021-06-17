@@ -33,7 +33,7 @@ Route::post('/customers/register', 'Mobile\CustomerController@register');
 Route::post('/customers/otpCheck', 'Mobile\CustomerController@otpCheck');
 Route::post('/customers/otpResend', 'Mobile\CustomerController@otpResend');
 
-Route::get('/customers/appSettings', 'Mobile\CustomerController@mobileAppsSettings');
+Route::get('/customers/appSettings', 'AppPhotoController@mobileAppsSettings');
 
 Route::post('/notifications/updateToken', 'NotificationController@updateToken');
 
@@ -84,11 +84,12 @@ Route::get('/customers/delete/{id}', 'CustomerController@remove');
 
 Route::post('/branches/list', 'StoreController@listBarnches');
 
+Route::get('/store/edit/{id}', 'StoreController@edit');
+
 Route::middleware('auth:api')->group(function () {
 
   Route::post('/store/list', 'StoreController@index');
   Route::post('/store/create', 'StoreController@create');
-  Route::get('/store/edit/{id}', 'StoreController@edit');
   Route::post('/store/update', 'StoreController@update');
   Route::delete('/store/delete/{id}', 'StoreController@remove');
   Route::post('/store/updateImage', 'StoreController@updateImage');
