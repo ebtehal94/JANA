@@ -113,9 +113,11 @@ export default {
 		AllAccounts:'All accounts',
 
 		desc_lable:'Description',
-
 		recipients:'Recipients',
 
+		PleaseCheckAllFields:'Please Check All Fields',
+		PriceAfterDiscountCannotBeHigher:'Price After Discount Cannot Be Higher',
+		PleaseFillEitherDiscountOrPriceBeforeAndPriceAfter:'Please Fill Either Discount Or Price Before And Price After',
 
 		language: 'Language',
 		currency: 'Currency',
@@ -490,6 +492,9 @@ export default {
 		desc_lable:'الوصف',
 		recipients:'المستلمين',
 
+		PleaseCheckAllFields:'الرجاء التأكد من جميع الحقول',
+		PriceAfterDiscountCannotBeHigher:'السعر بعد الخصم لا يمكن أن يكون أعلى من السعر الأصلي',
+		PleaseFillEitherDiscountOrPriceBeforeAndPriceAfter:'الرجاء تعبئة نسبة الخصم أو السعر قبل و بعد الخصم',
 
 		Home: 'الرئيسية',
 		ProductsList: 'قائمة المنتجات',

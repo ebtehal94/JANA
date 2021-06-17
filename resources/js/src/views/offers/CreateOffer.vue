@@ -106,12 +106,12 @@
                       :dir="$vs.rtl ? 'rtl' : 'ltr'"
                       name="category"/>
 
-                    <!-- <span v-if="!errors.has('category') && offer_data.category_id">
+                    <span v-if="!errors.has('category') && offer_data.category_id">
                       <icon name="confirm" class="icon left-icon"/>
                     </span>
                     <span v-else-if="errors.has('category')">
                       <icon name="cross" class="icon left-icon"/>
-                    </span> -->
+                    </span>
                 </div>
 
                 <div v-if="$acl.check('admin')" class="bg-input text-sm">
@@ -223,15 +223,16 @@
                   v-validate="'required'"
                   label="name_ar" :options="stores"
                   :reduce="name_ar => name_ar.id"
-                  :dir="$vs.rtl ? 'rtl' : 'ltr'" />
+                  :dir="$vs.rtl ? 'rtl' : 'ltr'" 
+                  name="store_id"/>
 
-                <!-- <span
+                <span
                   v-if="!errors.has('store_id') && offer_data.store_id">
                   <icon name="confirm" class="icon left-icon"/>
                 </span>
                 <span v-else-if="errors.has('store_id')">
                   <icon name="cross" class="icon left-icon"/>
-                </span> -->
+                </span>
              </div>
           </div>
         </div>
@@ -250,7 +251,8 @@
                   v-model="offer_data.expiry"
                   :placeholder="$t('ExpiryDate')"
                   :config="configFromdateTimePicker"
-                  v-validate="'required'" />
+                  v-validate="'required'" 
+                  name="expiry"/>
                   <span class="text-danger text-sm"  v-show="errors.has('expiry')">{{ errors.first('expiry') }}</span>
             </div>
             <div class="vx-col w-1/2 ml-4">
@@ -281,17 +283,6 @@
                 </li>
               </ul>
             </div>
-            <!-- <div class="bg-input text-sm">
-                <v-select class="w-full mt-4 text-sm"
-                  :placeholder="$t('Choosebranche')"
-                  v-model="branches.branche_id"
-                  v-validate="'required'"
-                  multiple
-                  :closeOnSelect="false"
-                  label="name_ar" :options="branches"
-                  :reduce="name_ar => name_ar.id"
-                  :dir="$vs.rtl ? 'rtl' : 'ltr'" />
-             </div> -->
           </div>
         </div>
 
@@ -383,7 +374,7 @@ export default {
           text: this.$t('PleaseCheckAllFields'),
         })
         return false
-      }else if ( this.offer_data.price_before > 0 && this.offer_data.price > 0 && (this.offer_data.price_before < this.offer_data.price) ){
+    }else if ( this.offer_data.price_before > 0 && this.offer_data.price > 0 && (parseFloat(this.offer_data.price_before) <= parseFloat(this.offer_data.price)) ){
         this.$vs.notify({
           color: 'danger',
           title: this.$t('Error'),
@@ -400,7 +391,7 @@ export default {
       }
      return true;
     },
-     setSelected(value){
+    setSelected(value){
       console.log(value)
       this.offer_data.store_id = value
       if(this.$acl.check('admin')){

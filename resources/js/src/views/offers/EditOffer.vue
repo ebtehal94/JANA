@@ -288,17 +288,6 @@
                 </li>
               </ul>
             </div>
-            <!-- <div class="bg-input text-sm">
-                <v-select class="w-full mt-4 text-sm"
-                  :placeholder="$t('Choosebranche')"
-                  v-model="branches.branche_id"
-                  v-validate="'required'"
-                  multiple
-                  :closeOnSelect="false"
-                  label="name_ar" :options="branches"
-                  :reduce="name_ar => name_ar.id"
-                  :dir="$vs.rtl ? 'rtl' : 'ltr'" />
-             </div> -->
           </div>
         </div>
 
@@ -347,7 +336,6 @@ export default {
   data() {
     return {
       offer_data: {title_ar:null,title_en: null, category_id: null, desc_ar:null,desc_en:null,status:null,price_before:null,price:null,expiry:null,store_id:null,discount_perc:null,code:null},
-      // categories:[],
       branches:[],
       selected_branches:[],
       brache_offer:[],
@@ -389,7 +377,7 @@ export default {
           text: this.$t('PleaseCheckAllFields'),
         })
         return false
-      }else if ( this.offer_data.price_before > 0 && this.offer_data.price > 0 && (this.offer_data.price_before < this.offer_data.price) ){
+      }else if ( this.offer_data.price_before > 0 && this.offer_data.price > 0 && (parseFloat(this.offer_data.price_before) <= parseFloat(this.offer_data.price)) ){
         this.$vs.notify({
           color: 'danger',
           title: this.$t('Error'),
@@ -406,15 +394,7 @@ export default {
       }
      return true;
     },
-    getBranch(){
-      axios.post('/api/branches/list',{store_id:this.offer_data.store_id})
-        .then((res) => {
-          this.branches = res.data.branches
-          console.log(res.data)
-          })
-        .catch((error) => { console.log(error) })
-      },
-      updateCurrImg(input) {
+    updateCurrImg(input) {
       if (input.target.files && input.target.files[0]) {
         var reader = new FileReader()
         reader.onload = e => {
