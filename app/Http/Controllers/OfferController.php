@@ -41,7 +41,9 @@ class OfferController extends Controller
       }
 
       if (isset($info['active']) && $info['active'] == 1){
-        $offers                   = $offers->whereDate('expiry', '<=', Carbon::now()->toDateString());
+        $offers                   = $offers->whereDate('expiry', '<', Carbon::now()->toDateString());
+      }elseif(isset($info['active']) && $info['active'] == 0){
+        $offers                   = $offers->whereDate('expiry', '>=', Carbon::now()->toDateString());
       }
 
       if (isset($info['from'])){
