@@ -54,7 +54,7 @@
                             <vs-button v-if="$acl.check('admin')" color="#6FDD68" size="small" @click="updateStatus(item.id, 1)">{{$i18n.locale == "en" ? "Accept" : "موافقة"}}</vs-button>
                         </div>
                         <div class="-ml-6 cursor-pointer flex justify-center"  v-if="display == 'active'">
-                            <vs-button v-if="$acl.not.check('admin')" color="danger" size="small" @click="updateStatus(item.id, 2)">{{$i18n.locale == "en" ? "Reject" : "رفض"}}</vs-button>
+                            <vs-button v-if="$acl.not.check('admin')" color="danger" size="small" @click="updateExpiry(item.id,item.expiry)">{{$i18n.locale == "en" ? "Reject" : "رفض"}}</vs-button>
                         </div>
                     </template>
                 </vx-card>
@@ -131,9 +131,9 @@ export default {
             }else if (this.display == 'active'){
                 this.$store.dispatch(link, {status: [1],search: this.search,from: this.fromDate, to: this.toDate}).catch(err => { console.error(err) })
             }else if (this.display == 'reject'){
-                this.$store.dispatch(link, {status: [2],search: this.search,from: this.fromDate, to: this.toDate}).catch(err => { console.error(err) })
+                this.$store.dispatch(link, {status: [2],active: "1",search: this.search,from: this.fromDate, to: this.toDate}).catch(err => { console.error(err) })
             }else if (this.display == 'expire'){
-                this.$store.dispatch(link, {active: "1",search: this.search,from: this.fromDate, to: this.toDate}).catch(err => { console.error(err) })
+                this.$store.dispatch(link, {active: "0",search: this.search,from: this.fromDate, to: this.toDate}).catch(err => { console.error(err) })
             }
             else
                 this.$store.dispatch(link,{search: this.search, from: this.fromDate, to: this.toDate}).catch(err => { console.error(err) })
@@ -178,7 +178,23 @@ export default {
                 text: 'تم بنجاح'
             })
         },
-
+        updateExpiry(id,expiry){
+            console.log(moment(expiry))
+            var date = moment().subtract(1,'days').format('YYYY-MM-DD')
+            this.$store.dispatch("offerManagement/updateOffer", {id:id, expiry:date})
+            .then(()   => { this.showUpdateSuccess() })
+            .then(()  => {
+            this.$store.dispatch("offerManagement/fetchOffers", {status: [1]})
+        })
+            .catch(err => { console.error(err.response)})
+        },
+        showUpdateSuccess() {
+                this.$vs.notify({
+                color: 'success',
+                title: 'Successfull',
+                text: 'تم بنجاح'
+            })
+        }
 
     },
     created() {
