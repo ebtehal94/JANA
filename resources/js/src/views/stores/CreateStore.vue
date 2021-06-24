@@ -511,7 +511,7 @@ export default {
       if (this.branches_data.length > 1){
 
           return new Promise((resolve, reject) => {
-            axios.post("/api/branches/update", branch)
+            axios.post("/api/branches/create", branch)
             .then((response) => {
               if (response.data.statusCode == 200){
                 this.$vs.notify({
@@ -559,7 +559,7 @@ export default {
             .catch((error) => { reject(error) })
           })
       }else{
-        // branch.store_id = this.store_data;
+        branch.store_id = this.store_data.id;
         return new Promise((resolve, reject) => {
           axios.post("/api/branches/create", branch)
           .then((response) => {

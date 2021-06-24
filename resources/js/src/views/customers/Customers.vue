@@ -77,17 +77,14 @@
 <script>
 import axios from "@/axios.js"
 import AllCustomers from './AllCustomers.vue';
-import list from './list.vue';
 import flatPickr from 'vue-flatpickr-component';
 import 'flatpickr/dist/flatpickr.css';
-import List from './list.vue';
+
 
 export default{
     components: {
         AllCustomers,
         flatPickr,
-        list,
-        List
     },
    props:{
         // customers:{

@@ -105,13 +105,13 @@
                       :reduce="title_ar => title_ar.id"
                       :dir="$vs.rtl ? 'rtl' : 'ltr'"
                       name="category"/>
-
-                    <span v-if="!errors.has('category') && offer_data.category_id">
+                     <span class="text-danger text-sm"  v-show="errors.has('category')">{{ errors.first('category') }}</span>
+                    <!-- <span v-if="!errors.has('category') && offer_data.category_id">
                       <icon name="confirm" class="icon left-icon"/>
                     </span>
                     <span v-else-if="errors.has('category')">
                       <icon name="cross" class="icon left-icon"/>
-                    </span>
+                    </span> -->
                 </div>
 
                 <div v-if="$acl.check('admin')" class="bg-input text-sm">
@@ -224,15 +224,15 @@
                   label="name_ar" :options="stores"
                   :reduce="name_ar => name_ar.id"
                   :dir="$vs.rtl ? 'rtl' : 'ltr'" 
-                  name="store_id"/>
-
-                <span
-                  v-if="!errors.has('store_id') && offer_data.store_id">
+                  name="store"/>
+                <span class="text-danger text-sm"  v-show="errors.has('store')">{{ errors.first('store') }}</span>
+                <!-- <span
+                  v-if="!errors.has('store') && offer_data.store_id">
                   <icon name="confirm" class="icon left-icon"/>
                 </span>
-                <span v-else-if="errors.has('store_id')">
+                <span v-else-if="errors.has('store')">
                   <icon name="cross" class="icon left-icon"/>
-                </span>
+                </span> -->
              </div>
           </div>
         </div>
@@ -266,8 +266,7 @@
                   class="w-full mt-4 vs-input-no-shdow-focus"
                   v-model="offer_data.code"
                   :placeholder="$t('DiscountCode')"/>
-                  <!-- <span class="text-danger text-sm"  v-show="errors.has('expiry')">{{ errors.first('expiry') }}</span> -->
-
+                <!-- <vs-checkbox  class="mt-3 text-sm checkbox" siza="small">{{ $i18n.locale == 'en' ? 'Multiple Use' : 'Multiple Use' }}</vs-checkbox> -->
           </div>
           </div>
 
@@ -622,7 +621,10 @@ export default {
       border-radius:30px ;
       font-size: .9rem;
     }
-
+  .vs-checkbox {
+    width: 15px;
+    height: 15px;
+  }
 
 }
 
