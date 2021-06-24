@@ -546,8 +546,6 @@ export default {
       // this.categories = res.data.categories
     })
     .catch((error) => console.log(error))
-
-
   }
 }
 </script>

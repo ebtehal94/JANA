@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Branch extends Model
 {
 
-  protected  $fillable = ['id', 'title', 'city_id', 'location', 'url', 'type', 'lat', 'lng'];
+  protected  $fillable = ['id', 'title', 'store_id', 'city_id', 'location', 'url', 'type', 'lat', 'lng'];
 
 
 
