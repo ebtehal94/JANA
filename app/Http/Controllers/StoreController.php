@@ -43,8 +43,16 @@ class StoreController extends Controller
       if (isset($info['to'])){
         $stores                   = $stores->whereDate('created_at', '<=', $info['to']);
       }
-
       $response['stores']       = $stores->get();
+      foreach ($response['stores'] as $key => $store) {
+        if (isset($store->user)){
+          $store->admin_name      = $store->user->name;
+          $store->admin_email     = $store->user->email;
+          $store->admin_mobile    = $store->user->mobile;
+          unset($store->user);
+        }
+      }
+
       $response['statusCode']   = 200;
       return $response;
     }
