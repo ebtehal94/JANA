@@ -129,9 +129,9 @@ export default {
             if (this.display == 'pending'){
                 this.$store.dispatch(link, {status: [0],search: this.search,from: this.fromDate, to: this.toDate}).catch(err => { console.error(err) })
             }else if (this.display == 'active'){
-                this.$store.dispatch(link, {status: [1],search: this.search,from: this.fromDate, to: this.toDate}).catch(err => { console.error(err) })
+                this.$store.dispatch(link, {status: [1],active: "1",search: this.search,from: this.fromDate, to: this.toDate}).catch(err => { console.error(err) })
             }else if (this.display == 'reject'){
-                this.$store.dispatch(link, {status: [2],active: "1",search: this.search,from: this.fromDate, to: this.toDate}).catch(err => { console.error(err) })
+                this.$store.dispatch(link, {status: [2],search: this.search,from: this.fromDate, to: this.toDate}).catch(err => { console.error(err) })
             }else if (this.display == 'expire'){
                 this.$store.dispatch(link, {active: "0",search: this.search,from: this.fromDate, to: this.toDate}).catch(err => { console.error(err) })
             }
@@ -184,7 +184,7 @@ export default {
             this.$store.dispatch("offerManagement/updateOffer", {id:id, expiry:date})
             .then(()   => { this.showUpdateSuccess() })
             .then(()  => {
-            this.$store.dispatch("offerManagement/fetchOffers", {status: [1]})
+            this.$store.dispatch("offerManagement/fetchOffers", {status: [1],active :"1"})
         })
             .catch(err => { console.error(err.response)})
         },
