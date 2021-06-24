@@ -21,7 +21,7 @@ class UserController extends Controller
       return 'Unauthorized!';
     }
 
-    $users          = User::orderby('id','desc');
+    $users          = User::whereDoesntHave('store')->orderby('id','desc');
     if (isset($info['search'])){
       $users                   = $users->where('name', 'like', '%'.$info['search'].'%');
     }

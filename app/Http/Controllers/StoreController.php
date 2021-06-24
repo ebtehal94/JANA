@@ -291,6 +291,9 @@ class StoreController extends Controller
         if (isset($store->offers)){
           $store->offers()->delete();
         }
+        if (isset($store->user)){
+          $store->user()->delete();
+        }
 
         $store->delete();
 
