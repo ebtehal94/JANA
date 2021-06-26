@@ -58,8 +58,8 @@ export default [
     rule: 'admin',
   },
   {
-    url: '/Accounts',
-    name: 'Accounts',
+    url: '/admins',
+    name: 'admins',
     slug: 'Accounts',
     icon: 'adminsIcon',
     i18n:'Accounts',
