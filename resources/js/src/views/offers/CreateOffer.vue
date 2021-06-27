@@ -332,7 +332,7 @@ export default {
   },
   data () {
     return {
-      offer_data: {title_ar:null, title_en: null, category_id: null, desc_ar:null, desc_en:null, status:0, price_before:null, price:null, expiry:null, store_id:null, discount_perc:null, code:null},
+      offer_data: {title_ar:null, title_en: null, category_id: null, desc_ar:null, desc_en:null, status:0, price_before:null, price:null, expiry:null, store_id:null, discount_perc:null, code:""},
       branches:[],
       selected_branches:[],
       status_list: [
