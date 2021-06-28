@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'info@clouds-line.com'),
-        'name' => env('MAIL_FROM_NAME', 'Otantik'),
+        'address' => env('MAIL_FROM_ADDRESS', 'no-reply@jana-sa.org'),
+        'name' => 'JANA Plus',
     ],
 
     /*
