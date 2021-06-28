@@ -51,7 +51,8 @@
                 icon="icon"
                 :placeholder="$t('email')"
                 v-model="user_data.email"
-                class="w-full mt-2"/>
+                class="w-full mt-2"
+                name="email"/>
 
                 <span v-if="!errors.has('email') && user_data.email">
                   <icon name="confirm" class="icon left-icon"/>
@@ -70,7 +71,8 @@
                 icon-no-border
                 icon="icon"
                 v-validate="'required|min:7'"
-                class="w-3/4 mt-2 px-3"/>
+                class="w-3/4 mt-2 px-3"
+                name="mobile"/>
 
                 <vs-input
                 v-model="user_data.cc"
@@ -100,7 +102,8 @@
                 icon-no-border
                 icon="icon"
                 v-model="user_data.password"
-                class="w-full mt-2"/>
+                class="w-full mt-2"
+                name="password"/>
 
                 <span v-if="!errors.has('password') && user_data.password">
                   <icon name="confirm" class="icon left-icon"/>

@@ -102,14 +102,15 @@
                       v-validate="'required'"
                       label="title_ar" :options="categories"
                       :reduce="title_ar => title_ar.id"
-                      :dir="$vs.rtl ? 'rtl' : 'ltr'" />
-
-                    <span v-if="!errors.has('category_id') && offer_data.category_id">
+                      :dir="$vs.rtl ? 'rtl' : 'ltr'" 
+                      name="category"/>
+                      <span class="text-danger text-sm"  v-show="errors.has('category')">{{ errors.first('category') }}</span>
+                    <!-- <span v-if="!errors.has('category_id') && offer_data.category_id">
                       <icon name="confirm" class="icon left-icon"/>
                     </span>
                     <span v-else-if="errors.has('category_id')">
                       <icon name="cross" class="icon left-icon"/>
-                    </span>
+                    </span> -->
                 </div>
 
                 <div v-if="$acl.check('admin')" class="bg-input text-sm">
@@ -125,13 +126,13 @@
                       :reduce="text => text.id"
                       :dir="$vs.rtl ? 'rtl' : 'ltr'" />
 
-                    <span
+                    <!-- <span
                       v-if="!errors.has('status') && offer_data.status">
                       <icon name="confirm" class="icon left-icon"/>
                     </span>
                     <span v-else-if="errors.has('status')">
                       <icon name="cross" class="icon left-icon"/>
-                    </span>
+                    </span> -->
                 </div>
           </div>
 
@@ -259,7 +260,8 @@
               v-model="offer_data.expiry"
               :placeholder="$t('ExpiryDate')"
               :config="configFromdateTimePicker"
-              v-validate="'required'" />
+              v-validate="'required'" 
+              name="expiry"/>
               <span class="text-danger text-sm"  v-show="errors.has('expiry')">{{ errors.first('expiry') }}</span>
             </div>
             <div class="vx-col w-1/2 ml-4">
@@ -273,10 +275,10 @@
               class="w-full mt-4 vs-input-no-shdow-focus"
               v-model="offer_data.code"
               :placeholder="$t('DiscountCode')"/>
-              <!-- <span class="text-danger text-sm"  v-show="errors.has('expiry')">{{ errors.first('expiry') }}</span> -->
+              <!-- <vs-checkbox  class="mt-3 text-sm checkbox" siza="small">{{ $i18n.locale == 'en' ? 'Multiple Use' : 'Multiple Use' }}</vs-checkbox> -->
           </div>
           </div>
-                    <div class="vx-col w-full md:w-1/2 mt-2">
+          <div class="vx-col w-full md:w-1/2 mt-2">
             <div class="flex items-end">
               <span class="leading-none font-semibold text-sm">{{$i18n.locale == "en" ? "Branches" : "الفروع"}}<span class="text-danger"> * </span></span>
             </div>
@@ -335,7 +337,7 @@ export default {
   },
   data() {
     return {
-      offer_data: {title_ar:null,title_en: null, category_id: null, desc_ar:null,desc_en:null,status:null,price_before:null,price:null,expiry:null,store_id:null,discount_perc:null,code:null},
+      offer_data: {title_ar:null,title_en: null, category_id: null, desc_ar:null,desc_en:null,status:null,price_before:null,price:null,expiry:null,store_id:null,discount_perc:null,code:""},
       branches:[],
       selected_branches:[],
       brache_offer:[],

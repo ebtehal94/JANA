@@ -296,10 +296,10 @@ const router = new Router({
           }
         },
         {
-          path: '/accounts',
-          name: 'accounts',
+          path: '/admins',
+          name: 'admins',
           // component: () => import('@/views/pages/ComingSoon.vue'),
-          component: () => import('@/views/admins/Accounts.vue'),
+          component: () => import('@/views/admins/admins.vue'),
           meta: {
             breadcrumb: [
               { title: 'Home', url: '/' },
