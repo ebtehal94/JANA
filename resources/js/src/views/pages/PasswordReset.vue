@@ -186,7 +186,7 @@ export default{
                       title: 'تم بنجاح',
                       text: 'تمت اعادة تعيين كلمة المرور بنجاح'
                     })
-                    this.$router.push({path: '/login'})
+                    this.$router.push({path: '/'})
                   }else if ( res.data.statusCode == 400 ){
                     this.$vs.notify({
                       color: 'danger',
