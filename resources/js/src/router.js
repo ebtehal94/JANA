@@ -72,13 +72,70 @@ const router = new Router({
           }
         },
         {
-          path: '/',
+          path: '/login',
           name: 'page-login',
           component: () => import('@/views/pages/Login.vue'),
           meta: {
             rule: 'public'
           }
         },
+        {
+          path: '/',
+          name: 'index',
+          component: () => import('@/views/pages/index/index.vue'),
+          meta: {
+            rule: 'public'
+          }
+        },
+        {
+          path: '/knowledge-base',
+          name: 'knowledge-base',
+          component: () => import('@/views/pages/index/knowledgeBase.vue'),
+          meta: {
+            rule: 'public'
+          }
+        },
+        {
+          path: '/questions-list',
+          name: 'questions-list',
+          component: () => import('@/views/pages/index/QuestionsList.vue'),
+          meta: {
+            rule: 'public'
+          }
+        },
+        {
+          path: '/create-question',
+          name: 'create-question',
+          component: () => import('@/views/pages/index/CreateQuestion.vue'),
+          meta: {
+            rule: 'public'
+          }
+        },
+        {
+          path: '/edit-question/:questionID',
+          name: 'edit-question',
+          component: () => import('@/views/pages/index/CreateQuestion.vue'),
+          meta: {
+            rule: 'public'
+          }
+        },
+        {
+          path: '/category-questions',
+          name: 'category-questions',
+          component: () => import('@/views/pages/index/components/CategoryQuestions.vue'),
+          meta: {
+            rule: 'public'
+          }
+        },
+        // {
+        //   path: '/system-intro',
+        //   name: 'system-intro',
+        //   component: () => import('@/views/pages/index/components/SystemIntro.vue'),
+        //   meta: {
+        //     rule: 'public'
+        //   }
+        // }, 
+
         {
           path: '/forgot-password',
           name: 'page-forgot-password',
@@ -157,6 +214,119 @@ const router = new Router({
               { title: 'Reports', active: true }
             ],
             rule: 'vendor'
+          }
+        },
+        {
+          path: '/main',
+          name: 'main',
+          component: () => import('@/views/BasmatkWebApp/main.vue'),
+          meta: {
+            rule: 'public'
+          }
+        },
+        {
+          path: '/reports',
+          name: 'reports',
+          component: () => import('@/views/BasmatkWebApp/reports.vue'),
+          meta: {
+            rule: 'public'
+          }
+        },
+        {
+          path: '/requests',
+          name: 'requests',
+          component: () => import('@/views/BasmatkWebApp/requests.vue'),
+          meta: {
+            rule: 'public'
+          }
+        },
+        
+        {
+          path: '/request-details',
+          name: 'request-details',
+          component: () => import('@/views/BasmatkWebApp/requestDetails.vue'),
+          meta: {
+            rule: 'public'
+          }
+        },
+        {
+          path: '/new-request',
+          name: 'new-request',
+          component: () => import('@/views/BasmatkWebApp/newRequest.vue'),
+          meta: {
+            rule: 'public'
+          }
+        },
+        {
+          path: '/vacations',
+          name: 'vacations',
+          component: () => import('@/views/BasmatkWebApp/vacations.vue'),
+          meta: {
+            rule: 'public'
+          }
+        },
+        {
+          path: '/missing-checkouts',
+          name: 'missing-checkouts',
+          component: () => import('@/views/BasmatkWebApp/missingCheckouts.vue'),
+          meta: {
+            rule: 'public'
+          }
+        },
+        {
+          path: '/late-checkouts',
+          name: 'late-checkouts',
+          component: () => import('@/views/BasmatkWebApp/lateCheckouts.vue'),
+          meta: {
+            rule: 'public'
+          }
+        },
+        {
+          path: '/payroll',
+          name: 'payroll',
+          component: () => import('@/views/BasmatkWebApp/payroll.vue'),
+          meta: {
+            rule: 'public'
+          }
+        },
+        {
+          path: '/warnings',
+          name: 'warnings',
+          component: () => import('@/views/BasmatkWebApp/warnings.vue'),
+          meta: {
+            rule: 'public'
+          }
+        },
+        {
+          path: '/warnings-details',
+          name: 'warnings-details',
+          component: () => import('@/views/BasmatkWebApp/warningsDetails.vue'),
+          meta: {
+            rule: 'public'
+          }
+        },
+        {
+          path: '/account',
+          name: 'account',
+          component: () => import('@/views/BasmatkWebApp/account.vue'),
+          meta: {
+            rule: 'public'
+          }
+        },
+        {
+          path: '/personal-information',
+          name: 'personal-information',
+          component: () => import('@/views/BasmatkWebApp/personalInformation.vue'),
+          meta: {
+            rule: 'public'
+          }
+        },
+        {
+          path: '/documents',
+          name: 'documents',
+          component: () => import('@/views/BasmatkWebApp/documents.vue'),
+          meta: {
+            rule: 'public'
           }
         },
         {

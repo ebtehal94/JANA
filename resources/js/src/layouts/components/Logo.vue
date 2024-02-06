@@ -1,5 +1,5 @@
 <template>
   <div >
-    <img src="@assets/images/logo/jana-plus.png" alt="Jana" width="80" class="mr-8">
+    <img src="@assets/images/logo/logo-3.svg" alt="Basmatk" width="160" class="mt-4 mb-4">
   </div>
 </template>

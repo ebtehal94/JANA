@@ -74,14 +74,19 @@ export default {
 
 <style lang="scss">
   .vs-sidebar-item-active {
-    background: #bd9c72;
+    background: none !important;
   }
 
   .router-link-exact-active.router-link-active.router-link-active {
     box-shadow: none;
     border: none;
   }
-  .v-nav-menu .vs-sidebar--item a span {
-    font-size: 13px;
+  .v-nav-menu .vs-sidebar--item .router-link-active span {
+    color: #0E77FF !important;
 }
+  .v-nav-menu .vs-sidebar--item .router-link-active{
+    background: none !important;
+    box-shadow: none !important;
+  }
+
 </style>

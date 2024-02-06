@@ -21,7 +21,7 @@
      <div id="content-overlay" />
 
     <!-- Navbar -->
-    <!-- <template v-if="mainLayoutType === 'horizontal' && windowWidth >= 1200">
+    <template v-if="mainLayoutType === 'horizontal' && windowWidth >= 1200">
      <div id="header">
         <the-navbar-horizontal
         :navbarType= "navbarType"
@@ -39,7 +39,7 @@
         ]"
         :navMenuItems="navMenuItems" />
      </div>
-    </template> -->
+    </template>
 
     <template>
       <the-navbar-vertical
@@ -53,12 +53,12 @@
 
       <div class="content-wrapper">
           <div class="router-content pt-6" style="margin-top: 0;">
-            <div class="vx-row mx-10">
+            <div class="vx-row flex mx-10">
               <div class="vx-col">
                 <feather-icon class="sm:inline-flex xl:hidden cursor-pointer p-2 mt-2 MenuIcon" icon="MenuIcon" @click.stop="showSidebar" />
               </div>
-              <div class="vx-col hidden lg:block lg:block p-0">
-                <!-- SM - OPEN SIDEBAR BUTTON -->
+              <!-- <div class="vx-col hidden lg:block lg:block p-0">
+                SM - OPEN SIDEBAR BUTTON
 
                 <div  v-if="breadcrumbs!= null && breadcrumbs.length > 0" class="breadcrumbs mr-10 mt-2 mb-6">
                   <p class="text-white">
@@ -70,7 +70,7 @@
                     </span>
                   </p>
                 </div>
-              </div>
+              </div> -->
                <vs-spacer />
               <div>
                 <i18n class="mr-2 mt-2"/>
@@ -293,6 +293,11 @@ export default {
   }
   .MenuIcon{
     color: #fff;
+  }
+  @media only screen and (min-width: 1200px) and (max-width:1600px ){
+    #content-area{
+      margin-left: 260px !important;
+    }
   }
   .content-wrapper {
     .router-content{

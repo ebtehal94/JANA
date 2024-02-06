@@ -1,0 +1,6 @@
+<svg id="time-status" xmlns="http://www.w3.org/2000/svg" width="14" height="15.536" viewBox="0 0 15.536 15.536">
+  <g id="clock" transform="translate(0 0)">
+    <path id="Shape" d="M7.768,15.536a7.768,7.768,0,1,1,7.769-7.769A7.777,7.777,0,0,1,7.768,15.536Zm0-14.45A6.682,6.682,0,1,0,14.45,7.768,6.689,6.689,0,0,0,7.768,1.087Z" transform="translate(0 0)" fill="#5c5c5c"/>
+    <path id="Path" d="M.55,4.843H3.139a.55.55,0,1,0,0-1.1H1.1V.55A.544.544,0,0,0,.55,0,.544.544,0,0,0,0,.55V4.293a.544.544,0,0,0,.55.55Z" transform="translate(6.856 3.837)" fill="#5c5c5c"/>
+  </g>
+</svg>

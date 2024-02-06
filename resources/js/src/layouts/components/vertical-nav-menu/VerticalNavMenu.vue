@@ -38,19 +38,19 @@
           <!-- Menu Buttons -->
           <div>
             <!-- Close Button -->
-            <template v-if="showCloseButton">
+            <!-- <template v-if="showCloseButton">
               <feather-icon icon="XIcon" class="m-0 cursor-pointer XIcon" @click="$store.commit('TOGGLE_IS_VERTICAL_NAV_MENU_ACTIVE', false)" />
-            </template>
+            </template> -->
 
             <!-- Toggle Buttons -->
-            <template v-else-if="!showCloseButton && !verticalNavMenuItemsMin">
+            <!-- <template v-else-if="!showCloseButton && !verticalNavMenuItemsMin">
               <feather-icon
                 id="btnVNavMenuMinToggler"
                 class="mr-0 cursor-pointer"
                 :icon="reduce ? 'CircleIcon' : 'DiscIcon'"
                 svg-classes="stroke-current text-primary"
                 @click="toggleReduce(!reduce)" />
-            </template>
+            </template> -->
           </div>
           <!-- /Menu Toggle Buttons -->
         </div>
@@ -84,7 +84,7 @@
                 :href="item.slug === 'external' ? item.url : null"
                 :isDisabled="item.isDisabled"
                 :slug="item.slug">
-                <Sidebar-icon :name="item.icon" class="pr-4 icon"/>
+                <Sidebar-icon :name="item.icon" class="px-4 pt-2 icon"/>
                 <!-- <feather-icon class="w-5 h-5" :icon="item.icon" /> -->
                 <span v-show="!verticalNavMenuItemsMin" class="text-sm">{{ $t(item.i18n) || item.name }}</span>
                   <vs-chip class="ml-auto" :color="item.tagColor" v-if="item.tag && (isMouseEnter || !reduce)">{{ item.tag }}</vs-chip>
@@ -121,7 +121,14 @@
                 <Sidebar-icon name='storeIcon' class="pr-4 icon"/>
               <span v-show="!verticalNavMenuItemsMin" class="text-sm">{{$i18n.locale == "en" ? "Setting" : "الإعدادات"}}</span>
             </v-nav-menu-item>
+            
           </template>
+          <vs-button
+            class="mx-8 my-2 text-withe rounded-full px-8 sidebar-btn"
+            color="#0E77FF"
+            @click="$router.push({path: '/new-request'}).catch(() => {})">
+            {{$i18n.locale == "en" ? "Send New Request" : "إرسال طلب جديد"}}
+          </vs-button>
 
           <!-- List of Categories -->
           <!-- <template v-if="$acl.not.check('captain')">
@@ -400,9 +407,22 @@ export default {
 <style lang="scss">
 .v-nav-menu{
   color: #626262;
+  font-family: "Cairo", sans-serif !important;
+}
+.v-nav-menu .vs-sidebar--item a{
+  padding: 3px 15px !important;
 }
 .v-nav-menu .vs-sidebar--item a span {
-    font-size: 12px;
+    font-size: 13px !important;
+}
+
+.v-nav-menu .scroll-area-v-nav-menu > .vs-sidebar--item{
+  padding: 0 !important;
+}
+.sidebar-btn{
+  font-family: "Cairo", sans-serif !important;
+  padding-top: 5px!important;
+  padding-bottom:5px !important;
 }
 @import "@sass/vuexy/components/verticalNavMenu.scss"
 </style>
