@@ -1,0 +1,60 @@
+/*=========================================================================================
+    File Name: _variables.scss
+    Description: partial- SCSS varibales
+    ----------------------------------------------------------------------------------------
+    Item Name: Vuexy - Vuejs, HTML & Laravel Admin Dashboard Template
+      Author: Pixinvent
+    Author URL: http://www.themeforest.net/user/pixinvent
+==========================================================================================*/
+/*========================================================
+        SPACING
+=========================================================*/
+/*========================================================
+        COLORS
+=========================================================*/
+/*========================================================
+        TYPOGRAPHY
+=========================================================*/
+/*========================================================
+        TYPOGRAPHY
+=========================================================*/
+/*========================================================
+        DARK THEME
+=========================================================*/
+.active-menu-link {
+  color: #E93F7D !important;
+  height: 2.5rem;
+}
+
+.page-link {
+  padding-right: 3rem !important;
+  margin-right: 2rem !important;
+}
+
+.menu-item li .h-nav-menu-item a {
+  padding: 0.75rem 1.5rem;
+}
+.menu-item li .h-nav-menu-item > * {
+  transition: 0.25s ease-in-out;
+}
+.menu-item li .h-nav-menu-item > *:hover {
+  transform: translateX(5px);
+}
+.menu-item li .h-nav-menu-item.h-nav-active-item {
+  color: #E93F7D !important;
+}
+.theme-dark .menu-item li .h-nav-menu-item.h-nav-active-item {
+  background-color: #212121;
+}
+
+.menu-link .h-nav-menu-item {
+  margin: 0;
+}
+.menu-link .h-nav-menu-item.h-nav-active-item a {
+  background: linear-gradient(118deg, rgba(var(--vs-primary), 1), rgba(var(--vs-primary), 0.7)) !important;
+  box-shadow: 0px 0px 6px 1px rgba(var(--vs-primary), 0.6);
+  color: #fff;
+}
+.menu-link .h-nav-menu-item a {
+  padding: 1rem;
+}/*# sourceMappingURL=horizontalNavMenuItem.css.map */

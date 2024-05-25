@@ -1,0 +1,79 @@
+/*=========================================================================================
+    File Name: _variables.scss
+    Description: partial- SCSS varibales
+    ----------------------------------------------------------------------------------------
+    Item Name: Vuexy - Vuejs, HTML & Laravel Admin Dashboard Template
+      Author: Pixinvent
+    Author URL: http://www.themeforest.net/user/pixinvent
+==========================================================================================*/
+/*========================================================
+        SPACING
+=========================================================*/
+/*========================================================
+        COLORS
+=========================================================*/
+/*========================================================
+        TYPOGRAPHY
+=========================================================*/
+/*========================================================
+        TYPOGRAPHY
+=========================================================*/
+/*========================================================
+        DARK THEME
+=========================================================*/
+.menu-item > .h-nav-group-open .group-header {
+  background-color: #f6f6f6;
+}
+.theme-dark .menu-item > .h-nav-group-open .group-header {
+  background-color: #2d2d2d;
+}
+
+.header-children .h-nav-group-active {
+  background-color: #f6f6f6;
+}
+.theme-dark .header-children .h-nav-group-active {
+  background-color: #212121;
+}
+
+.h-nav-group-items {
+  border-radius: 4px;
+  min-width: 215px;
+  z-index: 999999;
+}
+.h-nav-group-items.dd-left {
+  right: 0rem;
+}
+.h-nav-group-items::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+.h-nav-group-items::-webkit-scrollbar-thumb {
+  background: #dae1e7;
+  border-radius: 20px;
+}
+.theme-dark .h-nav-group-items::-webkit-scrollbar-thumb {
+  background: #212121;
+}
+.h-nav-group-items::-webkit-scrollbar-track {
+  background: #f8f8f8;
+  border-radius: 30px;
+}
+.theme-dark .h-nav-group-items::-webkit-scrollbar-track {
+  background: #2d2d2d;
+}
+
+.nav-header .group-header {
+  transition: all 0.2s ease;
+  padding: 0.75rem 1.5rem;
+}
+.nav-header .group-header:hover {
+  transform: translateX(5px);
+}
+
+.menu-item > .h-nav-group .group-header {
+  border-radius: 4px;
+  padding: 0.5rem 1.5rem;
+}
+.menu-item > .h-nav-group-active .group-header {
+  color: #fff;
+}/*# sourceMappingURL=horizontalNavMenuGroup.css.map */

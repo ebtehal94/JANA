@@ -1,19 +1,17 @@
 
 <template>
   <div>
-    <nav class="st-nav navbar main-nav navigation fixed-top" id="main-nav">
+      <!-- Navbar -->
+      <div>
+        <navbar/>
+      </div>
+    <!-- <nav class="st-nav navbar main-nav navigation fixed-top" id="main-nav">
         <div class="container">
             <a href="" class="navbar-brand mr-0 mr-md-2">
               <img src="@assets/images/logo/logo.png" alt="basmtak" class="logo logo-sticky d-block d-md-none">
               <img src="@assets/images/logo/logo-light-2.png" alt="Dashcore" class="logo d-none d-md-block">
             </a>
             <ul class="st-nav-menu nav navbar-nav">
-                <!-- <li class="st-nav-section nav-item">
-                    <a href="" class="navbar-brand">
-                        <img src="@assets/images/logo/logo.png" alt="basmtak" class="logo logo-sticky d-block d-md-block">
-                        <img src="@assets/images/logo/logo-light.png" alt="Dashcore" class="logo d-none d-md-block">
-                    </a>
-                </li> -->
                 <li class="st-nav-section st-nav-primary nav-link"><a class="st-root-link nav-link" href="#"> {{$t('NavHome')}}</a>
                     <a class="st-root-link item-products nav-link" @click="scrollToFeat" > {{$t('NavFeatures')}} </a>
                     <a class="st-root-link item-products nav-link" @click="scrollStartNow"> {{$t('NavStartNow')}} </a>
@@ -40,48 +38,6 @@
                 <li class="st-nav-section nav-item">
                   <i18n />
                 </li>
-
-                <!-- <dark-mode/> -->
-
-                <!-- Mobile Navigation -->
-                <!-- <li class="st-nav-section st-nav-mobile nav-item">
-                    <button class="st-root-link navbar-toggler" type="button"><span class="icon-bar"></span> <span
-                            class="icon-bar"></span> <span class="icon-bar"></span></button>
-                    <div class="st-popup">
-                        <div class="st-popup-container"><a class="st-popup-close-button">Close</a>
-                            <div class="st-dropdown-content-group">
-                                <h4 class="text-uppercase regular">Pages</h4><a class="regular text-primary"
-                                                                                href="about.html"><i
-                                    class="far fa-building mr-2"></i> About </a><a class="regular text-success"
-                                                                                   href="contact.html"><i
-                                    class="far fa-envelope mr-2"></i> Contact </a><a class="regular text-warning"
-                                                                                     href="pricing.html"><i
-                                    class="fas fa-hand-holding-usd mr-2"></i> Pricing </a><a class="regular text-info"
-                                                                                             href="faqs.html"><i
-                                    class="far fa-question-circle mr-2"></i> FAQs</a>
-                            </div>
-                            <div class="st-dropdown-content-group border-top bw-2">
-                                <h4 class="text-uppercase regular">Components</h4>
-                                <div class="row">
-                                    <div class="col mr-4"><a target="_blank" href="components/alert.html">Alerts</a> <a
-                                            target="_blank" href="components/badge.html">Badges</a> <a target="_blank"
-                                                                                                       href="components/button.html">Buttons</a>
-                                        <a target="_blank" href="components/color.html">Colors</a> <a target="_blank"
-                                                                                                      href="components/accordion.html">Accordion</a>
-                                        <a target="_blank" href="components/cookie-law.html">Cookielaw</a></div>
-                                    <div class="col mr-4"><a target="_blank" href="components/overlay.html">Overlay</a> <a
-                                            target="_blank" href="components/progress.html">Progress</a> <a target="_blank"
-                                                                                                            href="components/lightbox.html">Lightbox</a>
-                                        <a target="_blank" href="components/tab.html">Tabs</a> <a target="_blank"
-                                                                                                  href="components/tables.html">Tables</a>
-                                        <a target="_blank" href="components/typography.html">Typography</a></div>
-                                </div>
-                            </div>
-                            <div class="st-dropdown-content-group bg-light b-t"><a href="login.html">Sign in <i
-                                    class="fas fa-arrow-left"></i></a></div>
-                        </div>
-                    </div>
-                </li> -->
             </ul>
         </div>
         <div class="st-dropdown-root">
@@ -90,7 +46,7 @@
             </div>
 
         </div>
-    </nav>
+    </nav> -->
     
     <!--- Header --->
     <header class="section header text-contrast app-landing-header main-header" dir="rtl">
@@ -107,12 +63,14 @@
               <h2 class="text-light text-contrast align-items-center">{{$t('HeaderF2')}}</h2>
               <!-- <p class="lead w-1/2 md:w-full"> {{$t('HeaderF4')}} </p> -->
               <div class="try-btn">
-                <a href="/register" :alt="$t('TryForAWeek')" class="font-semibold btn btn-rounded btn-lg btn-info shadow px-4 text-capitalize bg-white blue_text" >{{$t('TryForAWeek')}}<img class="pl-2" src="@assets/images/basmatk/chevrons-left.svg" width="22px"></a>
+                <a href="/register" :alt="$t('TryForAWeek')" class="font-semibold btn btn-rounded btn-lg shadow text-capitalize text-contrast" >{{$t('TryForAWeek')}}
+                <!-- <img class="pl-2" src="@assets/images/basmatk/chevrons-left.svg" width="22px"> -->
+                </a>
               </div>
-              <div class="flex mt-4 video-promo">
+              <!-- <div class="flex mt-4 video-promo">
                 <div>
                   <img class="logo-light" src="@assets/images/logo/logo-light.svg" alt="">
-                  <a @click="popupActive=true" class="btn btn-lg btn-info shadow px-5  bg-white blue_text"><img src="@assets/images/basmatk/Polygon 2.svg" width="18px"></a>
+                  <a @click="popupActive=true" class="btn btn-lg btn-info shadow px-5  bg-white blue_text"><img src="@assets/images/basmatk/Polygon 2.svg" width="35px"></a>
                   <vs-popup fullscreen title="Basmatk" :active.sync="popupActive">
                     <iframe src="https://www.youtube-nocookie.com/embed/jjo5_1KTgbY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                   </vs-popup>
@@ -121,7 +79,7 @@
                   <span>{{$t('PromoText1')}}</span>
                   <p class="m-0 bold" @click="popupActive=true" style="cursor: pointer;">{{$t('PromoText2')}}</p>
                 </div>
-              </div>
+              </div> -->
             </div>
             <div class="col-md-6 col-lg-5 app-screen">
               <div data-aos="fade-left">
@@ -133,23 +91,42 @@
         </div>
     </header>
 
+    <!--Video Promo-->
+    <!-- <videoPromo /> -->
+    
     <!-- features -->
     <features />
 
     <!-- Start Now -->
     <start-now />
 
+    <!-- Dashboard -->
+    <dashboard />
+    <!--App-->
+    <app />
+    
     <!-- Clients -->
-    <clients />
-
+    <ClientSection />
+    
     <!-- F&Q -->
     <questions />
  
     <!-- Pricing Tables -->
-    <pricing-table />
+    <!-- <pricing-table /> -->
 
     <!-- Footer -->
     <siteFooter />
+    <script type="application/javascript">
+      window.Trengo = window.Trengo || {};
+      window.Trengo.key = 'LlhLZ6FFVs2XW9t6uI6n';
+      (function(d, script, t) {
+          script = d.createElement('script');
+          script.type = 'text/javascript';
+          script.async = true;
+          script.src = 'https://static.widget.trengo.eu/embed.js';
+          d.getElementsByTagName('head')[0].appendChild(script);
+      }(document));
+    </script>
   </div>
 </template>
 
@@ -164,12 +141,17 @@ import './common-script.js'
 import './site.js'
 
 import I18n  from "./components/I18n.vue"
+import navbar from "./components/Navbar.vue"
 import features from "./components/features.vue"
 import startNow from "./components/startNow.vue"
+import dashboard from "./components/dashboard.vue"
+import app from "./components/App.vue"
 import clients from "./components/clients.vue"
 import questions  from "./components/questions.vue"
 import pricingTable  from "./components/pricingTable.vue"
 import siteFooter from "./components/siteFooter.vue"
+import videoPromo from './components/videoPromo.vue';
+import ClientSection from './components/clientSection.vue';
 
 export default{
   components: {
@@ -177,12 +159,16 @@ export default{
     swiper,
     swiperSlide ,
     I18n ,
+    navbar,
     features,
     startNow,
-    clients,
+    dashboard,
+    app,
     questions,
     pricingTable,
-    siteFooter
+    siteFooter,
+    videoPromo,
+    ClientSection
     },
   data () {
     return {
@@ -248,23 +234,7 @@ export default{
   
   methods: {
  
- 
-    scrollToFeat() {
-      window.scrollTo(0, 750);
-    },
-    scrollStartNow() {
-      window.scrollTo(0, 1400);
-    },
 
-    scrollClients() {
-      window.scrollTo(0, 4000);
-    },
-    scrollFAQ() {
-      window.scrollTo(0, 4650);
-    },
-       scrollPricing() {
-      window.scrollTo(0, 5150);
-    },
   },
   created(){
     AOS.init({ disable: "phone" });
@@ -300,7 +270,14 @@ export default{
 .main-header .try-btn{
   margin-top: 3rem !important;
 }
+.main-header .try-btn .btn{
+  background: #00a63f;
+}
 @media (min-width: 768px){
+
+.app-landing-header .container {
+    padding-top: 30px !important;
+}
   .main-header .header-desc{
     margin-top: 0 !important;
   }

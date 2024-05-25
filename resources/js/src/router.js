@@ -88,6 +88,150 @@ const router = new Router({
           }
         },
         {
+          path: '/try-register',
+          name: 'try-register',
+          component: () => import('@/views/pages/index/TryRegister.vue'),
+          meta: {
+            rule: 'public'
+          }
+        },
+        {
+          path: '/tow-steps-v',
+          name: 'tow-steps-v',
+          component: () => import('@/views/pages/index/TowStepsV.vue'),
+          meta: {
+            rule: 'public'
+          }
+        },
+        {
+          path: '/muqeem-login',
+          name: 'muqeem-login',
+          component: () => import('@/views/pages/index/Muqeem/Login.vue'),
+          meta: {
+            rule: 'public'
+          }
+        },
+        {
+          path: '/muqeem',
+          name: 'muqeem',
+          component: () => import('@/views/pages/index/Muqeem/Muqeem.vue'),
+          meta: {
+            rule: 'public'
+          }
+        },
+        {
+          path: '/issue-visa',
+          name: 'issue-visa',
+          component: () => import('@/views/pages/index/Muqeem/components/IssueVisa.vue'),
+          meta: {
+            rule: 'public'
+          }
+        },
+        {
+          path: '/cancle-visa',
+          name: 'cancle-visa',
+          component: () => import('@/views/pages/index/Muqeem/components/CancleVisa.vue'),
+          meta: {
+            rule: 'public'
+          }
+        },
+        {
+          path: '/reprint-visa',
+          name: 'reprint-visa',
+          component: () => import('@/views/pages/index/Muqeem/components/ReprintVisa.vue'),
+          meta: {
+            rule: 'public'
+          }
+        },
+        {
+          path: '/issue-final-exit',
+          name: 'issue-final-exit',
+          component: () => import('@/views/pages/index/Muqeem/components/IssueFinalExit.vue'),
+          meta: {
+            rule: 'public'
+          }
+        },
+        {
+          path: '/cancle-final-exit',
+          name: 'cancle-final-exit',
+          component: () => import('@/views/pages/index/Muqeem/components/CancleFinalExit.vue'),
+          meta: {
+            rule: 'public'
+          }
+        },
+        {
+          path: '/extend-passport',
+          name: 'extend-passport',
+          component: () => import('@/views/pages/index/Muqeem/components/ExtendPassportValidity.vue'),
+          meta: {
+            rule: 'public'
+          }
+        },
+        {
+          path: '/renew-passport',
+          name: 'renew-passport',
+          component: () => import('@/views/pages/index/Muqeem/components/RenewPassport.vue'),
+          meta: {
+            rule: 'public'
+          }
+        },
+        {
+          path: '/renew-iqama',
+          name: 'renew-iqama',
+          component: () => import('@/views/pages/index/Muqeem/components/RenewIqama.vue'),
+          meta: {
+            rule: 'public'
+          }
+        },
+        {
+          path: '/iqama-transfer',
+          name: 'iqama-transfer',
+          component: () => import('@/views/pages/index/Muqeem/components/IqamaTransfer.vue'),
+          meta: {
+            rule: 'public'
+          }
+        },
+        {
+          path: '/issue-iqama',
+          name: 'issue-iqama',
+          component: () => import('@/views/pages/index/Muqeem/components/IssueIqama.vue'),
+          meta: {
+            rule: 'public'
+          }
+        },
+        {
+          path: '/extend-visit-visa',
+          name: 'extend-visit-visa',
+          component: () => import('@/views/pages/index/Muqeem/components/ExtendVisitVisa.vue'),
+          meta: {
+            rule: 'public'
+          }
+        },
+        {
+          path: '/check-mol-approval',
+          name: 'check-mol-approval',
+          component: () => import('@/views/pages/index/Muqeem/components/CheckMOLApproval.vue'),
+          meta: {
+            rule: 'public'
+          }
+        },
+        {
+          path: '/change-occupation',
+          name: 'change-occupation',
+          component: () => import('@/views/pages/index/Muqeem/components/ChangeOccupation.vue'),
+          meta: {
+            rule: 'public'
+          }
+        },
+        {
+          path: '/probationary-period',
+          name: 'probationary-period',
+          component: () => import('@/views/pages/index/Muqeem/components/ProbationaryPeriod.vue'),
+          meta: {
+            rule: 'public'
+          }
+        },
+        {
           path: '/knowledge-base',
           name: 'knowledge-base',
           component: () => import('@/views/pages/index/knowledgeBase.vue'),
@@ -191,6 +335,14 @@ const router = new Router({
           meta: {
             rule: 'public'
           }
+        },
+        {
+          path: '/terms',
+          name: 'terms',
+          component: () => import('@/views/pages/Terms.vue'),
+          meta: {
+            rule: 'public'
+          }
         }
       ]
     },
@@ -213,7 +365,7 @@ const router = new Router({
               { title: 'Home', url: '/' },
               { title: 'Reports', active: true }
             ],
-            rule: 'vendor'
+            rule: 'public'
           }
         },
         {
@@ -519,19 +671,6 @@ const router = new Router({
             rule: 'admin'
           }
         },
-        {
-          path: '/notification',
-          name: 'notification',
-          // component: () => import('@/views/pages/ComingSoon.vue'),
-          component: () => import('@/views/Notification.vue'),
-          meta: {
-            breadcrumb: [
-              { title: 'Home', url: '/' },
-              { title: 'Notification', active: true }
-            ],
-            rule: 'admin'
-          }
-        }
 
       ]
     },

@@ -42,7 +42,7 @@
     }
 
     .vs__selected-options {
-      padding: 2px 0 2px 3rem;
+      padding: 2px 0 2px 0rem;
       .vs__selected {
         // margin: 0px 4px 0;
       }
@@ -60,6 +60,7 @@
     .vs__dropdown-option--highlight {
       // background: rgba(var(--vs-primary),1) !important;
       color: $white !important;
+      background:  #2a9eeb !important;
     }
 
     .vs__dropdown-option {

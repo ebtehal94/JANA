@@ -2,7 +2,7 @@
     <section class="bg-white clients">
       <div class="container">
           <div class="vx-row flex justify-center text-center">
-            <h5 class=" bold text-uppercase  mb-4">{{$t('SuccessPartners')}}</h5>
+            <h5 class="mt-6 mb-3">{{$t('SuccessPartners')}}</h5>
           </div>
           <swiper class="vx-row flex flex-wrap justify justify-center items-center px-1" :options="swiperTwoOption" ref="mySwiperTwo" :dir="$vs.rtl ? 'rtl' : 'ltr'" :key="$vs.rtl">
               <swiper-slide class="vx-col w-1/2 md:w-1/6 px-2 justify justify-center items-center">
@@ -97,7 +97,8 @@ export default {
 
 <style>
 .clients h5{
-  font-size: 2rem ;
+  font-size: 2rem !important;
+  font-weight: 900 !important;
   color: #4A4A4A 
 }
 @media (min-width: 768px){

@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- Start Now -->
-        <section class="section start-now pb-2">
+      <section class="section start-now pb-2">
         <div class="col-md-8 mx-auto d-none d-md-block">
             <img src="@assets/images/basmatk/Rectangle-80.png" width="100%" style="opacity:.5;">
         </div>
@@ -75,7 +75,7 @@
                 <div class="start-pagination d-none d-md-block" slot="pagination"></div>
             </div>
         </div>
-        </section>
+      </section>
 
         
         <!-- Mobile App -->
@@ -120,14 +120,14 @@
             <a href="/register" :alt="$t('TryForAWeek')" class="font-semibold btn btn-rounded btn-lg btn-info shadow px-4 text-capitalize bg-white blue_text" >{{$t('TryForAWeek')}}<img class="pl-2" src="@assets/images/basmatk/chevrons-left.svg" width="22px"></a>
             </div>
         </div>
-            <div class="custom-shape-divider-top-1625989520">
+          <div class="custom-shape-divider-top-1625989520">
             <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
                 <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" class="shape-fill"></path>
             </svg>
         </div>
         </section>
     <!-- Dashboard -->
-    <section class="section dashboard">
+    <!-- <section class="section dashboard">
       <div class="container">
         <div class="section-heading mb-5 text-center">
           <h5 class="semibold text-uppercase text-contrast" style="font-size: 1.7rem;">{{$t('DashboardSectionTitle')}}</h5>
@@ -170,9 +170,6 @@
                   <swiper-slide>
                     <img class="responsive" src="@assets/images/screenshots/dash/7.png" alt="banner">
                   </swiper-slide>
-                  <!-- <div class="swiper-pagination" slot="pagination"></div> -->
-                  <!-- <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div> -->
-                  <!-- <div class="swiper-button-next swiper-button-white" slot="button-next"></div> -->
                 </swiper>
               </div>
             </div>  
@@ -188,12 +185,9 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
     <!-- App Download -->
-    <section class="section text-contrast app-download">
-      <!-- <div class="shape-wrapper">
-        <img src="@assets/images/smartphone-free-mockup.jpg" width="100%">
-      </div> -->
+    <!-- <section class="section text-contrast app-download">
         <div class="container">
           <div class="row align-items-center">
             <div class="col-md-6 col-lg-6 pr-lg-7  download-disc">
@@ -222,7 +216,7 @@
           <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" class="shape-fill"></path>
         </svg>
       </div>
-    </section>
+    </section> -->
 
     </div>
 </template>
@@ -286,7 +280,7 @@ export default {
 <style>
 /* Start Now ======================================================== */
 .start-now{
-   background-color: #0E69D3;
+   background-color: #0E69D3 !important;
    position: relative;
    
 }
@@ -414,7 +408,7 @@ export default {
     }
 }
 /* Dashboard ====================================================== */
-.dashboard{
+/* .dashboard{
  background-color: #0E69D3;
 }
 .dashboard .section-heading{
@@ -593,9 +587,9 @@ export default {
       left:30%;
       height: 31px;
   }
-}
+} */
 /* Download App =================================================== */
-.app-download{
+/* .app-download{
   background: #0872FA;
 }
 .app-download .download-disc{
@@ -603,12 +597,6 @@ export default {
   text-align: center;
  
 }
-/* @media (max-width: 576px){
-  .app-download .download-disc{
-    justify-content: center;
-    text-align: center;
-  }  
-} */
 @media (min-width: 768px){
   .app-download{
     clip-path: ellipse(90% 100% at 50% 100%);
@@ -618,7 +606,6 @@ export default {
     justify-content:flex-start;
     text-align: left !important;
     padding-left: 4rem !important;
-    /* text-align: center; */
   } 
 
 }
@@ -626,7 +613,6 @@ export default {
   color:#0e77ff;
   font-size: .9rem;
   padding: .7rem 2rem .5rem 2rem;
-  /* padding-bottom: .5rem; */
   width:160px;
 }
 .custom-shape-divider-bottom-1626156558 {
@@ -647,5 +633,5 @@ export default {
 
 .custom-shape-divider-bottom-1626156558 .shape-fill {
     fill: #FFFFFF;
-}
+} */
 </style>

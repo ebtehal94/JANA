@@ -51,6 +51,9 @@ import VueTour from 'vue-tour'
 Vue.use(VueTour)
 require('vue-tour/dist/vue-tour.css')
 
+//OTP
+import OtpInput from "@bachdgvn/vue-otp-input";
+Vue.component("v-otp-input", OtpInput);
 
 // VeeValidate
 // import VeeValidate from 'vee-validate'

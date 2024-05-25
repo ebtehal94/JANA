@@ -2,9 +2,9 @@
   File Name: moduleAuthState.js
   Description: Auth Module State
   ----------------------------------------------------------------------------------------
-  Item Name: Vuexy - Vuejs, HTML & Laravel Admin Dashboard Template
-  Author: Pixinvent
-  Author URL: http://www.themeforest.net/user/pixinvent
+  Project Name: Basmtak
+  Author: Ahmed Khairy
+  Author URL: http://www.clouds-line.com
 ==========================================================================================*/
 
 
@@ -13,11 +13,11 @@
 // import 'firebase/auth'
 
 export default {
-  isUserLoggedIn: () => {
-      if(localStorage.getItem("accessToken") && localStorage.getItem("userInfo") ) {
-        return true;
-      }else{
-        return false
-      }
-  },
+    isUserLoggedIn: () => {
+        if(localStorage.getItem("accessToken") && localStorage.getItem("userInfo") ) {
+          return true;
+        }else{
+          return false
+        }
+    },
 }

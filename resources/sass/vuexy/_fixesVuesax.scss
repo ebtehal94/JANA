@@ -275,7 +275,7 @@
 
 .vs-input--input.hasIcon:not(.icon-after-input) {
   &+.vs-input--placeholder {
-    padding-left:4rem !important;
+    padding-left:3rem !important;
   }
   &:focus+.vs-placeholder-label {
     padding-left: .7rem !important;
@@ -395,7 +395,10 @@
   }
 }
 
-
+.vs-con-input .vs-inputx:hover,
+.vs-con-input .vs-inputx:focus {
+    border-color: #2a9eeb !important;
+}
 // ======================================================================================
 // List
 // ======================================================================================

@@ -1,7 +1,6 @@
 <template>
  <!-- Footer -->
- <div>
-    <footer class="site-footer section block">
+ <footer class="site-footer section block">
       <div class="container py-4">
         <div class="row pt-3 text-left">
           <div class="col-lg-4 col-md-6">
@@ -17,15 +16,14 @@
             </div>
             <nav class="nav justify-content-md-center">
               <ul class="list-none">
-                <li><a class="nav-item nav-link text-contrast" href="/knowledge-base">{{$t('FooterExplantionLibrary')}}</a></li>
-                <li><a class="nav-item nav-link text-contrast" href="#">{{$t('FooterTermsAndConditions')}}</a></li>
+                <li><a class="nav-item nav-link text-contrast" href="/terms-and-conditions">{{$t('FooterTermsAndConditions')}}</a></li>
                 <li><a class="demo-2 nav-item nav-link text-contrast" href="#">{{$t('FooterContactUs')}}</a></li>
-                <!-- <li><a class="nav-item nav-link text-contrast" href="http://clouds-line.com/">{{$t('FooterCloudsLine')}}</a></li> -->
+                <li><a class="nav-item nav-link text-contrast" href="http://clouds-line.com/">{{$t('FooterCloudsLine')}}</a></li>
               </ul>
             </nav>
           </div>
           <!-- <div class="col-lg-2 col-md-6">
-            <div class="footer-title"> 
+            <div class="footer-title">
               <h2>{{$t('FooterContactUs')}}</h2>
             </div>
             <nav class="nav justify-content-md-start">
@@ -37,11 +35,20 @@
             </nav>
           </div> -->
           <div class="col-lg-4 col-md-6 social-section">
-            <div class="footer-title"> 
+            <div class="footer-title">
               <h2>{{$t('FooterContactUs')}}</h2>
             </div>
+             <!-- <nav class="nav justify-content-md-start">
+              <li><a href="tel:+966‏‪‪557710822" dir="ltr" class="nav-item nav-link text-contrast font-semibold">(+966) ‏‪‪55 771 0822</a></li>
+            </nav> -->
              <nav class="nav justify-content-md-start">
-              <li><a href="tel:920033421" dir="ltr" class="nav-item nav-link text-contrast font-semibold">920033421</a></li>
+              <li><a href="tel:+966920035966" dir="ltr" class="nav-item nav-link text-contrast font-bold"><h6 class="text-white font-bold">9200 359 66</h6></a></li>
+            </nav>
+             <nav class="nav justify-content-md-start">
+              <li><a href="tel:+966‏‪‪115121606" dir="ltr" class="nav-item nav-link text-contrast font-semibold">(+966) ‏‪‪115 121 606</a></li>
+            </nav>
+             <nav class="nav justify-content-md-start">
+              <li><a href="tel:+966‏‪‪115121607" dir="ltr" class="nav-item nav-link text-contrast font-semibold">(+966) ‏‪‪115 121 607</a></li>
             </nav>
             <div class="social-title pl-2 pt-3"> <h4 class="text-contrast">{{$t('ContactSoicalMedia')}}</h4></div>
             <a href="https://www.instagram.com/basmtakApp/" target="_blank" class="px-2">
@@ -55,14 +62,15 @@
             </a>
             <a href="https://www.facebook.com/BasmtakApp/" target="_blank" class="px-2">
               <feather-icon icon="FacebookIcon" svgClasses="h-4 w-3 mx-2" class="social-icon"/>
-            </a>              
+            </a>
+          <!-- <div> -->
+          <!-- </div> -->
           </div>
         </div>
         <hr>
         <p class="mt-2 mb-0 text-contrast pl-3 text-left">{{$t('FooterALLRAS')}} <a href="http://clouds-line.com/" class="d-inline text-contrast">{{$t('CopyRight')}}</a>   2020 ©</p>
       </div>
     </footer>
- </div>
 </template>
 
 <script>

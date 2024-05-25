@@ -1,5 +1,5 @@
 <template>
-    <section class="section features-carousel mb-md-5">
+    <section class="section features-carousel">
       <div class="container pt-0">
         <div class="swiper-container" data-sw-show-items="4" data-sw-autoplay="3500" data-sw-loop="true" data-sw-nav-arrows=".features-nav" data-sw-breakpoints='{"1024": {"slidesPerView": 4,"spaceBetween": 40},"992": {"slidesPerView": 4,"spaceBetween": 15},"768": {"slidesPerView": 4.5,"spaceBetween": 15},"576": {"slidesPerView": 1.5,"spaceBetween": 10}}'>
           <div class="section-heading mb-4 text-center">
